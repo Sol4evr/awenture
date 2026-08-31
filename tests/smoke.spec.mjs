@@ -7,9 +7,26 @@ test('feature-complete learner shell and dynamic premium assessment flow', async
 
   await expect(page.getByText('Hello Alistair')).toBeVisible();
   await expect(page.getByText('My Collection')).toBeVisible();
-  await expect(page.getByText(/Made with love by Arthur Wang/)).toBeVisible();
+  await expect(page.locator('.love')).toContainText('Made with');
+  await expect(page.locator('.aw-heart')).toHaveText('♥');
+  await expect(page.locator('.stats')).toHaveCount(0);
+  await expect(page.locator('.aw-learning-line')).toBeVisible();
+  await expect(page.locator('.aw-path-step.active')).toContainText('ICAS Grade 2');
+  await expect(page.locator('.aw-path-step.locked')).toHaveCount(3);
+  await expect(page.getByText(/stable calibrated core/i)).toHaveCount(0);
   await expect(page.locator('link[href*="premium.css"]')).toHaveCount(1);
   await expect(page.locator('link[href*="practice-flow.css"]')).toHaveCount(1);
+  await expect(page.locator('link[href*="home-insights.css"]')).toHaveCount(1);
+
+  await page.locator('[data-a="parent"]').click();
+  await expect(page.getByText('Parent insights')).toBeVisible();
+  await expect(page.getByText('Strongest skills')).toBeVisible();
+  await expect(page.getByText('Needs practice')).toBeVisible();
+  await expect(page.getByText('Unseen question inventory')).toBeVisible();
+  await expect(page.locator('.aw-unseen-grid > div')).toHaveCount(3);
+  await page.locator('[data-aw-topup]').click();
+  await expect(page.getByRole('button',{name:'Top-up requested'})).toBeVisible();
+  await page.locator('[data-a="home"]').last().click();
 
   await page.locator('[data-a="tests"]').click();
   await page.locator('[data-s="English"]').click();

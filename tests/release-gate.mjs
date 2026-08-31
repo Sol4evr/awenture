@@ -2,8 +2,10 @@ import fs from 'node:fs';
 const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../dist/premium.css',import.meta.url),'utf8');
 const flow=fs.readFileSync(new URL('../dist/practice-flow.css',import.meta.url),'utf8');
+const homeCss=fs.readFileSync(new URL('../dist/home-insights.css',import.meta.url),'utf8');
 const ui=fs.readFileSync(new URL('../dist/premium.js',import.meta.url),'utf8');
-const must=['content="6.10.1"',"RELEASE='6.10.1'",'oc-ready-progress-v1','My Collection','Made with love by Arthur Wang (daddy), 2026','data-a="parent"','subjectTest(subject)','Confidence Champion','speechSynthesis','window.AW_BANK=[]','legacy-v3.8-static','for(let i=b.length-1;i>0;i--)','/premium.css?v=6101','/practice-flow.css?v=6101','/premium.js?v=6101'];
+const insights=fs.readFileSync(new URL('../dist/insights.js',import.meta.url),'utf8');
+const must=['content="6.10.2"',"RELEASE='6.10.2'",'oc-ready-progress-v1','My Collection','Made with love by Arthur Wang (daddy), 2026','data-a="parent"','subjectTest(subject)','Confidence Champion','speechSynthesis','window.AW_BANK=[]','legacy-v3.8-static','for(let i=b.length-1;i>0;i--)','/premium.css?v=6102','/practice-flow.css?v=6102','/home-insights.css?v=6102','/premium.js?v=6102','/insights.js?v=6102'];
 for(const x of must)if(!html.includes(x))throw new Error(`Missing ${x}`);
 const ids=[...html.matchAll(/"id":"([EMS]\d+)"/g)].map(m=>m[1]);
 if(new Set(ids).size!==126)throw new Error(`Expected 126, got ${new Set(ids).size}`);
@@ -13,7 +15,8 @@ if(/DecompressionStream|atob\(parts\.join|Release integrity check failed/.test(h
 if(!css.includes('body.aw-daily-practice [data-a="flag"]'))throw new Error('Daily flag presentation rule missing');
 for(const marker of ['aw-question-only','aw-inline-stimulus','stimulus-pane[hidden]','test-options .opt'])if(!flow.includes(marker))throw new Error(`Practice-flow rule missing: ${marker}`);
 for(const marker of ['composeAssessmentLayout','aw-visual-stimulus','aw-question-only','aw-inline-stimulus'])if(!ui.includes(marker))throw new Error(`Dynamic layout marker missing: ${marker}`);
-for(const forbidden of ['localStorage','sessionStorage','AW_BANK','skillStats','reviewQueue','recentFamilies','subjectTest(','dailyFast(','finish(','save(']){
-  if(ui.includes(forbidden))throw new Error(`UI module crossed logic boundary: ${forbidden}`);
-}
-console.log(JSON.stringify({release:'6.10.1',baseline:'6.9.0',bank:126,visualMarkers:visuals,featureRegression:'PASS',uiIsolation:'PASS',dynamicStimulus:'PASS',answerCards:'PASS'}));
+for(const forbidden of ['localStorage','sessionStorage','AW_BANK','skillStats','reviewQueue','recentFamilies','subjectTest(','dailyFast(','finish(','save('])if(ui.includes(forbidden))throw new Error(`Premium UI module crossed logic boundary: ${forbidden}`);
+for(const marker of ['aw-learning-line','aw-path-step','aw-heart','aw-parent-grid','aw-unseen-grid'])if(!homeCss.includes(marker))throw new Error(`Home/insights style missing: ${marker}`);
+for(const marker of ['PROGRESS_KEY','TOPUP_KEY','transformHome','transformParent','skillRows','unseenBySubject','requestTopup'])if(!insights.includes(marker))throw new Error(`Insights module missing: ${marker}`);
+for(const forbidden of ['dailyFast(','subjectTest(','finish(','speechSynthesis','recentFamilies'])if(insights.includes(forbidden))throw new Error(`Insights module crossed learner-engine boundary: ${forbidden}`);
+console.log(JSON.stringify({release:'6.10.2',baseline:'6.9.0',bank:126,visualMarkers:visuals,featureRegression:'PASS',uiIsolation:'PASS',dynamicStimulus:'PASS',homeSimplification:'PASS',parentInsights:'PASS',topupSignal:'PASS'}));
