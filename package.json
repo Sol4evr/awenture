@@ -1,0 +1,13 @@
+{
+  "name": "awenture",
+  "version": "6.9.0",
+  "private": true,
+  "scripts": {
+    "test:release": "node tests/release-gate.mjs",
+    "test:browser": "playwright test",
+    "test": "npm run test:release && npm run test:browser"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.0"
+  }
+}
