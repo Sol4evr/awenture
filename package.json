@@ -3,7 +3,8 @@
   "version": "6.9.0",
   "private": true,
   "scripts": {
-    "test:release": "node tests/release-gate.mjs",
+    "build": "node scripts/build.mjs",
+    "test:release": "npm run build && node tests/release-gate.mjs",
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
   },
