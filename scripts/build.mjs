@@ -6,10 +6,21 @@ import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const m=JSON.parse(fs.readFileSync(path.join(root,'baseline/manifest.json'),'utf8'));
 let b64=''; for(let i=1;i<=m.parts;i++) b64+=fs.readFileSync(path.join(root,`baseline/v6.9.0.part${String(i).padStart(2,'0')}`),'utf8').trim();
-const html=zlib.gunzipSync(Buffer.from(b64,'base64'));
-const sha=crypto.createHash('sha256').update(html).digest('hex');
+const baseline=zlib.gunzipSync(Buffer.from(b64,'base64'));
+const sha=crypto.createHash('sha256').update(baseline).digest('hex');
 if(sha!==m.sha256) throw new Error(`AWenture baseline integrity failure: ${sha}`);
-if(html.length!==m.decodedBytes) throw new Error(`AWenture baseline size mismatch: ${html.length}`);
-fs.rmSync(path.join(root,'dist'),{recursive:true,force:true}); fs.mkdirSync(path.join(root,'dist'));
+if(baseline.length!==m.decodedBytes) throw new Error(`AWenture baseline size mismatch: ${baseline.length}`);
+
+const release='6.10.0';
+let html=baseline.toString('utf8');
+html=html.replace('content="6.9.0"',`content="${release}"`);
+html=html.replace("RELEASE='6.9.0'",`RELEASE='${release}'`);
+html=html.replace('</head>','<link rel="stylesheet" href="/premium.css?v=6100"></head>');
+html=html.replace('</body>','<script src="/premium.js?v=6100" defer></script></body>');
+
+fs.rmSync(path.join(root,'dist'),{recursive:true,force:true});
+fs.mkdirSync(path.join(root,'dist'));
 fs.writeFileSync(path.join(root,'dist/index.html'),html);
-console.log(JSON.stringify({release:m.release,sha256:sha,bytes:html.length,output:'dist/index.html'}));
+fs.copyFileSync(path.join(root,'ui/premium.css'),path.join(root,'dist/premium.css'));
+fs.copyFileSync(path.join(root,'ui/premium.js'),path.join(root,'dist/premium.js'));
+console.log(JSON.stringify({release,baselineRelease:m.release,baselineSha256:sha,baselineBytes:baseline.length,uiModule:'premium-v1',output:'dist'}));
