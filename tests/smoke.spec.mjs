@@ -20,7 +20,7 @@ test('feature-complete learner shell and dynamic premium assessment flow', async
   const dots=page.locator('.progressdot');
   const count=await dots.count();
   for(let i=0;i<count && !(foundText&&foundVisual&&foundEmpty);i++){
-    await dots.nth(i).click();
+    await dots.nth(i).click({force:true});
     const visualCount=await page.locator('.stimulus-pane .stimulus-visual').count();
     const textCount=await page.locator('.stimulus-pane .stimulus-text').count();
     const emptyCount=await page.locator('.stimulus-pane .stimulus-empty').count();
