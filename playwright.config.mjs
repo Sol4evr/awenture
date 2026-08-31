@@ -4,7 +4,7 @@ export default defineConfig({
   timeout: 30000,
   use: { baseURL: 'http://127.0.0.1:4173' },
   webServer: {
-    command: 'python3 -m http.server 4173 --bind 127.0.0.1',
+    command: 'python3 -m http.server 4173 --bind 127.0.0.1 --directory dist',
     port: 4173,
     reuseExistingServer: false,
     timeout: 10000
