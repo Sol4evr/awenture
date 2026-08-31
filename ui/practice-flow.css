@@ -1,0 +1,45 @@
+/* v6.10.1 — assessment flow refinement. Presentation only. */
+.testworkspace{align-items:start}
+.stimulus-pane,.question-pane{min-height:0!important;height:auto!important}
+.testworkspace.aw-question-only{display:block!important;grid-template-columns:none!important;max-width:840px;width:min(840px,calc(100% - 36px))}
+.testworkspace.aw-question-only .question-pane{width:100%;min-height:0!important}
+.stimulus-pane[hidden]{display:none!important}
+
+/* Text stimulus belongs with the question instead of occupying a second pane. */
+.aw-inline-stimulus{margin:0 0 22px;padding:16px 18px;border:1px solid #dde5f0;border-left:4px solid var(--aw-blue);border-radius:14px;background:#f8fbff;color:#34445b;font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.62;box-shadow:0 3px 10px rgba(34,52,88,.035)}
+
+/* Genuine visual stimulus remains distinct, but sizes to content. */
+.testworkspace.aw-visual-stimulus .stimulus-pane{align-self:start;min-height:0!important}
+.testworkspace.aw-visual-stimulus .stimulus-empty{display:none!important}
+.stimulus-pane{padding-bottom:20px!important}
+.stimulus-visual{margin:0!important}
+.stimulus-visual .visual{padding:14px!important}
+.legacy-svg svg{min-height:0!important;max-height:360px!important}
+
+/* Premium answer cards: clearly separated, calm and touch-friendly. */
+.test-options{display:grid!important;gap:14px!important;margin-top:4px}
+.test-options .opt{width:100%;min-height:62px!important;padding:8px 10px!important;border:1px solid #d8e0eb!important;border-radius:16px!important;background:#fff!important;box-shadow:0 4px 12px rgba(31,50,86,.045)!important;align-items:center!important;overflow:visible!important;transition:border-color .14s ease,box-shadow .14s ease,transform .14s ease,background .14s ease!important}
+.test-options .opt+.opt{margin-top:0!important}
+.test-options .choice{display:grid!important;place-items:center!important;width:40px!important;height:40px!important;flex:0 0 40px!important;margin:0 4px 0 0!important;border:1px solid #dce3ed!important;border-radius:12px!important;background:#f5f7fa!important;color:#46566d!important;font-size:15px!important;font-weight:850!important}
+.test-options .opt>span:last-child{padding:10px 12px!important;line-height:1.42!important;font-size:16px!important}
+.test-options .opt:hover{border-color:#a7b8d2!important;background:#fbfcff!important;box-shadow:0 7px 16px rgba(31,50,86,.075)!important;transform:translateY(-1px)}
+.test-options .opt.sel{border:2px solid var(--aw-blue)!important;background:#f5f8ff!important;box-shadow:0 0 0 4px rgba(63,110,216,.08)!important}
+.test-options .opt.sel .choice{border-color:var(--aw-blue)!important;background:var(--aw-blue)!important;color:#fff!important}
+.test-options .opt.ok{border-color:#72b894!important;background:#f3fbf6!important}.test-options .opt.ok .choice{border-color:#4f9f73!important;background:#4f9f73!important;color:#fff!important}
+.test-options .opt.bad{border-color:#df8c83!important;background:#fff6f5!important}.test-options .opt.bad .choice{border-color:#c96860!important;background:#c96860!important;color:#fff!important}
+
+@media(max-width:800px){
+  .testworkspace.aw-question-only{width:100%;max-width:none;margin:0}
+  .testworkspace.aw-visual-stimulus{display:block!important}
+  .testworkspace.aw-visual-stimulus .stimulus-pane,.testworkspace.aw-visual-stimulus .question-pane{min-height:0!important}
+  .testworkspace.aw-visual-stimulus .stimulus-pane{border-bottom:1px solid var(--aw-border)}
+  .legacy-svg svg{max-height:300px!important}
+}
+@media(max-width:620px){
+  .aw-inline-stimulus{margin-bottom:18px;padding:14px 15px;font-size:16px;line-height:1.55;border-radius:12px}
+  .test-options{gap:12px!important}
+  .test-options .opt{min-height:58px!important;padding:7px 8px!important;border-radius:14px!important}
+  .test-options .choice{width:38px!important;height:38px!important;flex-basis:38px!important;border-radius:11px!important}
+  .test-options .opt>span:last-child{padding:9px 10px!important;font-size:15.5px!important}
+  .test-options .opt:hover{transform:none!important}
+}
