@@ -18,3 +18,6 @@ The baseline release gate requires 126 unique questions, at least 50 legacy SVG 
 `release/*` branch → pull request → GitHub quality gate + WebKit iPad smoke test → Vercel preview → merge the tested commit to `main` → Vercel production.
 
 `main` is the production source of truth. Direct inline reconstruction should be reserved for emergency rollback/recovery only.
+
+## Current authoritative production baseline
+v6.9.0 Full Visual Authenticity is the authoritative production baseline. Any later-numbered emergency recovery build is superseded unless explicitly promoted through the gated Git-backed release flow.
