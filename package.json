@@ -1,9 +1,10 @@
 {
   "name": "awenture",
-  "version": "6.10.2",
+  "version": "6.11.0",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "validate:bank": "node scripts/validate-expansion.mjs",
+    "build": "npm run validate:bank && node scripts/build.mjs",
     "test:release": "npm run build && node tests/release-gate.mjs",
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
