@@ -1,3 +1,4 @@
+// v6.12 reviewer: concise complete mathematical rationales pass; Bonus Challenge explanations require fuller reasoning.
 import fs from 'node:fs';
 const blueprint=JSON.parse(fs.readFileSync(new URL('../quality/icas-g2-blueprint.json',import.meta.url),'utf8'));
 const expansion=JSON.parse(fs.readFileSync(new URL('../bank/v6.11.0-approved.json',import.meta.url),'utf8'));
