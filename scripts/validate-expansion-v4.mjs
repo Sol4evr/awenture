@@ -1,7 +1,11 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-const file=fileURLToPath(new URL('../bank/v6.11.0-approved.json',import.meta.url));
-const items=JSON.parse(fs.readFileSync(file,'utf8'));
+const root=fileURLToPath(new URL('..',import.meta.url));
+const source=JSON.parse(fs.readFileSync(`${root}/bank/v6.11.0-approved.json`,'utf8'));
+const corrections=JSON.parse(fs.readFileSync(`${root}/bank/v6.11.0-corrections.json`,'utf8'));
+const sourceIds=new Set(source.map(q=>q.id));
+for(const id of Object.keys(corrections))if(!sourceIds.has(id))throw new Error(`Expansion quality gate: unknown correction id ${id}`);
+const items=source.map(q=>({...q,...(corrections[q.id]||{})}));
 const SUBJECTS=['English','Mathematics','Science'];
 const LETTERS='ABCD';
 const banned=[/all of the above/i,/none of the above/i,/obviously/i,/placeholder/i,/todo/i,/lorem ipsum/i,/because it is correct/i];
@@ -28,6 +32,9 @@ for(const q of items){
   if(q.quality?.standard!=='ICAS-style'||q.quality?.review!=='expert-reviewed'||!q.quality?.focus)fail(`${q.id} missing quality provenance`);
   const combined=[q.question,...q.options,q.explanation].join(' ');
   if(banned.some(r=>r.test(combined)))fail(`${q.id} contains low-quality placeholder language`);
+  for(const option of q.options){
+    for(const match of String(option).matchAll(/\b(\d{1,2}):(\d{2})\b/g))if(Number(match[2])>59)fail(`${q.id} contains invalid clock-time distractor ${match[0]}`);
+  }
 }
 for(const s of SUBJECTS){
   const rows=items.filter(q=>q.subject===s);
@@ -41,4 +48,4 @@ for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){
   const sim=jaccard(`${items[i].question} ${items[i].stimulus}`,`${items[j].question} ${items[j].stimulus}`);
   if(sim>.72)fail(`semantic sibling risk ${items[i].id}/${items[j].id} (${sim.toFixed(2)})`);
 }
-console.log(JSON.stringify({approved:items.length,subjects:Object.fromEntries(SUBJECTS.map(s=>[s,items.filter(q=>q.subject===s).length])),visuals:items.filter(q=>q.kind==='visual').length,higherOrder:Object.fromEntries(SUBJECTS.map(s=>[s,items.filter(q=>q.subject===s&&q.difficulty===4).length])),semanticSiblingGate:'PASS',schemaGate:'PASS',qualityProvenance:'PASS'}));
+console.log(JSON.stringify({approved:items.length,corrections:Object.keys(corrections).length,subjects:Object.fromEntries(SUBJECTS.map(s=>[s,items.filter(q=>q.subject===s).length])),visuals:items.filter(q=>q.kind==='visual').length,higherOrder:Object.fromEntries(SUBJECTS.map(s=>[s,items.filter(q=>q.subject===s&&q.difficulty===4).length])),semanticSiblingGate:'PASS',schemaGate:'PASS',qualityProvenance:'PASS',clockDistractorGate:'PASS'}));
