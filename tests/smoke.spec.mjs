@@ -73,7 +73,7 @@ test('feature-complete learner shell, premium flow and gated bonus challenge', a
   await expect(page.locator('[data-aw-bonus-card]')).toContainText('Complete');
   await page.locator('[data-a="collection"]').click();
   await expect(page.getByText('11 achievements')).toBeVisible();
-  await expect(page.getByText('Bonus Challenger')).toBeVisible();
+  await expect(page.getByText('Bonus Challenger',{exact:true})).toBeVisible();
   await expect(page.getByText(/Gold in the main collection now represents sustained effort/i)).toBeVisible();
   expect(errors).toEqual([]);
 });
