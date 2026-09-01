@@ -1,4 +1,7 @@
 import fs from 'node:fs';
+import path from 'node:path';
+import { PDFDocument } from 'pdf-lib';
+const root=new URL('..',import.meta.url);
 const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../dist/premium.css',import.meta.url),'utf8');
 const flow=fs.readFileSync(new URL('../dist/practice-flow.css',import.meta.url),'utf8');
@@ -11,17 +14,15 @@ const challenge=fs.readFileSync(new URL('../dist/challenge.js',import.meta.url),
 const formalUi=fs.readFileSync(new URL('../dist/formal-tests.js',import.meta.url),'utf8');
 const expansion=JSON.parse(fs.readFileSync(new URL('../bank/v6.11.0-approved.json',import.meta.url),'utf8'));
 const bonus=JSON.parse(fs.readFileSync(new URL('../bank/v6.12.0-bonus.json',import.meta.url),'utf8'));
-const forms=JSON.parse(fs.readFileSync(new URL('../bank/v6.13.0-test-forms.json',import.meta.url),'utf8'));
-const must=['content="6.13.0"',"RELEASE='6.13.0'",'oc-ready-progress-v1','My Collection','Made with love by Arthur Wang (daddy), 2026','data-a="parent"','Confidence Champion','speechSynthesis','window.AW_BANK=[]','legacy-v3.8-static','for(let i=b.length-1;i>0;i--)','v6.11.0 approved build-time bank expansion','v6.12.0 separate Difficulty 5 bonus bank','v6.13.0 governed fixed formal test forms','window.AW_BONUS_BANK=','window.__AW_BONUS_API','window.__AW_FORMAL_FORMS=','window.__AW_FORMAL_API','startFormal','formalTime','updateFormalTimer','submit-formal','formal-next','durationSeconds','timedOut','/formal-tests.css?v=6130','/formal-tests.js?v=6130'];
+const runtime=JSON.parse(fs.readFileSync(new URL('../bank/v6.13.1-original-paper-runtime.json',import.meta.url),'utf8'));
+const pkg=JSON.parse(fs.readFileSync(new URL('../package.json',import.meta.url),'utf8'));
+const must=['content="6.13.1"',"RELEASE='6.13.1'",'oc-ready-progress-v1','My Collection','Made with love by Arthur Wang (daddy), 2026','data-a="parent"','Confidence Champion','speechSynthesis','window.AW_BANK=[]','legacy-v3.8-static','v6.11.0 approved build-time bank expansion','v6.12.0 separate Difficulty 5 bonus bank','window.AW_BONUS_BANK=','window.__AW_BONUS_API','v6.13.1 authorised historical Year 2 formal-paper runtime','window.__AW_ORIGINAL_PAPERS=','/formal-tests.css?v=6131','/formal-tests.js?v=6131'];
 for(const x of must)if(!html.includes(x))throw new Error(`Missing ${x}`);
-const ids=[...html.matchAll(/"id":"([EMS]\d+)"/g)].map(m=>m[1]);
-const unique=new Set(ids);if(unique.size!==171)throw new Error(`Expected 171 normal-bank unique questions, got ${unique.size}`);
+const ids=[...html.matchAll(/"id":"([EMS]\d+)"/g)].map(m=>m[1]);const unique=new Set(ids);if(unique.size!==171)throw new Error(`Expected 171 normal-bank unique questions, got ${unique.size}`);
 for(const prefix of ['E','M','S']){const n=[...unique].filter(id=>id.startsWith(prefix)).length;if(n!==57)throw new Error(`Expected 57 ${prefix} questions, got ${n}`)}
 const bonusIds=[...html.matchAll(/"id":"(B[EMS]\d+)"/g)].map(m=>m[1]);if(new Set(bonusIds).size!==9)throw new Error(`Expected 9 separate bonus questions, got ${new Set(bonusIds).size}`);
-for(const q of bonus)if(!html.includes(`"id":"${q.id}"`))throw new Error(`Bonus item missing: ${q.id}`);
-if(bonus.some(q=>q.difficulty!==5))throw new Error('Every bonus item must remain Difficulty 5');
-const bonusVisuals=bonus.filter(q=>q.kind==='visual').length;if(bonusVisuals<6)throw new Error(`Expected at least 6 bonus visuals, got ${bonusVisuals}`);
-for(const q of expansion)if(!html.includes(`"id":"${q.id}"`))throw new Error(`Approved expansion item missing: ${q.id}`);
+for(const q of bonus)if(!html.includes(`"id":"${q.id}"`))throw new Error(`Bonus item missing: ${q.id}`);if(bonus.some(q=>q.difficulty!==5))throw new Error('Every bonus item must remain Difficulty 5');
+const bonusVisuals=bonus.filter(q=>q.kind==='visual').length;if(bonusVisuals<6)throw new Error(`Expected at least 6 bonus visuals, got ${bonusVisuals}`);for(const q of expansion)if(!html.includes(`"id":"${q.id}"`))throw new Error(`Approved expansion item missing: ${q.id}`);
 if(/DecompressionStream|atob\(parts\.join|Release integrity check failed/.test(html))throw new Error('Browser deployment envelope detected');
 if(!css.includes('body.aw-daily-practice [data-a="flag"]'))throw new Error('Daily flag presentation rule missing');
 for(const marker of ['aw-question-only','aw-inline-stimulus','stimulus-pane[hidden]','test-options .opt'])if(!flow.includes(marker))throw new Error(`Practice-flow rule missing: ${marker}`);
@@ -33,19 +34,20 @@ for(const forbidden of ['dailyFast(','subjectTest(','finish(','speechSynthesis',
 for(const marker of ['aw-bonus-card','aw-bonus-progress','aw-awards-note'])if(!challengeCss.includes(marker))throw new Error(`Challenge style missing: ${marker}`);
 for(const marker of ['latestDailyPerfect','Bonus Challenger','ICAS Challenger','6 achievements','[3,5,7]','activeDays>=30','__AW_BONUS_API'])if(!challenge.includes(marker))throw new Error(`Challenge module marker missing: ${marker}`);
 for(const removed of ['Comeback Kid','English Explorer','Maths Master','Science Star','Visual Detective'])if(challenge.includes(removed))throw new Error(`Removed achievement still present: ${removed}`);
-for(const marker of ['aw-form-grid','aw-form-tile','aw-timer','aw-form-result'])if(!formalCss.includes(marker))throw new Error(`Formal test style missing: ${marker}`);
-for(const marker of ['Paper ${id}','Formal timed test','__AW_FORMAL_FORMS','__AW_FORMAL_API','data-aw-form-id'])if(!formalUi.includes(marker))throw new Error(`Formal test selector missing: ${marker}`);
-const expected={English:{questions:35,minutes:35},Mathematics:{questions:30,minutes:35},Science:{questions:30,minutes:45}};
-for(const [subject,cfg] of Object.entries(expected)){
-  if(forms.conditions[subject].questions!==cfg.questions||forms.conditions[subject].minutes!==cfg.minutes)throw new Error(`Wrong formal conditions for ${subject}`);
-  for(const id of ['A','B','C']){
-    const paper=forms.forms[subject][id];if(!Array.isArray(paper)||paper.length!==cfg.questions)throw new Error(`${subject} Paper ${id} wrong length`);
-    if(new Set(paper).size!==paper.length)throw new Error(`${subject} Paper ${id} has duplicate questions`);
-    for(const qid of paper)if(!unique.has(qid))throw new Error(`${subject} Paper ${id} references missing ${qid}`);
-  }
-}
-const excluded=new Set(forms.excludedFromFormal.Mathematics||[]);for(const id of excluded)for(const paper of Object.values(forms.forms.Mathematics))if(paper.includes(id))throw new Error(`Excluded legacy visual ${id} leaked into a formal Maths paper`);
-if(!/!sess\.formal&&ask&&!ck/.test(html)||!/!sess\.formal&&ck/.test(html))throw new Error('Formal mode must suppress question-by-question confidence/feedback');
-const bonusFinish=html.slice(html.indexOf('function finishBonus()'),html.indexOf('function finish(){if(sess'));
-for(const forbidden of ['skillStats','reviewQueue','seenIds','P.xp','P.attempts.push'])if(bonusFinish.includes(forbidden))throw new Error(`Bonus result contaminated core learning evidence: ${forbidden}`);
-console.log(JSON.stringify({release:'6.13.0',baseline:'6.9.0',normalBank:171,bonusBank:9,bonusVisuals,collectionAchievements:6,formalForms:9,formalConditions:expected,excludedLegacyFormal:[...excluded],featureRegression:'PASS',uiIsolation:'PASS',bonusScoreIsolation:'PASS',bonusPerfectUnlock:'PASS',achievementGold30Days:'PASS',bonusAchievement357:'PASS',collectionSimplification:'PASS',formalFixedForms:'PASS',formalTimer:'PASS',formalDeferredMarking:'PASS',formalAutoSubmit:'PASS'}));
+for(const marker of ['aw-form-grid','aw-form-tile','aw-timer','aw-form-result','aw-exam-overlay','aw-paper-pane','aw-answer-pane'])if(!formalCss.includes(marker))throw new Error(`Formal test style missing: ${marker}`);
+for(const marker of ['Historical ICAS paper','data-aw-original-year','data-aw-paper-frame','data-aw-answer-choice','data-aw-submit-original','icas-original','source-review','responseTypes','timedOut'])if(!formalUi.includes(marker))throw new Error(`Historical formal UI marker missing: ${marker}`);
+if(formalUi.includes('__AW_FORMAL_API?.start'))throw new Error('Learner-visible selector still launches generated A/B/C forms');
+if(runtime.release!=='6.13.1'||runtime.papers.length!==21)throw new Error('Historical runtime manifest count/release mismatch');
+const expectedCounts={English:8,Mathematics:8,Science:5},expectedConditions={English:[35,35],Mathematics:[30,35],Science:[30,45]};
+for(const [subject,count] of Object.entries(expectedCounts)){const rows=runtime.papers.filter(p=>p.subject===subject);if(rows.length!==count)throw new Error(`${subject} historical paper count ${rows.length}`);const c=runtime.conditions[subject],e=expectedConditions[subject];if(c.questions!==e[0]||c.minutes!==e[1])throw new Error(`${subject} formal conditions mismatch`)}
+if(runtime.papers.filter(p=>p.scoring==='verified').length!==9)throw new Error('Expected 9 fully verified scoring keys in v6.13.1');
+const seen=new Set();let questionAssets=0,answerAssets=0;
+for(const p of runtime.papers){const key=`${p.subject}|${p.year}`;if(seen.has(key))throw new Error(`Duplicate historical paper ${key}`);seen.add(key);const c=runtime.conditions[p.subject];if(!Number.isInteger(p.questionEndPage)||p.questionEndPage<1)throw new Error(`Invalid questionEndPage ${key}`);if(p.scoring==='verified'&&(!Array.isArray(p.answers)||p.answers.length!==c.questions))throw new Error(`Verified key wrong length ${key}`);const qPath=new URL(`../dist/original-icas/year2/${c.folder}/${p.year}-questions.pdf`,import.meta.url);if(!fs.existsSync(qPath))throw new Error(`Missing question-only asset ${key}`);const qDoc=await PDFDocument.load(fs.readFileSync(qPath));if(qDoc.getPageCount()!==p.questionEndPage)throw new Error(`Question-only page count mismatch ${key}: ${qDoc.getPageCount()} != ${p.questionEndPage}`);questionAssets++;const aPath=new URL(`../dist/original-icas/year2/${c.folder}/${p.year}-answers.pdf`,import.meta.url);if(p.answerReference){if(!fs.existsSync(aPath))throw new Error(`Missing post-submit answer reference ${key}`);answerAssets++}else if(fs.existsSync(aPath))throw new Error(`Unexpected answer reference ${key}`)}
+const assetRoot=path.resolve(new URL('../dist/original-icas/year2',import.meta.url).pathname);for(const folder of fs.readdirSync(assetRoot)){for(const file of fs.readdirSync(path.join(assetRoot,folder))){if(!/^[0-9]{4}-(questions|answers)\.pdf$/.test(file))throw new Error(`Raw/unknown PDF leaked into dist: ${folder}/${file}`)}}
+if(fs.existsSync(new URL('../dist/original-icas/inspection.json',import.meta.url)))throw new Error('Temporary inspection manifest leaked into dist');
+if(/ocr-original|inspect-original|copy-original-papers/.test(pkg.scripts.build))throw new Error('Temporary OCR/inspection/copy pipeline still in shipping build');
+if(pkg.devDependencies?.['tesseract.js']||pkg.devDependencies?.['@napi-rs/canvas']||pkg.devDependencies?.['pdfjs-dist'])throw new Error('Temporary OCR/inspection dependencies remain');
+if(!pkg.devDependencies?.['pdf-lib'])throw new Error('pdf-lib missing for controlled derivative build');
+if(!formalUi.includes("PROGRESS_KEY='oc-ready-progress-v1'")||/skillStats|reviewQueue/.test(formalUi))throw new Error('Historical formal attempt isolation failed');
+const bonusFinish=html.slice(html.indexOf('function finishBonus()'),html.indexOf('function finish(){if(sess'));for(const forbidden of ['skillStats','reviewQueue','seenIds','P.xp','P.attempts.push'])if(bonusFinish.includes(forbidden))throw new Error(`Bonus result contaminated core learning evidence: ${forbidden}`);
+console.log(JSON.stringify({release:'6.13.1',baseline:'6.9.0',normalBank:171,bonusBank:9,collectionAchievements:6,historicalPapers:21,historicalBySubject:expectedCounts,verifiedAutoScoring:9,sourceReview:12,questionAssets,answerAssets,questionOnlyIsolation:'PASS',rawSourceLeak:'PASS',ocrRuntime:'ABSENT',formalHistoryIsolation:'PASS',featureRegression:'PASS',bonusScoreIsolation:'PASS'}));
