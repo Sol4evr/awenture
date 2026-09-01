@@ -51,10 +51,18 @@ test('feature-complete learner shell, premium flow and gated bonus challenge', a
   await page.locator('[data-aw-bonus-start]').click();
   await expect(page.getByText(/Question 1 of 1/i)).toBeVisible();
   await expect(page.getByText(/Bonus Challenge/i).first()).toBeVisible();
-  await expect(page.locator('.stimulus-visual')).toBeVisible();
-  const answer=await page.evaluate(()=>{const stem=document.querySelector('.question-pane .q')?.textContent||'';const q=(window.AW_BONUS_BANK||[]).find(x=>x.question===stem);return q?.answer});
-  expect(answer).toMatch(/^[ABCD]$/);
-  await page.locator(`[data-o="${answer}"]`).click();
+  const selected=await page.evaluate(()=>{const stem=document.querySelector('.question-pane .q')?.textContent||'';const q=(window.AW_BONUS_BANK||[]).find(x=>x.question===stem);return q?{answer:q.answer,kind:q.kind,difficulty:q.difficulty,visual:!!q.visual,stimulus:!!q.stimulus}:null});
+  expect(selected).toBeTruthy();expect(selected.difficulty).toBe(5);expect(selected.answer).toMatch(/^[ABCD]$/);
+  if(selected.kind==='visual'){
+    await expect(page.locator('.stimulus-visual')).toBeVisible();
+    await expect(page.locator('.testworkspace')).toHaveClass(/aw-visual-stimulus/);
+  }else if(selected.stimulus){
+    await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);
+    await expect(page.locator('.aw-inline-stimulus')).toBeVisible();
+  }else{
+    await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);
+  }
+  await page.locator(`[data-o="${selected.answer}"]`).click();
   await page.locator('[data-a="check"]').click();
   await page.locator('[data-c="3"]').click();
   await page.locator('[data-a="next"]').click();
