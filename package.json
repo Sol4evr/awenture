@@ -6,7 +6,7 @@
     "validate:bank": "node scripts/validate-expansion-v4.mjs",
     "validate:original-papers": "node scripts/validate-original-papers.mjs",
     "review:quality": "node scripts/review-assessment-quality.mjs",
-    "build": "npm run validate:bank && npm run validate:original-papers && npm run review:quality && node scripts/build.mjs",
+    "build": "npm run validate:bank && npm run validate:original-papers && npm run review:quality && node scripts/build.mjs && node scripts/copy-original-papers.mjs",
     "test:release": "npm run build && node tests/release-gate.mjs",
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
