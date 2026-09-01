@@ -3,7 +3,7 @@
   "version": "6.11.0",
   "private": true,
   "scripts": {
-    "validate:bank": "node scripts/validate-expansion-v2.mjs",
+    "validate:bank": "node scripts/validate-expansion-v3.mjs",
     "build": "npm run validate:bank && node scripts/build.mjs",
     "test:release": "npm run build && node tests/release-gate.mjs",
     "test:browser": "playwright test",
