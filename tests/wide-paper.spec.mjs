@@ -12,13 +12,16 @@ test('historical paper viewer supports iPad-safe zoom and horizontal panning', a
   const zoomOut=page.locator('[data-aw-zoom-out]');
   const panLeft=page.locator('[data-aw-pan-left]');
   const panRight=page.locator('[data-aw-pan-right]');
+  const zoomLabel=page.locator('[data-aw-zoom-label]');
   await expect(zoomIn).toBeVisible();
   await expect(zoomOut).toBeVisible();
   await expect(panLeft).toBeVisible();
   await expect(panRight).toBeVisible();
   await zoomIn.click();
+  await expect(zoomLabel).toHaveText('115%');
+  await page.waitForTimeout(250);
   await zoomIn.click();
-  await expect(page.locator('[data-aw-zoom-label]')).toHaveText('130%');
+  await expect(zoomLabel).toHaveText('130%');
   const before=await page.locator('[data-aw-paper-frame]').evaluate(el=>({left:el.scrollLeft,width:el.clientWidth,scrollWidth:el.scrollWidth,touch:getComputedStyle(el).touchAction}));
   expect(before.scrollWidth).toBeGreaterThan(before.width);
   expect(before.touch).toContain('pan-x');
@@ -31,7 +34,7 @@ test('historical paper viewer supports iPad-safe zoom and horizontal panning', a
   const back=await page.locator('[data-aw-paper-frame]').evaluate(el=>el.scrollLeft);
   expect(back).toBeLessThan(after);
   await zoomOut.click();
-  await expect(page.locator('[data-aw-zoom-label]')).toHaveText('115%');
+  await expect(zoomLabel).toHaveText('115%');
   page.once('dialog',d=>d.accept());
   await page.locator('[data-aw-exam-exit]').click();
 });
