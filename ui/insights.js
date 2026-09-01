@@ -3,7 +3,7 @@
 const PROGRESS_KEY='oc-ready-progress-v1';
 const TOPUP_KEY='awenture-topup-request-v1';
 const SUBJECTS=['English','Mathematics','Science'];
-const PATH=[['ICAS Grade 2','active'],['ICAS Grade 3','locked'],['NAPLAN Grade 3','locked'],['Opportunity Class','locked']];
+const PATH=[['ICAS Y2','active'],['ICAS Y3','locked'],['NAPLAN Y3','locked'],['ICAS Y4','locked'],['OC','locked']];
 
 function progress(){try{return JSON.parse(localStorage.getItem(PROGRESS_KEY)||'{}')}catch(_){return{}}}
 function bank(){return Array.isArray(window.AW_BANK)?window.AW_BANK:[]}
