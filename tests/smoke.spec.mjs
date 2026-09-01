@@ -72,8 +72,10 @@ test('feature-complete learner shell, premium flow and gated bonus challenge', a
   await page.locator('[data-a="home"]').last().click();
   await expect(page.locator('[data-aw-bonus-card]')).toContainText('Complete');
   await page.locator('[data-a="collection"]').click();
-  await expect(page.getByText('11 achievements')).toBeVisible();
+  await expect(page.getByText('6 achievements')).toBeVisible();
+  await expect(page.locator('.aw-ach')).toHaveCount(6);
+  for(const removed of ['Comeback Kid','English Explorer','Maths Master','Science Star','Visual Detective'])await expect(page.getByText(removed,{exact:true})).toHaveCount(0);
   await expect(page.getByText('Bonus Challenger',{exact:true})).toBeVisible();
-  await expect(page.getByText(/Gold in the main collection now represents sustained effort/i)).toBeVisible();
+  await expect(page.getByText(/Gold in the main collection represents sustained effort/i)).toBeVisible();
   expect(errors).toEqual([]);
 });
