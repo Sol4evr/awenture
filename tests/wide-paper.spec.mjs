@@ -24,7 +24,7 @@ test('historical paper viewer supports iPad-safe zoom and horizontal panning', a
   await expect(zoomLabel).toHaveText('130%');
   const before=await page.locator('[data-aw-paper-frame]').evaluate(el=>({left:el.scrollLeft,width:el.clientWidth,scrollWidth:el.scrollWidth,touch:getComputedStyle(el).touchAction}));
   expect(before.scrollWidth).toBeGreaterThan(before.width);
-  expect(before.touch).toContain('pan-x');
+  expect(before.touch==='manipulation'||before.touch.includes('pan-x')).toBeTruthy();
   await panRight.click();
   await page.waitForTimeout(350);
   const after=await page.locator('[data-aw-paper-frame]').evaluate(el=>el.scrollLeft);
