@@ -24,13 +24,13 @@ for(const branch of delegated){
   formal=formal.replace(branch,'');
 }
 
-const pageLabel=String.raw`<strong data-aw-page-label>Page 1 of \${p.questionEndPage}</strong>`;
-const pageSelect=String.raw`<label class="aw-page-select-wrap"><span>Page</span><select data-aw-page-select aria-label="Paper page">\${Array.from({length:p.questionEndPage},(_,i)=>`<option value="\${i+1}">\${i+1}</option>`).join('')}</select><span data-aw-page-total>of \${p.questionEndPage}</span><strong data-aw-page-label class="aw-page-label-sr">Page 1 of \${p.questionEndPage}</strong></label>`;
+const pageLabel='<strong data-aw-page-label>Page 1 of ${p.questionEndPage}</strong>';
+const pageSelect='<label class="aw-page-select-wrap"><span>Page</span><select data-aw-page-select aria-label="Paper page">${Array.from({length:p.questionEndPage},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join(\'\')}</select><span data-aw-page-total>of ${p.questionEndPage}</span><strong data-aw-page-label class="aw-page-label-sr">Page 1 of ${p.questionEndPage}</strong></label>';
 if(!formal.includes(pageLabel))throw new Error('Missing formal page label markup');
 formal=formal.replace(pageLabel,pageSelect);
 
-const syncNeedle=String.raw`const label=qs('[data-aw-page-label]');if(label)label.textContent=`Page \${n} of \${total}`;`;
-const syncReplacement=String.raw`const label=qs('[data-aw-page-label]');if(label)label.textContent=`Page \${n} of \${total}`;const select=qs('[data-aw-page-select]');if(select)select.value=String(n);const totalEl=qs('[data-aw-page-total]');if(totalEl)totalEl.textContent=`of \${total}`;`;
+const syncNeedle='const label=qs(\'[data-aw-page-label]\');if(label)label.textContent=`Page ${n} of ${total}`;';
+const syncReplacement='const label=qs(\'[data-aw-page-label]\');if(label)label.textContent=`Page ${n} of ${total}`;const select=qs(\'[data-aw-page-select]\');if(select)select.value=String(n);const totalEl=qs(\'[data-aw-page-total]\');if(totalEl)totalEl.textContent=`of ${total}`;';
 if(!formal.includes(syncNeedle))throw new Error('Missing viewer sync label logic');
 formal=formal.replace(syncNeedle,syncReplacement);
 
