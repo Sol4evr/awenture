@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const PROGRESS_KEY='oc-ready-progress-v1',BONUS_KEY='awenture-bonus-v1';
-const qs=(s,r=document)=>r.querySelector(s),qsa=(s,r=document)=>[...r.querySelectorAll(s)];
+const qs=(s,r=document)=>r.querySelector(s);
 function load(key,fallback){try{return Object.assign({},fallback,JSON.parse(localStorage.getItem(key)||'{}'))}catch(_){return {...fallback}}}
 function dayOf(value){const d=new Date(value);if(Number.isNaN(+d))return null;return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function today(){return dayOf(new Date())}
@@ -24,29 +24,23 @@ function bonusCard(){
 function metricLevel(v,[b,s,g],activeDays,{goldDays=30,bonus=false}={}){if(v>=g&&(bonus||activeDays>=goldDays))return'gold';if(v>=s)return'silver';if(v>=b)return'bronze';return'grey'}
 function renderAwards(){
   const collection=qs('.collection');if(!collection||collection.dataset.awV2==='1')return;
-  const p=load(PROGRESS_KEY,{attempts:[],seenIds:[],skillStats:{}}),b=bonusState(),attempts=p.attempts||[];
+  const p=load(PROGRESS_KEY,{attempts:[],skillStats:{}}),b=bonusState(),attempts=p.attempts||[];
   const days=uniqueDays(attempts),activeDays=days.length,currentStreak=consecutiveEndingToday(days),perfectDays=uniqueDays(attempts,a=>Number(a.score)===100).length;
-  const stats=Object.values(p.skillStats||{}),conf=stats.filter(x=>(x.a||0)>=3&&(x.c||0)/(x.a||1)>=.8&&(x.guess||0)/(x.a||1)<.2).length,comeback=stats.filter(x=>(x.a||0)>=3&&(x.c||0)>=2).length;
-  const full=s=>attempts.filter(x=>x.type==='icas-test'&&x.subject===s).length,totalFull=['English','Mathematics','Science'].reduce((n,s)=>n+full(s),0);
-  const visualIds=new Set(window.__AW_VISUAL_IDS||[]),visualSeen=(p.seenIds||[]).filter(id=>visualIds.has(id)).length;
+  const stats=Object.values(p.skillStats||{}),conf=stats.filter(x=>(x.a||0)>=3&&(x.c||0)/(x.a||1)>=.8&&(x.guess||0)/(x.a||1)<.2).length;
+  const totalFull=attempts.filter(x=>x.type==='icas-test').length;
   const awards=[
     ['🧭','Adventure Streak',currentStreak,[7,14,30],'days',{}],
     ['🌱','Practice Explorer',activeDays,[7,14,30],'active days',{}],
     ['🎯','Perfect Practice',perfectDays,[3,10,25],'perfect days',{}],
     ['🧠','Confidence Champion',conf,[2,5,8],'confident skills',{}],
-    ['🔄','Comeback Kid',comeback,[2,4,6],'improving skills',{}],
-    ['📘','English Explorer',full('English'),[2,5,10],'papers',{}],
-    ['➗','Maths Master',full('Mathematics'),[2,5,10],'papers',{}],
-    ['🔬','Science Star',full('Science'),[2,5,10],'papers',{}],
-    ['👀','Visual Detective',visualSeen,[12,30,50],'visual questions',{}],
     ['🏆','ICAS Challenger',totalFull,[3,9,18],'papers',{}],
     ['✦','Bonus Challenger',b.streak||0,[3,5,7],'consecutive days',{bonus:true,goldDays:0}]
   ];
   const names={grey:'Locked',bronze:'Bronze',silver:'Silver',gold:'Gold'};
   collection.dataset.awV2='1';
-  collection.insertAdjacentHTML('beforebegin',`<div class="aw-awards-note">Gold in the main collection now represents sustained effort: it cannot unlock before 30 distinct active practice days. Bonus Challenger follows its own 3 / 5 / 7 consecutive-day ladder.</div>`);
+  collection.insertAdjacentHTML('beforebegin',`<div class="aw-awards-note">Gold in the main collection represents sustained effort: it cannot unlock before 30 distinct active practice days. Bonus Challenger follows its own 3 / 5 / 7 consecutive-day ladder.</div>`);
   collection.innerHTML=awards.map(([ic,n,v,t,u,rule])=>{const level=metricLevel(v,t,activeDays,rule),next=level==='grey'?t[0]:level==='bronze'?t[1]:level==='silver'?t[2]:null,goldBlocked=!rule.bonus&&v>=t[2]&&activeDays<30;return `<div class="ach aw-ach ${goldBlocked?'locked-gold':''}"><div class="row"><div class="icon ${level}">${ic}</div><div><b>${n}</b><br><small>${names[level]}</small></div></div><div class="mile"><i class="${v>=t[0]?'on b':''}"></i><i class="${v>=t[1]?'on s':''}"></i><i class="${v>=t[2]&&(rule.bonus||activeDays>=30)?'on g':''}"></i></div><small class="aw-ach-meta">${next?`${v}/${next} ${u}${level==='silver'&&!rule.bonus?' · Gold also needs 30 active days':''}`:`${v} ${u} · Gold achieved ✨`}</small></div>`}).join('');
-  const h1=qs('h1',collection.closest('.card'));if(h1)h1.textContent='11 achievements';
+  const h1=qs('h1',collection.closest('.card'));if(h1)h1.textContent='6 achievements';
 }
 function sync(){bonusCard();renderAwards()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-aw-bonus-start]');if(!b)return;b.disabled=true;const ok=window.__AW_BONUS_API?.start?.();if(!ok)b.disabled=false});
