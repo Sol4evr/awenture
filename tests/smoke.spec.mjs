@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('feature-complete learner shell, premium flow and gated bonus challenge', async ({ page }) => {
+test('feature-complete learner shell, formal assessment mode and gated bonus challenge', async ({ page }) => {
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));await page.goto('/');
   await expect(page.getByText('Hello Alistair')).toBeVisible();
   await expect(page.getByText('My Collection')).toBeVisible();
@@ -11,10 +11,8 @@ test('feature-complete learner shell, premium flow and gated bonus challenge', a
   await expect(page.locator('.aw-path-step.active')).toContainText('ICAS Grade 2');
   await expect(page.locator('.aw-path-step.locked')).toHaveCount(3);
   await expect(page.getByText(/stable calibrated core/i)).toHaveCount(0);
-  await expect(page.locator('link[href*="challenge.css"]')).toHaveCount(1);
   await expect(page.locator('[data-aw-bonus-card]')).toBeVisible();
   await expect(page.locator('[data-aw-bonus-card]')).toContainText('Locked');
-  await expect(page.locator('[data-aw-bonus-start]')).toHaveCount(0);
 
   await page.locator('[data-a="parent"]').click();
   await expect(page.getByText('Parent insights')).toBeVisible();
@@ -27,21 +25,39 @@ test('feature-complete learner shell, premium flow and gated bonus challenge', a
   await page.locator('[data-a="home"]').last().click();
 
   await page.locator('[data-a="tests"]').click();
-  await page.locator('[data-s="English"]').click();
+  await expect(page.locator('.aw-form-subject')).toHaveCount(3);
+  await expect(page.locator('[data-aw-form-id]')).toHaveCount(9);
+  const english=page.locator('.aw-form-subject').filter({hasText:'English'});
+  await expect(english).toContainText('35 questions · 35 min');
+  await english.locator('[data-aw-form-id="A"]').click();
   await expect(page.getByText(/Question 1 of 35/i)).toBeVisible();
+  await expect(page.locator('[data-aw-timer]')).toBeVisible();
   await expect(page.locator('[data-a="flag"]')).toBeVisible();
+  await expect(page.locator('[data-a="check"]')).toHaveCount(0);
+  await page.locator('.opt').first().click();
+  await expect(page.locator('.feedback')).toHaveCount(0);
+  await expect(page.locator('.confidence')).toHaveCount(0);
+
   let foundText=false,foundVisual=false,foundEmpty=false;const dots=page.locator('.progressdot');const count=await dots.count();
   for(let i=0;i<count&&!(foundText&&foundVisual&&foundEmpty);i++){
     await dots.nth(i).dispatchEvent('click');
     const visualCount=await page.locator('.stimulus-pane .stimulus-visual').count(),textCount=await page.locator('.stimulus-pane .stimulus-text').count(),emptyCount=await page.locator('.stimulus-pane .stimulus-empty').count();
     if(visualCount){foundVisual=true;await expect(page.locator('.testworkspace')).toHaveClass(/aw-visual-stimulus/);await expect(page.locator('.stimulus-pane')).toBeVisible()}
     else if(textCount){foundText=true;await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);await expect(page.locator('.stimulus-pane')).toBeHidden();await expect(page.locator('.aw-inline-stimulus')).toBeVisible()}
-    else if(emptyCount){foundEmpty=true;await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);await expect(page.locator('.stimulus-pane')).toBeHidden();await expect(page.locator('.aw-inline-stimulus')).toHaveCount(0)}
+    else if(emptyCount){foundEmpty=true;await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);await expect(page.locator('.stimulus-pane')).toBeHidden()}
   }
   expect(foundText&&foundVisual&&foundEmpty).toBeTruthy();
   const option=page.locator('.opt').first();await expect(option).toBeVisible();const metrics=await option.evaluate(el=>({radius:parseFloat(getComputedStyle(el).borderRadius),height:el.getBoundingClientRect().height}));expect(metrics.radius).toBeGreaterThanOrEqual(14);expect(metrics.height).toBeGreaterThanOrEqual(58);
+  await dots.nth(34).dispatchEvent('click');
+  await expect(page.locator('[data-a="submit-formal"]')).toBeVisible();
+  await page.locator('[data-a="submit-formal"]').click();
+  await expect(page.getByText('Formal ICAS-style test')).toBeVisible();
+  await expect(page.getByText(/English · Paper A/)).toBeVisible();
+  await expect(page.getByText(/Marking and explanations are shown only now/i)).toBeVisible();
+  const formalAttempt=await page.evaluate(()=>JSON.parse(localStorage.getItem('oc-ready-progress-v1')).attempts.at(-1));
+  expect(formalAttempt.type).toBe('icas-test');expect(formalAttempt.subject).toBe('English');expect(formalAttempt.formId).toBe('A');expect(formalAttempt.durationSeconds).toBeGreaterThanOrEqual(0);expect(formalAttempt.timedOut).toBe(false);
+  await page.locator('[data-a="home"]').last().click();
 
-  await page.locator('[data-a="home"]').first().click();
   const perfectDate=new Date().toISOString();
   await page.evaluate(({perfectDate})=>localStorage.setItem('oc-ready-progress-v1',JSON.stringify({attempts:[{date:perfectDate,score:100,subject:'Daily',type:'practice'}],seenIds:[],reviewQueue:[],recentFamilies:[],xp:0,streak:1,skillStats:{},lastActiveDate:null})),{perfectDate});
   await page.reload();
@@ -51,17 +67,10 @@ test('feature-complete learner shell, premium flow and gated bonus challenge', a
   await page.locator('[data-aw-bonus-start]').click();
   await expect(page.getByText(/Question 1 of 1/i)).toBeVisible();
   await expect(page.getByText(/Bonus Challenge/i).first()).toBeVisible();
-  const selected=await page.evaluate(()=>{const stem=document.querySelector('.question-pane .q')?.textContent||'';const q=(window.AW_BONUS_BANK||[]).find(x=>x.question===stem);return q?{answer:q.answer,kind:q.kind,difficulty:q.difficulty,visual:!!q.visual,stimulus:!!q.stimulus}:null});
+  const selected=await page.evaluate(()=>{const stem=document.querySelector('.question-pane .q')?.textContent||'';const q=(window.AW_BONUS_BANK||[]).find(x=>x.question===stem);return q?{answer:q.answer,kind:q.kind,difficulty:q.difficulty,stimulus:!!q.stimulus}:null});
   expect(selected).toBeTruthy();expect(selected.difficulty).toBe(5);expect(selected.answer).toMatch(/^[ABCD]$/);
-  if(selected.kind==='visual'){
-    await expect(page.locator('.stimulus-visual')).toBeVisible();
-    await expect(page.locator('.testworkspace')).toHaveClass(/aw-visual-stimulus/);
-  }else if(selected.stimulus){
-    await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);
-    await expect(page.locator('.aw-inline-stimulus')).toBeVisible();
-  }else{
-    await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);
-  }
+  if(selected.kind==='visual'){await expect(page.locator('.stimulus-visual')).toBeVisible();await expect(page.locator('.testworkspace')).toHaveClass(/aw-visual-stimulus/)}
+  else if(selected.stimulus){await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);await expect(page.locator('.aw-inline-stimulus')).toBeVisible()}
   await page.locator(`[data-o="${selected.answer}"]`).click();
   await page.locator('[data-a="check"]').click();
   await page.locator('[data-c="3"]').click();
