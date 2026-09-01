@@ -9,14 +9,12 @@ const insights=fs.readFileSync(new URL('../dist/insights.js',import.meta.url),'u
 const challenge=fs.readFileSync(new URL('../dist/challenge.js',import.meta.url),'utf8');
 const expansion=JSON.parse(fs.readFileSync(new URL('../bank/v6.11.0-approved.json',import.meta.url),'utf8'));
 const bonus=JSON.parse(fs.readFileSync(new URL('../bank/v6.12.0-bonus.json',import.meta.url),'utf8'));
-const must=['content="6.12.0"',"RELEASE='6.12.0'",'oc-ready-progress-v1','My Collection','Made with love by Arthur Wang (daddy), 2026','data-a="parent"','subjectTest(subject)','Confidence Champion','speechSynthesis','window.AW_BANK=[]','legacy-v3.8-static','for(let i=b.length-1;i>0;i--)','v6.11.0 approved build-time bank expansion','v6.12.0 separate Difficulty 5 bonus bank','window.AW_BONUS_BANK=','window.__AW_BONUS_API','bonus-challenge','awenture-bonus-v1','/premium.css?v=6120','/practice-flow.css?v=6120','/home-insights.css?v=6120','/challenge.css?v=6120','/premium.js?v=6120','/insights.js?v=6120','/challenge.js?v=6120'];
+const must=['content="6.12.1"',"RELEASE='6.12.1'",'oc-ready-progress-v1','My Collection','Made with love by Arthur Wang (daddy), 2026','data-a="parent"','subjectTest(subject)','Confidence Champion','speechSynthesis','window.AW_BANK=[]','legacy-v3.8-static','for(let i=b.length-1;i>0;i--)','v6.11.0 approved build-time bank expansion','v6.12.0 separate Difficulty 5 bonus bank','window.AW_BONUS_BANK=','window.__AW_BONUS_API','bonus-challenge','awenture-bonus-v1','/premium.css?v=6121','/practice-flow.css?v=6121','/home-insights.css?v=6121','/challenge.css?v=6121','/premium.js?v=6121','/insights.js?v=6121','/challenge.js?v=6121'];
 for(const x of must)if(!html.includes(x))throw new Error(`Missing ${x}`);
 const ids=[...html.matchAll(/"id":"([EMS]\d+)"/g)].map(m=>m[1]);
-const unique=new Set(ids);
-if(unique.size!==171)throw new Error(`Expected 171 normal-bank unique questions, got ${unique.size}`);
+const unique=new Set(ids);if(unique.size!==171)throw new Error(`Expected 171 normal-bank unique questions, got ${unique.size}`);
 for(const prefix of ['E','M','S']){const n=[...unique].filter(id=>id.startsWith(prefix)).length;if(n!==57)throw new Error(`Expected 57 ${prefix} questions, got ${n}`)}
-const bonusIds=[...html.matchAll(/"id":"(B[EMS]\d+)"/g)].map(m=>m[1]);
-if(new Set(bonusIds).size!==9)throw new Error(`Expected 9 separate bonus questions, got ${new Set(bonusIds).size}`);
+const bonusIds=[...html.matchAll(/"id":"(B[EMS]\d+)"/g)].map(m=>m[1]);if(new Set(bonusIds).size!==9)throw new Error(`Expected 9 separate bonus questions, got ${new Set(bonusIds).size}`);
 for(const q of bonus)if(!html.includes(`"id":"${q.id}"`))throw new Error(`Bonus item missing: ${q.id}`);
 if(bonus.some(q=>q.difficulty!==5))throw new Error('Every bonus item must remain Difficulty 5');
 const bonusVisuals=bonus.filter(q=>q.kind==='visual').length;if(bonusVisuals<6)throw new Error(`Expected at least 6 bonus visuals, got ${bonusVisuals}`);
@@ -30,7 +28,8 @@ for(const marker of ['aw-learning-line','aw-path-step','aw-heart','aw-parent-gri
 for(const marker of ['PROGRESS_KEY','TOPUP_KEY','transformHome','transformParent','skillRows','unseenBySubject','requestTopup'])if(!insights.includes(marker))throw new Error(`Insights module missing: ${marker}`);
 for(const forbidden of ['dailyFast(','subjectTest(','finish(','speechSynthesis','recentFamilies'])if(insights.includes(forbidden))throw new Error(`Insights module crossed learner-engine boundary: ${forbidden}`);
 for(const marker of ['aw-bonus-card','aw-bonus-progress','aw-awards-note'])if(!challengeCss.includes(marker))throw new Error(`Challenge style missing: ${marker}`);
-for(const marker of ['latestDailyPerfect','Bonus Challenger','[3,5,7]','activeDays>=30','__AW_BONUS_API'])if(!challenge.includes(marker))throw new Error(`Challenge module marker missing: ${marker}`);
+for(const marker of ['latestDailyPerfect','Bonus Challenger','ICAS Challenger','6 achievements','[3,5,7]','activeDays>=30','__AW_BONUS_API'])if(!challenge.includes(marker))throw new Error(`Challenge module marker missing: ${marker}`);
+for(const removed of ['Comeback Kid','English Explorer','Maths Master','Science Star','Visual Detective'])if(challenge.includes(removed))throw new Error(`Removed achievement still present: ${removed}`);
 const bonusFinish=html.slice(html.indexOf('function finishBonus()'),html.indexOf('function finish(){if(sess'));
 for(const forbidden of ['skillStats','reviewQueue','seenIds','P.xp','P.attempts.push'])if(bonusFinish.includes(forbidden))throw new Error(`Bonus result contaminated core learning evidence: ${forbidden}`);
-console.log(JSON.stringify({release:'6.12.0',baseline:'6.9.0',normalBank:171,bonusBank:9,bonusVisuals,featureRegression:'PASS',uiIsolation:'PASS',bonusScoreIsolation:'PASS',bonusPerfectUnlock:'PASS',achievementGold30Days:'PASS',bonusAchievement357:'PASS',assessmentBlueprint:'PASS'}));
+console.log(JSON.stringify({release:'6.12.1',baseline:'6.9.0',normalBank:171,bonusBank:9,bonusVisuals,collectionAchievements:6,featureRegression:'PASS',uiIsolation:'PASS',bonusScoreIsolation:'PASS',bonusPerfectUnlock:'PASS',achievementGold30Days:'PASS',bonusAchievement357:'PASS',collectionSimplification:'PASS'}));
