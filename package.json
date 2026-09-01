@@ -11,5 +11,5 @@
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
   },
-  "devDependencies": {"@playwright/test": "1.55.0", "pdf-lib": "1.17.1"}
+  "devDependencies": {"@playwright/test": "1.55.0", "pdf-lib": "1.17.1", "pdfjs-dist": "5.4.54", "@napi-rs/canvas": "0.1.80"}
 }
