@@ -15,12 +15,13 @@ const release='6.11.0';
 const expansionRaw=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.11.0-approved.json'),'utf8'));
 const LETTERS='ABCD';
 const expansion=expansionRaw.map((q,i)=>{
-  const shift=i%4,answerIndex=LETTERS.indexOf(q.answer);
+  const answerIndex=LETTERS.indexOf(q.answer),targetIndex=i%4;
+  const shift=(answerIndex-targetIndex+4)%4;
   const options=[...q.options.slice(shift),...q.options.slice(0,shift)];
-  return {...q,options,answer:LETTERS[(answerIndex-shift+4)%4]};
+  return {...q,options,answer:LETTERS[targetIndex]};
 });
 const answerMix=Object.fromEntries(LETTERS.split('').map(l=>[l,expansion.filter(q=>q.answer===l).length]));
-if(Math.max(...Object.values(answerMix))-Math.min(...Object.values(answerMix))>2)throw new Error(`Expansion answer distribution imbalance: ${JSON.stringify(answerMix)}`);
+if(Math.max(...Object.values(answerMix))-Math.min(...Object.values(answerMix))>1)throw new Error(`Expansion answer distribution imbalance: ${JSON.stringify(answerMix)}`);
 
 let html=baseline.toString('utf8');
 html=html.replace('content="6.9.0"',`content="${release}"`);
