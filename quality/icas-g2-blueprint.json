@@ -1,0 +1,32 @@
+{
+  "release": "6.12.0",
+  "benchmark": "ICAS-style Grade 2 internal assessment blueprint",
+  "principles": [
+    "Questions must require the stimulus when one is supplied.",
+    "Distractors should represent plausible misconceptions, not jokes or impossible forms.",
+    "Visuals must encode information needed to answer, not merely decorate the page.",
+    "Higher-difficulty items should combine at least two reasoning steps or sources of evidence.",
+    "Explanations must identify the decisive reasoning, not only restate the answer.",
+    "Science conclusions must stay within the evidence supplied.",
+    "Mathematics items should test interpretation as well as calculation.",
+    "English items should include inference, synthesis, vocabulary-in-context and writer craft."
+  ],
+  "coreExpansion": {
+    "minimumQuestionsPerSubject": 15,
+    "minimumVisualQuestions": 11,
+    "minimumHigherOrderShare": 0.6,
+    "difficultyFloor": 3
+  },
+  "bonusChallenge": {
+    "questionsPerSubject": 3,
+    "difficulty": 5,
+    "minimumVisualQuestions": 6,
+    "unlock": "perfect Daily Practice only",
+    "normalScoreIsolation": true,
+    "oneAttemptPerDay": true
+  },
+  "achievementPolicy": {
+    "mainCollectionGoldMinimumActiveDays": 30,
+    "bonusChallengeTiers": [3, 5, 7]
+  }
+}
