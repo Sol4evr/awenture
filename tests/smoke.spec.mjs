@@ -54,9 +54,9 @@ test('feature-complete learner shell, historical formal papers and gated bonus c
   expect(formalAttempt.type).toBe('icas-original');expect(formalAttempt.subject).toBe('English');expect(formalAttempt.sourceYear).toBe(2013);expect(formalAttempt.score).toBe(3);expect(formalAttempt.correct).toBe(1);expect(formalAttempt.verified).toBe(true);expect(formalAttempt.durationSeconds).toBeGreaterThanOrEqual(0);expect(formalAttempt.timedOut).toBe(false);
   expect(formalAttempt.responses['1']).toBe('D');
   await page.locator('[data-aw-result-done]').click();
-
-  await page.locator('[data-a="tests"]').click();
-  await english.locator('[data-aw-original-year="2020"]').click();
+  await expect(page.locator('.aw-form-subject')).toHaveCount(3);
+  const englishAgain=page.locator('.aw-form-subject').filter({hasText:'English'});
+  await englishAgain.locator('[data-aw-original-year="2020"]').click();
   await page.locator('[data-aw-start-original]').click();
   await expect(page.locator('[data-aw-answer-row="31"] small')).toContainText('Select all');
   await page.locator('[data-aw-answer-choice="31"][data-value="B"]').click();
