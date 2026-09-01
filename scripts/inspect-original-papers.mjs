@@ -21,6 +21,8 @@ for(const p of manifest.papers){
     pages.push({page:i,text:text.slice(0,5000)});
   }
   out.push({id:p.id,subject:p.subject,year:p.year,file,pages});
+  const tail=pages.slice(-6).map(x=>({page:x.page,text:x.text.slice(0,1800)}));
+  console.log('AW_ORIGINAL_PAPER_TAIL '+JSON.stringify({id:p.id,subject:p.subject,year:p.year,totalPages:doc.numPages,tail}));
 }
 const target=path.join(root,'dist','original-icas','inspection.json');
 fs.mkdirSync(path.dirname(target),{recursive:true});
