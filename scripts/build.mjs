@@ -11,7 +11,7 @@ const sha=crypto.createHash('sha256').update(baseline).digest('hex');
 if(sha!==m.sha256) throw new Error(`AWenture baseline integrity failure: ${sha}`);
 if(baseline.length!==m.decodedBytes) throw new Error(`AWenture baseline size mismatch: ${baseline.length}`);
 
-const release='6.12.0';
+const release='6.12.1';
 const expansionSource=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.11.0-approved.json'),'utf8'));
 const corrections=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.11.0-corrections.json'),'utf8'));
 const bonus=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.12.0-bonus.json'),'utf8'));
@@ -53,8 +53,8 @@ if(!html.includes(healthMarker))throw new Error('Runtime health marker not found
 const bridge="window.__AW_BONUS_API={start:()=>{const b=bonusLoad(),t=localDay();if((b.attempts||[]).some(a=>a.date===t))return false;const eligible=(P.attempts||[]).some(a=>a.type==='practice'&&a.subject==='Daily'&&Math.round(Number(a.score))===100&&localDay(new Date(a.date))===t);if(!eligible)return false;const pool=Array.isArray(window.AW_BONUS_BANK)?window.AW_BONUS_BANK:[];if(!pool.length)return false;const q=pool[seed()%pool.length];start([q],'bonus-challenge','Bonus Challenge');return true}};window.__AW_RUNTIME_HEALTH={release:RELEASE,bank:BANK.length,bonusBank:(window.AW_BONUS_BANK||[]).length,subjects:Object.fromEntries(SUB.map(s=>[s,BANK.filter(q=>q.subject===s).length]))};render();";
 html=html.replace(healthMarker,bridge);
 
-html=html.replace('</head>','<link rel="stylesheet" href="/premium.css?v=6120"><link rel="stylesheet" href="/practice-flow.css?v=6120"><link rel="stylesheet" href="/home-insights.css?v=6120"><link rel="stylesheet" href="/challenge.css?v=6120"></head>');
-html=html.replace('</body>','<script src="/premium.js?v=6120" defer></script><script src="/insights.js?v=6120" defer></script><script src="/challenge.js?v=6120" defer></script></body>');
+html=html.replace('</head>','<link rel="stylesheet" href="/premium.css?v=6121"><link rel="stylesheet" href="/practice-flow.css?v=6121"><link rel="stylesheet" href="/home-insights.css?v=6121"><link rel="stylesheet" href="/challenge.css?v=6121"></head>');
+html=html.replace('</body>','<script src="/premium.js?v=6121" defer></script><script src="/insights.js?v=6121" defer></script><script src="/challenge.js?v=6121" defer></script></body>');
 
 fs.rmSync(path.join(root,'dist'),{recursive:true,force:true});
 fs.mkdirSync(path.join(root,'dist'));
