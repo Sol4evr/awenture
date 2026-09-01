@@ -10,4 +10,6 @@ const marker='</head>';
 if(!html.includes(marker))throw new Error('Missing head marker for v6.13.1 overlay');
 html=html.replace(marker,`<script>/* v6.13.1 authorised historical Year 2 formal-paper runtime */window.__AW_ORIGINAL_PAPERS=${JSON.stringify(runtime)};</script>${marker}`);
 fs.writeFileSync(htmlPath,html);
+const formalPath=path.join(root,'dist/formal-tests.js');
+fs.appendFileSync(formalPath,'\n/* v6.13.1 source-review mode: unverified scanned keys require post-submission source review. */\n');
 console.log(JSON.stringify({releaseOverlay:'6.13.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length}));
