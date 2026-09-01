@@ -1,6 +1,6 @@
 {
   "name": "awenture",
-  "version": "6.12.0",
+  "version": "6.12.1",
   "private": true,
   "scripts": {
     "validate:bank": "node scripts/validate-expansion-v4.mjs",
@@ -10,7 +10,5 @@
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
   },
-  "devDependencies": {
-    "@playwright/test": "1.55.0"
-  }
+  "devDependencies": {"@playwright/test": "1.55.0"}
 }
