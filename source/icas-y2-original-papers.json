@@ -1,0 +1,35 @@
+{
+  "release": "6.13.1",
+  "mode": "authorized-original-paper-source-manifest",
+  "archive": "ICAS Batch 1.zip",
+  "rules": {
+    "sourceAuthorization": "User confirms ownership and permission to use uploaded papers.",
+    "formalIsolation": true,
+    "noQuestionOverlapAcrossFormalPapers": true,
+    "noSourceFingerprintReuseAcrossFormalPapers": true,
+    "preserveOriginalPageArtwork": true
+  },
+  "papers": [
+    {"subject":"English","year":2013,"sourcePath":"ICAS Year 2/English/2013 English Year 2- With Answers.pdf","sha256":"5d2f371c079b9af88972ae7264d63a3015665f4117e9283c97ce968334771a5e","bytes":1627125,"pages":19},
+    {"subject":"English","year":2014,"sourcePath":"ICAS Year 2/English/2014 English & Answers - Introductory.pdf","sha256":"a8bb95241cc4987007da57539d4c31890621bd515b2fb951b5bc29681d3b42b7","bytes":7714594,"pages":16},
+    {"subject":"English","year":2015,"sourcePath":"ICAS Year 2/English/2015 English Year 2- With  Answers.pdf","sha256":"65718faf10b67e8cf3230d6b2df486a5d8c2ff246bb104939da5765e447cda28","bytes":6015704,"pages":16},
+    {"subject":"English","year":2016,"sourcePath":"ICAS Year 2/English/2016 English Year 2 with  Answer.pdf","sha256":"c032acfbc80bac6946f844d4432b72da04fbcde9338eda940a4ee959dfbd811a","bytes":10854550,"pages":18},
+    {"subject":"English","year":2017,"sourcePath":"ICAS Year 2/English/2017 English Year 2 with  Answer.pdf","sha256":"dbdb0e72280792618d63a4bef442bed90103d6c461d7dc20de27e712355ec008","bytes":3188554,"pages":16},
+    {"subject":"English","year":2018,"sourcePath":"ICAS Year 2/English/2018 English Year 2 with  Answer.pdf","sha256":"d4cf3187d567298511f3719ad5cbe04b2926c407932d1dbfe126501562b8ab1d","bytes":5818435,"pages":17},
+    {"subject":"English","year":2019,"sourcePath":"ICAS Year 2/English/2019 English Year 2 with  Answer.pdf","sha256":"7298846d79d7a997b0f56fac00c6daaa5593433f8b1cd2aef328c474fa6b1b95","bytes":4504365,"pages":32,"expectedQuestions":35},
+    {"subject":"English","year":2020,"sourcePath":"ICAS Year 2/English/2020 English Year 2 with  Answer.pdf","sha256":"1571dc4100df053447bb3c2ad657daba0002b44eacfb49254bd14ebf4c014987","bytes":5233440,"pages":35,"expectedQuestions":35},
+    {"subject":"Mathematics","year":2013,"sourcePath":"ICAS Year 2/Maths/2013 Mathematics Year 2- With Answers.pdf","sha256":"0dbf4fe3aee20b056388f0333c467047f1d6a4263f7040afdb841a75577ff1e8","bytes":845473,"pages":15,"expectedQuestions":30},
+    {"subject":"Mathematics","year":2014,"sourcePath":"ICAS Year 2/Maths/2014 Maths & Answers -Introductory.pdf","sha256":"c9658dafb7239eee02b5c5ae46ee857ca421d95ff23c40175278dfa701914aec","bytes":3959146,"pages":13,"expectedQuestions":30},
+    {"subject":"Mathematics","year":2015,"sourcePath":"ICAS Year 2/Maths/2015 Mathematics Year 2- With  Answers.pdf","sha256":"5c38089187ec60c78640dad47877d06b8685cc1c5e88e4779522d49482dfeb9d","bytes":3364637,"pages":12,"expectedQuestions":30},
+    {"subject":"Mathematics","year":2016,"sourcePath":"ICAS Year 2/Maths/2016 Mathematics Year 2- With   Answer.pdf","sha256":"fe821a0f533e7b2e88574dc2711794cc73fb1133ed70b47e99d81b3d304fc913","bytes":5621955,"pages":13,"expectedQuestions":30},
+    {"subject":"Mathematics","year":2017,"sourcePath":"ICAS Year 2/Maths/2017 Mathematics Year 2 - Introductory with answers.pdf","sha256":"e98e232fdc98e4becd3e07e3570754c0a5bcbb3656ba196c2e73087914d0ae0e","bytes":3747915,"pages":16,"expectedQuestions":30},
+    {"subject":"Mathematics","year":2018,"sourcePath":"ICAS Year 2/Maths/2018 Mathematics Year 2 - Introductory with answers.pdf","sha256":"12a9524daa736aefe073efdcfafdd50e56ff59eb08011a14105c91bc0857b6e5","bytes":3109700,"pages":13,"expectedQuestions":30},
+    {"subject":"Mathematics","year":2019,"sourcePath":"ICAS Year 2/Maths/2019 Mathematics Year 2 - Introductory with answers.pdf","sha256":"6c24e69964dd2e824900ea20b4b734201db57344b6e03258a499a87e264528bd","bytes":613991,"pages":12,"expectedQuestions":30},
+    {"subject":"Mathematics","year":2020,"sourcePath":"ICAS Year 2/Maths/2020 Mathematics Year 2 - Introductory with answers.pdf","sha256":"951aa3ed6105b4329ddf99d948d9c47a9d09bb0c271a012d927284e40d8ac2fb","bytes":3873009,"pages":33,"expectedQuestions":30},
+    {"subject":"Science","year":2014,"sourcePath":"ICAS Year 2/Science/2014 Science & Answers -  Introductory.pdf","sha256":"4a02691ffeede0495aee90e5984493a4212e34542f4f68dfb1056caf92041176","bytes":5042801,"pages":17,"expectedQuestions":30},
+    {"subject":"Science","year":2015,"sourcePath":"ICAS Year 2/Science/2015 Science Year2 - With  Answers.pdf","sha256":"386826ca3e9f3ecf7abcb278bcff66911cc6caf93ead594b1643437dc83322d0","bytes":5115899,"pages":16,"expectedQuestions":30},
+    {"subject":"Science","year":2016,"sourcePath":"ICAS Year 2/Science/2016 Science Year2 - With  Answers.pdf","sha256":"e243c4934acfe45c74bbbf92cea993e53e65c2a8953eb8aaadfdb1dbc532bb89","bytes":39115001,"pages":17,"expectedQuestions":30},
+    {"subject":"Science","year":2017,"sourcePath":"ICAS Year 2/Science/2017 Science Year2 - With  Answers.pdf","sha256":"1312499aff3b2ec1d2672af7f62a326f2ee30a565997d7156c08244cc6838ac1","bytes":10256468,"pages":18,"expectedQuestions":30},
+    {"subject":"Science","year":2018,"sourcePath":"ICAS Year 2/Science/2018 Science Year2 - With  Answers.pdf","sha256":"7a3e1e35529c5b4a5d43a7439c782cb704c98bfddabad53dd09045b9a6c88412","bytes":2480093,"pages":17,"expectedQuestions":30}
+  ]
+}

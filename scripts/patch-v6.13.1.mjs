@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const htmlPath=path.join(root,'dist/index.html');
+const runtime=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.13.1-original-paper-runtime.json'),'utf8'));
+let html=fs.readFileSync(htmlPath,'utf8');
+html=html.replaceAll('6.13.0','6.13.1').replaceAll('v=6130','v=6131');
+const marker='</head>';
+if(!html.includes(marker))throw new Error('Missing head marker for v6.13.1 overlay');
+html=html.replace(marker,`<script>/* v6.13.1 authorised historical Year 2 formal-paper runtime */window.__AW_ORIGINAL_PAPERS=${JSON.stringify(runtime)};</script>${marker}`);
+fs.writeFileSync(htmlPath,html);
+const formalPath=path.join(root,'dist/formal-tests.js');
+fs.appendFileSync(formalPath,'\n/* v6.13.1 source-review mode: unverified scanned keys require post-submission source review. */\n');
+console.log(JSON.stringify({releaseOverlay:'6.13.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length}));
