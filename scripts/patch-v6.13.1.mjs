@@ -25,9 +25,9 @@ for(const branch of delegated){
 }
 const anchor="const stage=qs('[data-aw-paper-frame]');let touchStartX=null,touchStartY=null;";
 if(!formal.includes(anchor))throw new Error('Missing formal viewer control-binding anchor');
-const direct=`const bindPager=(sel,fn)=>{const b=qs(sel);if(!b)return;b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();fn()})};bindPager('[data-aw-page-prev]',()=>changePage(-1));bindPager('[data-aw-page-next]',()=>changePage(1));bindPager('[data-aw-zoom-out]',()=>changeZoom(-.15));bindPager('[data-aw-zoom-in]',()=>changeZoom(.15));${anchor}`;
+const direct=`const bindPager=(sel,fn)=>{const b=qs(sel);if(!b)return;let pointerAt=0;b.addEventListener('pointerdown',e=>{if(b.disabled)return;pointerAt=Date.now();e.preventDefault();e.stopPropagation();fn()});b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(b.disabled||Date.now()-pointerAt<700)return;fn()})};bindPager('[data-aw-page-prev]',()=>changePage(-1));bindPager('[data-aw-page-next]',()=>changePage(1));bindPager('[data-aw-zoom-out]',()=>changeZoom(-.15));bindPager('[data-aw-zoom-in]',()=>changeZoom(.15));${anchor}`;
 formal=formal.replace(anchor,direct);
-formal+='\n/* v6.13.1.1 iPad-safe paged historical-paper viewer; direct pager controls; source-review mode retained. */\n';
+formal+='\n/* v6.13.1.1 iPad-safe paged historical-paper viewer; pointer-first pager controls; source-review mode retained. */\n';
 fs.writeFileSync(formalPath,formal);
 
 for(const name of ['pdf.min.mjs','pdf.worker.min.mjs']){
@@ -35,4 +35,4 @@ for(const name of ['pdf.min.mjs','pdf.worker.min.mjs']){
   if(!fs.existsSync(src))throw new Error(`Missing PDF.js runtime asset ${name}`);
   fs.copyFileSync(src,dest);
 }
-console.log(JSON.stringify({releaseOverlay:'6.13.1.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length,pagedViewer:'PDF.js local runtime',pagerCompatibility:'direct-controls'}));
+console.log(JSON.stringify({releaseOverlay:'6.13.1.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length,pagedViewer:'PDF.js local runtime',pagerCompatibility:'pointer-first-controls'}));
