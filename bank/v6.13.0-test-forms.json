@@ -1,0 +1,31 @@
+{
+  "release": "6.13.0",
+  "standard": "ICAS-style Intro / Australian Year 2 internal assessment forms",
+  "sourcePolicy": "Original AWenture questions only. Historical ICAS papers may inform blueprint calibration but copyrighted ICAS item content is not embedded or redistributed.",
+  "conditions": {
+    "English": {"questions": 35, "minutes": 35},
+    "Mathematics": {"questions": 30, "minutes": 35},
+    "Science": {"questions": 30, "minutes": 45}
+  },
+  "excludedFromFormal": {
+    "Mathematics": ["M09", "M18", "M19", "M23", "M26", "M31"],
+    "reason": "Known legacy visual-content contradictions are excluded from formal assessment until corrected through a governed content QA overlay."
+  },
+  "forms": {
+    "English": {
+      "A": ["E01","E02","E03","E04","E05","E06","E07","E08","E09","E10","E11","E12","E13","E14","E15","E16","E17","E18","E19","E20","E21","E22","E23","E24","E25","E26","E27","E28","E29","E30","E31","E32","E33","E34","E35"],
+      "B": ["E20","E21","E22","E23","E24","E25","E26","E27","E28","E29","E30","E31","E32","E33","E34","E35","E36","E37","E38","E39","E40","E41","E42","E43","E44","E45","E46","E47","E48","E49","E50","E51","E52","E53","E54"],
+      "C": ["E39","E40","E41","E42","E43","E44","E45","E46","E47","E48","E49","E50","E51","E52","E53","E54","E55","E56","E57","E01","E02","E03","E04","E05","E06","E07","E08","E09","E10","E11","E12","E13","E14","E15","E16"]
+    },
+    "Mathematics": {
+      "A": ["M01","M02","M03","M04","M05","M06","M07","M08","M10","M11","M12","M13","M14","M15","M16","M17","M20","M21","M22","M24","M25","M27","M28","M29","M30","M32","M33","M34","M35","M36"],
+      "B": ["M21","M22","M24","M25","M27","M28","M29","M30","M32","M33","M34","M35","M36","M37","M38","M39","M40","M41","M42","M43","M44","M45","M46","M47","M48","M49","M50","M51","M52","M53"],
+      "C": ["M41","M42","M43","M44","M45","M46","M47","M48","M49","M50","M51","M52","M53","M54","M55","M56","M57","M01","M02","M03","M04","M05","M06","M07","M08","M10","M11","M12","M13","M14"]
+    },
+    "Science": {
+      "A": ["S01","S02","S03","S04","S05","S06","S07","S08","S09","S10","S11","S12","S13","S14","S15","S16","S17","S18","S19","S20","S21","S22","S23","S24","S25","S26","S27","S28","S29","S30"],
+      "B": ["S20","S21","S22","S23","S24","S25","S26","S27","S28","S29","S30","S31","S32","S33","S34","S35","S36","S37","S38","S39","S40","S41","S42","S43","S44","S45","S46","S47","S48","S49"],
+      "C": ["S39","S40","S41","S42","S43","S44","S45","S46","S47","S48","S49","S50","S51","S52","S53","S54","S55","S56","S57","S01","S02","S03","S04","S05","S06","S07","S08","S09","S10","S11"]
+    }
+  }
+}

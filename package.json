@@ -1,6 +1,6 @@
 {
   "name": "awenture",
-  "version": "6.12.1",
+  "version": "6.13.0",
   "private": true,
   "scripts": {
     "validate:bank": "node scripts/validate-expansion-v4.mjs",
