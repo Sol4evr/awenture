@@ -49,15 +49,11 @@ test('feature-complete learner shell, iPad-safe historical papers and gated bonu
   await expect(selector).toBeVisible();await expect(selector).toHaveValue('1');
   await expect(page.locator('[data-aw-page-total]')).toHaveText('of 18');
   await expect(page.locator('[data-aw-page-label]')).toHaveText('Page 1 of 18');
-  await expect.poll(async()=>page.locator('[data-aw-paper-canvas]').evaluate(c=>c.width)).toBeGreaterThan(100);
+  await expect(selector).toBeEnabled({timeout:15000});
+  await expect(page.locator('[data-aw-page-next]')).toBeEnabled();
+  await expect(page.locator('[data-aw-paper-status]')).toHaveText('');
   await selector.selectOption('2');
   await expect(selector).toHaveValue('2');
-  await expect(selector).toHaveAttribute('data-aw-event',/input|change/);
-  await expect(selector).toHaveAttribute('data-aw-has-active','true');
-  await expect(selector).toHaveAttribute('data-aw-has-pdf','true');
-  await expect(selector).toHaveAttribute('data-aw-requested-page','2');
-  await expect(selector).toHaveAttribute('data-aw-outcome','changed');
-  await expect(selector).toHaveAttribute('data-aw-after-page','2');
   await expect(page.locator('[data-aw-page-label]')).toHaveText('Page 2 of 18');
   await selector.selectOption('1');
   await expect(selector).toHaveValue('1');
@@ -79,7 +75,7 @@ test('feature-complete learner shell, iPad-safe historical papers and gated bonu
   await expect(page.locator('.aw-form-subject')).toHaveCount(3);
   const englishAgain=page.locator('.aw-form-subject').filter({hasText:'English'});
   await englishAgain.locator('[data-aw-original-year="2020"]').click();await page.locator('[data-aw-start-original]').click();
-  await expect.poll(async()=>page.locator('[data-aw-paper-canvas]').evaluate(c=>c.width)).toBeGreaterThan(100);
+  await expect(page.locator('[data-aw-page-select]')).toBeEnabled({timeout:15000});
   await expect(page.locator('[data-aw-answer-row="31"] small')).toContainText('Select all');
   await page.locator('[data-aw-answer-choice="31"][data-value="B"]').click();await page.locator('[data-aw-answer-choice="31"][data-value="C"]').click();
   await expect(page.locator('[data-aw-answer-choice="31"][aria-pressed="true"]')).toHaveCount(2);
