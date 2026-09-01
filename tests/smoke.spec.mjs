@@ -33,10 +33,10 @@ test('feature-complete learner shell, historical formal papers and gated bonus c
   const maths=page.locator('.aw-form-subject').filter({hasText:'Mathematics'});await expect(maths).toContainText('30 questions · 35 min · 8 papers');
   const science=page.locator('.aw-form-subject').filter({hasText:'Science'});await expect(science).toContainText('30 questions · 45 min · 5 papers');
   await english.locator('[data-aw-original-year="2013"]').click();
-  await expect(page.getByText('Historical ICAS paper')).toBeVisible();
-  await expect(page.getByRole('heading',{name:'2013 English'})).toBeVisible();
-  await expect(page.getByText('Verified auto-marking')).toHaveCount(0);
-  await expect(page.getByText(/fully verified answer key/i)).toBeVisible();
+  const instruction=page.locator('.aw-instruction-overlay');
+  await expect(instruction.getByText('Historical ICAS paper')).toBeVisible();
+  await expect(instruction.getByRole('heading',{name:'2013 English'})).toBeVisible();
+  await expect(instruction.getByText(/fully verified answer key/i)).toBeVisible();
   await page.locator('[data-aw-start-original]').click();
   await expect(page.locator('[data-aw-original-timer]')).toBeVisible();
   await expect(page.locator('[data-aw-paper-frame]')).toHaveAttribute('src',/\/english\/2013-questions\.pdf/);
@@ -44,7 +44,7 @@ test('feature-complete learner shell, historical formal papers and gated bonus c
   await expect(page.locator('[data-aw-answer-text]')).toHaveCount(0);
   await page.locator('[data-aw-answer-choice="1"][data-value="D"]').click();
   await expect(page.locator('[data-aw-answer-choice="1"][data-value="D"]')).toHaveAttribute('aria-pressed','true');
-  await expect(page.getByText(/correct/i)).toHaveCount(0);
+  await expect(page.locator('.aw-running-exam').getByText(/correct/i)).toHaveCount(0);
   await page.locator('[data-aw-submit-original]').click();
   await expect(page.getByText('Historical formal test')).toBeVisible();
   await expect(page.getByRole('heading',{name:'3%'})).toBeVisible();
@@ -62,7 +62,9 @@ test('feature-complete learner shell, historical formal papers and gated bonus c
   await page.locator('[data-aw-answer-choice="31"][data-value="B"]').click();
   await page.locator('[data-aw-answer-choice="31"][data-value="C"]').click();
   await expect(page.locator('[data-aw-answer-choice="31"][aria-pressed="true"]')).toHaveCount(2);
-  await page.locator('[data-aw-exam-exit]').click();page.once('dialog',d=>d.accept());
+  page.once('dialog',d=>d.accept());
+  await page.locator('[data-aw-exam-exit]').click();
+  await expect(page.locator('[data-aw-exam-overlay]')).toHaveCount(0);
 
   const perfectDate=new Date().toISOString();
   await page.evaluate(({perfectDate})=>localStorage.setItem('oc-ready-progress-v1',JSON.stringify({attempts:[{date:perfectDate,score:100,subject:'Daily',type:'practice'}],seenIds:[],reviewQueue:[],recentFamilies:[],xp:0,streak:1,skillStats:{},lastActiveDate:null})),{perfectDate});
