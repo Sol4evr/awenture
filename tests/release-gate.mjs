@@ -16,8 +16,11 @@ for(const prefix of ['E','M','S']){
   if(n!==57)throw new Error(`Expected 57 ${prefix} questions, got ${n}`);
 }
 for(const q of expansion)if(!html.includes(`"id":"${q.id}"`))throw new Error(`Approved expansion item missing from built runtime: ${q.id}`);
-const visuals=(html.match(/legacy-v3\.8-static/g)||[]).length;
-if(visuals<60)throw new Error(`Expected >=60 visuals, got ${visuals}`);
+const legacyVisuals=(html.match(/legacy-v3\.8-static/g)||[]).length;
+if(legacyVisuals<54)throw new Error(`Expected 54 legacy visual markers, got ${legacyVisuals}`);
+const expansionVisuals=expansion.filter(q=>q.kind==='visual').length;
+if(expansionVisuals<11)throw new Error(`Expected 11 expansion visuals, got ${expansionVisuals}`);
+for(const q of expansion.filter(q=>q.kind==='visual'))if(!html.includes(q.visual))throw new Error(`Expansion visual missing from runtime: ${q.id}`);
 if(/DecompressionStream|atob\(parts\.join|Release integrity check failed/.test(html))throw new Error('Browser deployment envelope detected');
 if(!css.includes('body.aw-daily-practice [data-a="flag"]'))throw new Error('Daily flag presentation rule missing');
 for(const marker of ['aw-question-only','aw-inline-stimulus','stimulus-pane[hidden]','test-options .opt'])if(!flow.includes(marker))throw new Error(`Practice-flow rule missing: ${marker}`);
@@ -26,4 +29,4 @@ for(const forbidden of ['localStorage','sessionStorage','AW_BANK','skillStats','
 for(const marker of ['aw-learning-line','aw-path-step','aw-heart','aw-parent-grid','aw-unseen-grid'])if(!homeCss.includes(marker))throw new Error(`Home/insights style missing: ${marker}`);
 for(const marker of ['PROGRESS_KEY','TOPUP_KEY','transformHome','transformParent','skillRows','unseenBySubject','requestTopup'])if(!insights.includes(marker))throw new Error(`Insights module missing: ${marker}`);
 for(const forbidden of ['dailyFast(','subjectTest(','finish(','speechSynthesis','recentFamilies'])if(insights.includes(forbidden))throw new Error(`Insights module crossed learner-engine boundary: ${forbidden}`);
-console.log(JSON.stringify({release:'6.11.0',baseline:'6.9.0',coreBank:126,approvedExpansion:45,bank:171,subjects:{English:57,Mathematics:57,Science:57},visualMarkers:visuals,featureRegression:'PASS',uiIsolation:'PASS',dynamicStimulus:'PASS',homeSimplification:'PASS',parentInsights:'PASS',qualityBankExpansion:'PASS'}));
+console.log(JSON.stringify({release:'6.11.0',baseline:'6.9.0',coreBank:126,approvedExpansion:45,bank:171,subjects:{English:57,Mathematics:57,Science:57},legacyVisuals,expansionVisuals,totalVisuals:legacyVisuals+expansionVisuals,featureRegression:'PASS',uiIsolation:'PASS',dynamicStimulus:'PASS',homeSimplification:'PASS',parentInsights:'PASS',qualityBankExpansion:'PASS'}));
