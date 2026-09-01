@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('feature-complete learner shell, historical formal papers and gated bonus challenge', async ({ page }) => {
+test('feature-complete learner shell, iPad-safe historical papers and gated bonus challenge', async ({ page }) => {
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));await page.goto('/');
   await expect(page.getByText('Hello Alistair')).toBeVisible();
   await expect(page.getByText('My Collection')).toBeVisible();
@@ -8,8 +8,9 @@ test('feature-complete learner shell, historical formal papers and gated bonus c
   await expect(page.locator('.aw-heart')).toHaveText('♥');
   await expect(page.locator('.stats')).toHaveCount(0);
   await expect(page.locator('.aw-learning-line')).toBeVisible();
-  await expect(page.locator('.aw-path-step.active')).toContainText('ICAS Grade 2');
-  await expect(page.locator('.aw-path-step.locked')).toHaveCount(3);
+  await expect(page.locator('.aw-path-step.active')).toContainText('ICAS Y2');
+  await expect(page.locator('.aw-path-step.locked')).toHaveCount(4);
+  for(const label of ['ICAS Y2','ICAS Y3','NAPLAN Y3','ICAS Y4','OC'])await expect(page.locator('.aw-path-label',{hasText:label})).toBeVisible();
   await expect(page.getByText(/stable calibrated core/i)).toHaveCount(0);
   await expect(page.locator('[data-aw-bonus-card]')).toBeVisible();
   await expect(page.locator('[data-aw-bonus-card]')).toContainText('Locked');
@@ -39,7 +40,16 @@ test('feature-complete learner shell, historical formal papers and gated bonus c
   await expect(instruction.getByText(/fully verified answer key/i)).toBeVisible();
   await page.locator('[data-aw-start-original]').click();
   await expect(page.locator('[data-aw-original-timer]')).toBeVisible();
-  await expect(page.locator('[data-aw-paper-frame]')).toHaveAttribute('src',/\/english\/2013-questions\.pdf/);
+  await expect(page.locator('iframe')).toHaveCount(0);
+  await expect(page.locator('[data-aw-paper-frame]')).toBeVisible();
+  await expect(page.locator('[data-aw-paper-canvas]')).toBeVisible();
+  await expect(page.locator('[data-aw-page-label]')).toHaveText('Page 1 of 18');
+  await expect.poll(async()=>page.locator('[data-aw-paper-canvas]').evaluate(c=>c.width)).toBeGreaterThan(100);
+  await page.locator('[data-aw-page-next]').click();
+  await expect(page.locator('[data-aw-page-label]')).toHaveText('Page 2 of 18');
+  await page.locator('[data-aw-page-prev]').click();
+  await expect(page.locator('[data-aw-page-label]')).toHaveText('Page 1 of 18');
+  await expect(page.locator('[data-aw-page-prev]')).toBeDisabled();
   await expect(page.locator('[data-aw-answer-row]')).toHaveCount(35);
   await expect(page.locator('[data-aw-answer-text]')).toHaveCount(0);
   await page.locator('[data-aw-answer-choice="1"][data-value="D"]').click();
@@ -58,6 +68,7 @@ test('feature-complete learner shell, historical formal papers and gated bonus c
   const englishAgain=page.locator('.aw-form-subject').filter({hasText:'English'});
   await englishAgain.locator('[data-aw-original-year="2020"]').click();
   await page.locator('[data-aw-start-original]').click();
+  await expect.poll(async()=>page.locator('[data-aw-paper-canvas]').evaluate(c=>c.width)).toBeGreaterThan(100);
   await expect(page.locator('[data-aw-answer-row="31"] small')).toContainText('Select all');
   await page.locator('[data-aw-answer-choice="31"][data-value="B"]').click();
   await page.locator('[data-aw-answer-choice="31"][data-value="C"]').click();
