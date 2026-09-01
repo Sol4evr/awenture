@@ -13,7 +13,9 @@ function explanationAdequate(q,bonusItem){
   if(!text)return false;
   if(bonusItem)return text.length>=80;
   if(text.length>=28)return true;
-  return /\d/.test(text)&&/[=+\-×÷]/.test(text)&&text.length>=16;
+  const nums=text.match(/\d+(?:\.\d+)?/g)||[];
+  const mathRelation=/[=+\-×÷]|\b(?:times|plus|minus|divided|subtract|add|multipl|total|difference)\b/i.test(text);
+  return nums.length>=2&&mathRelation&&text.length>=16;
 }
 function common(q,{bonusItem=false}={}){
   if(!q.id||!q.subject||!q.skill||!q.subskill||!q.family)fail(`missing metadata on ${q.id||'unknown'}`);
