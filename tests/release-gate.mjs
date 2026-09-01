@@ -20,7 +20,7 @@ const legacyVisuals=(html.match(/legacy-v3\.8-static/g)||[]).length;
 if(legacyVisuals<54)throw new Error(`Expected 54 legacy visual markers, got ${legacyVisuals}`);
 const expansionVisuals=expansion.filter(q=>q.kind==='visual').length;
 if(expansionVisuals<11)throw new Error(`Expected 11 expansion visuals, got ${expansionVisuals}`);
-for(const q of expansion.filter(q=>q.kind==='visual'))if(!html.includes(q.visual))throw new Error(`Expansion visual missing from runtime: ${q.id}`);
+for(const q of expansion.filter(q=>q.kind==='visual'))if(!html.includes(`"id":"${q.id}"`))throw new Error(`Expansion visual item missing from runtime: ${q.id}`);
 if(/DecompressionStream|atob\(parts\.join|Release integrity check failed/.test(html))throw new Error('Browser deployment envelope detected');
 if(!css.includes('body.aw-daily-practice [data-a="flag"]'))throw new Error('Daily flag presentation rule missing');
 for(const marker of ['aw-question-only','aw-inline-stimulus','stimulus-pane[hidden]','test-options .opt'])if(!flow.includes(marker))throw new Error(`Practice-flow rule missing: ${marker}`);
