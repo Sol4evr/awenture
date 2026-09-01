@@ -9,15 +9,30 @@ html=html.replaceAll('6.13.0','6.13.1.1').replaceAll('v=6130','v=61311');
 const marker='</head>';
 if(!html.includes(marker))throw new Error('Missing head marker for v6.13.1.1 overlay');
 html=html.replace(marker,`<script>/* v6.13.1.1 authorised historical Year 2 formal-paper runtime */window.__AW_ORIGINAL_PAPERS=${JSON.stringify(runtime)};</script>${marker}`);
-const bodyMarker='</body>';
-if(!html.includes(bodyMarker))throw new Error('Missing body marker for pager compatibility layer');
-html=html.replace(bodyMarker,`<script>/* v6.13.1.1 formal pager compatibility layer: own page-button clicks before legacy capture handlers */window.addEventListener('click',function(e){var t=e.target&&e.target.closest?e.target.closest('[data-aw-page-next],[data-aw-page-prev]'):null;if(!t)return;e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();document.dispatchEvent(new KeyboardEvent('keydown',{key:t.hasAttribute('data-aw-page-next')?'ArrowRight':'ArrowLeft'}));},true);</script>${bodyMarker}`);
 fs.writeFileSync(htmlPath,html);
+
 const formalPath=path.join(root,'dist/formal-tests.js');
-fs.appendFileSync(formalPath,'\n/* v6.13.1.1 iPad-safe paged historical-paper viewer; source-review mode retained. */\n');
+let formal=fs.readFileSync(formalPath,'utf8');
+const delegated=[
+  "if(e.target.closest('[data-aw-page-prev]')){changePage(-1);return}",
+  "if(e.target.closest('[data-aw-page-next]')){changePage(1);return}",
+  "if(e.target.closest('[data-aw-zoom-out]')){changeZoom(-.15);return}",
+  "if(e.target.closest('[data-aw-zoom-in]')){changeZoom(.15);return}"
+];
+for(const branch of delegated){
+  if(!formal.includes(branch))throw new Error(`Missing delegated pager branch: ${branch}`);
+  formal=formal.replace(branch,'');
+}
+const anchor="const stage=qs('[data-aw-paper-frame]');let touchStartX=null,touchStartY=null;";
+if(!formal.includes(anchor))throw new Error('Missing formal viewer control-binding anchor');
+const direct=`const bindPager=(sel,fn)=>{const b=qs(sel);if(!b)return;b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();fn()})};bindPager('[data-aw-page-prev]',()=>changePage(-1));bindPager('[data-aw-page-next]',()=>changePage(1));bindPager('[data-aw-zoom-out]',()=>changeZoom(-.15));bindPager('[data-aw-zoom-in]',()=>changeZoom(.15));${anchor}`;
+formal=formal.replace(anchor,direct);
+formal+='\n/* v6.13.1.1 iPad-safe paged historical-paper viewer; direct pager controls; source-review mode retained. */\n';
+fs.writeFileSync(formalPath,formal);
+
 for(const name of ['pdf.min.mjs','pdf.worker.min.mjs']){
   const src=path.join(root,'node_modules','pdfjs-dist','build',name),dest=path.join(root,'dist',name);
   if(!fs.existsSync(src))throw new Error(`Missing PDF.js runtime asset ${name}`);
   fs.copyFileSync(src,dest);
 }
-console.log(JSON.stringify({releaseOverlay:'6.13.1.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length,pagedViewer:'PDF.js local runtime',pagerCompatibility:'window-capture'}));
+console.log(JSON.stringify({releaseOverlay:'6.13.1.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length,pagedViewer:'PDF.js local runtime',pagerCompatibility:'direct-controls'}));
