@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('feature-complete learner shell, formal assessment mode and gated bonus challenge', async ({ page }) => {
+test('feature-complete learner shell, historical formal papers and gated bonus challenge', async ({ page }) => {
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));await page.goto('/');
   await expect(page.getByText('Hello Alistair')).toBeVisible();
   await expect(page.getByText('My Collection')).toBeVisible();
@@ -26,37 +26,43 @@ test('feature-complete learner shell, formal assessment mode and gated bonus cha
 
   await page.locator('[data-a="tests"]').click();
   await expect(page.locator('.aw-form-subject')).toHaveCount(3);
-  await expect(page.locator('[data-aw-form-id]')).toHaveCount(9);
+  await expect(page.locator('[data-aw-original-year]')).toHaveCount(21);
+  await expect(page.locator('[data-aw-form-id]')).toHaveCount(0);
   const english=page.locator('.aw-form-subject').filter({hasText:'English'});
-  await expect(english).toContainText('35 questions · 35 min');
-  await english.locator('[data-aw-form-id="A"]').click();
-  await expect(page.getByText(/Question 1 of 35/i)).toBeVisible();
-  await expect(page.locator('[data-aw-timer]')).toBeVisible();
-  await expect(page.locator('[data-a="flag"]')).toBeVisible();
-  await expect(page.locator('[data-a="check"]')).toHaveCount(0);
-  await page.locator('.opt').first().click();
-  await expect(page.locator('.feedback')).toHaveCount(0);
-  await expect(page.locator('.confidence')).toHaveCount(0);
-
-  let foundText=false,foundVisual=false,foundEmpty=false;const dots=page.locator('.progressdot');const count=await dots.count();
-  for(let i=0;i<count&&!(foundText&&foundVisual&&foundEmpty);i++){
-    await dots.nth(i).dispatchEvent('click');
-    const visualCount=await page.locator('.stimulus-pane .stimulus-visual').count(),textCount=await page.locator('.stimulus-pane .stimulus-text').count(),emptyCount=await page.locator('.stimulus-pane .stimulus-empty').count();
-    if(visualCount){foundVisual=true;await expect(page.locator('.testworkspace')).toHaveClass(/aw-visual-stimulus/);await expect(page.locator('.stimulus-pane')).toBeVisible()}
-    else if(textCount){foundText=true;await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);await expect(page.locator('.stimulus-pane')).toBeHidden();await expect(page.locator('.aw-inline-stimulus')).toBeVisible()}
-    else if(emptyCount){foundEmpty=true;await expect(page.locator('.testworkspace')).toHaveClass(/aw-question-only/);await expect(page.locator('.stimulus-pane')).toBeHidden()}
-  }
-  expect(foundText&&foundVisual&&foundEmpty).toBeTruthy();
-  const option=page.locator('.opt').first();await expect(option).toBeVisible();const metrics=await option.evaluate(el=>({radius:parseFloat(getComputedStyle(el).borderRadius),height:el.getBoundingClientRect().height}));expect(metrics.radius).toBeGreaterThanOrEqual(14);expect(metrics.height).toBeGreaterThanOrEqual(58);
-  await dots.nth(34).dispatchEvent('click');
-  await expect(page.locator('[data-a="submit-formal"]')).toBeVisible();
-  await page.locator('[data-a="submit-formal"]').click();
-  await expect(page.getByText('Formal ICAS-style test')).toBeVisible();
-  await expect(page.getByText(/English · Paper A/)).toBeVisible();
-  await expect(page.getByText(/Marking and explanations are shown only now/i)).toBeVisible();
+  await expect(english).toContainText('35 questions · 35 min · 8 papers');
+  const maths=page.locator('.aw-form-subject').filter({hasText:'Mathematics'});await expect(maths).toContainText('30 questions · 35 min · 8 papers');
+  const science=page.locator('.aw-form-subject').filter({hasText:'Science'});await expect(science).toContainText('30 questions · 45 min · 5 papers');
+  await english.locator('[data-aw-original-year="2013"]').click();
+  await expect(page.getByText('Historical ICAS paper')).toBeVisible();
+  await expect(page.getByRole('heading',{name:'2013 English'})).toBeVisible();
+  await expect(page.getByText('Verified auto-marking')).toHaveCount(0);
+  await expect(page.getByText(/fully verified answer key/i)).toBeVisible();
+  await page.locator('[data-aw-start-original]').click();
+  await expect(page.locator('[data-aw-original-timer]')).toBeVisible();
+  await expect(page.locator('[data-aw-paper-frame]')).toHaveAttribute('src',/\/english\/2013-questions\.pdf/);
+  await expect(page.locator('[data-aw-answer-row]')).toHaveCount(35);
+  await expect(page.locator('[data-aw-answer-text]')).toHaveCount(0);
+  await page.locator('[data-aw-answer-choice="1"][data-value="D"]').click();
+  await expect(page.locator('[data-aw-answer-choice="1"][data-value="D"]')).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByText(/correct/i)).toHaveCount(0);
+  await page.locator('[data-aw-submit-original]').click();
+  await expect(page.getByText('Historical formal test')).toBeVisible();
+  await expect(page.getByRole('heading',{name:'3%'})).toBeVisible();
+  await expect(page.getByText('1 of 35 correct')).toBeVisible();
+  await expect(page.locator('.aw-answer-reference')).toHaveAttribute('href',/\/english\/2013-answers\.pdf/);
   const formalAttempt=await page.evaluate(()=>JSON.parse(localStorage.getItem('oc-ready-progress-v1')).attempts.at(-1));
-  expect(formalAttempt.type).toBe('icas-test');expect(formalAttempt.subject).toBe('English');expect(formalAttempt.formId).toBe('A');expect(formalAttempt.durationSeconds).toBeGreaterThanOrEqual(0);expect(formalAttempt.timedOut).toBe(false);
-  await page.locator('[data-a="home"]').last().click();
+  expect(formalAttempt.type).toBe('icas-original');expect(formalAttempt.subject).toBe('English');expect(formalAttempt.sourceYear).toBe(2013);expect(formalAttempt.score).toBe(3);expect(formalAttempt.correct).toBe(1);expect(formalAttempt.verified).toBe(true);expect(formalAttempt.durationSeconds).toBeGreaterThanOrEqual(0);expect(formalAttempt.timedOut).toBe(false);
+  expect(formalAttempt.responses['1']).toBe('D');
+  await page.locator('[data-aw-result-done]').click();
+
+  await page.locator('[data-a="tests"]').click();
+  await english.locator('[data-aw-original-year="2020"]').click();
+  await page.locator('[data-aw-start-original]').click();
+  await expect(page.locator('[data-aw-answer-row="31"] small')).toContainText('Select all');
+  await page.locator('[data-aw-answer-choice="31"][data-value="B"]').click();
+  await page.locator('[data-aw-answer-choice="31"][data-value="C"]').click();
+  await expect(page.locator('[data-aw-answer-choice="31"][aria-pressed="true"]')).toHaveCount(2);
+  await page.locator('[data-aw-exam-exit]').click();page.once('dialog',d=>d.accept());
 
   const perfectDate=new Date().toISOString();
   await page.evaluate(({perfectDate})=>localStorage.setItem('oc-ready-progress-v1',JSON.stringify({attempts:[{date:perfectDate,score:100,subject:'Daily',type:'practice'}],seenIds:[],reviewQueue:[],recentFamilies:[],xp:0,streak:1,skillStats:{},lastActiveDate:null})),{perfectDate});
