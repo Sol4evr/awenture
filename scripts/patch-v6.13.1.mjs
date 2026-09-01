@@ -36,9 +36,14 @@ formal=formal.replace(syncNeedle,syncReplacement);
 
 const anchor="const stage=qs('[data-aw-paper-frame]');let touchStartX=null,touchStartY=null;";
 if(!formal.includes(anchor))throw new Error('Missing formal viewer control-binding anchor');
-const direct=`const bindPager=(sel,fn)=>{const b=qs(sel);if(!b)return;let lastAt=0;const activate=e=>{if(b.disabled)return;const now=Date.now();if(now-lastAt<250){e.preventDefault();e.stopPropagation();return}lastAt=now;e.preventDefault();e.stopPropagation();fn()};b.addEventListener('pointerdown',activate);b.addEventListener('mousedown',activate);b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(b.disabled||Date.now()-lastAt<700)return;lastAt=Date.now();fn()})};bindPager('[data-aw-page-prev]',()=>changePage(-1));bindPager('[data-aw-page-next]',()=>changePage(1));bindPager('[data-aw-zoom-out]',()=>changeZoom(-.15));bindPager('[data-aw-zoom-in]',()=>changeZoom(.15));const pageSelect=qs('[data-aw-page-select]');if(pageSelect)pageSelect.addEventListener('change',()=>{if(!active?.pdfDoc)return;const n=Number(pageSelect.value);if(!Number.isInteger(n))return;active.page=Math.max(1,Math.min(active.pageCount,n));syncViewerControls();renderPaperPage()});${anchor}`;
+const direct=`const bindPager=(sel,fn)=>{const b=qs(sel);if(!b)return;let lastAt=0;const activate=e=>{if(b.disabled)return;const now=Date.now();if(now-lastAt<250){e.preventDefault();e.stopPropagation();return}lastAt=now;e.preventDefault();e.stopPropagation();fn()};b.addEventListener('pointerdown',activate);b.addEventListener('mousedown',activate);b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(b.disabled||Date.now()-lastAt<700)return;lastAt=Date.now();fn()})};bindPager('[data-aw-page-prev]',()=>changePage(-1));bindPager('[data-aw-page-next]',()=>changePage(1));bindPager('[data-aw-zoom-out]',()=>changeZoom(-.15));bindPager('[data-aw-zoom-in]',()=>changeZoom(.15));${anchor}`;
 formal=formal.replace(anchor,direct);
-formal+='\n/* v6.13.1.1 iPad-safe paged historical-paper viewer; native page selector + hardened pointer/mouse controls; source-review mode retained. */\n';
+
+const inputListener="document.addEventListener('input',e=>{const input=e.target.closest('[data-aw-answer-text]');if(input&&active)active.answers[Number(input.dataset.awAnswerText)]=input.value},true);";
+if(!formal.includes(inputListener))throw new Error('Missing formal input listener anchor');
+const changeListener="document.addEventListener('change',e=>{const select=e.target.closest&&e.target.closest('[data-aw-page-select]');if(!select||!active?.pdfDoc)return;const n=Number(select.value);if(!Number.isInteger(n))return;active.page=Math.max(1,Math.min(active.pageCount,n));syncViewerControls();renderPaperPage()},true);";
+formal=formal.replace(inputListener,`${changeListener}${inputListener}`);
+formal+='\n/* v6.13.1.1 iPad-safe paged historical-paper viewer; native page selector routed through document capture; source-review mode retained. */\n';
 fs.writeFileSync(formalPath,formal);
 
 const cssPath=path.join(root,'dist/formal-tests.css');
@@ -49,4 +54,4 @@ for(const name of ['pdf.min.mjs','pdf.worker.min.mjs']){
   if(!fs.existsSync(src))throw new Error(`Missing PDF.js runtime asset ${name}`);
   fs.copyFileSync(src,dest);
 }
-console.log(JSON.stringify({releaseOverlay:'6.13.1.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length,pagedViewer:'PDF.js local runtime',pageSelector:'native-select',pagerCompatibility:'native-select-plus-pointer-mouse'}));
+console.log(JSON.stringify({releaseOverlay:'6.13.1.1',historicalPapers:runtime.papers.length,verifiedScoring:runtime.papers.filter(p=>p.scoring==='verified').length,sourceReview:runtime.papers.filter(p=>p.scoring!=='verified').length,pagedViewer:'PDF.js local runtime',pageSelector:'native-select',pagerCompatibility:'document-capture-plus-pointer-mouse'}));
