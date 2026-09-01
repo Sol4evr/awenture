@@ -12,7 +12,11 @@ if(sha!==m.sha256) throw new Error(`AWenture baseline integrity failure: ${sha}`
 if(baseline.length!==m.decodedBytes) throw new Error(`AWenture baseline size mismatch: ${baseline.length}`);
 
 const release='6.11.0';
-const expansionRaw=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.11.0-approved.json'),'utf8'));
+const expansionSource=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.11.0-approved.json'),'utf8'));
+const corrections=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.11.0-corrections.json'),'utf8'));
+const knownIds=new Set(expansionSource.map(q=>q.id));
+for(const id of Object.keys(corrections))if(!knownIds.has(id))throw new Error(`Unknown expansion correction id: ${id}`);
+const expansionRaw=expansionSource.map(q=>({...q,...(corrections[q.id]||{})}));
 const LETTERS='ABCD';
 const expansion=expansionRaw.map((q,i)=>{
   const answerIndex=LETTERS.indexOf(q.answer),targetIndex=i%4;
@@ -40,4 +44,4 @@ fs.copyFileSync(path.join(root,'ui/practice-flow.css'),path.join(root,'dist/prac
 fs.copyFileSync(path.join(root,'ui/home-insights.css'),path.join(root,'dist/home-insights.css'));
 fs.copyFileSync(path.join(root,'ui/premium.js'),path.join(root,'dist/premium.js'));
 fs.copyFileSync(path.join(root,'ui/insights.js'),path.join(root,'dist/insights.js'));
-console.log(JSON.stringify({release,baselineRelease:m.release,baselineSha256:sha,baselineBytes:baseline.length,coreBank:126,approvedExpansion:expansion.length,totalBank:126+expansion.length,answerMix,uiModules:['premium-v1','practice-flow-v1','home-insights-v1'],output:'dist'}));
+console.log(JSON.stringify({release,baselineRelease:m.release,baselineSha256:sha,baselineBytes:baseline.length,coreBank:126,approvedExpansion:expansion.length,contentCorrections:Object.keys(corrections).length,totalBank:126+expansion.length,answerMix,uiModules:['premium-v1','practice-flow-v1','home-insights-v1'],output:'dist'}));
