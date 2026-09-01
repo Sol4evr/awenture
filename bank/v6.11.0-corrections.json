@@ -1,0 +1,19 @@
+{
+  "E46": {
+    "question": "A visitor wants to attend the 5:30 pm family robotics workshop. Which information from Source 1 confirms that the library will still be open?",
+    "options": ["Thursday closes at 7 pm", "Saturday opens at 10 am", "Friday closes at 5 pm", "Monday–Wednesday close at 5 pm"],
+    "answer": "A",
+    "explanation": "Source 2 places the robotics workshop at 5:30 pm on Thursday, and Source 1 shows that the library remains open until 7 pm that day."
+  },
+  "M45": {
+    "options": ["10:50 am", "11:00 am", "11:10 am", "10:40 am"]
+  },
+  "S50": {
+    "question": "A flagpole’s shadow points east. Where is the Sun most likely located?",
+    "explanation": "A shadow forms on the side opposite the light source, so an east-pointing shadow indicates that the Sun is to the west."
+  },
+  "S53": {
+    "question": "A mixture contains iron filings, dry sand and large plastic beads. Which sequence would best separate the three materials?",
+    "explanation": "A magnet removes the iron filings. A sieve can then separate the large plastic beads from the much smaller sand grains."
+  }
+}
