@@ -1,0 +1,34 @@
+{
+  "supabaseProject": "awenture",
+  "projectRef": "yvvwjdnazxzhzrfhudwx",
+  "region": "ap-southeast-2",
+  "deployedAt": "2026-09-02",
+  "functions": {
+    "topup-request": {
+      "version": 2,
+      "verifyJwt": false,
+      "sha256": "4c168e48b9c95f9ea9f262324f44a0dc68d388674540d8377c597ff692eaccd3",
+      "purpose": "Public governed intake/status endpoint; mandatory QA policy is server-owned; schedules internal factory processing."
+    },
+    "question-factory": {
+      "version": 1,
+      "verifyJwt": true,
+      "sha256": "22763db63e00f9ad65f4a2d2587041051f2cd5e28a82530e1e54e6beff2be572",
+      "purpose": "Internal service-role-only deterministic candidate generator and automated reviewer."
+    }
+  },
+  "database": {
+    "schema": "awenture_private",
+    "rls": true,
+    "anonAuthenticatedTablePrivileges": false,
+    "newTables": ["question_factory_runs", "question_factory_candidates"]
+  },
+  "securityBoundary": {
+    "browserCanQueue": true,
+    "browserCanReadRequestStatus": true,
+    "browserCanInvokeFactory": false,
+    "browserCanReadCandidates": false,
+    "browserCanApproveCandidates": false,
+    "browserCanPublishQuestions": false
+  }
+}
