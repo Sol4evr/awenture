@@ -42,6 +42,7 @@ test('historical paper viewer uses responsive desktop controls and touch-first i
   const panRight=page.locator('[data-aw-pan-right]');
   const zoomLabel=page.locator('[data-aw-zoom-label]');
   const stage=page.locator('[data-aw-paper-frame]');
+  const status=page.locator('[data-aw-paper-status]');
   await expect(stage).toHaveAttribute('data-aw-touch-gestures','pinch-pan');
 
   if(testInfo.project.name==='webkit-ipad'){
@@ -54,7 +55,7 @@ test('historical paper viewer uses responsive desktop controls and touch-first i
       fire('gesturestart',1);fire('gesturechange',1.3);fire('gestureend',1.3);
     });
     await expect(zoomLabel).toHaveText('130%',{timeout:10000});
-    await expect(page.locator('[data-aw-paper-status]')).toHaveText('',{timeout:10000});
+    await expect(status).toHaveText('',{timeout:10000});
   }else{
     await expect(zoomIn).toBeVisible();
     await expect(zoomOut).toBeVisible();
@@ -64,9 +65,10 @@ test('historical paper viewer uses responsive desktop controls and touch-first i
     expect(Math.max(...ys)-Math.min(...ys)).toBeLessThan(18);
     await zoomIn.click();
     await expect(zoomLabel).toHaveText('115%');
-    await page.waitForTimeout(200);
+    await expect(status).toHaveText('',{timeout:10000});
     await zoomIn.click();
-    await expect(zoomLabel).toHaveText('130%');
+    await expect(zoomLabel).toHaveText('130%',{timeout:10000});
+    await expect(status).toHaveText('',{timeout:10000});
     const before=await stage.evaluate(el=>({left:el.scrollLeft,width:el.clientWidth,scrollWidth:el.scrollWidth}));
     expect(before.scrollWidth).toBeGreaterThan(before.width);
     await panRight.click();
