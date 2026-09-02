@@ -16,7 +16,7 @@ test('v6.15 dynamic Practice, static subject tests, Parent collapse and release 
   await expect(summary).toHaveAttribute('aria-expanded','false');await summary.click();await expect(summary).toHaveAttribute('aria-expanded','true');
   await page.locator('[data-aw-topup]').click();
   await expect(page.getByRole('button',{name:'Released'})).toBeVisible({timeout:12000});
-  expect(getCalls).toBeGreaterThan(0);expect(feedCalls).toBeGreaterThan(1);
+  expect(getCalls).toBeGreaterThan(0);await expect.poll(()=>feedCalls).toBeGreaterThan(1);
   await page.locator('[data-a="home"]').last().click();
 
   await page.evaluate(()=>{const p=JSON.parse(localStorage.getItem('oc-ready-progress-v1')||'{}');p.seenIds=window.AW_BANK.filter(q=>q.subject==='English'&&!String(q.id).startsWith('QF-')).map(q=>q.id);localStorage.setItem('oc-ready-progress-v1',JSON.stringify(p))});
