@@ -1,12 +1,12 @@
 {
   "name": "awenture",
-  "version": "6.14.0",
+  "version": "6.14.1",
   "private": true,
   "scripts": {
     "validate:bank": "node scripts/validate-expansion-v4.mjs",
     "validate:original-papers": "node scripts/validate-original-papers.mjs",
     "review:quality": "node scripts/review-assessment-quality.mjs",
-    "build": "npm run validate:bank && npm run validate:original-papers && npm run review:quality && node scripts/build.mjs && node scripts/patch-v6.13.1.mjs && node scripts/patch-v6.13.1.2.mjs && node scripts/patch-v6.13.1.3.mjs && node scripts/patch-v6.13.1.4.mjs && node scripts/patch-v6.13.2.mjs && node scripts/patch-v6.14.0.mjs && node scripts/build-original-paper-formal-assets.mjs",
+    "build": "npm run validate:bank && npm run validate:original-papers && npm run review:quality && node scripts/build.mjs && node scripts/patch-v6.13.1.mjs && node scripts/patch-v6.13.1.2.mjs && node scripts/patch-v6.13.1.3.mjs && node scripts/patch-v6.13.1.4.mjs && node scripts/patch-v6.13.2.mjs && node scripts/patch-v6.14.0.mjs && node scripts/patch-v6.14.1.mjs && node scripts/build-original-paper-formal-assets.mjs",
     "test:release": "npm run build && node tests/release-gate.mjs",
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
