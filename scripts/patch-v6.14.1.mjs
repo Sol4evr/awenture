@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const file=path.join(root,'dist/index.html');
+let html=fs.readFileSync(file,'utf8');
+html=html.replaceAll('6.14.0','6.14.1').replaceAll('61400','61410');
+for(const required of ['window.__AW_TOPUP_API','awenture-topup-request-v2','awenture-topup-v1','Question Factory request'])if(!fs.readFileSync(path.join(root,'ui/insights.js'),'utf8').includes(required))throw new Error(`Top-up runtime missing: ${required}`);
+fs.writeFileSync(file,html);
+console.log(JSON.stringify({release:'6.14.1',baseline:'HARDENED',parentTopup:'GOVERNED_REQUEST'}));
