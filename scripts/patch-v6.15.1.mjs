@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const file=path.join(root,'dist/index.html');
+let html=fs.readFileSync(file,'utf8').replaceAll('6.15.0','6.15.1').replaceAll('61500','61510');
+for(const f of ['brand.css','brand.js','dynamic-bank.js'])fs.copyFileSync(path.join(root,'ui',f),path.join(root,'dist',f));
+for(const required of ['aw-brand-1.2','awenture-logo-192.png?v=61510'])if(!fs.readFileSync(path.join(root,'ui/brand.js'),'utf8').includes(required))throw new Error(`Polished brand runtime missing: ${required}`);
+for(const required of ['background:transparent','min-width:44px'])if(!fs.readFileSync(path.join(root,'ui/brand.css'),'utf8').includes(required))throw new Error(`Polished brand style missing: ${required}`);
+if(!fs.readFileSync(path.join(root,'ui/dynamic-bank.js'),'utf8').includes('aw-content-release-1\\.(?:1|2)\\.'))throw new Error('Dynamic bank does not accept the current governed release gate');
+fs.writeFileSync(file,html);
+console.log(JSON.stringify({release:'6.15.1',brand:'TRANSPARENT_EMBLEM_ONLY',questionFactory:'aw-qf-1.1.2'}));

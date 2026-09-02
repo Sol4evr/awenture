@@ -1,5 +1,5 @@
 {
-  "version": "aw-qf-1.0.1",
+  "version": "aw-qf-1.1.2",
   "projectRef": "yvvwjdnazxzhzrfhudwx",
   "topupIntakeFunction": "topup-request",
   "processorFunction": "question-factory",
@@ -66,8 +66,8 @@
   ],
   "release": {
     "mode": "dual-pass-server-release",
-    "independentReviewer": "aw-independent-review-1.1.0",
-    "releaseGate": "aw-content-release-1.1.0",
+    "independentReviewer": "aw-independent-review-1.2.1",
+    "releaseGate": "aw-content-release-1.2.1",
     "feed": "aw-dynamic-bank-1",
     "browserWriteAccess": false,
     "practiceAutoSync": true,
@@ -88,6 +88,8 @@
       "English",
       "Mathematics",
       "Science"
-    ]
+    ],
+    "recipeFamiliesPerSubject": 12,
+    "recipeOrder": "request-key-rotated"
   }
 }

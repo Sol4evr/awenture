@@ -2,8 +2,8 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.4";
 import canonicalBank from "./canonical-bank-v6.14.1.json" with { type: "json" };
 
-const REVIEW_VERSION='aw-independent-review-1.1.0';
-const RELEASE_GATE='aw-content-release-1.1.0';
+const REVIEW_VERSION='aw-independent-review-1.2.1';
+const RELEASE_GATE='aw-content-release-1.2.1';
 const LETTERS='ABCD';
 const STOP=new Set(['the','and','for','that','this','with','from','into','than','then','they','there','because','which','when','what','where','most','best','will','would','could','should','does','have','has','had','are','was','were','its','their','more','less','only','same','each']);
 const CANONICAL_SIGNATURES=Array.isArray(canonicalBank)?canonicalBank:[];
@@ -27,45 +27,90 @@ function solve(item:any):any{
   let recipe='',family='',skill=text(item.skill),subskill=text(item.subskill),expected='';
 
   if(item.subject==='English'){
-    if(/^Why does the writer include the information about the /i.test(q)){
-      recipe='eng-practical-detail';family='qf-eng-practical-detail';skill='Text comprehension';subskill='author purpose';expected='To help the reader make a practical decision';
-      const detail=q.match(/about the (.+)\?$/i)?.[1]||'';if(!detail||!includes(stim,detail))return {ok:false,reason:'source_detail_mismatch'};
-    }else if(/^What does “.+” most nearly mean in this sentence\?$/i.test(q)){
-      recipe='eng-vocabulary-context';family='qf-eng-vocabulary-context';skill='Vocabulary';subskill='meaning in context';
-      const word=q.match(/“([^”]+)”/)?.[1]||'';const map:any={scarce:'hard to find or limited',fragile:'easily damaged',reluctant:'not willing at first',observe:'watch carefully'};expected=map[word]||'';
-      if(!expected||!new RegExp(`\\b${word}\\b`,'i').test(stim))return {ok:false,reason:'vocabulary_source_mismatch'};
-      if(['reluctant','observe'].includes(word)&&/item was\s+(?:reluctant|observe)/i.test(stim))return {ok:false,reason:'unnatural_vocabulary_context'};
-    }else if(q==='Which sentence is written most clearly?'){
-      recipe='eng-clear-sentence';family='qf-eng-clear-sentence';skill='Syntax';subskill='sentence structure';expected='Although the rain had stopped, the path remained slippery.';
-    }else if(q==='What effect does the final sentence have on the passage?'){
-      recipe='eng-mood-shift';family='qf-eng-mood-shift';skill='Writer’s craft';subskill='tone and mood';expected='It introduces a change in mood and hints that conditions may worsen';
-      if(!/dark line of cloud/i.test(stim))return {ok:false,reason:'mood_source_mismatch'};
-    }else if(q==='Which statement is supported by both sources?'){
-      recipe='eng-two-source-time';family='qf-eng-two-source-time';skill='Text comprehension';subskill='two-source synthesis';expected='The activity is available before the building closes';
-      const t=nums(stim);if(t.length<5)return {ok:false,reason:'two_source_data_missing'};
+    let m:RegExpMatchArray|null;
+    if(q==='What should the visitor do immediately after collecting the map?'){
+      recipe='eng-route-sequence';family='qf-eng-route-sequence';skill='Text comprehension';subskill='sequencing';
+      m=stim.match(/Next, (.+?)\. Finally,/i);expected=m?.[1]||'';if(!expected)return {ok:false,reason:'route_sequence_missing'};
+    }else if((m=q.match(/^What can the reader infer about (.+)\?$/))){
+      recipe='eng-action-inference';family='qf-eng-action-inference';skill='Text comprehension';subskill='inference';
+      const name=m[1],activity=stim.match(/ before (.+)\.$/)?.[1]||'',actions:any={'packed spare water and checked the route':'was preparing carefully','checked the weather and packed a hat':'was planning ahead','tested the torch and added fresh batteries':'wanted to be ready','labelled every bag and made a checklist':'was organising carefully'},action=Object.keys(actions).find(x=>includes(stim,x))||'';
+      if(!activity||!action)return {ok:false,reason:'inference_source_mismatch'};expected=name+' '+actions[action]+' for '+activity;
+    }else if(/^What does “.+” mean in this sentence\?$/i.test(q)){
+      recipe='eng-natural-vocabulary';family='qf-eng-natural-vocabulary';skill='Vocabulary';subskill='meaning in context';
+      const word=q.match(/“([^”]+)”/)?.[1]||'',map:any={gleaming:'shining brightly',cautious:'careful to avoid danger',enormous:'very large',grateful:'thankful'};expected=map[word]||'';
+      if(!expected||!new RegExp('\\b'+word+'\\b','i').test(stim))return {ok:false,reason:'vocabulary_source_mismatch'};
+    }else if(q==='What does the word “it” refer to in the sentence?'){
+      recipe='eng-pronoun-reference';family='qf-eng-pronoun-reference';skill='Grammar';subskill='pronoun reference';
+      const thing=stim.match(/placed the (.+?) beside/i)?.[1]||'';expected=thing?'the '+thing:'';if(!expected||!/\bit needed\b/i.test(stim))return {ok:false,reason:'pronoun_source_mismatch'};
+    }else if(q==='Which sentence uses capital letters and end punctuation correctly?'){
+      recipe='eng-capitals-punctuation';family='qf-eng-capitals-punctuation';skill='Punctuation';subskill='capital letters and full stops';
+      const valid=(item.options||[]).filter((x:any)=>/^[A-Z][a-z]+ visited [A-Z][a-z]+ on Saturday\.$/.test(text(x)));if(valid.length!==1)return {ok:false,reason:'punctuation_options_ambiguous'};expected=text(valid[0]);
+    }else if(q==='What is the main idea of the passage?'){
+      recipe='eng-main-idea';family='qf-eng-main-idea';skill='Text comprehension';subskill='main idea';
+      if(/Bees visit flowers/i.test(stim))expected='Bees help flowering plants while collecting food.';
+      else if(/school library now opens/i.test(stim))expected='The library offers useful services before class.';
+      else if(/Penguins have thick feathers/i.test(stim))expected='Penguins have body features that help them keep warm.';
+      else return {ok:false,reason:'main_idea_source_mismatch'};
+    }else if(q==='Which statement is an opinion rather than a fact?'){
+      recipe='eng-fact-opinion';family='qf-eng-fact-opinion';skill='Text comprehension';subskill='fact and opinion';
+      const opinions=(item.options||[]).filter((x:any)=>/\b(nicest|best|most beautiful)\b/i.test(text(x)));if(opinions.length!==1)return {ok:false,reason:'opinion_options_ambiguous'};expected=text(opinions[0]);
+    }else if(q.startsWith('After reading all the instructions, what should a student do next')){
+      recipe='eng-instruction-sequence';family='qf-eng-instruction-sequence';skill='Text comprehension';subskill='instruction sequence';
+      expected=stim.match(/2\. (.+?)\. 3\./)?.[1]||'';if(!expected)return {ok:false,reason:'instruction_step_missing'};
+    }else if(/^Which word from the sentence means the opposite of /i.test(q)){
+      recipe='eng-antonym-context';family='qf-eng-antonym-context';skill='Vocabulary';subskill='antonyms in context';
+      const word=q.match(/“([^”]+)”/)?.[1]||'',map:any={narrow:'wide',ancient:'new',silent:'noisy',empty:'full'};expected=map[word]||'';if(!expected||!includes(stim,expected))return {ok:false,reason:'antonym_source_mismatch'};
+    }else if(q==='Why is the heading written in large bold letters?'){
+      recipe='eng-heading-purpose';family='qf-eng-heading-purpose';skill='Text features';subskill='heading purpose';expected='To tell readers an important rule';
+      if(!/^NOTICE/m.test(stim))return {ok:false,reason:'notice_heading_missing'};
+    }else if((m=q.match(/^What does (.+)'s reply show\?$/))){
+      recipe='eng-dialogue-inference';family='qf-eng-dialogue-inference';skill='Text comprehension';subskill='dialogue inference';expected=m[1]+' is offering to help solve the problem';
+      if(!/I can sort them/i.test(stim))return {ok:false,reason:'dialogue_evidence_missing'};
+    }else if(q==='Which statement is supported by both notices?'){
+      recipe='eng-compare-notices';family='qf-eng-compare-notices';skill='Text comprehension';subskill='comparing sources';expected='Both activities begin after school';
+      if(!/3:30 pm/i.test(stim)||!/4:00 pm/i.test(stim))return {ok:false,reason:'notice_times_missing'};
     }
   }else if(item.subject==='Mathematics'){
-    let m=q.match(/A class has (\d+) counters\. They use (\d+), then the teacher adds (\d+)\./);
-    if(m){recipe='math-add-subtract';family='qf-math-add-subtract';skill='Number and arithmetic';subskill='multi-step problem';expected=String(Number(m[1])-Number(m[2])+Number(m[3]));}
-    else if(q==='Which number comes next in the pattern?'){
-      recipe='math-number-pattern';family='qf-math-number-pattern';skill='Algebra and patterns';subskill='growing pattern';const a=nums(stim);if(a.length!==4||a[1]-a[0]!==a[2]-a[1]||a[2]-a[1]!==a[3]-a[2])return {ok:false,reason:'invalid_number_pattern'};expected=String(a[3]+a[1]-a[0]);
-    }else if(q==='How many more votes did Blue receive than Red?'){
-      recipe='math-bar-difference';family='qf-math-bar-difference';skill='Chance and data';subskill='bar chart comparison';const red=visual.match(/>Red<\/text><text[^>]*>(\d+)/),blue=visual.match(/>Blue<\/text><text[^>]*>(\d+)/);if(!red||!blue)return {ok:false,reason:'bar_chart_values_missing'};expected=String(+blue[1]-+red[1]);
-    }else if((m=q.match(/starts at (\d+):(\d+) am and lasts (\d+) minutes/))){
-      recipe='math-elapsed-time';family='qf-math-elapsed-time';skill='Measures and units';subskill='elapsed time';expected=formatTime(timeMinutes(+m[1],+m[2])+(+m[3]));
-    }else if(q==='What is the perimeter of the rectangle?'){
-      recipe='math-rectangle-perimeter';family='qf-math-rectangle-perimeter';skill='Measures and units';subskill='perimeter';const a=[...visual.matchAll(/>(\d+) cm<\/text>/g)].map(x=>+x[1]);if(a.length!==2)return {ok:false,reason:'rectangle_labels_missing'};expected=`${2*(a[0]+a[1])} cm`;
-    }else if((m=q.match(/There are (\d+) equal groups with (\d+) objects/))){
-      recipe='math-equal-groups';family='qf-math-equal-groups';skill='Number and arithmetic';subskill='multiplicative reasoning';expected=String(+m[1]*+m[2]);
+    let m:RegExpMatchArray|null;
+    if((m=q.match(/value of the digit in the (hundreds|tens|ones) place in (\d+)/))){
+      recipe='math-place-value';family='qf-math-place-value';skill='Number and arithmetic';subskill='place value';const n=+m[2],which=m[1];expected=String(which==='hundreds'?Math.floor(n/100)*100:which==='tens'?Math.floor(n/10)%10*10:n%10);
+    }else if((m=q.match(/coins worth (\d+) cents, (\d+) cents and (\d+) cents/))){
+      recipe='math-money-total';family='qf-math-money-total';skill='Measures and units';subskill='money';expected=(+m[1]+ +m[2]+ +m[3])+' cents';
+    }else if((m=q.match(/(\d+) shells are shared equally among (\d+) children/))){
+      recipe='math-equal-sharing';family='qf-math-equal-sharing';skill='Number and arithmetic';subskill='division and sharing';if(+m[1]%+m[2])return {ok:false,reason:'sharing_not_equal'};expected=String(+m[1]/+m[2]);
+    }else if((m=q.match(/Half of (\d+) counters/))){
+      recipe='math-half-of-set';family='qf-math-half-of-set';skill='Number and arithmetic';subskill='halves';if(+m[1]%2)return {ok:false,reason:'odd_half_set'};expected=String(+m[1]/2);
+    }else if((m=q.match(/ribbon is (\d+) metres long/))){
+      recipe='math-metres-centimetres';family='qf-math-metres-centimetres';skill='Measures and units';subskill='metric conversion';expected=(+m[1]*100)+' cm';
+    }else if((m=q.match(/shape has exactly (\d+) straight sides/))){
+      recipe='math-shape-sides';family='qf-math-shape-sides';skill='Space and geometry';subskill='2D shape properties';const names:any={5:'pentagon',6:'hexagon',8:'octagon'};expected=names[m[1]]||'';if(!expected)return {ok:false,reason:'unsupported_side_count'};
+    }else if((m=q.match(/(\d+) \+ □ = (\d+)/))){
+      recipe='math-missing-addend';family='qf-math-missing-addend';skill='Number and arithmetic';subskill='missing number';expected=String(+m[2]-+m[1]);
+    }else if((m=q.match(/Today is (Monday|Tuesday|Wednesday)\. What day will it be (\d+) days/))){
+      recipe='math-calendar-forward';family='qf-math-calendar-forward';skill='Measures and units';subskill='calendar';const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];expected=days[(days.indexOf(m[1])+(+m[2]))%7];
+    }else if((m=q.match(/tray has (\d+) rows of (\d+) strawberries/))){
+      recipe='math-array-total';family='qf-math-array-total';skill='Number and arithmetic';subskill='multiplicative reasoning';expected=String(+m[1]*+m[2]);
+    }else if(q==='How many books were borrowed altogether?'){
+      recipe='math-table-total';family='qf-math-table-total';skill='Chance and data';subskill='table totals';const a=nums(stim);if(a.length!==3)return {ok:false,reason:'table_values_missing'};expected=String(a[0]+a[1]+a[2]);
+    }else if(q==='Which shape has more than one line of symmetry?'){
+      recipe='math-lines-symmetry';family='qf-math-lines-symmetry';skill='Space and geometry';subskill='symmetry';expected='A square';
+    }else if((m=q.match(/mass of (\d+) kg and another has a mass of (\d+) kg/))){
+      recipe='math-mass-difference';family='qf-math-mass-difference';skill='Measures and units';subskill='mass comparison';expected=(+m[1]-+m[2])+' kg';
     }
   }else if(item.subject==='Science'){
-    if(q==='Which material absorbed the most water?'){
-      recipe='sci-absorption-chart';family='qf-sci-absorption-chart';skill='Investigating';subskill='interpreting results';const rows=[...visual.matchAll(/>(Material [ABC])<\/text><text[^>]*>(\d+) mL<\/text>/g)].map(x=>({label:x[1],value:+x[2]}));if(rows.length!==3)return {ok:false,reason:'absorption_chart_values_missing'};rows.sort((a,b)=>b.value-a.value);if(rows[0].value===rows[1].value)return {ok:false,reason:'ambiguous_absorption_maximum'};expected=rows[0].label;
-    }else if(q.includes('reduce water loss')){recipe='sci-dry-plant';family='qf-sci-dry-plant';skill='Life and living';subskill='adaptation';expected='A waxy leaf surface';}
-    else if(q.includes('equal-height ramps')){recipe='sci-friction-ramp';family='qf-sci-friction-ramp';skill='Energy and change';subskill='forces';expected='The car on the smooth ramp travels farther because there is less friction';}
-    else if(q.includes('outside of a cold metal cup')){recipe='sci-condensation';family='qf-sci-condensation';skill='Earth and beyond';subskill='water cycle';expected='Water vapour in the air condensed on the cold surface';}
-    else if(q.includes('fairest test of whether light affects')){recipe='sci-fair-test-light';family='qf-sci-fair-test-light';skill='Investigating';subskill='fair test';expected='Use the same plant type, soil and water, changing only light exposure';}
-    else if(q.includes('lunchbox that should be light')){recipe='sci-material-purpose';family='qf-sci-material-purpose';skill='Natural and processed materials';subskill='material properties';expected='Rigid plastic';}
+    if(q.includes('shortest shadow on a sunny day')){recipe='sci-shadow-length';family='qf-sci-shadow-length';skill='Earth and beyond';subskill='Sun and shadows';expected='At midday';}
+    else if(q.includes('attracted to a magnet')){recipe='sci-magnetic-material';family='qf-sci-magnetic-material';skill='Natural and processed materials';subskill='magnetic materials';expected='A steel paper clip';}
+    else if(q.includes('after the caterpillar stage')){recipe='sci-butterfly-life-cycle';family='qf-sci-butterfly-life-cycle';skill='Life and living';subskill='life cycles';expected='Pupa';if(!/caterpillar → pupa/i.test(stim))return {ok:false,reason:'life_cycle_source_mismatch'};}
+    else if(q.includes('move efficiently through water')){recipe='sci-webbed-feet';family='qf-sci-webbed-feet';skill='Life and living';subskill='body features';expected='Webbed feet';}
+    else if(q.includes('ruler hanging over the edge')){recipe='sci-sound-vibration';family='qf-sci-sound-vibration';skill='Energy and change';subskill='sound and vibration';expected='The ruler is vibrating';}
+    else if(q.includes('fairly test which wrapping')){recipe='sci-insulation-fair-test';family='qf-sci-insulation-fair-test';skill='Investigating';subskill='fair testing';expected='Use identical cups and change only the wrapping material';}
+    else if(q.includes('dissolve when stirred into warm water')){recipe='sci-dissolving';family='qf-sci-dissolving';skill='Natural and processed materials';subskill='dissolving';const possible=['Sugar','Salt'].filter(x=>(item.options||[]).some((o:any)=>same(o,x)));if(possible.length!==1)return {ok:false,reason:'dissolving_options_ambiguous'};expected=possible[0];}
+    else if(q.includes('best evidence that a seedling is living')){recipe='sci-living-evidence';family='qf-sci-living-evidence';skill='Life and living';subskill='characteristics of living things';expected='It grows new leaves over time';}
+    else if(q==='What causes day and night on Earth?'){recipe='sci-day-night';family='qf-sci-day-night';skill='Earth and beyond';subskill='Earth rotation';expected='Earth rotates on its axis';}
+    else if(q.includes('let the most light pass through')){recipe='sci-transparency';family='qf-sci-transparency';skill='Natural and processed materials';subskill='transparent materials';expected='Clear plastic';}
+    else if(q.includes('which living thing is eaten by the frog')){recipe='sci-food-chain';family='qf-sci-food-chain';skill='Life and living';subskill='food chains';expected='Grasshopper';if(!/grasshopper → frog/i.test(stim))return {ok:false,reason:'food_chain_source_mismatch'};}
+    else if(q.includes('measure how much rain has fallen')){recipe='sci-rain-gauge';family='qf-sci-rain-gauge';skill='Earth and beyond';subskill='weather instruments';expected='Rain gauge';}
+
   }
   if(!recipe||!expected)return {ok:false,reason:'unsupported_construction'};
   if(!optionFor(item,expected))return {ok:false,reason:'independent_answer_mismatch'};
