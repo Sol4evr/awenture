@@ -1,0 +1,44 @@
+{
+  "version": "aw-qf-1.0.0",
+  "projectRef": "yvvwjdnazxzhzrfhudwx",
+  "topupIntakeFunction": "topup-request",
+  "processorFunction": "question-factory",
+  "privateSchema": "awenture_private",
+  "tables": {
+    "requests": "question_topup_requests",
+    "batches": "question_topup_batches",
+    "runs": "question_factory_runs",
+    "candidates": "question_factory_candidates"
+  },
+  "states": {
+    "request": ["queued", "generating", "expert_review", "approved", "released", "complete"],
+    "run": ["generating", "automated_review", "expert_review", "complete", "failed"],
+    "automatedCandidate": ["pending", "passed", "rejected"],
+    "expertCandidate": ["pending", "approved", "changes_requested", "rejected"]
+  },
+  "mandatoryPolicy": {
+    "expertReviewRequired": true,
+    "visualQaRequired": true,
+    "noveltyCheckRequired": true,
+    "releaseGateRequired": true,
+    "learnerRuntimeDirectPublish": false
+  },
+  "automatedChecks": [
+    "metadata",
+    "thin_stem",
+    "four_distinct_options",
+    "answer_key",
+    "rationale",
+    "accessible_visual",
+    "banned_language",
+    "within_batch_semantic_sibling"
+  ],
+  "releaseBoundary": "Factory output is candidate-only. Expert approval does not mutate window.AW_BANK; a normal governed bank release is still required.",
+  "idempotency": "request_key + generator_version yields one logical factory run; candidate_key is deterministic per request/subject/index/version.",
+  "generation": {
+    "mode": "governed-parameterised-recipes",
+    "providerCost": 0,
+    "maxCandidatesPerSubjectPerRun": 40,
+    "subjects": ["English", "Mathematics", "Science"]
+  }
+}
