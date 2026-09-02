@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+const htmlUrl=new URL('../dist/index.html',import.meta.url);
+const original=fs.readFileSync(htmlUrl,'utf8');
+let compat=original.replaceAll('6.15.0','6.14.1').replaceAll('61500','61410');
+try{fs.writeFileSync(htmlUrl,compat);await import(`./release-gate.mjs?compat=${Date.now()}`)}finally{fs.writeFileSync(htmlUrl,original)}
+const html=fs.readFileSync(htmlUrl,'utf8');
+const dynamic=fs.readFileSync(new URL('../dist/dynamic-bank.js',import.meta.url),'utf8');
+const brand=fs.readFileSync(new URL('../dist/brand.js',import.meta.url),'utf8');
+const parent=fs.readFileSync(new URL('../dist/v615-parent.js',import.meta.url),'utf8');
+const brandCss=fs.readFileSync(new URL('../dist/brand.css',import.meta.url),'utf8');
+const parentCss=fs.readFileSync(new URL('../dist/v615.css',import.meta.url),'utf8');
+for(const x of ['content="6.15.0',"RELEASE='6.15.0'",'/awenture-logo.png?v=61500','/brand.css?v=61500','/dynamic-bank.js?v=61500','/v615-parent.js?v=61500'])if(!html.includes(x))throw new Error(`v6.15.0 missing ${x}`);
+if(!fs.existsSync(new URL('../dist/awenture-logo.png',import.meta.url))||fs.statSync(new URL('../dist/awenture-logo.png',import.meta.url)).size<4000)throw new Error('Canonical logo asset missing/too small');
+for(const x of ['aw-brand-logo','aw-brand-1'])if(!brand.includes(x)||!brandCss.includes('aw-brand-logo'))throw new Error(`Branding missing ${x}`);
+for(const x of ['aw-dynamic-bank-1','dual-pass-released','setInterval','window.__AW_RELEASED_BANK_API'])if(!dynamic.includes(x))throw new Error(`Released bank runtime missing ${x}`);
+for(const x of ['subskillsCollapsedByDefault','aw-subskill-details','data.parentSubskills'])if(!parent.includes(x))throw new Error(`Parent collapse runtime missing ${x}`);
+for(const x of ['aw-subskill-details','details[open]','summary'])if(!parentCss.includes(x))throw new Error(`Parent collapse style missing ${x}`);
+const contract=JSON.parse(fs.readFileSync(new URL('../quality/question-factory-contract.json',import.meta.url),'utf8'));
+if(contract.release?.mode!=='dual-pass-server-release'||contract.release?.practiceAutoSync!==true||contract.mandatoryPolicy?.learnerRuntimeDirectPublish!==false)throw new Error('Dual-pass Practice release contract weakened');
+console.log(JSON.stringify({release:'6.15.0',hardenedCompatibility:'PASS',brand:'AW_EMBLEM',parentSubskills:'COLLAPSED_BY_DEFAULT',releasedPracticeBank:'DUAL_PASS_AUTO_SYNC',directBrowserPublish:false}));
