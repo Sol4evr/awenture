@@ -5,29 +5,46 @@
   "deployedAt": "2026-09-02",
   "functions": {
     "topup-request": {
-      "version": 2,
+      "version": 3,
       "verifyJwt": false,
-      "sha256": "4c168e48b9c95f9ea9f262324f44a0dc68d388674540d8377c597ff692eaccd3",
-      "purpose": "Public governed intake/status endpoint; mandatory QA policy is server-owned; schedules internal factory processing."
+      "sha256": "f5aca40d655204020d01b3358cd106d46fdd91bc07b02a084f3fce414f96aaeb",
+      "purpose": "Public governed intake/status endpoint; schedules generation followed by independent server release review."
     },
     "question-factory": {
       "version": 2,
       "generatorVersion": "aw-qf-1.0.1",
       "verifyJwt": true,
-      "sha256": "45bd332b6a3a6b14cef149fee18597f0b80b97e187f632a0a7c1ea3ffe1fd6bd",
-      "purpose": "Internal service-role-only deterministic candidate generator and automated reviewer; correct answer identity is preserved through option shuffling and JWT base64url decoding is padded safely."
+      "sha256": "45bd332b6a3b14cef149fee18597f0b80b97e187f632a0a7c1ea3ffe1fd6bd",
+      "purpose": "Internal service-role-only deterministic candidate generator and automated reviewer; correct answer identity is preserved through option shuffling."
+    },
+    "question-release": {
+      "version": 1,
+      "reviewVersion": "aw-independent-review-1.0.0",
+      "releaseGate": "aw-content-release-1.0.0",
+      "verifyJwt": true,
+      "sha256": "98e86f837a90e291e4d1246bedc2fda4995357514643b6cc55894b73150166db",
+      "purpose": "Internal independent second-pass reviewer; only dual-pass candidates enter the private released bank."
+    },
+    "released-bank": {
+      "version": 1,
+      "feedVersion": "aw-dynamic-bank-1",
+      "verifyJwt": false,
+      "sha256": "3a80280d76703ec8acd8c83c6c143bb864c0b76ace776af90ab18d63500103ad",
+      "purpose": "Read-only public feed containing only dual-pass released question payloads for Practice synchronization."
     }
   },
   "database": {
     "schema": "awenture_private",
     "rls": true,
     "anonAuthenticatedTablePrivileges": false,
-    "newTables": ["question_factory_runs", "question_factory_candidates"]
+    "newTables": ["question_factory_runs", "question_factory_candidates", "released_question_items"]
   },
   "securityBoundary": {
     "browserCanQueue": true,
     "browserCanReadRequestStatus": true,
+    "browserCanReadReleasedFeed": true,
     "browserCanInvokeFactory": false,
+    "browserCanInvokeRelease": false,
     "browserCanReadCandidates": false,
     "browserCanApproveCandidates": false,
     "browserCanPublishQuestions": false
