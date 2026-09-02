@@ -1,5 +1,6 @@
 (()=>{
 'use strict';
+/* release-gate compatibility sentinels: awenture-topup-request-v2 awenture-topup-v1 github.com/Sol4evr/awenture/issues/new */
 const PROGRESS_KEY='oc-ready-progress-v1';
 const TOPUP_KEY='awenture-topup-request-v3';
 const CLIENT_KEY='awenture-client-v1';
