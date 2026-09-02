@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {loadImage} from '@napi-rs/canvas';
 const htmlUrl=new URL('../dist/index.html',import.meta.url);
 const original=fs.readFileSync(htmlUrl,'utf8');
 let compat=original.replaceAll('6.15.0','6.14.1').replaceAll('61500','61410');
@@ -9,12 +10,16 @@ const brand=fs.readFileSync(new URL('../dist/brand.js',import.meta.url),'utf8');
 const parent=fs.readFileSync(new URL('../dist/v615-parent.js',import.meta.url),'utf8');
 const brandCss=fs.readFileSync(new URL('../dist/brand.css',import.meta.url),'utf8');
 const parentCss=fs.readFileSync(new URL('../dist/v615.css',import.meta.url),'utf8');
-for(const x of ['content="6.15.0',"RELEASE='6.15.0'",'/awenture-logo.png?v=61500','/brand.css?v=61500','/dynamic-bank.js?v=61500','/v615-parent.js?v=61500'])if(!html.includes(x))throw new Error(`v6.15.0 missing ${x}`);
-if(!fs.existsSync(new URL('../dist/awenture-logo.png',import.meta.url))||fs.statSync(new URL('../dist/awenture-logo.png',import.meta.url)).size<4000)throw new Error('Canonical logo asset missing/too small');
-for(const x of ['aw-brand-logo','aw-brand-1'])if(!brand.includes(x)||!brandCss.includes('aw-brand-logo'))throw new Error(`Branding missing ${x}`);
+const insights=fs.readFileSync(new URL('../dist/insights.js',import.meta.url),'utf8');
+for(const x of ['content="6.15.0',"RELEASE='6.15.0'",'/awenture-logo-32.png?v=61500','/brand.css?v=61500','/dynamic-bank.js?v=61500','/v615-parent.js?v=61500'])if(!html.includes(x))throw new Error(`v6.15.0 missing ${x}`);
+for(const size of [32,180,192,512]){const logo=new URL(`../dist/awenture-logo-${size}.png`,import.meta.url);if(!fs.existsSync(logo))throw new Error(`Logo ${size} missing`);const image=await loadImage(logo);if(image.width!==size||image.height!==size)throw new Error(`Logo ${size} invalid`)}
+for(const x of ['aw-brand-logo','aw-brand-1.1','awenture-logo-192.png'])if(!brand.includes(x)||!brandCss.includes('aw-brand-logo'))throw new Error(`Branding missing ${x}`);
 for(const x of ['aw-dynamic-bank-1','dual-pass-released','300000','bank.splice','independentSolve','aw-content-release-1\\.1','window.__AW_RELEASED_BANK_API'])if(!dynamic.includes(x))throw new Error(`Released bank runtime missing ${x}`);
-for(const x of ['subskillsCollapsedByDefault','statusPolling','aria-expanded','aw-subskill-details','dataset.parentSubskills'])if(!parent.includes(x))throw new Error(`Parent collapse runtime missing ${x}`);
+for(const x of ['subskillsCollapsedByDefault','statusPolling','aria-expanded','aw-subskill-details','wireSubskills'])if(!parent.includes(x))throw new Error(`Parent collapse runtime missing ${x}`);
+if((insights.match(/>Subskill performance</g)||[]).length!==1||!insights.includes("subject==='Mathematics'?'Maths':subject"))throw new Error('Subject-level subskill controls missing or duplicated');
 for(const x of ['aw-subskill-details','details[open]','summary'])if(!parentCss.includes(x))throw new Error(`Parent collapse style missing ${x}`);
+const vercel=JSON.parse(fs.readFileSync(new URL('../vercel.json',import.meta.url),'utf8'));
+if(vercel.git?.deploymentEnabled?.main!==true||vercel.github?.autoAlias!==true)throw new Error('Vercel main auto-deployment is not explicitly enabled');
 const contract=JSON.parse(fs.readFileSync(new URL('../quality/question-factory-contract.json',import.meta.url),'utf8'));
 if(contract.release?.mode!=='dual-pass-server-release'||contract.release?.practiceAutoSync!==true||contract.release?.independentSolve!==true||contract.release?.canonicalBankSize!==171||contract.mandatoryPolicy?.learnerRuntimeDirectPublish!==false)throw new Error('Dual-pass Practice release contract weakened');
 if(!html.includes("!String(q.id).startsWith('QF-')")||!html.includes('__AW_REGISTER_DYNAMIC_QUESTION'))throw new Error('Dynamic Practice/static subject-test boundary missing');

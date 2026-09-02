@@ -53,7 +53,11 @@ function spectrumRow(r,rank){
 }
 function subjectSummary(rows){return `<div class="aw-subject-spectrum">${subjectRows(rows).map((r,i)=>spectrumRow({...r,skill:r.subject},i+1)).join('')}</div>`}
 function subskillSections(rows){
-  return SUBJECTS.map(subject=>{const ranked=rows.filter(r=>r.subject===subject).sort((a,b)=>{if(a.accuracy==null&&b.accuracy!=null)return 1;if(a.accuracy!=null&&b.accuracy==null)return-1;return (b.accuracy??0)-(a.accuracy??0)||(b.a-a.a)||a.skill.localeCompare(b.skill)});return `<section class="aw-subject-panel"><div class="aw-subject-head"><div><small>${esc(subject)}</small><h3>${esc(subject)} subskills</h3></div><span>${ranked.filter(x=>x.a).length}/${ranked.length} attempted</span></div><div class="aw-subskill-spectrum">${ranked.map((r,i)=>spectrumRow(r,i+1)).join('')}</div></section>`}).join('');
+  return SUBJECTS.map(subject=>{
+    const ranked=rows.filter(r=>r.subject===subject).sort((a,b)=>{if(a.accuracy==null&&b.accuracy!=null)return 1;if(a.accuracy!=null&&b.accuracy==null)return-1;return (b.accuracy??0)-(a.accuracy??0)||(b.a-a.a)||a.skill.localeCompare(b.skill)});
+    const attempted=ranked.filter(x=>x.a).length,a=ranked.reduce((n,x)=>n+x.a,0),c=ranked.reduce((n,x)=>n+x.c,0),label=subject==='Mathematics'?'Maths':subject;
+    return `<details class="aw-subject-panel aw-subskill-details" data-parent-subskills="${esc(subject)}"><summary role="button" aria-expanded="false"><span><b>${esc(label)}</b><small>${attempted}/${ranked.length} attempted · ${scoreLabel(a,c)}</small></span><i aria-hidden="true">⌄</i></summary><div class="aw-subskill-spectrum">${ranked.map((r,i)=>spectrumRow(r,i+1)).join('')}</div></details>`;
+  }).join('');
 }
 function unseenBySubject(p){const seen=new Set(Array.isArray(p.seenIds)?p.seenIds:[]),b=bank();return Object.fromEntries(SUBJECTS.map(s=>[s,b.filter(q=>q.subject===s&&!seen.has(q.id)).length]))}
 function topupRequest(){try{return JSON.parse(localStorage.getItem(TOPUP_KEY)||'null')}catch(_){return null}}
