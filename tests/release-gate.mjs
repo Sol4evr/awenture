@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { PDFDocument } from 'pdf-lib';
+const SUBJECTS=['English','Mathematics','Science'];
 
 const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../dist/premium.css',import.meta.url),'utf8');
@@ -57,4 +58,4 @@ if(!fs.existsSync(new URL('../dist/pdf.min.mjs',import.meta.url))||!fs.existsSyn
 if(/ocr-original|inspect-original|copy-original-papers/.test(pkg.scripts.build))throw new Error('Temporary QA pipeline remains in shipping build');
 if(pkg.devDependencies?.['tesseract.js'])throw new Error('OCR dependency remains');
 
-console.log(JSON.stringify({release:'6.13.2.0',baseline:'6.9.0',normalBank:171,bonusBank:9,dailyVisualTarget:3,dailyVisualMax:4,quarantinedVisuals:6,progressTile:'REMOVED',parentView:'FULL_PERFORMANCE_SPECTRUM',parentSubjects:SUBJECTS??['English','Mathematics','Science'],historicalPapers:21,verifiedAutoScoring:9,questionAssets,answerAssets,pagedViewer:'PASS',touchControls:'GESTURE_FIRST',learningPath:['ICAS Y2','ICAS Y3','NAPLAN Y3','ICAS Y4','OC'],questionOnlyIsolation:'PASS',formalHistoryIsolation:'PASS',featureRegression:'PASS'}));
+console.log(JSON.stringify({release:'6.13.2.0',baseline:'6.9.0',normalBank:171,bonusBank:9,dailyVisualTarget:3,dailyVisualMax:4,quarantinedVisuals:6,progressTile:'REMOVED',parentView:'FULL_PERFORMANCE_SPECTRUM',parentSubjects:SUBJECTS,historicalPapers:21,verifiedAutoScoring:9,questionAssets,answerAssets,pagedViewer:'PASS',touchControls:'GESTURE_FIRST',learningPath:['ICAS Y2','ICAS Y3','NAPLAN Y3','ICAS Y4','OC'],questionOnlyIsolation:'PASS',formalHistoryIsolation:'PASS',featureRegression:'PASS'}));
