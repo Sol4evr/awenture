@@ -14,6 +14,8 @@ test('v6.15 dynamic Practice, static subject tests, Parent collapse and release 
   await page.locator('[data-a="parent"]').click();
   await expect(page.locator('.aw-subskill-details')).toHaveCount(3);
   await expect(page.locator('.aw-subskill-details[open]')).toHaveCount(0);
+  await expect(page.getByText('Subskill performance',{exact:true})).toHaveCount(1);
+  for(const subject of ['English','Maths','Science'])await expect(page.locator('.aw-subskill-details>summary').filter({hasText:subject})).toHaveCount(1);
   const first=page.locator('.aw-subskill-details').first(),summary=first.locator('summary');
   await expect(summary).toHaveAttribute('aria-expanded','false');await summary.click();await expect(summary).toHaveAttribute('aria-expanded','true');
   await page.locator('[data-aw-topup]').click();
