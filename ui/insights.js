@@ -81,7 +81,7 @@ function statusCopy(req,current){
   if(!current)return {button:'Request question top-up',note:'Submits a governed Question Factory request targeted to current supply gaps and weakest skills. New questions still require review and release gates.'};
   const status=req.backendStatus||'prepared';
   if(status==='prepared')return {button:'Submit prepared top-up',note:`Top-up package ${esc(req.requestId)} is prepared from the latest supply and skill data.`};
-  const labels={queued:'Queued for generation',generating:'Generating questions',review:'Expert review',approved:'Approved for release',released:'Released',rejected:'Needs revision',cancelled:'Cancelled'};
+  const labels={queued:'Queued for generation',generating:'Generating questions',review:'Expert review',expert_review:'Expert review',approved:'Approved for release',released:'Released',review_failed:'Needs revision',failed:'Needs revision',complete:'Complete',rejected:'Needs revision',cancelled:'Cancelled'};
   return {button:status==='rejected'||status==='cancelled'?'Prepare new top-up':labels[status]||'Top-up submitted',note:`Request ${esc(req.requestId)} · ${labels[status]||status}. The validated question bank is unchanged until the normal release gate passes.`};
 }
 
@@ -94,7 +94,7 @@ function transformParent(){
   const copy=statusCopy(request,requestCurrent);
   card.dataset.awInsights='1';
   card.innerHTML=`<div class="aw-parent-hero"><div><div class="ey">Parent insights</div><h1>Alistair at a glance</h1><p>Performance across subjects and subskills, ranked by question accuracy.</p></div><div class="aw-overall-score"><strong>${overallA?Math.round(overallC/overallA*100)+'%':'—'}</strong><small>overall accuracy</small></div></div><section class="aw-performance-card"><div class="aw-section-title"><div><span>Subject performance</span><small>Ranked strongest to weakest</small></div><b>0 — 100%</b></div>${subjectSummary(rows)}</section><div class="aw-parent-section-title"><div><span>Subskill performance</span><small>Every tracked skill in the current ICAS Y2 bank</small></div></div><div class="aw-subject-grid">${subskillSections(rows)}</div><section class="aw-inventory compact"><div class="aw-insight-head"><span>Question supply</span><b>${status}</b></div><div class="aw-unseen-grid">${SUBJECTS.map(s=>`<div><strong>${unseen[s]}</strong><small>${s} unseen</small></div>`).join('')}</div><button class="secondary aw-topup" data-aw-topup type="button">${copy.button}</button><small class="aw-request-note">${copy.note}</small></section><button class="primary wide" data-a="home">Back</button>`;
-  if(requestCurrent&&request.backendStatus&&request.backendStatus!=='prepared')syncTopupStatus(request).then(next=>{if(next!==request){const c=[...document.querySelectorAll('.card')].find(x=>x.dataset.awInsights==='1');if(c){c.dataset.awInsights='0';transformParent()}}});
+  if(requestCurrent&&request.backendStatus&&request.backendStatus!=='prepared')syncTopupStatus(request).then(async next=>{if(next?.backendStatus==='released')await window.__AW_RELEASED_BANK_API?.refresh?.();if(next!==request){const c=[...document.querySelectorAll('.card')].find(x=>x.dataset.awInsights==='1');if(c){c.dataset.awInsights='0';transformParent()}}});
 }
 async function requestTopup(){
   const p=progress(),unseen=unseenBySubject(p),currentId=requestId(unseen,Array.isArray(p.seenIds)?p.seenIds.length:0),existing=topupRequest();
@@ -106,7 +106,9 @@ async function requestTopup(){
 }
 function renderTopupBusy(on){const b=document.querySelector('[data-aw-topup]');if(!b)return;b.disabled=!!on;if(on)b.textContent='Submitting…'}
 document.addEventListener('click',e=>{if(e.target.closest('[data-aw-topup]'))requestTopup()});
-window.__AW_TOPUP_API={prepare:makeTopupRequest,submit:requestTopup,load:topupRequest,payload:backendPayload,endpoint:TOPUP_ENDPOINT};
+async function refreshTopupStatus(){const current=topupRequest();if(!current)return null;const next=await syncTopupStatus(current);if(next?.backendStatus==='released')await window.__AW_RELEASED_BANK_API?.refresh?.();return next}
+function rerenderParent(){const card=[...document.querySelectorAll('.card')].find(x=>x.dataset.awInsights==='1');if(card){card.dataset.awInsights='0';transformParent()}}
+window.__AW_TOPUP_API={prepare:makeTopupRequest,submit:requestTopup,load:topupRequest,payload:backendPayload,endpoint:TOPUP_ENDPOINT,refreshStatus:refreshTopupStatus,render:rerenderParent};
 let queued=false;function sync(){transformHome();transformParent()}function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;sync()})}
 new MutationObserver(schedule).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});sync();
 })();
