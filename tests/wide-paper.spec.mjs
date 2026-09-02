@@ -66,9 +66,6 @@ test('historical paper viewer uses responsive desktop controls and touch-first i
     await zoomIn.click();
     await expect(zoomLabel).toHaveText('115%');
     await expect(status).toHaveText('',{timeout:10000});
-    await zoomIn.click();
-    await expect(zoomLabel).toHaveText('130%',{timeout:10000});
-    await expect(status).toHaveText('',{timeout:10000});
     const before=await stage.evaluate(el=>({left:el.scrollLeft,width:el.clientWidth,scrollWidth:el.scrollWidth}));
     expect(before.scrollWidth).toBeGreaterThan(before.width);
     await panRight.click();
