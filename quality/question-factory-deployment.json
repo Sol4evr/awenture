@@ -46,7 +46,13 @@
     ],
     "edgeServiceRoleDataApiAccess": true,
     "browserSchemaPrivileges": false,
-    "statusConstraintsAligned": true
+    "statusConstraintsAligned": true,
+    "foreignKeyIndexes": true,
+    "appliedMigrations": [
+      "20260902121113_allow_edge_service_role_private_pipeline",
+      "20260902121547_align_question_factory_status_constraints",
+      "20260902123031_add_question_factory_fk_indexes"
+    ]
   },
   "securityBoundary": {
     "browserCanQueue": true,

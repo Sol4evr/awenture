@@ -1,0 +1,3 @@
+create index if not exists question_factory_candidates_batch_idx on awenture_private.question_factory_candidates(batch_id);
+create index if not exists released_question_items_request_idx on awenture_private.released_question_items(request_id);
+create index if not exists released_question_items_batch_idx on awenture_private.released_question_items(batch_id);
