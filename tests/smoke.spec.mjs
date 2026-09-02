@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 test('hardened learner shell, governed top-up, historical tests and bonus isolation', async ({ page }) => {
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   let posted=null;
+  await page.route('https://yvvwjdnazxzhzrfhudwx.supabase.co/functions/v1/released-bank',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'offline'})}));
   await page.route('https://yvvwjdnazxzhzrfhudwx.supabase.co/functions/v1/topup-request*',async route=>{
     const req=route.request();
     if(req.method()==='POST'){
