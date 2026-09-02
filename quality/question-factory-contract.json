@@ -1,5 +1,5 @@
 {
-  "version": "aw-qf-1.0.0",
+  "version": "aw-qf-1.0.1",
   "projectRef": "yvvwjdnazxzhzrfhudwx",
   "topupIntakeFunction": "topup-request",
   "processorFunction": "question-factory",
@@ -39,6 +39,7 @@
     "mode": "governed-parameterised-recipes",
     "providerCost": 0,
     "maxCandidatesPerSubjectPerRun": 40,
+    "correctOptionTracking": "post-shuffle-index",
     "subjects": ["English", "Mathematics", "Science"]
   }
 }

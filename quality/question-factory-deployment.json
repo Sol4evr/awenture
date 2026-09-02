@@ -11,10 +11,11 @@
       "purpose": "Public governed intake/status endpoint; mandatory QA policy is server-owned; schedules internal factory processing."
     },
     "question-factory": {
-      "version": 1,
+      "version": 2,
+      "generatorVersion": "aw-qf-1.0.1",
       "verifyJwt": true,
-      "sha256": "22763db63e00f9ad65f4a2d2587041051f2cd5e28a82530e1e54e6beff2be572",
-      "purpose": "Internal service-role-only deterministic candidate generator and automated reviewer."
+      "sha256": "45bd332b6a3a6b14cef149fee18597f0b80b97e187f632a0a7c1ea3ffe1fd6bd",
+      "purpose": "Internal service-role-only deterministic candidate generator and automated reviewer; correct answer identity is preserved through option shuffling and JWT base64url decoding is padded safely."
     }
   },
   "database": {
