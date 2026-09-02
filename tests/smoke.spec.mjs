@@ -20,7 +20,7 @@ test('feature-complete learner shell, iPad-safe historical papers and gated bonu
   await expect(page.getByText('Parent insights')).toBeVisible();
   await expect(page.getByText('Subject performance')).toBeVisible();
   await expect(page.getByText('Subskill performance')).toBeVisible();
-  await expect(page.getByText('Question supply')).toBeVisible();
+  await expect(page.getByText('Question supply',{exact:true})).toBeVisible();
   await expect(page.locator('.aw-overall-score')).toBeVisible();
   await expect(page.locator('.aw-subject-spectrum .aw-spectrum-row')).toHaveCount(3);
   await expect(page.locator('.aw-subject-panel')).toHaveCount(3);
