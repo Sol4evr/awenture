@@ -23,4 +23,4 @@ This release freezes the current accepted learner experience as the reference ba
 - Release gate explicitly fails if the removed generated-form runtime or obsolete utilities return.
 
 ## Release rule
-Future releases must preserve this baseline unless the intended release explicitly changes an accepted feature. Browser validation must pass in WebKit/iPad-like and Chromium before promotion.
+Future releases must preserve this baseline unless the intended release explicitly changes an accepted feature. Static/content validation and browser validation in WebKit/iPad-like and Chromium must pass on the exact release candidate before promotion. The matching Vercel preview must also be READY on that same candidate SHA.
