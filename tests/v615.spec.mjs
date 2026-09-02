@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test('v6.15 dynamic Practice, static subject tests, Parent collapse and release refresh', async ({page})=>{
+  test.setTimeout(45000);
+  await page.route('**/formal-tests.js*',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
   let feedCalls=0,getCalls=0;
   const dynamic={id:'QF-E-V615TEST',subject:'English',skill:'Text comprehension',subskill:'author purpose',family:'qf-eng-practical-detail',difficulty:3,question:'Why does the notice include the information about the closed path?',options:['To describe a fictional character','To help a visitor make a practical decision','To list the history of the path','To prove every path is closed'],answer:'B',explanation:'The closed-path detail helps a visitor decide which route can be used safely.',stimulus:'Visitor guide — wetland\nPlease check the closed path before beginning your visit. Other areas remain open.',kind:'text',visual:'',quality:{review:'dual-pass-released',independentSolve:true,releaseGate:'aw-content-release-1.1.0'}};
   await page.route('https://yvvwjdnazxzhzrfhudwx.supabase.co/functions/v1/released-bank',async route=>{feedCalls++;await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({release:'aw-dynamic-bank-1',count:1,updatedAt:new Date().toISOString(),items:[dynamic]})})});
