@@ -25,7 +25,7 @@ test('hardened learner shell, governed top-up, historical tests and bonus isolat
   await page.locator('[data-a="parent"]').click();
   await expect(page.getByText('Parent insights')).toBeVisible();
   await expect(page.getByText('Subject performance')).toBeVisible();
-  await expect(page.getByText('Subskill performance')).toBeVisible();
+  await expect(page.getByText('Subskill performance').first()).toBeVisible();
   await expect(page.locator('.aw-subject-spectrum .aw-spectrum-row')).toHaveCount(3);
   await expect(page.locator('.aw-subject-panel')).toHaveCount(3);
   await expect(page.locator('.aw-unseen-grid > div')).toHaveCount(3);
