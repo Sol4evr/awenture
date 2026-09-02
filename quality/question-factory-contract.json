@@ -14,10 +14,30 @@
     "released": "released_question_items"
   },
   "states": {
-    "request": ["queued", "generating", "expert_review", "released", "review_failed", "complete"],
-    "run": ["generating", "expert_review", "complete", "failed"],
-    "automatedCandidate": ["pending", "passed", "rejected"],
-    "expertCandidate": ["pending", "approved", "rejected"]
+    "request": [
+      "queued",
+      "generating",
+      "expert_review",
+      "released",
+      "review_failed",
+      "complete"
+    ],
+    "run": [
+      "generating",
+      "expert_review",
+      "complete",
+      "failed"
+    ],
+    "automatedCandidate": [
+      "pending",
+      "passed",
+      "rejected"
+    ],
+    "expertCandidate": [
+      "pending",
+      "approved",
+      "rejected"
+    ]
   },
   "mandatoryPolicy": {
     "expertReviewRequired": true,
@@ -25,7 +45,9 @@
     "noveltyCheckRequired": true,
     "releaseGateRequired": true,
     "dualPassServerRelease": true,
-    "learnerRuntimeDirectPublish": false
+    "learnerRuntimeDirectPublish": false,
+    "independentSolveRequired": true,
+    "canonicalNoveltyRequired": true
   },
   "automatedChecks": [
     "metadata",
@@ -35,15 +57,25 @@
     "rationale",
     "accessible_visual",
     "banned_language",
-    "within_batch_semantic_sibling"
+    "within_batch_semantic_sibling",
+    "independent_answer_solve",
+    "canonical_bank_semantic_similarity",
+    "released_bank_semantic_similarity",
+    "visual_semantic_consistency",
+    "unsafe_svg_markup"
   ],
   "release": {
     "mode": "dual-pass-server-release",
-    "independentReviewer": "aw-independent-review-1.0.0",
-    "releaseGate": "aw-content-release-1.0.0",
+    "independentReviewer": "aw-independent-review-1.1.0",
+    "releaseGate": "aw-content-release-1.1.0",
     "feed": "aw-dynamic-bank-1",
     "browserWriteAccess": false,
-    "practiceAutoSync": true
+    "practiceAutoSync": true,
+    "independentSolve": true,
+    "canonicalBankRelease": "6.14.1",
+    "canonicalBankSize": 171,
+    "visualSemanticQa": true,
+    "releasedBankNovelty": true
   },
   "releaseBoundary": "Only candidates that pass the factory automated gate and the independent server release reviewer may enter the private released bank. The learner browser has no publish or table-write privilege; Practice consumes only the read-only dual-pass released feed.",
   "idempotency": "request_key + generator_version yields one logical factory run; candidate_key is deterministic per request/subject/index/version and unique in the released bank.",
@@ -52,6 +84,10 @@
     "providerCost": 0,
     "maxCandidatesPerSubjectPerRun": 40,
     "correctOptionTracking": "post-shuffle-index",
-    "subjects": ["English", "Mathematics", "Science"]
+    "subjects": [
+      "English",
+      "Mathematics",
+      "Science"
+    ]
   }
 }

@@ -81,7 +81,7 @@ function statusCopy(req,current){
   if(!current)return {button:'Request question top-up',note:'Submits a governed Question Factory request targeted to current supply gaps and weakest skills. New questions still require review and release gates.'};
   const status=req.backendStatus||'prepared';
   if(status==='prepared')return {button:'Submit prepared top-up',note:`Top-up package ${esc(req.requestId)} is prepared from the latest supply and skill data.`};
-  const labels={queued:'Queued for generation',generating:'Generating questions',review:'Expert review',approved:'Approved for release',released:'Released',rejected:'Needs revision',cancelled:'Cancelled'};
+  const labels={queued:'Queued for generation',generating:'Generating questions',review:'Expert review',expert_review:'Expert review',approved:'Approved for release',released:'Released',review_failed:'Needs revision',failed:'Needs revision',complete:'Complete',rejected:'Needs revision',cancelled:'Cancelled'};
   return {button:status==='rejected'||status==='cancelled'?'Prepare new top-up':labels[status]||'Top-up submitted',note:`Request ${esc(req.requestId)} · ${labels[status]||status}. The validated question bank is unchanged until the normal release gate passes.`};
 }
 
@@ -106,7 +106,9 @@ async function requestTopup(){
 }
 function renderTopupBusy(on){const b=document.querySelector('[data-aw-topup]');if(!b)return;b.disabled=!!on;if(on)b.textContent='Submitting…'}
 document.addEventListener('click',e=>{if(e.target.closest('[data-aw-topup]'))requestTopup()});
-window.__AW_TOPUP_API={prepare:makeTopupRequest,submit:requestTopup,load:topupRequest,payload:backendPayload,endpoint:TOPUP_ENDPOINT};
+async function refreshTopupStatus(){const current=topupRequest();if(!current)return null;const next=await syncTopupStatus(current);if(next?.backendStatus==='released')await window.__AW_RELEASED_BANK_API?.refresh?.();return next}
+function rerenderParent(){const card=[...document.querySelectorAll('.card')].find(x=>x.dataset.awInsights==='1');if(card){card.dataset.awInsights='0';transformParent()}}
+window.__AW_TOPUP_API={prepare:makeTopupRequest,submit:requestTopup,load:topupRequest,payload:backendPayload,endpoint:TOPUP_ENDPOINT,refreshStatus:refreshTopupStatus,render:rerenderParent};
 let queued=false;function sync(){transformHome();transformParent()}function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;sync()})}
 new MutationObserver(schedule).observe(document.getElementById('app')||document.body,{childList:true,subtree:true});sync();
 })();

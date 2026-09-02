@@ -11,25 +11,27 @@
       "purpose": "Public governed intake/status endpoint; schedules generation followed by independent server release review."
     },
     "question-factory": {
-      "version": 2,
+      "version": 4,
       "generatorVersion": "aw-qf-1.0.1",
-      "verifyJwt": true,
-      "sha256": "45bd332b6a3b14cef149fee18597f0b80b97e187f632a0a7c1ea3ffe1fd6bd",
-      "purpose": "Internal service-role-only deterministic candidate generator and automated reviewer; correct answer identity is preserved through option shuffling."
+      "verifyJwt": false,
+      "sha256": "1d28bbdc2935f0ab798411cb14458175f47a3276b3afa261199cde7fdf91dec4",
+      "purpose": "Internal service-role-only deterministic candidate generator and automated reviewer; correct answer identity is preserved through option shuffling.",
+      "internalAuth": "service-role apikey equality"
     },
     "question-release": {
-      "version": 1,
-      "reviewVersion": "aw-independent-review-1.0.0",
-      "releaseGate": "aw-content-release-1.0.0",
-      "verifyJwt": true,
-      "sha256": "98e86f837a90e291e4d1246bedc2fda4995357514643b6cc55894b73150166db",
-      "purpose": "Internal independent second-pass reviewer; only dual-pass candidates enter the private released bank."
+      "version": 6,
+      "reviewVersion": "aw-independent-review-1.1.0",
+      "releaseGate": "aw-content-release-1.1.0",
+      "verifyJwt": false,
+      "sha256": "5ec4c070ca03087e6897f3ed2d907e67d9851cad269443ebb8361ec1205d4332",
+      "purpose": "Internal independent second-pass reviewer; only dual-pass candidates enter the private released bank.",
+      "internalAuth": "service-role apikey equality"
     },
     "released-bank": {
-      "version": 1,
+      "version": 2,
       "feedVersion": "aw-dynamic-bank-1",
       "verifyJwt": false,
-      "sha256": "3a80280d76703ec8acd8c83c6c143bb864c0b76ace776af90ab18d63500103ad",
+      "sha256": "7df91e3a51187f14f68d2ee1485620a47be34ca1109d19f3e0de5f0d0c5f1690",
       "purpose": "Read-only public feed containing only dual-pass released question payloads for Practice synchronization."
     }
   },
@@ -37,7 +39,14 @@
     "schema": "awenture_private",
     "rls": true,
     "anonAuthenticatedTablePrivileges": false,
-    "newTables": ["question_factory_runs", "question_factory_candidates", "released_question_items"]
+    "newTables": [
+      "question_factory_runs",
+      "question_factory_candidates",
+      "released_question_items"
+    ],
+    "edgeServiceRoleDataApiAccess": true,
+    "browserSchemaPrivileges": false,
+    "statusConstraintsAligned": true
   },
   "securityBoundary": {
     "browserCanQueue": true,
@@ -47,6 +56,14 @@
     "browserCanInvokeRelease": false,
     "browserCanReadCandidates": false,
     "browserCanApproveCandidates": false,
-    "browserCanPublishQuestions": false
+    "browserCanPublishQuestions": false,
+    "internalFunctionAuth": "secret/service-role apikey checked inside function"
+  },
+  "verification": {
+    "livePipeline": "PASS",
+    "generated": 3,
+    "releasedAfterDualPass": 2,
+    "canonicalDuplicateQuarantined": true,
+    "readOnlyFeed": "PASS"
   }
 }
