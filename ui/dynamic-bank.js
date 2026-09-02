@@ -12,4 +12,6 @@ async function refresh(){try{const r=await fetch(ENDPOINT,{cache:'no-store'});if
 const c=cached();if(c?.items)merge(c.items);
 window.__AW_RELEASED_BANK_API={endpoint:ENDPOINT,refresh,mergeCached:()=>{const x=cached();return x?.items?merge(x.items):0},cacheKey:CACHE_KEY};
 refresh();
+setInterval(()=>{if(document.visibilityState==='visible')refresh()},15000);
+window.addEventListener('focus',refresh);
 })();
