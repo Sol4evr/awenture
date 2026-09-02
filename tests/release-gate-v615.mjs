@@ -12,7 +12,7 @@ const parentCss=fs.readFileSync(new URL('../dist/v615.css',import.meta.url),'utf
 for(const x of ['content="6.15.0',"RELEASE='6.15.0'",'/awenture-logo.png?v=61500','/brand.css?v=61500','/dynamic-bank.js?v=61500','/v615-parent.js?v=61500'])if(!html.includes(x))throw new Error(`v6.15.0 missing ${x}`);
 if(!fs.existsSync(new URL('../dist/awenture-logo.png',import.meta.url))||fs.statSync(new URL('../dist/awenture-logo.png',import.meta.url)).size<4000)throw new Error('Canonical logo asset missing/too small');
 for(const x of ['aw-brand-logo','aw-brand-1'])if(!brand.includes(x)||!brandCss.includes('aw-brand-logo'))throw new Error(`Branding missing ${x}`);
-for(const x of ['aw-dynamic-bank-1','dual-pass-released','300000','bank.splice','independentSolve','aw-content-release-1.1','window.__AW_RELEASED_BANK_API'])if(!dynamic.includes(x))throw new Error(`Released bank runtime missing ${x}`);
+for(const x of ['aw-dynamic-bank-1','dual-pass-released','300000','bank.splice','independentSolve','aw-content-release-1\\.1','window.__AW_RELEASED_BANK_API'])if(!dynamic.includes(x))throw new Error(`Released bank runtime missing ${x}`);
 for(const x of ['subskillsCollapsedByDefault','statusPolling','aria-expanded','aw-subskill-details','data.parentSubskills'])if(!parent.includes(x))throw new Error(`Parent collapse runtime missing ${x}`);
 for(const x of ['aw-subskill-details','details[open]','summary'])if(!parentCss.includes(x))throw new Error(`Parent collapse style missing ${x}`);
 const contract=JSON.parse(fs.readFileSync(new URL('../quality/question-factory-contract.json',import.meta.url),'utf8'));
