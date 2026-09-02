@@ -27,8 +27,11 @@ test('feature-complete learner shell, iPad-safe historical papers and gated bonu
   await expect(page.locator('.aw-subskill-spectrum .aw-spectrum-row')).not.toHaveCount(0);
   await expect(page.locator('.aw-spectrum-track').first()).toBeVisible();
   await expect(page.locator('.aw-unseen-grid > div')).toHaveCount(3);
+  await page.evaluate(()=>{window.open=(url)=>{window.__AW_TEST_TOPUP_URL=url;return {closed:false}}});
   await page.locator('[data-aw-topup]').click();
-  await expect(page.getByRole('button',{name:'Top-up requested'})).toBeVisible();
+  await expect(page.getByRole('button',{name:'Open prepared top-up'})).toBeVisible();
+  const topup=await page.evaluate(()=>({request:JSON.parse(localStorage.getItem('awenture-topup-request-v2')),url:window.__AW_TEST_TOPUP_URL,api:!!window.__AW_TOPUP_API}));
+  expect(topup.api).toBe(true);expect(topup.request.schema).toBe('awenture-topup-v1');expect(topup.request.source).toBe('parent-view');expect(topup.request.bankSize).toBe(171);expect(topup.request.qualityPolicy.expertReviewRequired).toBe(true);expect(topup.request.qualityPolicy.releaseGateRequired).toBe(true);expect(Object.keys(topup.request.unseen)).toEqual(['English','Mathematics','Science']);expect(Object.keys(topup.request.requested)).toEqual(['English','Mathematics','Science']);expect(topup.request.weakest.English.length).toBeGreaterThan(0);expect(topup.url).toContain('github.com/Sol4evr/awenture/issues/new');expect(decodeURIComponent(topup.url)).toContain(topup.request.requestId);
   await page.locator('[data-a="home"]').last().click();
 
   await page.locator('[data-a="tests"]').click();
