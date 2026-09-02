@@ -3,24 +3,28 @@
   "projectRef": "yvvwjdnazxzhzrfhudwx",
   "topupIntakeFunction": "topup-request",
   "processorFunction": "question-factory",
+  "releaseFunction": "question-release",
+  "releasedBankFunction": "released-bank",
   "privateSchema": "awenture_private",
   "tables": {
     "requests": "question_topup_requests",
     "batches": "question_topup_batches",
     "runs": "question_factory_runs",
-    "candidates": "question_factory_candidates"
+    "candidates": "question_factory_candidates",
+    "released": "released_question_items"
   },
   "states": {
-    "request": ["queued", "generating", "expert_review", "approved", "released", "complete"],
-    "run": ["generating", "automated_review", "expert_review", "complete", "failed"],
+    "request": ["queued", "generating", "expert_review", "released", "review_failed", "complete"],
+    "run": ["generating", "expert_review", "complete", "failed"],
     "automatedCandidate": ["pending", "passed", "rejected"],
-    "expertCandidate": ["pending", "approved", "changes_requested", "rejected"]
+    "expertCandidate": ["pending", "approved", "rejected"]
   },
   "mandatoryPolicy": {
     "expertReviewRequired": true,
     "visualQaRequired": true,
     "noveltyCheckRequired": true,
     "releaseGateRequired": true,
+    "dualPassServerRelease": true,
     "learnerRuntimeDirectPublish": false
   },
   "automatedChecks": [
@@ -33,8 +37,16 @@
     "banned_language",
     "within_batch_semantic_sibling"
   ],
-  "releaseBoundary": "Factory output is candidate-only. Expert approval does not mutate window.AW_BANK; a normal governed bank release is still required.",
-  "idempotency": "request_key + generator_version yields one logical factory run; candidate_key is deterministic per request/subject/index/version.",
+  "release": {
+    "mode": "dual-pass-server-release",
+    "independentReviewer": "aw-independent-review-1.0.0",
+    "releaseGate": "aw-content-release-1.0.0",
+    "feed": "aw-dynamic-bank-1",
+    "browserWriteAccess": false,
+    "practiceAutoSync": true
+  },
+  "releaseBoundary": "Only candidates that pass the factory automated gate and the independent server release reviewer may enter the private released bank. The learner browser has no publish or table-write privilege; Practice consumes only the read-only dual-pass released feed.",
+  "idempotency": "request_key + generator_version yields one logical factory run; candidate_key is deterministic per request/subject/index/version and unique in the released bank.",
   "generation": {
     "mode": "governed-parameterised-recipes",
     "providerCost": 0,
