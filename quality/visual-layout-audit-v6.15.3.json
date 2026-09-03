@@ -1,0 +1,19 @@
+{
+  "release": "6.15.3",
+  "scope": "171-question static validated bank plus governed dynamic chart contract",
+  "weekendProgram": {"id": "E17", "result": "corrected", "method": "separate wrapped SVG lines in bounded cells"},
+  "spatialInventory": {
+    "total": 9,
+    "safeVisualIds": ["M15", "M16", "M17", "M34", "M47"],
+    "safeTextIds": ["M33", "M40", "M55"],
+    "quarantinedIds": ["M18"],
+    "coordinateLabelsVerified": {"M47": ["A", "B", "C", "D", "1", "2", "3", "4"]}
+  },
+  "chartInventory": {
+    "safeIds": ["M27", "M35", "S06", "S16", "S20", "S21", "S35", "S40", "S42", "E54", "S47", "S51"],
+    "quarantinedIds": ["M19"],
+    "requirements": ["accessible SVG label", "visible title", "visible category/value labels", "minimum four text labels"]
+  },
+  "dailyPractice": {"questionCount": 12, "visualTarget": 3, "visualMaximum": 4, "spatialCoverage": "safe unseen visual rescue after 24-family cooldown"},
+  "spelling": {"status": "not learner-active", "recommendedRelease": "6.16.0 after source, audio, taxonomy, independent QA and progress migration"}
+}

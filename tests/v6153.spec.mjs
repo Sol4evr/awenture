@@ -1,0 +1,16 @@
+import {test,expect} from '@playwright/test';
+
+test('v6.15.3 fixes Weekend program layout and independently sizes Parent accordions',async({page})=>{
+  await page.route('**/released-bank',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({release:'aw-dynamic-bank-1',count:0,items:[]})}));
+  await page.goto('/');
+  const visual=await page.evaluate(()=>{const q=window.AW_BANK.find(x=>x.id==='E17'),host=document.createElement('div');host.id='aw-e17-qa';host.style.width='520px';host.innerHTML=q.visual;document.body.replaceChildren(host);const svg=host.querySelector('svg'),box=svg.viewBox.baseVal;return {aria:svg.getAttribute('aria-label'),tspans:host.querySelectorAll('tspan').length,viewBox:[box.width,box.height],labels:[...host.querySelectorAll('text')].map(x=>({text:x.textContent.trim(),x:x.getBBox().x,width:x.getBBox().width})),scrollWidth:host.scrollWidth,clientWidth:host.clientWidth}});
+  expect(visual.aria).toContain('day and activities columns');expect(visual.tspans).toBe(5);expect(visual.viewBox).toEqual([520,248]);expect(visual.labels.every(x=>x.x>=-0.5&&x.x+x.width<=520.5)).toBeTruthy();expect(visual.scrollWidth).toBe(visual.clientWidth);
+  await page.goto('/');await page.locator('[data-a="parent"]').click();const panels=page.locator('.aw-subskill-details'),english=panels.nth(0),maths=panels.nth(1),science=panels.nth(2);await maths.locator('summary').click();await expect(maths).toHaveAttribute('open','');await expect(english).not.toHaveAttribute('open','');await expect(science).not.toHaveAttribute('open','');const heights=await panels.evaluateAll(xs=>xs.map(x=>Math.round(x.getBoundingClientRect().height)));expect(heights[1]).toBeGreaterThan(heights[0]+40);expect(heights[2]).toBeLessThanOrEqual(90);await expect(maths.locator('summary')).toHaveAttribute('aria-expanded','true');await expect(english.locator('summary')).toHaveAttribute('aria-expanded','false');
+});
+
+test('v6.15.3 Daily Practice rescues safe spatial coverage without exceeding visual policy',async({page})=>{
+  await page.route('**/released-bank',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({release:'aw-dynamic-bank-1',count:0,items:[]})}));
+  await page.goto('/');await page.evaluate(()=>localStorage.setItem('oc-ready-progress-v1',JSON.stringify({attempts:[],seenIds:[],reviewQueue:[],recentFamilies:[],xp:0,streak:0,skillStats:{},lastActiveDate:null})));await page.reload();await page.locator('[data-a="daily"]').click();
+  const items=await page.evaluate(()=>{const out=[];for(let i=0;i<12;i++){document.querySelector(`[data-q="${i}"]`)?.click();const stem=document.querySelector('.question-pane .q')?.textContent||'',q=window.AW_BANK.find(x=>x.question===stem);out.push(q&&{id:q.id,subject:q.subject,skill:q.skill,kind:q.kind});}return out});
+  expect(items).toHaveLength(12);expect(items.filter(x=>x?.kind==='visual').length).toBeGreaterThanOrEqual(3);expect(items.filter(x=>x?.kind==='visual').length).toBeLessThanOrEqual(4);expect(items.some(x=>x?.subject==='Mathematics'&&x.skill==='Space and geometry'&&x.kind==='visual')).toBeTruthy();for(const id of ['M09','M18','M19','M23','M26','M31'])expect(items.some(x=>x?.id===id)).toBeFalsy();
+});
