@@ -51,7 +51,9 @@ test('hardened learner shell, governed top-up, historical tests and bonus isolat
   await page.locator('[data-a="home"]').last().click();
 
   await page.locator('[data-a="tests"]').click();
-  await expect(page.locator('.aw-form-subject')).toHaveCount(3);
+  await expect(page.locator('.aw-form-subject')).toHaveCount(4);
+  await expect(page.locator('.aw-spelling-subject')).toHaveCount(1);
+  await expect(page.locator('[data-aw-spelling-paper="2016"]')).toHaveCount(1);
   await expect(page.locator('[data-aw-original-year]')).toHaveCount(21);
   await expect(page.locator('[data-aw-form-id]')).toHaveCount(0);
   const english=page.locator('.aw-form-subject').filter({hasText:'English'});
