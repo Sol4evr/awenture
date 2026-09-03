@@ -16,4 +16,7 @@ jobs:
       - run: npm install --no-audit --no-fund
       - run: npm run test:release
       - run: npx playwright install --with-deps webkit chromium
-      - run: npm run test:browser
+      - name: Run v6.16.1 browser checks
+        run: npx playwright test tests/v6161.spec.mjs
+      - name: Run full browser regression suite
+        run: npm run test:browser
