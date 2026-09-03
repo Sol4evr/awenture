@@ -13,13 +13,14 @@
   },
   "deployedDerivative": {
     "name": "2016 Spelling Year 2- Section B with Answer.pdf",
-    "bytes": 73835,
-    "sha256": "6d0007f7f633e7b4dbaec521a48f39142fb5985a540b306e391b2f071ce5097c",
+    "bytes": 40955,
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
     "pages": 3,
     "sourcePages": [2,3,5],
     "questionPages": [1,2],
     "analysisPages": [3],
-    "representation": "grayscale raster derivative preserving the supplied source page artwork"
+    "representation": "compact grayscale raster derivative preserving the supplied source page artwork",
+    "transport": "checked-in base64 payload reconstructed and fingerprint-verified at build time"
   },
   "test": {
     "section": "B",
