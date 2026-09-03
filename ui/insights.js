@@ -53,10 +53,11 @@ function spectrumRow(r,rank){
 }
 function subjectSummary(rows){return `<div class="aw-subject-spectrum">${subjectRows(rows).map((r,i)=>spectrumRow({...r,skill:r.subject},i+1)).join('')}</div>`}
 function subskillSections(rows){
+  const icons={English:'Aa',Mathematics:'×',Science:'✦'};
   return SUBJECTS.map(subject=>{
     const ranked=rows.filter(r=>r.subject===subject).sort((a,b)=>{if(a.accuracy==null&&b.accuracy!=null)return 1;if(a.accuracy!=null&&b.accuracy==null)return-1;return (b.accuracy??0)-(a.accuracy??0)||(b.a-a.a)||a.skill.localeCompare(b.skill)});
-    const attempted=ranked.filter(x=>x.a).length,a=ranked.reduce((n,x)=>n+x.a,0),c=ranked.reduce((n,x)=>n+x.c,0),label=subject==='Mathematics'?'Maths':subject;
-    return `<details class="aw-subject-panel aw-subskill-details" data-parent-subskills="${esc(subject)}"><summary role="button" aria-expanded="false"><span><b>${esc(label)}</b><small>${attempted}/${ranked.length} attempted · ${scoreLabel(a,c)}</small></span><i aria-hidden="true">⌄</i></summary><div class="aw-subskill-spectrum">${ranked.map((r,i)=>spectrumRow(r,i+1)).join('')}</div></details>`;
+    const attempted=ranked.filter(x=>x.a).length,a=ranked.reduce((n,x)=>n+x.a,0),c=ranked.reduce((n,x)=>n+x.c,0),label=subject==='Mathematics'?'Maths':subject,tone=subject.toLowerCase();
+    return `<details class="aw-subject-panel aw-subskill-details" data-parent-subskills="${esc(subject)}" data-subject-tone="${tone}"><summary role="button" aria-expanded="false"><span class="aw-subject-summary-leading"><span class="aw-subject-icon" aria-hidden="true">${icons[subject]}</span><span class="aw-subject-copy"><b>${esc(label)}</b><small>${attempted} of ${ranked.length} subskills explored</small></span></span><strong class="aw-subject-score" aria-label="${esc(label)} accuracy ${scoreLabel(a,c)}">${scoreLabel(a,c)}</strong><span class="aw-subject-chevron" aria-hidden="true">⌄</span></summary><div class="aw-subskill-spectrum">${ranked.map((r,i)=>spectrumRow(r,i+1)).join('')}</div></details>`;
   }).join('');
 }
 function unseenBySubject(p){const seen=new Set(Array.isArray(p.seenIds)?p.seenIds:[]),b=bank();return Object.fromEntries(SUBJECTS.map(s=>[s,b.filter(q=>q.subject===s&&!seen.has(q.id)).length]))}
