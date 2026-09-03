@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');
+const spelling=fs.readFileSync(new URL('../dist/spelling.js',import.meta.url),'utf8');
+for(const x of ['content="6.16.0',"RELEASE='6.16.0'",'/spelling.js?v=61600'])if(!html.includes(x))throw new Error('v6.16.0 missing '+x);
+for(const x of ['Weekend program table with day and activities columns','Story time — 10:00','Gardening — 9:30','Chess — 11:30'])if(!html.includes(x))throw new Error('v6.15.3 visual baseline regression '+x);
+for(const id of ['M09','M18','M19','M23','M26','M31'])if(!html.includes("'"+id+"'"))throw new Error('Unsafe visual quarantine missing '+id);
+for(const x of ["q.subject==='Spelling'",'spelling.length===3','...out.slice(0,12),...spelling.slice(0,3)'])if(!html.includes(x))throw new Error('15-question spelling mix missing '+x);
+for(const id of ['SP01','SP02','SP03','SP04','SP05','SP06','SP07','SP08','SP09','SP10','SP11','SP12','SP13','SP14','SP15','SP16','SP17','SP18'])if(!html.includes(`\"id\":\"${id}\"`))throw new Error('Generated spelling question missing '+id);
+for(const x of ["year:2016","assetReady:false","dailyGeneratedCount:3","targetDailyQuestionCount:15"])if(!spelling.includes(x))throw new Error('Spelling module contract missing '+x);
+if(!spelling.includes('Source PDF asset required before activation'))throw new Error('Original spelling paper must remain safely locked without source bytes');
+console.log(JSON.stringify({release:'6.16.0',baseline:'v6.15.3-preserved',generatedSpellingQuestions:18,dailyQuestionCount:15,dailyMix:{English:4,Mathematics:4,Science:4,Spelling:3},originalSpelling2016:'REGISTERED_ASSET_PENDING'}));
