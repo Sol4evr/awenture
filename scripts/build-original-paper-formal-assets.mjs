@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { PDFDocument, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
@@ -7,11 +8,29 @@ import { createCanvas } from '@napi-rs/canvas';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const runtime=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.13.1-original-paper-runtime.json'),'utf8'));
-const folderFor={English:'english',Mathematics:'mathematics',Science:'science'};
+const folderFor={English:'english',Mathematics:'mathematics',Science:'science',Spelling:'spelling'};
 const sourceRoot=path.join(root,'source','original-icas','year2');
 const outputRoot=path.join(root,'dist','original-icas','year2');
 const wasmUrl=pathToFileURL(path.join(root,'node_modules','pdfjs-dist','wasm')+path.sep).href;
 const forceRasterPapers=new Set(['English|2017']);
+
+// v6.16.1: reconstruct the authorised compact Section B derivative from checked-in payload.
+// The payload is only a transport form for Git; the learner runtime receives an ordinary PDF.
+const spellingMetaPath=path.join(root,'source','spelling','year2','2016-section-b-formal.json');
+const spellingPayloadDir=path.join(root,'source','spelling','year2','2016-section-b-payload');
+if(!fs.existsSync(spellingMetaPath)||!fs.existsSync(spellingPayloadDir))throw new Error('Missing 2016 Spelling Section B source payload');
+const spellingMeta=JSON.parse(fs.readFileSync(spellingMetaPath,'utf8'));
+const spellingParts=fs.readdirSync(spellingPayloadDir).filter(n=>/^part\d+\.b64$/i.test(n)).sort();
+if(!spellingParts.length)throw new Error('No 2016 Spelling Section B payload parts found');
+const spellingBytes=Buffer.from(spellingParts.map(n=>fs.readFileSync(path.join(spellingPayloadDir,n),'utf8').trim()).join(''),'base64');
+const spellingDigest=crypto.createHash('sha256').update(spellingBytes).digest('hex');
+if(spellingBytes.length!==spellingMeta.deployedDerivative.bytes)throw new Error(`Spelling derivative byte-size mismatch ${spellingBytes.length}/${spellingMeta.deployedDerivative.bytes}`);
+if(spellingDigest!==spellingMeta.deployedDerivative.sha256)throw new Error(`Spelling derivative SHA-256 mismatch ${spellingDigest}`);
+const spellingSourceDir=path.join(sourceRoot,'spelling');
+fs.mkdirSync(spellingSourceDir,{recursive:true});
+const spellingSourceFile=path.join(spellingSourceDir,'2016 Spelling Year 2- Section B with Answer.pdf');
+fs.writeFileSync(spellingSourceFile,spellingBytes);
+
 const orientationAudit=JSON.parse(fs.readFileSync(path.join(root,'quality/original-paper-orientation-v6.15.2.json'),'utf8'));
 const orientationByPaper=new Map(orientationAudit.papers.map(p=>[p.subject+'|'+p.year,p.correctionDegrees]));
 const runtimeKeys=runtime.papers.map(p=>p.subject+'|'+p.year);
@@ -48,4 +67,4 @@ for(const paper of runtime.papers){
   if(vector)vectorPapers++;else rasterFallbackPapers++;
   if(paper.answerReference){const indexes=Array.from({length:pageCount-paper.questionEndPage},(_,i)=>paper.questionEndPage+i);if(indexes.length){const title=`${paper.year} ICAS Year 2 ${paper.subject} — post-submission reference`;const aBytes=vector?await vectorDerivative(src,indexes,title,orientationCorrection):await rasterDerivative(bytes,indexes,title,orientationCorrection);fs.writeFileSync(path.join(outDir,`${paper.year}-answers.pdf`),aBytes);answerAssets++}}
 }
-console.log(JSON.stringify({historicalFormalAssets:'PASS',questionAssets,answerAssets,vectorPapers,rasterFallbackPapers,forcedRaster:[...forceRasterPapers],orientationAudit:'PASS',orientationPapers:orientationAudit.papers.length,orientationCorrections:orientationAudit.papers.filter(p=>p.correctionDegrees).map(p=>p.subject+'|'+p.year+'|'+p.correctionDegrees),rawAnswerPagesExcludedFromTimedFiles:true}));
+console.log(JSON.stringify({historicalFormalAssets:'PASS',questionAssets,answerAssets,vectorPapers,rasterFallbackPapers,forcedRaster:[...forceRasterPapers],orientationAudit:'PASS',orientationPapers:orientationAudit.papers.length,orientationCorrections:orientationAudit.papers.filter(p=>p.correctionDegrees).map(p=>p.subject+'|'+p.year+'|'+p.correctionDegrees),spellingSectionBPayload:'VERIFIED_RECONSTRUCTED',rawAnswerPagesExcludedFromTimedFiles:true}));
