@@ -1,0 +1,22 @@
+{
+  "source": "2016 ICAS Spelling Introductory Paper",
+  "region": "Australia",
+  "yearLevel": "Year 2",
+  "paperYear": 2016,
+  "questionCount": 35,
+  "calibrationUse": "AWenture-generated spelling question difficulty, construction families and skill taxonomy only",
+  "visibleBookletQuestions": "16-30",
+  "analysisPageCoverage": "1-35",
+  "observedSkillFamilies": [
+    "dictation",
+    "vowel digraphs and common spelling patterns",
+    "consonant digraphs",
+    "suffixes and endings",
+    "plural forms",
+    "homophones",
+    "rules and conventions",
+    "proofreading"
+  ],
+  "audioPolicy": "No original ICAS audio was supplied. AWenture uses browser speech synthesis for newly generated, source-calibrated questions and does not represent the generated audio as original ICAS content.",
+  "release": "6.16.0"
+}
