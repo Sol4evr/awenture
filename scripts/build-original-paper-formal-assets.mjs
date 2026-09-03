@@ -15,14 +15,14 @@ const wasmUrl=pathToFileURL(path.join(root,'node_modules','pdfjs-dist','wasm')+p
 const forceRasterPapers=new Set(['English|2017']);
 
 // v6.16.1: reconstruct the authorised compact Section B derivative from checked-in payload.
-// The payload is only a transport form for Git; the learner runtime receives an ordinary PDF.
+// Each part is independently base64 encoded, so decode each part before concatenating bytes.
 const spellingMetaPath=path.join(root,'source','spelling','year2','2016-section-b-formal.json');
 const spellingPayloadDir=path.join(root,'source','spelling','year2','2016-section-b-payload');
 if(!fs.existsSync(spellingMetaPath)||!fs.existsSync(spellingPayloadDir))throw new Error('Missing 2016 Spelling Section B source payload');
 const spellingMeta=JSON.parse(fs.readFileSync(spellingMetaPath,'utf8'));
 const spellingParts=fs.readdirSync(spellingPayloadDir).filter(n=>/^part\d+\.b64$/i.test(n)).sort();
 if(!spellingParts.length)throw new Error('No 2016 Spelling Section B payload parts found');
-const spellingBytes=Buffer.from(spellingParts.map(n=>fs.readFileSync(path.join(spellingPayloadDir,n),'utf8').trim()).join(''),'base64');
+const spellingBytes=Buffer.concat(spellingParts.map(n=>Buffer.from(fs.readFileSync(path.join(spellingPayloadDir,n),'utf8').trim(),'base64')));
 const spellingDigest=crypto.createHash('sha256').update(spellingBytes).digest('hex');
 if(spellingBytes.length!==spellingMeta.deployedDerivative.bytes)throw new Error(`Spelling derivative byte-size mismatch ${spellingBytes.length}/${spellingMeta.deployedDerivative.bytes}`);
 if(spellingDigest!==spellingMeta.deployedDerivative.sha256)throw new Error(`Spelling derivative SHA-256 mismatch ${spellingDigest}`);
