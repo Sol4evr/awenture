@@ -1,0 +1,39 @@
+{
+  "release": "6.16.1",
+  "source": "2016 ICAS Spelling Introductory Paper",
+  "region": "Australia",
+  "yearLevel": "Year 2",
+  "paperYear": 2016,
+  "formalMode": "written-section-only",
+  "originalUpload": {
+    "name": "2016 Spelling Year 2- With   Answer.pdf",
+    "bytes": 1805395,
+    "sha256": "ed353151d14ef1d59534e63633e600e1e6ef03a1965502e2216b22938477a06e",
+    "pages": 5
+  },
+  "deployedDerivative": {
+    "name": "2016 Spelling Year 2- Section B with Answer.pdf",
+    "bytes": 73835,
+    "sha256": "6d0007f7f633e7b4dbaec521a48f39142fb5985a540b306e391b2f071ce5097c",
+    "pages": 3,
+    "sourcePages": [2,3,5],
+    "questionPages": [1,2],
+    "analysisPages": [3],
+    "representation": "grayscale raster derivative preserving the supplied source page artwork"
+  },
+  "test": {
+    "section": "B",
+    "originalQuestionStart": 16,
+    "originalQuestionEnd": 30,
+    "questionCount": 15,
+    "minutes": 25,
+    "answers": ["D","A","B","B","C","B","D","C","A","D","A","C","C","B","A"]
+  },
+  "exclusions": {
+    "sectionA": "Not included because the listening/dictation material was not supplied.",
+    "coverPage": "Excluded from the timed derivative because it describes the unavailable full 35-question assessment.",
+    "acknowledgementPage": "Excluded from the timed derivative.",
+    "fabricatedQuestions": false,
+    "fabricatedAudio": false
+  }
+}
