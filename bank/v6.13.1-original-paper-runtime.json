@@ -4,7 +4,8 @@
   "conditions": {
     "English": {"questions":35,"minutes":35,"folder":"english"},
     "Mathematics": {"questions":30,"minutes":35,"folder":"mathematics"},
-    "Science": {"questions":30,"minutes":45,"folder":"science"}
+    "Science": {"questions":30,"minutes":45,"folder":"science"},
+    "Spelling": {"questions":15,"minutes":25,"folder":"spelling"}
   },
   "papers": [
     {"subject":"English","year":2013,"questionEndPage":18,"scoring":"verified","answerReference":true,"answers":["D","D","A","B","A","D","D","C","D","C","A","D","C","A","B","B","D","C","C","C","C","D","B","B","C","B","B","D","A","C","B","C","C","B","A"]},
@@ -29,6 +30,8 @@
     {"subject":"Science","year":2015,"questionEndPage":15,"scoring":"verified","answerReference":true,"answers":["A","C","A","B","D","D","B","D","C","C","C","B","B","A","B","C","B","C","A","D","A","A","A","D","D","D","B","D","A","C"]},
     {"subject":"Science","year":2016,"questionEndPage":15,"scoring":"source-review","answerReference":true},
     {"subject":"Science","year":2017,"questionEndPage":15,"scoring":"source-review","answerReference":true},
-    {"subject":"Science","year":2018,"questionEndPage":15,"scoring":"source-review","answerReference":true}
+    {"subject":"Science","year":2018,"questionEndPage":15,"scoring":"source-review","answerReference":true},
+
+    {"subject":"Spelling","year":2016,"questionEndPage":2,"scoring":"verified","answerReference":true,"questionNumberStart":16,"section":"B","answers":["D","A","B","B","C","B","D","C","A","D","A","C","C","B","A"]}
   ]
 }
