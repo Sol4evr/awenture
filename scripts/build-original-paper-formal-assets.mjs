@@ -32,9 +32,11 @@ const spellingSourceFile=path.join(spellingSourceDir,'2016 Spelling Year 2- Sect
 fs.writeFileSync(spellingSourceFile,spellingBytes);
 
 const orientationAudit=JSON.parse(fs.readFileSync(path.join(root,'quality/original-paper-orientation-v6.15.2.json'),'utf8'));
-const orientationByPaper=new Map(orientationAudit.papers.map(p=>[p.subject+'|'+p.year,p.correctionDegrees]));
+const spellingOrientationAudit=JSON.parse(fs.readFileSync(path.join(root,'quality/spelling-paper-orientation-v6.16.1.json'),'utf8'));
+const orientationPapers=[...orientationAudit.papers,...spellingOrientationAudit.papers];
+const orientationByPaper=new Map(orientationPapers.map(p=>[p.subject+'|'+p.year,p.correctionDegrees]));
 const runtimeKeys=runtime.papers.map(p=>p.subject+'|'+p.year);
-if(orientationAudit.release!=='6.15.2'||orientationAudit.papers.length!==runtimeKeys.length||runtimeKeys.some(k=>!orientationByPaper.has(k)))throw new Error('Historical-paper orientation audit does not cover the complete authorised runtime');
+if(orientationAudit.release!=='6.15.2'||spellingOrientationAudit.release!=='6.16.1'||orientationPapers.length!==runtimeKeys.length||runtimeKeys.some(k=>!orientationByPaper.has(k)))throw new Error('Historical-paper orientation audit does not cover the complete authorised runtime');
 for(const [key,rotation] of orientationByPaper){if(!runtimeKeys.includes(key)||![0,90,180,270].includes(rotation))throw new Error('Invalid historical-paper orientation contract: '+key+' '+rotation)};
 
 let questionAssets=0,answerAssets=0,vectorPapers=0,rasterFallbackPapers=0;
@@ -67,4 +69,4 @@ for(const paper of runtime.papers){
   if(vector)vectorPapers++;else rasterFallbackPapers++;
   if(paper.answerReference){const indexes=Array.from({length:pageCount-paper.questionEndPage},(_,i)=>paper.questionEndPage+i);if(indexes.length){const title=`${paper.year} ICAS Year 2 ${paper.subject} — post-submission reference`;const aBytes=vector?await vectorDerivative(src,indexes,title,orientationCorrection):await rasterDerivative(bytes,indexes,title,orientationCorrection);fs.writeFileSync(path.join(outDir,`${paper.year}-answers.pdf`),aBytes);answerAssets++}}
 }
-console.log(JSON.stringify({historicalFormalAssets:'PASS',questionAssets,answerAssets,vectorPapers,rasterFallbackPapers,forcedRaster:[...forceRasterPapers],orientationAudit:'PASS',orientationPapers:orientationAudit.papers.length,orientationCorrections:orientationAudit.papers.filter(p=>p.correctionDegrees).map(p=>p.subject+'|'+p.year+'|'+p.correctionDegrees),spellingSectionBPayload:'VERIFIED_RECONSTRUCTED',rawAnswerPagesExcludedFromTimedFiles:true}));
+console.log(JSON.stringify({historicalFormalAssets:'PASS',questionAssets,answerAssets,vectorPapers,rasterFallbackPapers,forcedRaster:[...forceRasterPapers],orientationAudit:'PASS',orientationPapers:orientationPapers.length,orientationCorrections:orientationPapers.filter(p=>p.correctionDegrees).map(p=>p.subject+'|'+p.year+'|'+p.correctionDegrees),spellingSectionBPayload:'VERIFIED_RECONSTRUCTED',rawAnswerPagesExcludedFromTimedFiles:true}));
