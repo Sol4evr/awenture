@@ -10,7 +10,8 @@ test('v6.15.2 landing emblem and Parent subject accordion are polished and acces
   await page.locator('[data-a="parent"]').click();
   await expect(brand).not.toHaveClass(/aw-brand-landing/);
   const innerWidth=await logo.evaluate(el=>el.getBoundingClientRect().width);expect(innerWidth).toBeLessThan(homeWidth);
-  const panels=page.locator('.aw-subskill-details');await expect(panels).toHaveCount(3);await expect(panels.locator('.aw-subject-icon')).toHaveCount(3);await expect(panels.locator('.aw-subject-score')).toHaveCount(3);
+  const panels=page.locator('.aw-subskill-details');await expect(panels).toHaveCount(4);await expect(panels.locator('.aw-subject-icon')).toHaveCount(4);await expect(panels.locator('.aw-subject-score')).toHaveCount(4);
+  await expect(page.locator('[data-parent-subskills="Spelling"]')).toBeVisible();
   const first=panels.nth(0),second=panels.nth(1);await first.locator('summary').click();await expect(first).toHaveAttribute('open','');await second.locator('summary').click();await expect(second).toHaveAttribute('open','');await expect(first).not.toHaveAttribute('open','');await expect(first.locator('summary')).toHaveAttribute('aria-expanded','false');await expect(second.locator('summary')).toHaveAttribute('aria-expanded','true');
 });
 
