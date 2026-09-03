@@ -1,0 +1,14 @@
+{
+  "release":"6.16.1",
+  "mode":"supplemental-historical-paper-display-orientation",
+  "papers":[
+    {
+      "subject":"Spelling",
+      "year":2016,
+      "sourceSha256":"6d0007f7f633e7b4dbaec521a48f39142fb5985a540b306e391b2f071ce5097c",
+      "sourcePages":3,
+      "correctionDegrees":0,
+      "result":"upright-no-correction-section-b"
+    }
+  ]
+}
