@@ -15,10 +15,10 @@ test('v6.15 dynamic Practice, static subject tests, Parent collapse and release 
   expect(await page.evaluate(()=>window.AW_BANK.filter(q=>q.id==='QF-E-V615TEST').length)).toBe(1);
 
   await page.locator('[data-a="parent"]').click();
-  await expect(page.locator('.aw-subskill-details')).toHaveCount(3);
+  await expect(page.locator('.aw-subskill-details')).toHaveCount(4);
   await expect(page.locator('.aw-subskill-details[open]')).toHaveCount(0);
   await expect(page.getByText('Subskill performance',{exact:true})).toHaveCount(1);
-  for(const subject of ['English','Maths','Science'])await expect(page.locator('.aw-subskill-details>summary').filter({hasText:subject})).toHaveCount(1);
+  for(const subject of ['English','Maths','Science','Spelling'])await expect(page.locator('.aw-subskill-details>summary').filter({hasText:subject})).toHaveCount(1);
   const first=page.locator('.aw-subskill-details').first(),summary=first.locator('summary');
   await expect(summary).toHaveAttribute('aria-expanded','false');await summary.click();await expect(summary).toHaveAttribute('aria-expanded','true');
   await page.locator('[data-aw-topup]').click();
@@ -29,7 +29,7 @@ test('v6.15 dynamic Practice, static subject tests, Parent collapse and release 
   await page.evaluate(()=>{const p=JSON.parse(localStorage.getItem('oc-ready-progress-v1')||'{}');p.seenIds=window.AW_BANK.filter(q=>q.subject==='English'&&!String(q.id).startsWith('QF-')).map(q=>q.id);localStorage.setItem('oc-ready-progress-v1',JSON.stringify(p))});
   await page.reload();await expect.poll(()=>page.evaluate(()=>window.__AW_RUNTIME_HEALTH?.dynamicBank||0)).toBe(1);
   await page.locator('[data-a="daily"]').click();await expect(page.locator('.test-player')).toBeVisible();
-  const dailyStems=await page.evaluate(()=>{const out=[];for(let i=0;i<12;i++){document.querySelector(`[data-q="${i}"]`)?.click();out.push(document.querySelector('.question-pane .q')?.textContent||'')}return out});
+  const dailyStems=await page.evaluate(()=>{const out=[];for(let i=0;i<15;i++){document.querySelector(`[data-q="${i}"]`)?.click();out.push(document.querySelector('.question-pane .q')?.textContent||'')}return out});
   expect(dailyStems).toContain(dynamic.question);
   await page.locator('.exitbtn').click();await page.locator('[data-a="tests"]').click();
   await page.locator('[data-s="English"]').click();await expect(page.locator('.test-player')).toBeVisible();
