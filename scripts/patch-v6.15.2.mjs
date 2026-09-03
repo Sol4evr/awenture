@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const file=path.join(root,'dist/index.html');
+let html=fs.readFileSync(file,'utf8').replaceAll('6.15.1','6.15.2').replaceAll('61510','61520');
+for(const f of ['brand.css','brand.js','v615.css','v615-parent.js','insights.js'])fs.copyFileSync(path.join(root,'ui',f),path.join(root,'dist',f));
+for(const required of ['aw-brand-1.3','aw-brand-landing','awenture-logo-192.png?v=61520'])if(!fs.readFileSync(path.join(root,'ui/brand.js'),'utf8').includes(required))throw new Error('Landing brand runtime missing: '+required);
+for(const required of ['singleOpenAccordion','visualSubjectCues'])if(!fs.readFileSync(path.join(root,'ui/v615-parent.js'),'utf8').includes(required))throw new Error('Parent accordion runtime missing: '+required);
+fs.writeFileSync(file,html);
+console.log(JSON.stringify({release:'6.15.2',landingBrand:'LARGER_EMBLEM',parentSubskills:'SUBJECT_ACCORDION',paperOrientation:'AUDITED_21'}));
