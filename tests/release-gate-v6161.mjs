@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+const html=fs.readFileSync('dist/index.html','utf8');
+const formal=fs.readFileSync('dist/formal-tests.js','utf8');
+const css=fs.readFileSync('dist/home-insights.css','utf8');
+const insights=fs.readFileSync('dist/insights.js','utf8');
+const fail=(m)=>{throw new Error(m)};
+if(!html.includes('awenture-release" content="6.16.1"'))fail('release marker is not v6.16.1');
+if(!formal.includes('aw-spelling-subject')||!formal.includes('data-aw-spelling-paper="2016"'))fail('Spelling subject / 2016 source card missing');
+if(!formal.includes('asset restore pending'))fail('2016 spelling source state must be explicit while binary is not bundled');
+if(!css.includes('@keyframes aw-subskill-roll')||!css.includes('.aw-roll-label'))fail('rolling subskill CSS missing');
+if(!insights.includes('enableRollingSubskills')||!insights.includes('--aw-roll-distance'))fail('rolling subskill runtime missing');
+console.log(JSON.stringify({release:'6.16.1',spellingSubjectCard:'PASS',spelling2016Card:'PASS',rollingSubskillLabels:'PASS'}));
