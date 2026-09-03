@@ -37,4 +37,19 @@ if(!html.includes(dailyMarker))throw new Error('Daily Practice completion marker
 html=html.replace(dailyMarker,dailyReplacement);
 html=html.replaceAll("Object.fromEntries(SUB.map(s=>[s,BANK.filter(q=>q.subject===s).length]))","Object.fromEntries([...SUB,'Spelling'].map(s=>[s,BANK.filter(q=>q.subject===s).length]))");
 fs.writeFileSync(file,html);
-console.log(JSON.stringify({release:'6.16.0',spellingBank:spelling.length,dailyQuestionCount:15,dailyMix:{English:4,Mathematics:4,Science:4,Spelling:3},audioMode:'WORD_SENTENCE_WORD',tts:'BROWSER_SPEECH_SYNTHESIS',provenance:'AWENTURE_GENERATED_ICAS_Y2_CALIBRATED'}));
+
+const insightsFile=path.join(root,'dist/insights.js');
+let insights=fs.readFileSync(insightsFile,'utf8');
+const insightReplacements=[
+  ["const SUBJECTS=['English','Mathematics','Science'];","const SUBJECTS=['English','Mathematics','Science','Spelling'];\nconst TOPUP_SUBJECTS=['English','Mathematics','Science'];"],
+  ["const key=SUBJECTS.map(s=>unseen[s]).join('-');","const key=TOPUP_SUBJECTS.map(s=>unseen[s]).join('-');"],
+  ["const icons={English:'Aa',Mathematics:'×',Science:'✦'};","const icons={English:'Aa',Mathematics:'×',Science:'✦',Spelling:'🔊'};"],
+  ["const deficits=Object.fromEntries(SUBJECTS.map(s=>[s,Math.max(0,TOPUP_TARGET-unseen[s])]));","const deficits=Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,Math.max(0,TOPUP_TARGET-unseen[s])]));"],
+  ["const requested=Object.values(deficits).some(Boolean)?deficits:Object.fromEntries(SUBJECTS.map(s=>[s,10]));","const requested=Object.values(deficits).some(Boolean)?deficits:Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,10]));"],
+  ["weakest:Object.fromEntries(SUBJECTS.map(s=>[s,weakest(rows,s)]))","weakest:Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,weakest(rows,s)]))"],
+  ["focusSubskills:Object.fromEntries(SUBJECTS.map(s=>[s,req.weakest[s].map(x=>x.skill)]))","focusSubskills:Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,req.weakest[s].map(x=>x.skill)]))"],
+  ["minimum=Math.min(...Object.values(unseen))","minimum=Math.min(...TOPUP_SUBJECTS.map(s=>unseen[s]))"]
+];
+for(const [from,to] of insightReplacements){if(!insights.includes(from))throw new Error('Parent spelling insight marker not found: '+from);insights=insights.replace(from,to)}
+fs.writeFileSync(insightsFile,insights);
+console.log(JSON.stringify({release:'6.16.0',spellingBank:spelling.length,dailyQuestionCount:15,dailyMix:{English:4,Mathematics:4,Science:4,Spelling:3},audioMode:'WORD_SENTENCE_WORD',tts:'BROWSER_SPEECH_SYNTHESIS',parentInsights:'SPELLING_INCLUDED',topupSubjects:['English','Mathematics','Science'],provenance:'AWENTURE_GENERATED_ICAS_Y2_CALIBRATED'}));
