@@ -4,10 +4,12 @@ test('learning progression renders one functional timeline and starts at ICAS Y2
   await page.goto('/');
   await expect(page.locator('.aw-functional-path')).toHaveCount(1);
   const steps=page.locator('.aw-functional-path .aw-stage-step');
-  await expect(steps).toHaveCount(4);
+  await expect(steps).toHaveCount(5);
   await expect(steps.nth(0)).toContainText('ICAS Year 2');
   await expect(steps.nth(0)).toHaveClass(/current/);
   await expect(steps.nth(1)).toBeDisabled();
+  await expect(steps.nth(3)).toContainText('ICAS Year 4');
+  await expect(steps.nth(4)).toContainText('Opportunity Class');
 });
 
 test('Parent QA cannot unlock ICAS Y3',async({page})=>{
