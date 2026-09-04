@@ -16,12 +16,17 @@ ok(insights.includes('aw-functional-path'),'functional learning path UI missing'
 ok(formal.includes('paperVisible'),'historical paper progression gate missing');
 ok(formal.includes('data-learning-stage'),'historical paper stage metadata missing');
 ok(formal.includes("window.addEventListener('awenture:stage-change',()=>sync(true))"),'historical papers do not refresh on stage change');
-ok(cfg.stages.map(s=>s.id).join('|')==='icas-y2|icas-y3|naplan-y3|oc-prep','unexpected stage order');
+ok(cfg.stages.map(s=>s.id).join('|')==='icas-y2|icas-y3|naplan-y3|icas-y4|oc-prep','unexpected stage order');
 const y3=cfg.stages.find(s=>s.id==='icas-y3');
+const y4=cfg.stages.find(s=>s.id==='icas-y4');
+const oc=cfg.stages.find(s=>s.id==='oc-prep');
 ok(y3.unlock.type==='mastery-gate','ICAS Y3 must use mastery gate');
 ok(y3.unlock.minOverallAccuracy===0.82,'ICAS Y3 mastery threshold changed');
 ok(y3.unlock.minFullPaperAttempts===2,'ICAS Y3 full-paper threshold changed');
+ok(y4?.unlock?.requiresStage==='naplan-y3','ICAS Y4 must unlock after NAPLAN Y3');
+ok(oc?.unlock?.requiresStage==='icas-y4','OC must unlock after ICAS Y4');
 ok(cfg.practiceMix['icas-y3']['icas-y2']===0.7&&cfg.practiceMix['icas-y3']['icas-y3']===0.3,'ICAS Y3 transition mix must start 70/30');
+ok(cfg.practiceMix['icas-y4']['icas-y4']===0.5,'ICAS Y4 transition mix must include 50% Y4 content');
 ok(cfg.principles.includes('historical papers are never mixed into generated Daily Practice'),'historical/generated isolation principle missing');
 ok(integrity.release==='6.17.0','final integrity manifest release is stale');
 ok(integrity.baseline==='hardened-v6.16.2','v6.17.0 must retain hardened v6.16.2 as parent baseline');
