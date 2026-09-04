@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+const html=fs.readFileSync('dist/index.html','utf8');
+const formal=fs.readFileSync('dist/formal-tests.js','utf8');
+const css=fs.readFileSync('dist/home-insights.css','utf8');
+const insights=fs.readFileSync('dist/insights.js','utf8');
+const runtime=JSON.parse(fs.readFileSync('bank/v6.13.1-original-paper-runtime.json','utf8'));
+const fail=(m)=>{throw new Error(m)};
+if(!html.includes('awenture-release" content="6.16.1"'))fail('release marker is not v6.16.1');
+if(!formal.includes("const SUBJECTS=['English','Mathematics','Science','Spelling']"))fail('Spelling is not enabled in historical Subject tests');
+if(!formal.includes('aw-spelling-subject')||!formal.includes('Section B only.'))fail('Spelling Section B presentation missing');
+if(formal.includes('asset restore pending')||formal.includes('original PDF binary is not yet bundled'))fail('stale Spelling placeholder remains');
+const spelling=runtime.papers.find(p=>p.subject==='Spelling'&&p.year===2016);
+if(!spelling||runtime.conditions?.Spelling?.questions!==15||runtime.conditions?.Spelling?.minutes!==25)fail('2016 Spelling runtime condition missing');
+if(spelling.questionEndPage!==2||spelling.questionNumberStart!==16||spelling.answers?.length!==15||spelling.scoring!=='verified')fail('2016 Spelling Section B runtime contract invalid');
+for(const asset of ['dist/original-icas/year2/spelling/2016-questions.pdf','dist/original-icas/year2/spelling/2016-answers.pdf'])if(!fs.existsSync(asset)||fs.statSync(asset).size<1000)fail('Spelling formal asset missing: '+asset);
+if(!css.includes('@keyframes aw-subskill-roll')||!css.includes('.aw-roll-label'))fail('rolling subskill CSS missing');
+if(!insights.includes('enableRollingSubskills')||!insights.includes('--aw-roll-distance'))fail('rolling subskill runtime missing');
+console.log(JSON.stringify({release:'6.16.1',spelling2016SectionB:'PASS',questions:15,minutes:25,originalNumbers:'16-30',formalAssets:'PASS',rollingSubskillLabels:'PASS'}));
