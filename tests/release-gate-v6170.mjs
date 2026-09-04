@@ -6,6 +6,7 @@ const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
 const insights=fs.readFileSync(path.join(dist,'insights.js'),'utf8');
 const formal=fs.readFileSync(path.join(dist,'formal-tests.js'),'utf8');
 const cfg=JSON.parse(fs.readFileSync(path.join(root,'progression/learning-progression-v1.json'),'utf8'));
+const integrity=JSON.parse(fs.readFileSync(path.join(dist,'hardened-integrity.json'),'utf8'));
 function ok(v,m){if(!v)throw new Error(m)}
 ok(html.includes('6.17.0'),'release marker 6.17.0 missing');
 ok(html.includes('AW_PROGRESSION'),'progression runtime missing');
@@ -22,4 +23,8 @@ ok(y3.unlock.minOverallAccuracy===0.82,'ICAS Y3 mastery threshold changed');
 ok(y3.unlock.minFullPaperAttempts===2,'ICAS Y3 full-paper threshold changed');
 ok(cfg.practiceMix['icas-y3']['icas-y2']===0.7&&cfg.practiceMix['icas-y3']['icas-y3']===0.3,'ICAS Y3 transition mix must start 70/30');
 ok(cfg.principles.includes('historical papers are never mixed into generated Daily Practice'),'historical/generated isolation principle missing');
-console.log(JSON.stringify({release:'6.17.0',gate:'learning-progression',stages:cfg.stages.length,daily:'stage-weighted',papers:'stage-gated',status:'PASS'}));
+ok(integrity.release==='6.17.0','final integrity manifest release is stale');
+ok(integrity.baseline==='hardened-v6.16.2','v6.17.0 must retain hardened v6.16.2 as parent baseline');
+ok(integrity.releaseContract==='functional-learning-progression-v1','progression integrity contract missing');
+for(const f of ['index.html','insights.js','formal-tests.js'])ok(integrity.files?.[f]?.sha256,'final integrity manifest missing '+f);
+console.log(JSON.stringify({release:'6.17.0',gate:'learning-progression',stages:cfg.stages.length,daily:'stage-weighted',papers:'stage-gated',integrity:'FINAL',status:'PASS'}));
