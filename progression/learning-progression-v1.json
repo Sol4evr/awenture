@@ -39,9 +39,9 @@
       }
     },
     {
-      "id": "oc-prep",
-      "label": "Opportunity Class",
-      "framework": "OC",
+      "id": "icas-y4",
+      "label": "ICAS Year 4",
+      "framework": "ICAS",
       "yearLevel": 4,
       "status": "locked",
       "unlock": {
@@ -50,13 +50,27 @@
         "minAttempts": 80,
         "minOverallAccuracy": 0.82
       }
+    },
+    {
+      "id": "oc-prep",
+      "label": "Opportunity Class",
+      "framework": "OC",
+      "yearLevel": 4,
+      "status": "locked",
+      "unlock": {
+        "type": "stage-completion",
+        "requiresStage": "icas-y4",
+        "minAttempts": 100,
+        "minOverallAccuracy": 0.82
+      }
     }
   ],
   "practiceMix": {
     "icas-y2": {"icas-y2": 1.0},
     "icas-y3": {"icas-y2": 0.7, "icas-y3": 0.3},
     "naplan-y3": {"icas-y2": 0.25, "icas-y3": 0.25, "naplan-y3": 0.5},
-    "oc-prep": {"icas-y2": 0.1, "icas-y3": 0.15, "naplan-y3": 0.25, "oc-prep": 0.5}
+    "icas-y4": {"icas-y3": 0.2, "naplan-y3": 0.3, "icas-y4": 0.5},
+    "oc-prep": {"icas-y3": 0.1, "naplan-y3": 0.15, "icas-y4": 0.25, "oc-prep": 0.5}
   },
   "principles": [
     "unlock is based on demonstrated readiness, not calendar time",
