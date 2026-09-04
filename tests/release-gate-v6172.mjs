@@ -8,13 +8,16 @@ const integrity=JSON.parse(fs.readFileSync(path.join(dist,'hardened-integrity.js
 function ok(v,m){if(!v)throw new Error(m)}
 ok(html.includes('awenture-release" content="6.17.2"'),'release marker 6.17.2 missing');
 ok(html.includes("RELEASE='6.17.2'"),'runtime release marker 6.17.2 missing');
-ok(insights.includes("wrap.className='aw-functional-path aw-learning-line'"),'line learning-path renderer missing');
+ok(insights.includes("wrap.className='aw-functional-path'"),'functional line learning-path renderer missing');
+ok(!insights.includes("wrap.className='aw-functional-path aw-learning-line'"),'functional path must not reuse legacy aw-learning-line host class');
 ok(insights.includes("'icas-y2':'ICAS Y2'"),'compact ICAS Y2 label missing');
 ok(insights.includes("'oc-prep':'OC'"),'compact OC label missing');
+ok(insights.includes('aw-path-full-label'),'accessible full stage label missing');
 ok(insights.includes("'<span class=\"aw-path-rail\""),'learning-path rails missing');
 ok(insights.includes("(on?(cur?'●':'✓'):'🔒')"),'lock/current state marker missing');
-ok(css.includes('.aw-functional-path.aw-learning-line{display:flex;align-items:flex-start'),'horizontal line layout missing');
+ok(css.includes('.aw-functional-path{display:flex;align-items:flex-start'),'horizontal line layout missing');
 ok(css.includes('.aw-functional-path .aw-path-rail'),'path rail CSS missing');
+ok(css.includes('.aw-functional-path .aw-path-full-label'),'visually-hidden full label CSS missing');
 ok(!css.includes('.aw-stage-step{min-width:150px;display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:14px;border:1px solid rgba(0,0,0,.12);background:#fff'),'boxed button path CSS still active');
 ok(integrity.release==='6.17.2','integrity manifest release stale');
 ok(integrity.releaseContract==='functional-learning-progression-v1.2','integrity contract missing');
