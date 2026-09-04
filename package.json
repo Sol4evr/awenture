@@ -1,6 +1,6 @@
 {
   "name": "awenture",
-  "version": "6.16.2",
+  "version": "6.17.0",
   "private": true,
   "scripts": {
     "validate:bank": "node scripts/validate-expansion-v4.mjs",
@@ -8,8 +8,8 @@
     "validate:question-factory": "node tests/question-factory-contract.mjs",
     "review:quality": "node scripts/review-assessment-quality.mjs",
     "build:legacy": "npm run validate:bank && npm run validate:original-papers && npm run validate:question-factory && npm run review:quality && node scripts/build.mjs && node scripts/patch-v6.13.1.mjs && node scripts/patch-v6.13.1.2.mjs && node scripts/patch-v6.13.1.3.mjs && node scripts/patch-v6.13.1.4.mjs && node scripts/patch-v6.13.2.mjs && node scripts/patch-v6.14.0.mjs && node scripts/patch-v6.14.1.mjs && node scripts/patch-v6.15.0.mjs && node scripts/patch-v6.15.1.mjs && node scripts/patch-v6.15.2.mjs && node scripts/patch-v6.15.3.mjs && node scripts/patch-v6.16.0.mjs && node scripts/patch-v6.16.1.mjs && node scripts/build-original-paper-formal-assets.mjs",
-    "build": "npm run build:legacy && node scripts/harden-v6.16.2.mjs",
-    "test:release": "npm run build:legacy && node tests/release-gate-v6160.mjs && node tests/release-gate-v6161.mjs && node scripts/harden-v6.16.2.mjs && node tests/release-gate-v6162.mjs",
+    "build": "npm run build:legacy && node scripts/harden-v6.16.2.mjs && node scripts/patch-v6.17.0.mjs && node scripts/finalize-v6.17.0.mjs",
+    "test:release": "npm run build:legacy && node tests/release-gate-v6160.mjs && node tests/release-gate-v6161.mjs && node scripts/harden-v6.16.2.mjs && node tests/release-gate-v6162.mjs && node scripts/patch-v6.17.0.mjs && node scripts/finalize-v6.17.0.mjs && node tests/release-gate-v6170.mjs",
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
   },
