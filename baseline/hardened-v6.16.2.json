@@ -1,0 +1,34 @@
+{
+  "release": "6.16.2",
+  "baselineId": "hardened-v6.16.2",
+  "status": "immutable-release-baseline",
+  "product": "AWenture",
+  "principles": [
+    "iPad-first stability",
+    "no user-facing prototype, alpha, or legacy release labels",
+    "historical ICAS assets remain source-faithful and isolated from generated practice",
+    "Parent QA must not contaminate Alistair learning statistics",
+    "generated spelling remains separate from authentic historical spelling papers",
+    "quarantined visual questions remain excluded from Daily Practice until corrected",
+    "every production release must pass exact-head CI and exact-head Vercel preview verification"
+  ],
+  "dailyPractice": {
+    "questions": 15,
+    "mix": {"English":4,"Mathematics":4,"Science":4,"Spelling":3}
+  },
+  "historicalSpelling2016": {
+    "section": "B",
+    "questionNumbers": "16-30",
+    "questionCount": 15,
+    "minutes": 25,
+    "timedSourcePages": [2,3],
+    "postSubmitAnalysisPages": [5]
+  },
+  "quarantinedVisualIds": ["M09","M18","M19","M23","M26","M31"],
+  "runtimeHardening": {
+    "historicalPaperConfigFrozen": true,
+    "serviceWorkerCleanup": "one-time migration only",
+    "distIntegrityManifest": "hardened-integrity.json",
+    "legacyUserFacingLabelsForbidden": true
+  }
+}
