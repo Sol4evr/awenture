@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "currentStage": "icas-y2",
+  "stages": [
+    {
+      "id": "icas-y2",
+      "label": "ICAS Year 2",
+      "framework": "ICAS",
+      "yearLevel": 2,
+      "status": "active",
+      "unlock": {"type": "always"}
+    },
+    {
+      "id": "icas-y3",
+      "label": "ICAS Year 3",
+      "framework": "ICAS",
+      "yearLevel": 3,
+      "status": "locked",
+      "unlock": {
+        "type": "mastery-gate",
+        "minAttempts": 40,
+        "minDistinctSkills": 8,
+        "minOverallAccuracy": 0.82,
+        "maxWeakSkillShare": 0.25,
+        "minFullPaperAttempts": 2
+      }
+    },
+    {
+      "id": "naplan-y3",
+      "label": "NAPLAN Year 3",
+      "framework": "NAPLAN",
+      "yearLevel": 3,
+      "status": "locked",
+      "unlock": {
+        "type": "stage-completion",
+        "requiresStage": "icas-y3",
+        "minAttempts": 60,
+        "minOverallAccuracy": 0.82
+      }
+    },
+    {
+      "id": "oc-prep",
+      "label": "Opportunity Class",
+      "framework": "OC",
+      "yearLevel": 4,
+      "status": "locked",
+      "unlock": {
+        "type": "stage-completion",
+        "requiresStage": "naplan-y3",
+        "minAttempts": 80,
+        "minOverallAccuracy": 0.82
+      }
+    }
+  ],
+  "practiceMix": {
+    "icas-y2": {"icas-y2": 1.0},
+    "icas-y3": {"icas-y2": 0.7, "icas-y3": 0.3},
+    "naplan-y3": {"icas-y2": 0.25, "icas-y3": 0.25, "naplan-y3": 0.5},
+    "oc-prep": {"icas-y2": 0.1, "icas-y3": 0.15, "naplan-y3": 0.25, "oc-prep": 0.5}
+  },
+  "principles": [
+    "unlock is based on demonstrated readiness, not calendar time",
+    "older stages remain available for revision after unlock",
+    "historical papers are never mixed into generated Daily Practice",
+    "generated Daily Practice transitions gradually to the newly unlocked stage",
+    "Parent QA activity must never affect progression"
+  ]
+}
