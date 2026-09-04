@@ -34,8 +34,14 @@ const tileMarker='data-aw-original-subject="${esc(subject)}" data-aw-original-ye
 const tileReplacement='data-aw-original-subject="${esc(subject)}" data-aw-original-year="${p.year}" data-learning-stage="${esc(p.stage||p.learningStage||\'icas-y2\')}"';
 if(!formal.includes(tileMarker))throw new Error('Historical paper tile marker missing');
 formal=formal.replace(tileMarker,tileReplacement);
-formal=formal.replace("function sync(){transformTests()}","function sync(){const grid=document.querySelector('.aw-historical-grid');if(grid)grid.dataset.awHistorical='0';transformTests()}");
-formal+=`\n;(()=>{'use strict';\nfunction refresh(){document.querySelectorAll('.aw-historical-grid').forEach(g=>{g.dataset.awHistorical='0'});const h=[...document.querySelectorAll('h1')].find(x=>(x.textContent||'').trim()==='Subject tests');if(h){const grid=h.closest('.card')?.querySelector('.grid');if(grid)grid.dataset.awHistorical='0'}document.dispatchEvent(new CustomEvent('awenture:formal-refresh'))}\nwindow.addEventListener('awenture:stage-change',refresh);\n})();\n`;
+const syncMarker='function sync(){transformTests()}';
+const syncReplacement="function sync(force=false){if(force){const h1=qsa('h1').find(x=>(x.textContent||'').trim()==='Subject tests'),grid=h1?.closest('.card')&&qs('.grid',h1.closest('.card'));if(grid)grid.dataset.awHistorical='0'}transformTests()}";
+if(!formal.includes(syncMarker))throw new Error('Formal sync marker missing');
+formal=formal.replace(syncMarker,syncReplacement);
+const observerMarker="new MutationObserver(()=>queueMicrotask(sync)).observe(document.documentElement,{subtree:true,childList:true});";
+const observerReplacement="window.addEventListener('awenture:stage-change',()=>sync(true));\n"+observerMarker;
+if(!formal.includes(observerMarker))throw new Error('Formal observer marker missing');
+formal=formal.replace(observerMarker,observerReplacement);
 fs.writeFileSync(formalPath,formal);
 
 const cssPath=path.join(dist,'home-insights.css');
