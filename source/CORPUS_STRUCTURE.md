@@ -5,17 +5,16 @@ This directory separates raw/reference papers from derived calibration assets an
 ## Canonical raw-paper locations
 
 ### ICAS
-- `source/original-icas/year2/{english,mathematics,science,spelling}`
-- `source/original-icas/year3/{english,mathematics,science,spelling}`
-- `source/original-icas/year4/{english,mathematics,science,spelling}`
+- `source/original-icas/year2/` retains the existing Year 2 production corpus.
+- `source/original-icas/year3/{Digital,English,Math,Science,Spelling,Writing}`
+- `source/original-icas/year4/{Digital,English,Math,Science,Spelling,Writing}`
 
-Upload original PDFs unchanged. Historical papers remain isolated from generated Daily Practice.
+Upload original PDFs unchanged into the matching subject folder. Historical papers remain isolated from generated Daily Practice until they have been ingested, reconciled and approved.
 
 ### NAPLAN
-- Official ACARA: `source/naplan/official-acara/year{3,5,7,9}/{language-conventions,reading,numeracy,writing}`
-- NQT practice papers: `source/naplan/nqt-practice/year{3,5,7,9}`
+- `source/naplan/Year 3/`
 
-The ACARA structure is designed for the previously collected 2008–2016 paper sets, including test papers, answers, reading magazines and writing prompts. Preserve original filenames where possible.
+Year 3 is the NAPLAN stage used by the current AWenture learning progression. Upload the collected Year 3 NAPLAN PDFs here unchanged; source/type/subject classification is handled during ingestion rather than by a pre-emptive folder split.
 
 ### Opportunity Class (OC)
 - Official/sample papers: `source/oc/official/{2021,2022,2023,2024}/{reading,mathematical-reasoning,thinking-skills}`
@@ -23,9 +22,9 @@ The ACARA structure is designed for the previously collected 2008–2016 paper s
 
 Keep question papers linked to their answer keys/worked explanations through filenames; raw sources do not enter the live learner bank until reconciled and approved.
 
-## Derived spelling assets
+## Year 2 spelling cleanup
 
-`source/spelling/year2` is retained intentionally as derived calibration/formal-paper metadata. It is not a second raw-paper location. The canonical 2016 spelling PDF lives only under `source/original-icas/year2/spelling/`.
+The old top-level `source/spelling/year2` location has been retired. Its non-PDF calibration/formal-paper artifacts were moved under `source/original-icas/year2/spelling/_derived/`. The canonical raw 2016 spelling PDF remains at `source/original-icas/year2/spelling/2016 Spelling Year 2- With   Answer.pdf`.
 
 ## Upload rules
 1. Upload PDFs as binary files; do not convert, OCR, split or re-save them first.
