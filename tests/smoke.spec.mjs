@@ -19,12 +19,16 @@ test('hardened learner shell, governed top-up, historical tests and bonus isolat
   await expect(page.getByText('My Collection')).toBeVisible();
   await expect(page.locator('[data-a="progress"]')).toHaveCount(0);
   await expect(page.locator('.stats')).toHaveCount(0);
-  await expect(page.locator('.aw-learning-line')).toBeVisible();
-  for(const label of ['ICAS Y2','ICAS Y3','NAPLAN Y3','ICAS Y4','OC'])await expect(page.locator('.aw-path-label',{hasText:label})).toBeVisible();
+  const learningCard=page.locator('.card').filter({hasText:'Learning path'});
+  await expect(learningCard.locator('.aw-functional-path')).toHaveCount(1);
+  await expect(page.locator('.aw-learning-line')).toHaveCount(0);
+  await expect(learningCard.locator('.aw-stage-step')).toHaveCount(5);
+  for(const label of ['ICAS Year 2','ICAS Year 3','NAPLAN Year 3','ICAS Year 4','Opportunity Class'])await expect(learningCard.locator('.aw-stage-step',{hasText:label})).toBeVisible();
   await expect(page.getByText(/stable calibrated core/i)).toHaveCount(0);
 
   await page.locator('[data-a="parent"]').click();
   await expect(page.getByText('Parent insights')).toBeVisible();
+  await expect(page.locator('.aw-functional-path')).toHaveCount(0);
   await expect(page.getByText('Subject performance')).toBeVisible();
   await expect(page.getByText('Subskill performance').first()).toBeVisible();
   await expect(page.locator('.aw-subject-spectrum .aw-spectrum-row')).toHaveCount(4);
