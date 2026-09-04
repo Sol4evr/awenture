@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=process.cwd();
+const dist=path.join(root,'dist');
+const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
+const insights=fs.readFileSync(path.join(dist,'insights.js'),'utf8');
+const formal=fs.readFileSync(path.join(dist,'formal-tests.js'),'utf8');
+const cfg=JSON.parse(fs.readFileSync(path.join(root,'progression/learning-progression-v1.json'),'utf8'));
+function ok(v,m){if(!v)throw new Error(m)}
+ok(html.includes('6.17.0'),'release marker 6.17.0 missing');
+ok(html.includes('AW_PROGRESSION'),'progression runtime missing');
+ok(insights.includes('aw-functional-path'),'functional learning path UI missing');
+ok(formal.includes('paperVisible'),'historical paper progression gate missing');
+ok(cfg.stages.map(s=>s.id).join('|')==='icas-y2|icas-y3|naplan-y3|oc-prep','unexpected stage order');
+const y3=cfg.stages.find(s=>s.id==='icas-y3');
+ok(y3.unlock.type==='mastery-gate','ICAS Y3 must use mastery gate');
+ok(y3.unlock.minOverallAccuracy===0.82,'ICAS Y3 mastery threshold changed');
+ok(y3.unlock.minFullPaperAttempts===2,'ICAS Y3 full-paper threshold changed');
+ok(cfg.practiceMix['icas-y3']['icas-y2']===0.7&&cfg.practiceMix['icas-y3']['icas-y3']===0.3,'ICAS Y3 transition mix must start 70/30');
+ok(cfg.principles.includes('historical papers are never mixed into generated Daily Practice'),'historical/generated isolation principle missing');
+console.log(JSON.stringify({release:'6.17.0',gate:'learning-progression',stages:cfg.stages.length,status:'PASS'}));
