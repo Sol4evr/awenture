@@ -1,0 +1,20 @@
+{
+  "id": "aw-historical-corpus-v1",
+  "locked": true,
+  "sourceTreeSha": "c8d01bac7f0d3e8c141e3d409878037424c4b62d",
+  "sourcePdfCount": 602,
+  "year2RuntimePapers": 22,
+  "stageLibrary": {
+    "activated": 58,
+    "pending": 210,
+    "ignoredFuture": 334,
+    "stages": ["icas-y3", "naplan-y3", "icas-y4", "oc-prep"]
+  },
+  "policy": {
+    "ordinaryBuildsMayRebuildHistoricalAssets": false,
+    "sourceMutationRequiresNewBaselineId": true,
+    "deepBinaryValidationOnlyOnBaselineRebuild": true,
+    "historicalPapersRemainIsolatedFromGeneratedDailyPractice": true
+  },
+  "notes": "Immutable source baseline captured after the full ICAS Y3-Y5, NAPLAN and OC corpus upload. Create aw-historical-corpus-v2 rather than mutating this baseline when historical source content changes."
+}
