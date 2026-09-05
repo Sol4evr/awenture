@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run test:release",
+  "buildCommand": "npm run test:release && node scripts/qa-unlock-all.mjs",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "headers": [
