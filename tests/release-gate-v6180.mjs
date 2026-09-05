@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const dist=path.join(root,'dist');
+const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
+if(!html.includes('awenture-release" content="6.18.0"'))throw new Error('v6.18.0 release marker missing');
+if(!html.includes('/stage-papers.js?v=61800'))throw new Error('stage paper runtime script missing');
+const js=fs.readFileSync(path.join(dist,'stage-papers.js'),'utf8');
+for(const marker of ['aw-stage-library','historical-review','awenture:stage-change'])if(!js.includes(marker))throw new Error(`stage paper runtime marker missing: ${marker}`);
+const catalog=JSON.parse(fs.readFileSync(path.join(dist,'stage-papers','catalog.json'),'utf8'));
+for(const stage of ['icas-y3','naplan-y3','icas-y4','oc-prep'])if(!catalog.stages?.[stage])throw new Error(`catalog missing learning stage ${stage}`);
+const active=Object.values(catalog.stages).flatMap(s=>s.papers||[]);
+if(!active.length)throw new Error('No source-safe stage papers activated');
+if(active.some(p=>p.scoring!=='source-review'))throw new Error('Newly uploaded stage papers must not claim verified scoring before answer-key QA');
+if(active.some(p=>/year5/i.test(p.sourcePath)||p.stage==='icas-y5'||p.stage==='naplan-y5'))throw new Error('Year 5 source corpus must not be learner-activated in the current path');
+if(active.some(p=>!fs.existsSync(path.join(dist,p.assetPath.replace(/^\//,'')))))throw new Error('One or more activated stage paper assets are missing');
+const progression=JSON.parse(fs.readFileSync(path.join(root,'progression','learning-progression-v1.json'),'utf8'));
+if(progression.stages.map(s=>s.id).join('|')!=='icas-y2|icas-y3|naplan-y3|icas-y4|oc-prep')throw new Error('Learning path sequence changed unexpectedly');
+const y2=JSON.parse(fs.readFileSync(path.join(root,'bank','v6.13.1-original-paper-runtime.json'),'utf8'));
+if(y2.papers.length!==22)throw new Error(`Year 2 historical runtime changed unexpectedly: ${y2.papers.length}`);
+console.log(JSON.stringify({release:'6.18.0',stagePaperLibrary:'PASS',activated:active.length,pending:catalog.summary.pending,stages:Object.fromEntries(Object.entries(catalog.stages).map(([k,v])=>[k,v.papers.length])),year2HistoricalRuntime:'PRESERVED',progression:'PRESERVED'}));
