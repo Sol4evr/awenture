@@ -1,6 +1,7 @@
 {
   "version": 1,
   "currentStage": "icas-y2",
+  "temporaryUnlockAll": true,
   "stages": [
     {
       "id": "icas-y2",
