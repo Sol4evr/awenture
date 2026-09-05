@@ -16,7 +16,14 @@
       "framework": "ICAS",
       "yearLevel": 3,
       "status": "locked",
-      "unlock": {"type": "always"}
+      "unlock": {
+        "type": "mastery-gate",
+        "minAttempts": 40,
+        "minDistinctSkills": 8,
+        "minOverallAccuracy": 0.82,
+        "maxWeakSkillShare": 0.25,
+        "minFullPaperAttempts": 2
+      }
     },
     {
       "id": "naplan-y3",
@@ -24,7 +31,12 @@
       "framework": "NAPLAN",
       "yearLevel": 3,
       "status": "locked",
-      "unlock": {"type": "always"}
+      "unlock": {
+        "type": "stage-completion",
+        "requiresStage": "icas-y3",
+        "minAttempts": 60,
+        "minOverallAccuracy": 0.82
+      }
     },
     {
       "id": "icas-y4",
@@ -32,7 +44,12 @@
       "framework": "ICAS",
       "yearLevel": 4,
       "status": "locked",
-      "unlock": {"type": "always"}
+      "unlock": {
+        "type": "stage-completion",
+        "requiresStage": "naplan-y3",
+        "minAttempts": 80,
+        "minOverallAccuracy": 0.82
+      }
     },
     {
       "id": "oc-prep",
@@ -40,7 +57,12 @@
       "framework": "OC",
       "yearLevel": 4,
       "status": "locked",
-      "unlock": {"type": "always"}
+      "unlock": {
+        "type": "stage-completion",
+        "requiresStage": "icas-y4",
+        "minAttempts": 100,
+        "minOverallAccuracy": 0.82
+      }
     }
   ],
   "practiceMix": {
