@@ -6,9 +6,9 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const dist=path.join(root,'dist');
 const js=fs.readFileSync(path.join(dist,'stage-formal-tests.js'),'utf8');
 if(!js.includes("eyebrow.textContent=STAGE_LABELS[stage]||stage"))throw new Error('stage-specific Subject tests eyebrow sync missing');
-if(!js.includes("credentials:'same-origin'"))throw new Error('stage PDF loader must fetch with same-origin credentials');
-if(!js.includes("res.arrayBuffer()"))throw new Error('stage PDF loader must use byte fetch before PDF.js parsing');
-if(!js.includes("%PDF-"))throw new Error('stage PDF payload signature guard missing');
+if(!js.includes('getDocument({url:active.paper.assetPath'))throw new Error('stage PDF loader must preserve Year 2-style URL/range loading');
+if(js.includes('arrayBuffer()'))throw new Error('whole-file PDF byte preload must not return');
+if(!js.includes('RenderingCancelledException')||!js.includes("document.createElement('canvas')"))throw new Error('atomic page rendering/cancellation missing');
 const catalog=JSON.parse(fs.readFileSync(path.join(dist,'stage-papers','catalog.json'),'utf8'));
 const required=['icas-y3','naplan-y3','icas-y4','oc-prep'];
 for(const stage of required){
@@ -21,4 +21,4 @@ for(const stage of required){
     if(head!=='%PDF-')throw new Error(`Invalid PDF asset: ${p.assetPath}`);
   }
 }
-console.log(JSON.stringify({release:'6.18.2',stageHeading:'PASS',stagePdfAssets:'PASS',loader:'AUTHENTICATED_BYTE_FETCH'}));
+console.log(JSON.stringify({release:'6.18.2',stageHeading:'PASS',stagePdfAssets:'PASS',loader:'YEAR2_LITE_URL_RANGE'}));
