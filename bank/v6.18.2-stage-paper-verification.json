@@ -1,0 +1,26 @@
+{
+  "version": "6.18.2-stage-paper-verification-v1",
+  "governance": "aw-formal-paper-governance-1",
+  "papers": {},
+  "reviewPolicy": {
+    "defaultScoring": "source-review",
+    "defaultLearnerReady": false,
+    "doNotInferQuestionEndPage": true,
+    "doNotInferAnswers": true,
+    "verifiedEntryRequiresHumanOrIndependentDocumentQA": true,
+    "verifiedAnswerMappingRequiresIndependentCrossCheck": true
+  },
+  "entrySchema": {
+    "questionStartPage": "positive integer, normally 1",
+    "questionEndPage": "positive integer, last learner-visible question page",
+    "pageBoundaryVerified": "boolean",
+    "scoring": "source-review | verified",
+    "answerReference": "boolean",
+    "answerMappingVerified": "boolean",
+    "answers": "array required only when scoring=verified",
+    "responseTypes": "optional per-question response type overrides",
+    "reviewEvidence": "short provenance / QA note",
+    "reviewedAt": "ISO date",
+    "reviewedBy": "reviewer identifier"
+  }
+}
