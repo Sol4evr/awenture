@@ -10,6 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Verify Git LFS source assets
+        run: |
+          git lfs ls-files
+          if grep -RIl '^version https://git-lfs.github.com/spec/v1$' source --include='*.pdf' | grep -q .; then
+            echo 'One or more source PDFs are still Git LFS pointer files after checkout.' >&2
+            exit 1
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: 22

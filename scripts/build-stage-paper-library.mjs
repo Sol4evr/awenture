@@ -1,0 +1,124 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import { PDFDocument } from 'pdf-lib';
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const sourceRoot=path.join(root,'source');
+const outRoot=path.join(root,'dist','stage-papers');
+fs.rmSync(outRoot,{recursive:true,force:true});
+fs.mkdirSync(outRoot,{recursive:true});
+
+const stageLabels={
+  'icas-y3':'ICAS Year 3',
+  'naplan-y3':'NAPLAN Year 3',
+  'icas-y4':'ICAS Year 4',
+  'oc-prep':'Opportunity Class'
+};
+const activeStages=new Set(Object.keys(stageLabels));
+
+function walk(dir,out=[]){
+  if(!fs.existsSync(dir))return out;
+  for(const ent of fs.readdirSync(dir,{withFileTypes:true})){
+    const p=path.join(dir,ent.name);
+    if(ent.isDirectory())walk(p,out);
+    else if(ent.isFile()&&ent.name.toLowerCase().endsWith('.pdf'))out.push(p);
+  }
+  return out;
+}
+function rel(p){return path.relative(root,p).split(path.sep).join('/')}
+function norm(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-')}
+function yearOf(s){const m=String(s).match(/(?:19|20)\d{2}/);return m?Number(m[0]):null}
+function stageOf(r){
+  const n=norm(r);
+  if(n.includes('source/original-icas/year3/'))return 'icas-y3';
+  if(n.includes('source/original-icas/year4/'))return 'icas-y4';
+  if(n.includes('source/oc/'))return 'oc-prep';
+  if(n.includes('source/naplan/')||n.includes('source/naplan/')){
+    if(/year[ _-]?3/.test(n)||/year 3/.test(n))return 'naplan-y3';
+  }
+  return null;
+}
+function subjectOf(r){
+  const n=norm(r);
+  if(n.includes('thinking'))return 'Thinking Skills';
+  if(n.includes('mathematical reasoning'))return 'Mathematical Reasoning';
+  if(n.includes('language convention'))return 'Language Conventions';
+  if(n.includes('numeracy'))return 'Numeracy';
+  if(n.includes('reading'))return 'Reading';
+  if(n.includes('writing'))return 'Writing';
+  if(n.includes('english'))return 'English';
+  if(n.includes('math'))return 'Mathematics';
+  if(n.includes('science'))return 'Science';
+  if(n.includes('spell'))return 'Spelling';
+  if(n.includes('digital'))return 'Digital Technologies';
+  return 'Other';
+}
+function provenanceOf(r){
+  const n=norm(r);
+  if(n.includes('/braintree'))return 'Braintree';
+  if(n.includes('/oc/'))return 'Official / sample';
+  if(n.includes('/naplan/'))return 'NAPLAN source';
+  return 'ICAS source';
+}
+function isLfsPointer(p){
+  const fd=fs.openSync(p,'r');
+  const b=Buffer.alloc(160);const n=fs.readSync(fd,b,0,b.length,0);fs.closeSync(fd);
+  return b.subarray(0,n).toString('utf8').startsWith('version https://git-lfs.github.com/spec/v1');
+}
+function excludedResource(name){
+  const n=norm(name);
+  return /answer|explanation|worked|marking|report|magazine|materials|large print|black and white/.test(n);
+}
+function explicitQuestion(name){return /question/.test(norm(name))&&!excludedResource(name)}
+
+const files=walk(sourceRoot);
+const byDir=new Map();
+for(const p of files){const d=path.dirname(p);if(!byDir.has(d))byDir.set(d,[]);byDir.get(d).push(p)}
+function hasYearMatchedAnswer(p){
+  const y=yearOf(path.basename(p));if(!y)return false;
+  return (byDir.get(path.dirname(p))||[]).some(x=>x!==p&&yearOf(path.basename(x))===y&&/answer/.test(norm(path.basename(x))));
+}
+function safeQuestionFile(p,stage){
+  const name=path.basename(p),n=norm(name);
+  if(excludedResource(name))return false;
+  if(stage==='oc-prep')return explicitQuestion(name);
+  if(stage==='naplan-y3'){
+    if(!/year[ _-]?3|year 3/.test(norm(rel(p))))return false;
+    return /language convention|numeracy|reading|writing prompt|writing test/.test(n);
+  }
+  if(stage==='icas-y3'||stage==='icas-y4')return explicitQuestion(name)||hasYearMatchedAnswer(p);
+  return false;
+}
+function titleFor(p,subject){
+  const y=yearOf(path.basename(p));
+  return `${y||'Historical'} ${subject}`;
+}
+function assetName(r){const ext='.pdf',hash=crypto.createHash('sha1').update(r).digest('hex').slice(0,12);return `${hash}${ext}`}
+
+const catalog={release:'6.18.0',mode:'stage-linked-source-review',generatedAtBuild:true,stages:{},summary:{sourcePdfs:files.length,activated:0,pending:0,ignoredFuture:0}};
+for(const id of activeStages)catalog.stages[id]={id,label:stageLabels[id],papers:[],pending:0};
+
+for(const p of files){
+  const r=rel(p),stage=stageOf(r);
+  if(!stage||!activeStages.has(stage)){catalog.summary.ignoredFuture++;continue}
+  if(isLfsPointer(p))throw new Error(`Git LFS object was not materialized before stage-paper build: ${r}`);
+  if(!safeQuestionFile(p,stage)){
+    catalog.stages[stage].pending++;catalog.summary.pending++;continue;
+  }
+  let pageCount=null;
+  try{const doc=await PDFDocument.load(fs.readFileSync(p),{ignoreEncryption:true});pageCount=doc.getPageCount()}catch(err){catalog.stages[stage].pending++;catalog.summary.pending++;continue}
+  const subject=subjectOf(r),asset=assetName(r),dest=path.join(outRoot,asset);
+  fs.copyFileSync(p,dest);
+  catalog.stages[stage].papers.push({
+    id:crypto.createHash('sha1').update(r).digest('hex').slice(0,16),
+    stage,subject,year:yearOf(path.basename(p)),title:titleFor(p,subject),
+    sourcePath:r,assetPath:`/stage-papers/${asset}`,pageCount,
+    scoring:'source-review',answerReference:false,provenance:provenanceOf(r)
+  });
+  catalog.summary.activated++;
+}
+for(const st of Object.values(catalog.stages))st.papers.sort((a,b)=>(a.subject.localeCompare(b.subject))||((a.year||0)-(b.year||0))||a.title.localeCompare(b.title));
+fs.writeFileSync(path.join(outRoot,'catalog.json'),JSON.stringify(catalog,null,2)+'\n');
+console.log(JSON.stringify({stagePaperLibrary:'PASS',...catalog.summary,stages:Object.fromEntries(Object.entries(catalog.stages).map(([k,v])=>[k,{activated:v.papers.length,pending:v.pending}]))}));
