@@ -1,0 +1,49 @@
+{
+  "version": "aw-formal-paper-governance-1",
+  "inherits": "bank/v6.13.1-original-paper-runtime.json",
+  "scope": ["icas-y3", "naplan-y3", "icas-y4", "oc-prep"],
+  "principles": {
+    "explicitPerPaperMetadata": true,
+    "questionPageBoundaryRequiredForLearnerMode": true,
+    "answerPagesNeverLearnerVisible": true,
+    "separateAnswerResourcesNeverPublishedAsLearnerPapers": true,
+    "verifiedAnswerMappingRequiredForAutoScoring": true,
+    "unverifiedPapersNeverClaimScore": true,
+    "unverifiedPapersNeverGrantProgressionCredit": true,
+    "writingAutoScoring": false,
+    "liteViewerParityWithYear2": true
+  },
+  "requiredPerPaperFields": [
+    "sourcePath",
+    "stage",
+    "subject",
+    "year",
+    "questionStartPage",
+    "questionEndPage",
+    "pageBoundaryVerified",
+    "scoring",
+    "answerReference",
+    "answerMappingVerified",
+    "learnerReady",
+    "viewer"
+  ],
+  "verifiedScoringRequirements": {
+    "scoring": "verified",
+    "answerMappingVerified": true,
+    "answerReference": true,
+    "answersRequired": true,
+    "responseTypesAllowed": true
+  },
+  "sourceReviewRequirements": {
+    "scoring": "source-review",
+    "answerMappingVerified": false,
+    "score": null,
+    "progressionCredit": false
+  },
+  "learnerModeGate": {
+    "pageBoundaryVerified": true,
+    "questionEndPageRequired": true,
+    "objectivePaperAutoScoreOnlyWhenAnswerMappingVerified": true
+  },
+  "notes": "A paper may be listed for corpus review before learnerReady=true, but timed learner mode is blocked until its question-page boundary is explicitly verified. Auto-scoring is independently gated by verified answer mapping. This mirrors the mature ICAS Year 2 separation between page-boundary QA and answer-key QA."
+}
