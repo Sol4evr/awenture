@@ -1,6 +1,6 @@
 {
   "name": "awenture",
-  "version": "6.18.1",
+  "version": "6.18.2",
   "private": true,
   "scripts": {
     "validate:bank": "node scripts/validate-expansion-v4.mjs",
@@ -13,8 +13,8 @@
     "build:stage-papers": "node scripts/build-stage-paper-library-cached.mjs",
     "rebuild:historical-baseline": "AW_REBUILD_HISTORICAL_BASELINE=1 npm run validate:original-papers:deep && AW_REBUILD_HISTORICAL_BASELINE=1 node scripts/build-original-paper-formal-assets-cached.mjs && AW_REBUILD_HISTORICAL_BASELINE=1 node scripts/build-stage-paper-library-cached.mjs",
     "build:legacy": "npm run validate:bank && npm run validate:historical-baseline && npm run validate:question-factory && npm run review:quality && node scripts/build.mjs && node scripts/patch-v6.13.1.mjs && node scripts/patch-v6.13.1.2.mjs && node scripts/patch-v6.13.1.3.mjs && node scripts/patch-v6.13.1.4.mjs && node scripts/patch-v6.13.2.mjs && node scripts/patch-v6.14.0.mjs && node scripts/patch-v6.14.1.mjs && node scripts/patch-v6.15.0.mjs && node scripts/patch-v6.15.1.mjs && node scripts/patch-v6.15.2.mjs && node scripts/patch-v6.15.3.mjs && node scripts/patch-v6.16.0.mjs && node scripts/patch-v6.16.1.mjs && npm run build:historical-y2",
-    "build": "npm run build:legacy && node scripts/harden-v6.16.2.mjs && node scripts/patch-v6.17.0.mjs && node scripts/finalize-v6.17.0.mjs && node scripts/patch-v6.17.1.mjs && node scripts/finalize-v6.17.1.mjs && node scripts/patch-v6.17.2.mjs && node scripts/finalize-v6.17.2.mjs && npm run build:stage-papers && node scripts/patch-v6.18.0.mjs && node scripts/finalize-v6.18.0.mjs && node scripts/patch-v6.18.1-unlock-all.mjs",
-    "test:release": "npm run build:legacy && node tests/release-gate-v6160.mjs && node tests/release-gate-v6161.mjs && node scripts/harden-v6.16.2.mjs && node tests/release-gate-v6162.mjs && node scripts/patch-v6.17.0.mjs && node scripts/finalize-v6.17.0.mjs && node tests/release-gate-v6170.mjs && node scripts/patch-v6.17.1.mjs && node scripts/finalize-v6.17.1.mjs && node tests/release-gate-v6171.mjs && node scripts/patch-v6.17.2.mjs && node scripts/finalize-v6.17.2.mjs && node tests/release-gate-v6172.mjs && npm run build:stage-papers && node scripts/patch-v6.18.0.mjs && node scripts/finalize-v6.18.0.mjs && node tests/release-gate-v6180.mjs && node scripts/patch-v6.18.1-unlock-all.mjs",
+    "build": "npm run build:legacy && node scripts/harden-v6.16.2.mjs && node scripts/patch-v6.17.0.mjs && node scripts/finalize-v6.17.0.mjs && node scripts/patch-v6.17.1.mjs && node scripts/finalize-v6.17.1.mjs && node scripts/patch-v6.17.2.mjs && node scripts/finalize-v6.17.2.mjs && npm run build:stage-papers && node scripts/patch-v6.18.0.mjs && node scripts/finalize-v6.18.0.mjs && node scripts/patch-v6.18.1-unlock-all.mjs && node scripts/patch-v6.18.2-stage-formal-tests.mjs",
+    "test:release": "npm run build:legacy && node tests/release-gate-v6160.mjs && node tests/release-gate-v6161.mjs && node scripts/harden-v6.16.2.mjs && node tests/release-gate-v6162.mjs && node scripts/patch-v6.17.0.mjs && node scripts/finalize-v6.17.0.mjs && node tests/release-gate-v6170.mjs && node scripts/patch-v6.17.1.mjs && node scripts/finalize-v6.17.1.mjs && node tests/release-gate-v6171.mjs && node scripts/patch-v6.17.2.mjs && node scripts/finalize-v6.17.2.mjs && node tests/release-gate-v6172.mjs && npm run build:stage-papers && node scripts/patch-v6.18.0.mjs && node scripts/finalize-v6.18.0.mjs && node tests/release-gate-v6180.mjs && node scripts/patch-v6.18.1-unlock-all.mjs && node scripts/patch-v6.18.2-stage-formal-tests.mjs && node tests/release-gate-v6182.mjs",
     "test:browser": "playwright test",
     "test": "npm run test:release && npm run test:browser"
   },
