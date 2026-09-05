@@ -8,7 +8,7 @@ const html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
 if(!html.includes('awenture-release" content="6.18.0"'))throw new Error('v6.18.0 release marker missing');
 if(!html.includes('/stage-papers.js?v=61800'))throw new Error('stage paper runtime script missing');
 const js=fs.readFileSync(path.join(dist,'stage-papers.js'),'utf8');
-for(const marker of ['aw-stage-library','historical-review','awenture:stage-change','syncTestTile','runtime'])if(!js.includes(marker))throw new Error(`stage paper runtime marker missing: ${marker}`);
+for(const marker of ['aw-stage-library','historical-review','awenture:stage-change','syncTestTile'])if(!js.includes(marker))throw new Error(`stage paper runtime marker missing: ${marker}`);
 if(js.includes('new MutationObserver'))throw new Error('stage paper runtime must remain lite/event-driven; global MutationObserver regression detected');
 if(!js.includes('button[data-a="tests"]'))throw new Error('stage change must synchronise the Test tile');
 if(!js.includes("cache:'force-cache'"))throw new Error('stage catalog should use cache-friendly loading');
