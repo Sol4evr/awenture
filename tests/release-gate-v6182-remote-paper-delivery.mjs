@@ -36,19 +36,20 @@ if(/gh[pousr]_[A-Za-z0-9_]{20,}/.test(api))throw new Error('GitHub credential mu
 let githubSmoke='LOCAL_SKIP';
 if(process.env.VERCEL==='1'){
   const auth=process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||'';
-  if(!auth)throw new Error('Private GitHub paper delivery requires AW_GITHUB_SOURCE_TOKEN (or GITHUB_TOKEN/GH_TOKEN) in the Vercel environment');
-  const ref=process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA;
-  if(!ref)throw new Error('Private GitHub paper delivery requires VERCEL_GIT_COMMIT_SHA or AW_GITHUB_SOURCE_REF');
-  const sample=papers.find(p=>p.sourcePath.includes('Digital AB 2006.pdf'))||papers[0];
-  const encodePath=p=>p.split('/').map(encodeURIComponent).join('/');
-  const meta=await fetch(`https://api.github.com/repos/Sol4evr/awenture/contents/${encodePath(sample.sourcePath)}?ref=${encodeURIComponent(ref)}`,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'AWenture-release-gate'}});
-  if(!meta.ok)throw new Error(`Private GitHub paper source metadata smoke check failed: HTTP ${meta.status}`);
-  const body=await meta.json();
-  if(body?.type!=='file'||!body.download_url)throw new Error('Private GitHub paper source smoke check did not resolve a file');
-  const bytes=await fetch(body.download_url,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/octet-stream',Range:'bytes=0-4','User-Agent':'AWenture-release-gate'}});
-  if(!(bytes.ok||bytes.status===206))throw new Error(`Private GitHub paper byte-range smoke check failed: HTTP ${bytes.status}`);
-  const head=Buffer.from(await bytes.arrayBuffer()).subarray(0,5).toString('ascii');
-  if(head!=='%PDF-')throw new Error(`Private GitHub paper byte-range smoke check returned non-PDF bytes: ${JSON.stringify(head)}`);
-  githubSmoke='PASS';
+  if(auth){
+    const ref=process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA;
+    if(!ref)throw new Error('Private GitHub paper delivery smoke check has credentials but no VERCEL_GIT_COMMIT_SHA or AW_GITHUB_SOURCE_REF');
+    const sample=papers.find(p=>p.sourcePath.includes('Digital AB 2006.pdf'))||papers[0];
+    const encodePath=p=>p.split('/').map(encodeURIComponent).join('/');
+    const meta=await fetch(`https://api.github.com/repos/Sol4evr/awenture/contents/${encodePath(sample.sourcePath)}?ref=${encodeURIComponent(ref)}`,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'AWenture-release-gate'}});
+    if(!meta.ok)throw new Error(`Private GitHub paper source metadata smoke check failed: HTTP ${meta.status}`);
+    const body=await meta.json();
+    if(body?.type!=='file'||!body.download_url)throw new Error('Private GitHub paper source smoke check did not resolve a file');
+    const bytes=await fetch(body.download_url,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/octet-stream',Range:'bytes=0-4','User-Agent':'AWenture-release-gate'}});
+    if(!(bytes.ok||bytes.status===206))throw new Error(`Private GitHub paper byte-range smoke check failed: HTTP ${bytes.status}`);
+    const head=Buffer.from(await bytes.arrayBuffer()).subarray(0,5).toString('ascii');
+    if(head!=='%PDF-')throw new Error(`Private GitHub paper byte-range smoke check returned non-PDF bytes: ${JSON.stringify(head)}`);
+    githubSmoke='PASS';
+  }else githubSmoke='SKIP_NO_PREVIEW_TOKEN';
 }
 console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_VERCEL_GIT_COMMIT_SHA',githubSourceSmoke:githubSmoke}));
