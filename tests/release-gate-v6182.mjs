@@ -19,6 +19,7 @@ if(!js.includes("score:null,verified:false"))throw new Error('unverified later-s
 
 const catalog=JSON.parse(fs.readFileSync(path.join(dist,'stage-papers','catalog.json'),'utf8'));
 if(catalog.release!=='6.18.2'||catalog.mode!=='stage-formal-lite-v2')throw new Error('stage formal catalog v2 missing');
+const remote=catalog.delivery==='github-source-proxy-v1';
 const required={
   'icas-y3':['Digital Technologies','English','Mathematics','Science','Spelling','Writing'],
   'icas-y4':['Digital Technologies','English','Mathematics','Science','Spelling','Writing'],
@@ -30,10 +31,15 @@ for(const [stage,subjects] of Object.entries(required)){
   if(!papers.length)throw new Error(`${stage} has no activated papers`);
   for(const subject of subjects)if(!present.has(subject))throw new Error(`${stage} missing ${subject} paper section`);
   for(const p of papers){
-    const asset=path.join(dist,p.assetPath.replace(/^\//,''));
-    if(!fs.existsSync(asset))throw new Error(`missing stage paper asset ${p.assetPath}`);
-    const fd=fs.openSync(asset,'r'),b=Buffer.alloc(5);fs.readSync(fd,b,0,5,0);fs.closeSync(fd);
-    if(b.toString('ascii')!=='%PDF-')throw new Error(`invalid PDF asset ${p.assetPath}`);
+    if(remote){
+      if(p.delivery!=='github-source-proxy-v1'||!p.sourcePath?.startsWith('source/')||!String(p.assetPath||'').startsWith('/api/paper?path='))throw new Error(`invalid remote paper delivery contract ${p.sourcePath}`);
+    }else{
+      const asset=path.join(dist,p.assetPath.replace(/^\//,''));
+      if(!fs.existsSync(asset))throw new Error(`missing stage paper asset ${p.assetPath}`);
+      const fd=fs.openSync(asset,'r'),b=Buffer.alloc(5);fs.readSync(fd,b,0,5,0);fs.closeSync(fd);
+      if(b.toString('ascii')!=='%PDF-')throw new Error(`invalid PDF asset ${p.assetPath}`);
+    }
   }
 }
-console.log(JSON.stringify({release:'6.18.2',stageIsolation:'PASS',completeStageCoverage:'PASS',stageFormalPlayer:'PASS',viewer:'YEAR2_LITE_PARITY',iPadRuntime:'LITE_EVENT_DRIVEN',unverifiedAutoMarking:'OFF',activated:catalog.summary.activated}));
+if(remote&&fs.readdirSync(path.join(dist,'stage-papers'),{withFileTypes:true}).some(e=>e.isFile()&&e.name.toLowerCase().endsWith('.pdf')))throw new Error('remote delivery must not emit stage PDFs into dist');
+console.log(JSON.stringify({release:'6.18.2',stageIsolation:'PASS',completeStageCoverage:'PASS',stageFormalPlayer:'PASS',viewer:'YEAR2_LITE_PARITY',iPadRuntime:'LITE_EVENT_DRIVEN',paperDelivery:catalog.delivery||'local-assets',unverifiedAutoMarking:'OFF',activated:catalog.summary.activated}));
