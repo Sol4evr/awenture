@@ -27,17 +27,17 @@ async function pageText(doc,n){
   return tc.items.map(x=>x.str||'').join(' ').replace(/\s+/g,' ').trim();
 }
 function answerPageScore(text){
-  let s=0;
-  if(STRONG_HEAD_RE.test(text.slice(0,1200)))s+=3;
-  const pairs=(text.match(ANSWER_PAIR_RE)||[]).length;if(pairs>=5)s+=2;else if(pairs>=3)s+=1;
-  const options=(text.match(OPTION_RE)||[]).length;if(options>=8)s+=1;
-  if(/\b(explanation|worked|solution|marking)\b/i.test(text))s+=1;
+  const t=String(text||'');let s=0;
+  if(STRONG_HEAD_RE.test(t.slice(0,1200)))s+=3;
+  const pairs=(t.match(ANSWER_PAIR_RE)||[]).length;if(pairs>=5)s+=2;else if(pairs>=3)s+=1;
+  const options=(t.match(OPTION_RE)||[]).length;if(options>=8)s+=1;
+  if(/\b(explanation|worked|solution|marking)\b/i.test(t))s+=1;
   return s;
 }
 function questionPageScore(text){
-  let s=0;if(QUESTION_CUE_RE.test(text))s++;
-  if((text.match(/\b\d{1,3}[\).]\s/g)||[]).length>=2)s++;
-  if((text.match(OPTION_RE)||[]).length>=2)s++;
+  const t=String(text||'');let s=0;if(QUESTION_CUE_RE.test(t))s++;
+  if((t.match(/\b\d{1,3}[\).]\s/g)||[]).length>=2)s++;
+  if((t.match(OPTION_RE)||[]).length>=2)s++;
   return s;
 }
 
@@ -53,12 +53,12 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
     const doc=await pdfjs.getDocument({data:bytes,disableWorker:true,isEvalSupported:false,useSystemFonts:true}).promise;
     const start=Math.max(1,Math.floor(doc.numPages*.35));
     const tail=[];for(let n=start;n<=doc.numPages;n++)tail.push({page:n,text:await pageText(doc,n)});
-    evidence=tail.map(x=>({page:x.page,answerScore:answerPageScore(x.text),questionScore:questionPageScore(x.text),snippet:x.text.slice(0,180)})).filter(x=>x.answerScore>=3||NON_LEARNER_HEAD_RE.test(x.text.slice(0,1400)));
+    evidence=tail.filter(x=>answerPageScore(x.text)>=3||NON_LEARNER_HEAD_RE.test(String(x.text||'').slice(0,1400))).map(x=>({page:x.page,answerScore:answerPageScore(x.text),questionScore:questionPageScore(x.text),snippet:String(x.text||'').slice(0,180)}));
     let boundary=null;
     for(let i=0;i<tail.length;i++){
       const {page,text}=tail[i],score=answerPageScore(text);
       const prev=i>0?tail[i-1].text:(page>1?await pageText(doc,page-1):'');
-      if(page>1&&NON_LEARNER_HEAD_RE.test(text.slice(0,1400))){boundary=page-1;break}
+      if(page>1&&NON_LEARNER_HEAD_RE.test(String(text||'').slice(0,1400))){boundary=page-1;break}
       if(score>=4&&page>1&&questionPageScore(prev)>=1){boundary=page-1;break}
       if(score>=5&&page>1){boundary=page-1;break}
     }
@@ -69,7 +69,7 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
     }else{
       const dedicated=DEDICATED_QUESTION_RE.test(path.basename(p.sourcePath));
       const sibling=siblingAnswerEvidence(p.sourcePath);
-      const anyStrong=tail.some(x=>answerPageScore(x.text)>=4||NON_LEARNER_HEAD_RE.test(x.text.slice(0,1400)));
+      const anyStrong=tail.some(x=>answerPageScore(x.text)>=4||NON_LEARNER_HEAD_RE.test(String(x.text||'').slice(0,1400)));
       if(!anyStrong){
         entry.questionEndPage=doc.numPages;entry.pageBoundaryVerified=true;
         if(dedicated){entry.reviewEvidence=`automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-${doc.numPages}`;result.summary.dedicatedQuestionFile++}
