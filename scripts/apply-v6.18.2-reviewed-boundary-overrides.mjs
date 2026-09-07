@@ -14,21 +14,28 @@ if(review.version!=='aw-stage-paper-reviewed-boundaries-v1')throw new Error('rev
 const papers=[];for(const s of Object.values(catalog.stages||{}))for(const p of s.papers||[])papers.push(p);
 const meta=new Map(papers.map(p=>[p.sourcePath,p]));
 function sha256(abs){return crypto.createHash('sha256').update(fs.readFileSync(abs)).digest('hex')}
-let applied=0;
+const approvedEvidence=new Set(['same-paper-explicit-stop-end-of-test','same-paper-reviewed-auto-boundary-false-positive']);
+let applied=0,expanded=0,narrowed=0;
 for(const r of review.overrides||[]){
   const p=meta.get(r.sourcePath);if(!p)throw new Error(`reviewed boundary source missing from catalog: ${r.sourcePath}`);
   if(p.stage!==r.stage||p.subject!==r.subject||Number(p.year||0)!==Number(r.year||0))throw new Error(`reviewed boundary metadata mismatch: ${r.sourcePath}`);
   const abs=path.join(root,r.sourcePath);if(!fs.existsSync(abs))throw new Error(`reviewed boundary source file missing: ${r.sourcePath}`);
   if(sha256(abs)!==r.sha256)throw new Error(`reviewed boundary SHA mismatch: ${r.sourcePath}`);
   if(!Number.isInteger(r.questionStartPage)||!Number.isInteger(r.questionEndPage)||r.questionStartPage<1||r.questionEndPage<r.questionStartPage)throw new Error(`invalid reviewed boundary: ${r.sourcePath}`);
-  if(r.evidenceType!=='same-paper-explicit-stop-end-of-test'||r.provider!=='ACARA')throw new Error(`unapproved reviewed boundary evidence: ${r.sourcePath}`);
+  if(!approvedEvidence.has(r.evidenceType))throw new Error(`unapproved reviewed boundary evidence: ${r.sourcePath}`);
+  if(r.evidenceType==='same-paper-explicit-stop-end-of-test'&&r.provider!=='ACARA')throw new Error(`terminal-stop override provider must be ACARA: ${r.sourcePath}`);
   const a=report.papers?.[r.sourcePath];if(!a)throw new Error(`auto boundary entry missing: ${r.sourcePath}`);
-  if(Number.isInteger(a.questionEndPage)&&r.questionEndPage>a.questionEndPage)throw new Error(`reviewed boundary cannot expand learner pages: ${r.sourcePath}`);
+  const autoEnd=Number.isInteger(a.questionEndPage)?a.questionEndPage:null;
+  const isExpansion=autoEnd!==null&&r.questionEndPage>autoEnd;
+  if(isExpansion&&r.evidenceType!=='same-paper-reviewed-auto-boundary-false-positive')throw new Error(`reviewed boundary expansion requires exact-source false-positive evidence: ${r.sourcePath}`);
+  if(isExpansion&&!review.policy?.automaticBoundaryMayBeExpandedOnlyByShaPinnedExactSourceCorrection)throw new Error(`reviewed boundary expansion policy disabled: ${r.sourcePath}`);
+  if(r.evidenceType==='same-paper-reviewed-auto-boundary-false-positive'&&(!Number.isInteger(r.evidencePage)||!Number.isInteger(r.terminalQuestion)||r.evidencePage<=r.questionEndPage))throw new Error(`reviewed boundary correction lacks terminal/answer transition evidence: ${r.sourcePath}`);
   a.questionStartPage=r.questionStartPage;a.questionEndPage=r.questionEndPage;a.pageBoundaryVerified=true;
-  a.method='reviewed-same-paper-terminal-stop';a.reviewEvidence={manifest:'quality/stage-paper-reviewed-boundaries-v1.json',sha256:r.sha256,provider:r.provider,evidenceType:r.evidenceType,evidencePage:r.evidencePage,terminalQuestion:r.terminalQuestion,reviewNote:r.reviewNote};a.reviewedBy='AWenture reviewed source QA';a.reviewedAt=new Date().toISOString();
+  a.method=isExpansion?'reviewed-sha-pinned-auto-boundary-correction':'reviewed-same-paper-terminal-stop';
+  a.reviewEvidence={manifest:'quality/stage-paper-reviewed-boundaries-v1.json',sha256:r.sha256,provider:r.provider,evidenceType:r.evidenceType,evidencePage:r.evidencePage,terminalQuestion:r.terminalQuestion,reviewNote:r.reviewNote};a.reviewedBy='AWenture reviewed source QA';a.reviewedAt=new Date().toISOString();
   p.questionStartPage=r.questionStartPage;p.questionEndPage=r.questionEndPage;p.pageBoundaryVerified=true;p.learnerReady=true;
-  p.governance={...(p.governance||{}),questionStartPage:r.questionStartPage,questionEndPage:r.questionEndPage,pageBoundaryVerified:true,learnerReady:true,reviewEvidence:a.reviewEvidence,reviewedBy:a.reviewedBy,reviewedAt:a.reviewedAt};applied++;
+  p.governance={...(p.governance||{}),questionStartPage:r.questionStartPage,questionEndPage:r.questionEndPage,pageBoundaryVerified:true,learnerReady:true,reviewEvidence:a.reviewEvidence,reviewedBy:a.reviewedBy,reviewedAt:a.reviewedAt};applied++;if(isExpansion)expanded++;else if(autoEnd!==null&&r.questionEndPage<autoEnd)narrowed++;
 }
 catalog.governance={...(catalog.governance||{}),reviewedBoundaryOverrides:'aw-stage-paper-reviewed-boundaries-v1'};
 fs.writeFileSync(reportPath,JSON.stringify(report,null,2)+'\n');fs.writeFileSync(catalogPath,JSON.stringify(catalog,null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',reviewedBoundaryOverrides:'PASS',applied}));
+console.log(JSON.stringify({release:'6.18.2',reviewedBoundaryOverrides:'PASS',applied,expanded,narrowed}));
