@@ -21,6 +21,19 @@
       "evidencePage": 14,
       "evidenceText": "Question 35 is followed by STOP – END OF TEST.",
       "reviewNote": "Exact source binary independently reviewed. Page 14 contains Q35 followed by STOP – END OF TEST; later pages are non-test/practice material."
+    },
+    {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2015.pdf",
+      "sha256": "f291c91abf96cbfc7533ce1a7c1b0058c9b84ddad59e4c5e5d133034c16e97fd",
+      "stage": "icas-y3",
+      "subject": "Digital Technologies",
+      "year": 2015,
+      "questionCount": 45,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "same-paper-complete-answer-sequence",
+      "evidencePage": 17,
+      "evidenceText": "Question Number Papers A & B 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45",
+      "reviewNote": "Exact source binary independently reviewed. Embedded answer key page 16 labels Papers A & B and enumerates Q1-30; page 17 continues the same Papers A & B column from Q31 through Q45. This proves the A/B paper contains 45 questions. Auto-scoring is not implied by count verification."
     }
   ]
 }
