@@ -47,6 +47,45 @@
       "evidencePage": 1,
       "evidenceText": "There are 45 MULTIPLE-CHOICE QUESTIONS (1-45).",
       "reviewNote": "Exact source binary independently reviewed. The learner paper opening page explicitly states there are 45 multiple-choice questions and gives the complete range 1-45. This supersedes the earlier weaker subsection-range heuristic. Auto-scoring and progression credit remain separately gated."
+    },
+    {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2015.pdf",
+      "sha256": "bd16a5d7056221bd96d2a399e4ed3c8d249316f4c7bf945d6b5ad60e258ae540",
+      "stage": "icas-y4",
+      "subject": "Digital Technologies",
+      "year": 2015,
+      "questionCount": 45,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "same-paper-complete-answer-sequence",
+      "evidencePage": 17,
+      "evidenceText": "Question Number Papers A & B 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45",
+      "reviewNote": "Exact Y4 source binary independently reviewed. Embedded answer key page 16 labels Papers A & B and enumerates Q1-30; page 17 continues the same A/B column through Q45. The count is established from this paper's own SHA and not inferred from the Year 3 copy."
+    },
+    {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2020.pdf",
+      "sha256": "fa561d7d06744633b484338534402fa94dfcb628673e85e28b4d82de73cdc58e",
+      "stage": "icas-y4",
+      "subject": "Science",
+      "year": 2020,
+      "questionCount": 29,
+      "provider": "Janison Solutions",
+      "evidenceType": "same-paper-complete-answer-sequence",
+      "evidencePage": 32,
+      "evidenceText": "Results pages enumerate Question number 1 through 29; completion page states Your mark is / 29.",
+      "reviewNote": "Exact source binary independently reviewed. Page 31 contains the complete results table for Q1-29 with correct answers and descriptors; page 32 explicitly confirms the completed practice-test mark denominator is 29. Auto-scoring remains separately gated."
+    },
+    {
+      "sourcePath": "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf",
+      "sha256": "109af09fb98f7f36678e98907519f07f27aa399a3ce8791839c01cd3dfa1ae93",
+      "stage": "icas-y4",
+      "subject": "English",
+      "year": 2019,
+      "questionCount": 45,
+      "provider": "Janison Solutions",
+      "evidenceType": "same-paper-complete-answer-sequence",
+      "evidencePage": 39,
+      "evidenceText": "Results page 37 enumerates Q1-30; page 38 enumerates Q31-45; completion page states mark / 45.",
+      "reviewNote": "Exact source binary independently reviewed. Consecutive results pages provide the entire question-number and correct-answer sequence from Q1 to Q45, and the completion page confirms a 45-mark denominator. Count verification does not imply answer-map release."
     }
   ]
 }
