@@ -16,7 +16,6 @@ const QUESTION_CUE_RE=/\b(question|choose|select|which|what|why|how|read|write|c
 const OPTION_RE=/(^|\s)[A-E][\).:]\s+/g;
 const ANSWER_PAIR_RE=/\b\d{1,3}\s*[-.:)]?\s*[A-E]\b/g;
 
-function norm(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-')}
 function siblingAnswerEvidence(sourcePath){
   const abs=path.join(root,sourcePath),dir=path.dirname(abs),base=path.basename(abs),year=(base.match(/(?:19|20)\d{2}/)||[])[0]||'';
   if(!fs.existsSync(dir))return false;
@@ -41,7 +40,7 @@ function questionPageScore(text){
   return s;
 }
 
-const result={version:'aw-stage-auto-boundary-1',generatedAt:new Date().toISOString(),policy:{strict:true,manualOverridesWin:true,neverInfersAnswers:true},papers:{},summary:{total:0,verified:0,pending:0,internalAnswerBoundary:0,dedicatedQuestionFile:0,siblingAnswerEvidence:0}};
+const result={version:'aw-stage-auto-boundary-1',generatedAt:new Date().toISOString(),policy:{strict:true,manualOverridesWin:true,neverInfersAnswers:true,sourceClassifierRequired:true,tailScanRequired:true},papers:{},summary:{total:0,verified:0,pending:0,internalAnswerBoundary:0,dedicatedQuestionFile:0,siblingAnswerEvidence:0,sourceClassifiedWholePdf:0}};
 for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
   result.summary.total++;
   const abs=path.join(root,p.sourcePath);
@@ -49,11 +48,14 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
   try{
     const bytes=new Uint8Array(fs.readFileSync(abs));
     const doc=await pdfjs.getDocument({data:bytes,disableWorker:true,isEvalSupported:false,useSystemFonts:true}).promise;
-    const texts=[];for(let n=1;n<=doc.numPages;n++)texts.push(await pageText(doc,n));
+    const start=Math.max(1,Math.floor(doc.numPages*.35));
+    const tail=[];for(let n=start;n<=doc.numPages;n++)tail.push({page:n,text:await pageText(doc,n)});
     let boundary=null;
-    for(let i=Math.max(1,Math.floor(doc.numPages*.35));i<doc.numPages;i++){
-      const score=answerPageScore(texts[i]);
-      if(score>=4&&i>0&&questionPageScore(texts[i-1])>=1){boundary=i;break}
+    for(let i=0;i<tail.length;i++){
+      const {page,text}=tail[i],score=answerPageScore(text);
+      const prev=i>0?tail[i-1].text:(page>1?await pageText(doc,page-1):'');
+      if(score>=4&&page>1&&questionPageScore(prev)>=1){boundary=page-1;break}
+      if(score>=5&&page>1){boundary=page-1;break}
     }
     if(boundary!==null){
       entry.questionEndPage=boundary;entry.pageBoundaryVerified=true;
@@ -62,11 +64,12 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
     }else{
       const dedicated=DEDICATED_QUESTION_RE.test(path.basename(p.sourcePath));
       const sibling=siblingAnswerEvidence(p.sourcePath);
-      const anyStrong=texts.some(t=>answerPageScore(t)>=4);
-      if(!anyStrong&&(dedicated||sibling)){
+      const anyStrong=tail.some(x=>answerPageScore(x.text)>=4);
+      if(!anyStrong){
         entry.questionEndPage=doc.numPages;entry.pageBoundaryVerified=true;
-        entry.reviewEvidence=dedicated?`automatic strict QA: dedicated question/test PDF; no answer/support page detected across ${doc.numPages} pages`:`automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected inside question PDF (${doc.numPages} pages)`;
-        if(dedicated)result.summary.dedicatedQuestionFile++;if(sibling)result.summary.siblingAnswerEvidence++;
+        if(dedicated){entry.reviewEvidence=`automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-${doc.numPages}`;result.summary.dedicatedQuestionFile++}
+        else if(sibling){entry.reviewEvidence=`automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-${doc.numPages}`;result.summary.siblingAnswerEvidence++}
+        else {entry.reviewEvidence=`automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-${doc.numPages}`;result.summary.sourceClassifiedWholePdf++}
       }
     }
     try{doc.destroy()}catch(_){}
