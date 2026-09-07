@@ -34,6 +34,19 @@
       "evidencePage": 17,
       "evidenceText": "Question Number Papers A & B 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45",
       "reviewNote": "Exact source binary independently reviewed. Embedded answer key page 16 labels Papers A & B and enumerates Q1-30; page 17 continues the same Papers A & B column from Q31 through Q45. This proves the A/B paper contains 45 questions. Auto-scoring is not implied by count verification."
+    },
+    {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2014.pdf",
+      "sha256": "5caf8d1befe172f30558ed03509a2926ab905055b9b3bcb91fa4cf3ade5b47ee",
+      "stage": "icas-y4",
+      "subject": "English",
+      "year": 2014,
+      "questionCount": 45,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "same-paper-explicit-cover-total-and-terminal-range",
+      "evidencePage": 1,
+      "evidenceText": "There are 45 MULTIPLE-CHOICE QUESTIONS (1-45).",
+      "reviewNote": "Exact source binary independently reviewed. The learner paper opening page explicitly states there are 45 multiple-choice questions and gives the complete range 1-45. This supersedes the earlier weaker subsection-range heuristic. Auto-scoring and progression credit remain separately gated."
     }
   ]
 }
