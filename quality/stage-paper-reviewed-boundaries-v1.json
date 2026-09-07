@@ -1,0 +1,26 @@
+{
+  "version": "aw-stage-paper-reviewed-boundaries-v1",
+  "policy": {
+    "paperSpecificOnly": true,
+    "sameBinaryEvidenceRequired": true,
+    "practicePagesExcludedFromLearnerMode": true,
+    "answerPagesExcludedFromLearnerMode": true,
+    "automaticBoundaryMayBeNarrowedByReviewedEvidence": true
+  },
+  "overrides": [
+    {
+      "sourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Numeracy.pdf",
+      "sha256": "72c84d1b0bf8f625ac5d31a72929bc64d0c8ba95c594a41266156d97ec226083",
+      "stage": "naplan-y3",
+      "subject": "Numeracy",
+      "year": null,
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "provider": "ACARA",
+      "evidenceType": "same-paper-explicit-stop-end-of-test",
+      "evidencePage": 14,
+      "terminalQuestion": 35,
+      "reviewNote": "Page 14 contains question 35 followed by STOP – END OF TEST. Page 15 says Do not write on this page and page 16 contains PRACTICE QUESTIONS P1/P2, so learner navigation must stop at page 14."
+    }
+  ]
+}
