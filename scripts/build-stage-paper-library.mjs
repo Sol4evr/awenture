@@ -22,6 +22,7 @@ const requiredSubjects={
   'oc-prep':['Reading','Mathematical Reasoning','Thinking Skills']
 };
 const activeStages=new Set(Object.keys(stageLabels));
+const delivery='github-source-proxy-v1';
 
 function walk(dir,out=[]){
   if(!fs.existsSync(dir))return out;
@@ -79,15 +80,13 @@ function excludedResource(name){
 }
 function explicitQuestion(name){return /question|test|paper|prompt|sample|practice|assessment/.test(norm(name))&&!excludedResource(name)}
 function safeQuestionFile(p,stage){
-  const name=path.basename(p),n=norm(name),r=norm(rel(p));
+  const name=path.basename(p),r=norm(rel(p));
   if(excludedResource(name))return false;
-  // ICAS Year 3/4 source folders are already subject-scoped past-paper collections.
-  // Treat every materialised PDF in those folders as a learner paper unless it is explicitly a support/answer resource.
   if(stage==='icas-y3'||stage==='icas-y4')return subjectOf(r)!=='Other';
   if(stage==='oc-prep')return explicitQuestion(name);
   if(stage==='naplan-y3'){
     if(!/year[ _-]?3|year 3/.test(r))return false;
-    return /language convention|numeracy|reading|writing prompt|writing test/.test(n)||explicitQuestion(name);
+    return /language convention|numeracy|reading|writing prompt|writing test/.test(norm(name))||explicitQuestion(name);
   }
   return false;
 }
@@ -96,10 +95,10 @@ function titleFor(p,subject){
   const base=path.basename(p,'.pdf').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim();
   return y?`${y} ${subject}`:`${subject} · ${base}`;
 }
-function assetName(r){return `${crypto.createHash('sha1').update(r).digest('hex').slice(0,12)}.pdf`}
+function paperUrl(r){return `/api/paper?path=${encodeURIComponent(r)}`}
 
 const files=walk(sourceRoot);
-const catalog={release:'6.18.2',mode:'stage-formal-lite-v2',generatedAtBuild:true,requiredSubjects,stages:{},summary:{sourcePdfs:files.length,activated:0,pending:0,ignoredFuture:0}};
+const catalog={release:'6.18.2',mode:'stage-formal-lite-v2',delivery,generatedAtBuild:true,requiredSubjects,stages:{},summary:{sourcePdfs:files.length,activated:0,pending:0,ignoredFuture:0,deployedPdfCopies:0}};
 for(const id of activeStages)catalog.stages[id]={id,label:stageLabels[id],papers:[],pending:0,subjects:requiredSubjects[id]};
 
 for(const p of files){
@@ -112,13 +111,12 @@ for(const p of files){
   if(!isPdf(p)){
     catalog.stages[stage].pending++;catalog.summary.pending++;continue;
   }
-  const subject=subjectOf(r),asset=assetName(r),dest=path.join(outRoot,asset);
-  fs.copyFileSync(p,dest);
+  const subject=subjectOf(r);
   catalog.stages[stage].papers.push({
     id:crypto.createHash('sha1').update(r).digest('hex').slice(0,16),
     stage,subject,year:yearOf(path.basename(p)),title:titleFor(p,subject),
-    sourcePath:r,assetPath:`/stage-papers/${asset}`,pageCount:null,
-    scoring:'source-review',answerReference:false,provenance:provenanceOf(r),viewer:'lite-url-pdfjs'
+    sourcePath:r,assetPath:paperUrl(r),pageCount:null,
+    delivery,scoring:'source-review',answerReference:false,provenance:provenanceOf(r),viewer:'lite-url-pdfjs'
   });
   catalog.summary.activated++;
 }
@@ -128,4 +126,4 @@ for(const [stage,st] of Object.entries(catalog.stages)){
   st.missingSubjects=requiredSubjects[stage].filter(s=>!present.has(s));
 }
 fs.writeFileSync(path.join(outRoot,'catalog.json'),JSON.stringify(catalog,null,2)+'\n');
-console.log(JSON.stringify({stagePaperLibrary:'PASS',mode:catalog.mode,...catalog.summary,stages:Object.fromEntries(Object.entries(catalog.stages).map(([k,v])=>[k,{activated:v.papers.length,pending:v.pending,missingSubjects:v.missingSubjects}]))}));
+console.log(JSON.stringify({stagePaperLibrary:'PASS',mode:catalog.mode,delivery,...catalog.summary,stages:Object.fromEntries(Object.entries(catalog.stages).map(([k,v])=>[k,{activated:v.papers.length,pending:v.pending,missingSubjects:v.missingSubjects}]))}));
