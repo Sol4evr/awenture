@@ -41,6 +41,7 @@ function questionPageScore(text){
 }
 
 const result={version:'aw-stage-auto-boundary-1',generatedAt:new Date().toISOString(),policy:{strict:true,manualOverridesWin:true,neverInfersAnswers:true,sourceClassifierRequired:true,tailScanRequired:true},papers:{},summary:{total:0,verified:0,pending:0,internalAnswerBoundary:0,dedicatedQuestionFile:0,siblingAnswerEvidence:0,sourceClassifiedWholePdf:0}};
+const unresolved=[];
 for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
   result.summary.total++;
   const abs=path.join(root,p.sourcePath);
@@ -70,12 +71,13 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
         if(dedicated){entry.reviewEvidence=`automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-${doc.numPages}`;result.summary.dedicatedQuestionFile++}
         else if(sibling){entry.reviewEvidence=`automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-${doc.numPages}`;result.summary.siblingAnswerEvidence++}
         else {entry.reviewEvidence=`automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-${doc.numPages}`;result.summary.sourceClassifiedWholePdf++}
-      }
+      }else entry.reviewEvidence='automatic QA pending: ambiguous answer/support markers remain in document tail';
     }
     try{doc.destroy()}catch(_){}
   }catch(err){entry.reviewEvidence=`automatic QA pending: ${String(err?.message||err).slice(0,180)}`}
   result.papers[p.sourcePath]=entry;
-  if(entry.pageBoundaryVerified)result.summary.verified++;else result.summary.pending++;
+  if(entry.pageBoundaryVerified)result.summary.verified++;else{result.summary.pending++;unresolved.push({sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,reason:entry.reviewEvidence})}
 }
+result.unresolved=unresolved;
 fs.writeFileSync(outPath,JSON.stringify(result,null,2)+'\n');
-console.log(JSON.stringify({stageBoundaryQA:'PASS',...result.summary}));
+console.log(JSON.stringify({stageBoundaryQA:'PASS',...result.summary,unresolved}));
