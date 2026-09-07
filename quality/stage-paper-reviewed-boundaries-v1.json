@@ -36,6 +36,20 @@
       "evidencePage": 16,
       "terminalQuestion": 45,
       "reviewNote": "Automatic boundary page 11 was a false positive. Same binary cover states 45 QUESTIONS and 45 MULTIPLE-CHOICE QUESTIONS (1-45). Pages 12-14 continue learner material, including questions 36-45; page 15 is the final branded blank learner-side page; page 16 begins the complete 1-45 answer key. Learner navigation therefore ends at page 15 and must not truncate questions 36-45."
+    },
+    {
+      "sourcePath": "source/original-icas/year3/English A/English A 2014.pdf",
+      "sha256": "9a0fb6606fafd55a3ac1aab4cffff681c71e8b860139ed1c22519f4d17aba177",
+      "stage": "icas-y3",
+      "subject": "English",
+      "year": 2014,
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+      "evidencePage": 15,
+      "terminalQuestion": 45,
+      "reviewNote": "Automatic boundary was truncated around the first half of the paper. The exact source cover states 45 QUESTIONS and 45 MULTIPLE-CHOICE QUESTIONS (1-45). Subsequent learner sections continue through questions 22-27, 28-34, 35-41 and 42-45 on pages 8-14. Page 15 begins the ICAS English answer-key table. Learner navigation therefore ends at page 14."
     }
   ]
 }
