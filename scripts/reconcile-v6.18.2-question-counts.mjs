@@ -16,7 +16,17 @@ function filenameCount(sourcePath){const base=path.basename(sourcePath);const nu
 function supportMatchesSubject(sourcePath,supportPath,p){if(!supportPath)return true;const n=norm(supportPath),tokens=subjectTokens(p.subject);if(tokens.some(t=>n.includes(t)))return true;const srcStem=norm(path.basename(sourcePath,'.pdf')).replace(/\b(?:answers?|solutions?|questions?|paper|test|practice|sample|with|without|no)\b/g,'').trim();const supStem=norm(path.basename(supportPath,'.pdf')).replace(/\b(?:answers?|solutions?|questions?|paper|test|practice|sample|with|without|no)\b/g,'').trim();return !!(srcStem&&supStem&&(srcStem.includes(supStem)||supStem.includes(srcStem)))}
 function sequenceCoverage(e){if(typeof e?.evidence?.coverage==='number')return e.evidence.coverage;if(typeof e?.evidence?.evidence?.coverage==='number')return e.evidence.evidence.coverage;return null}
 function reset(e,reason){e.questionCount=null;e.questionCountVerified=false;e.method=null;e.evidence=`question-count QA pending: ${reason}`}
-let revokedCrossSubject=0,revokedWeakSequence=0,revokedWeakTail=0,filenameVerified=0,sourceIdentityVerified=0;
+const propagatedMethods=new Set(['duplicate-binary-match','same-source-identity-match']);
+function hasIndependentVerifiedProvenance(src,seen=new Set()){
+  if(seen.has(src))return false;seen.add(src);
+  const e=qa.papers?.[src];if(!e?.questionCountVerified)return false;
+  if(!propagatedMethods.has(e.method))return true;
+  const ref=e?.evidence?.matchingSourcePath;if(!ref)return false;
+  const r=qa.papers?.[ref];if(!r?.questionCountVerified||r.questionCount!==e.questionCount)return false;
+  if(e.method==='duplicate-binary-match'&&e.sha256&&r.sha256&&e.sha256!==r.sha256)return false;
+  return hasIndependentVerifiedProvenance(ref,seen);
+}
+let revokedCrossSubject=0,revokedWeakSequence=0,revokedWeakTail=0,revokedInvalidPropagation=0,filenameVerified=0,sourceIdentityVerified=0;
 for(const [src,e] of Object.entries(qa.papers||{})){
   const p=meta.get(src);if(!p)continue;
   const supportPath=e?.evidence?.supportPath;
@@ -31,16 +41,27 @@ for(const [src,e] of Object.entries(qa.papers||{})){
   }
   if(!e.questionCountVerified){const f=filenameCount(src);if(f){e.questionCount=f.count;e.questionCountVerified=true;e.method='filename-explicit-question-range';e.evidence=f.evidence;filenameVerified++}}
 }
+// Propagated counts are only valid while their provenance still resolves to an independently verified source.
+// This catches stale duplicate-binary or source-identity records whose upstream evidence was revoked above.
+let propagationChanged=true;
+while(propagationChanged){propagationChanged=false;for(const [src,e] of Object.entries(qa.papers||{})){if(!e?.questionCountVerified||!propagatedMethods.has(e.method))continue;if(!hasIndependentVerifiedProvenance(src)){reset(e,'propagated count has no surviving independently verified source');revokedInvalidPropagation++;propagationChanged=true}}}
 // Same source identity can appear in duplicate collection folders with different binary packaging.
 // Promote only exact same stage + subject + year + normalized filename when at least one independently
-// verified copy exists and every verified copy agrees. Question-page boundaries must also agree.
+// verified copy exists and every independently verified copy agrees. Question-page boundaries must also agree.
 const boundaryPath=path.join(root,'dist/stage-papers/auto-boundary-verification.json');
 const bounds=fs.existsSync(boundaryPath)?JSON.parse(fs.readFileSync(boundaryPath,'utf8')):{papers:{}};
 const groups=new Map();
 for(const p of papers){const b=bounds.papers?.[p.sourcePath];const base=norm(path.basename(p.sourcePath,'.pdf'));const key=[p.stage,p.subject,p.year||'',base,b?.questionEndPage||''].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(p.sourcePath)}
 for(const srcs of groups.values()){
-  if(srcs.length<2)continue;const verified=[...new Set(srcs.map(s=>qa.papers?.[s]).filter(e=>e?.questionCountVerified).map(e=>e.questionCount))];if(verified.length!==1)continue;const count=verified[0],ref=srcs.find(s=>qa.papers?.[s]?.questionCountVerified);for(const s of srcs){const e=qa.papers?.[s];if(!e||e.questionCountVerified)continue;e.questionCount=count;e.questionCountVerified=true;e.method='same-source-identity-match';e.evidence={matchingSourcePath:ref};sourceIdentityVerified++}}
-qa.version='aw-stage-question-count-6-strict';qa.policy={...(qa.policy||{}),crossSubjectSupportForbidden:true,weakSequenceForbidden:true,minimumSequenceCoverage:.95,minimumStrongTailCoverage:.8,filenameExplicitRangeAllowed:true,sameSourceIdentityPropagation:true,subjectDefaultForbidden:true};qa.summary={...(qa.summary||{}),revokedCrossSubject,revokedWeakSequence,revokedWeakTail,filenameVerified,sourceIdentityVerified};qa.summary.verified=Object.values(qa.papers||{}).filter(e=>e.questionCountVerified).length;qa.summary.total=papers.length;qa.summary.pending=qa.summary.total-qa.summary.verified;qa.unresolved=[];for(const p of papers){const e=qa.papers?.[p.sourcePath];if(!e?.questionCountVerified)qa.unresolved.push({sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,year:p.year,reason:e?.evidence||'question-count QA pending'})}
+  if(srcs.length<2)continue;
+  const trusted=srcs.filter(s=>qa.papers?.[s]?.questionCountVerified&&hasIndependentVerifiedProvenance(s));
+  const verified=[...new Set(trusted.map(s=>qa.papers[s].questionCount))];if(verified.length!==1)continue;
+  const count=verified[0],ref=trusted.find(s=>qa.papers?.[s]?.questionCountVerified);if(!ref)continue;
+  for(const s of srcs){const e=qa.papers?.[s];if(!e||e.questionCountVerified)continue;e.questionCount=count;e.questionCountVerified=true;e.method='same-source-identity-match';e.evidence={matchingSourcePath:ref};sourceIdentityVerified++}
+}
+// Re-check any newly propagated source-identity matches.
+for(const [src,e] of Object.entries(qa.papers||{})){if(e?.questionCountVerified&&propagatedMethods.has(e.method)&&!hasIndependentVerifiedProvenance(src)){reset(e,'propagated count has no surviving independently verified source');revokedInvalidPropagation++}}
+qa.version='aw-stage-question-count-7-strict-provenance';qa.policy={...(qa.policy||{}),crossSubjectSupportForbidden:true,weakSequenceForbidden:true,minimumSequenceCoverage:.95,minimumStrongTailCoverage:.8,filenameExplicitRangeAllowed:true,sameSourceIdentityPropagation:true,propagatedEvidenceRequiresIndependentVerifiedSource:true,subjectDefaultForbidden:true};qa.summary={...(qa.summary||{}),revokedCrossSubject,revokedWeakSequence,revokedWeakTail,revokedInvalidPropagation,filenameVerified,sourceIdentityVerified};qa.summary.verified=Object.values(qa.papers||{}).filter(e=>e.questionCountVerified).length;qa.summary.total=papers.length;qa.summary.pending=qa.summary.total-qa.summary.verified;qa.unresolved=[];for(const p of papers){const e=qa.papers?.[p.sourcePath];if(!e?.questionCountVerified)qa.unresolved.push({sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,year:p.year,reason:e?.evidence||'question-count QA pending'})}
 fs.writeFileSync(verifyPath,JSON.stringify(qa,null,2)+'\n');
 const unresolvedByStageSubject={};for(const u of qa.unresolved){const k=`${u.stage}|${u.subject}`;unresolvedByStageSubject[k]=(unresolvedByStageSubject[k]||0)+1}
-console.log(JSON.stringify({release:'6.18.2',strictQuestionCountReconciliation:'PASS',verified:qa.summary.verified,pending:qa.summary.pending,revokedCrossSubject,revokedWeakSequence,revokedWeakTail,filenameVerified,sourceIdentityVerified,unresolvedByStageSubject}));
+console.log(JSON.stringify({release:'6.18.2',strictQuestionCountReconciliation:'PASS',verified:qa.summary.verified,pending:qa.summary.pending,revokedCrossSubject,revokedWeakSequence,revokedWeakTail,revokedInvalidPropagation,filenameVerified,sourceIdentityVerified,unresolvedByStageSubject}));
