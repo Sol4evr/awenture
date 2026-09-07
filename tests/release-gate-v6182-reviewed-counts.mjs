@@ -1,0 +1,9 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const qa=JSON.parse(fs.readFileSync(path.join(root,'dist/stage-papers/auto-question-count-verification.json'),'utf8'));
+const review=JSON.parse(fs.readFileSync(path.join(root,'quality/stage-paper-question-count-reviewed-evidence-v1.json'),'utf8'));
+if(review.version!=='aw-stage-paper-reviewed-count-evidence-v1')throw new Error('review manifest version mismatch');
+const seen=new Set();for(const r of review.evidence||[]){if(seen.has(r.sourcePath))throw new Error(`duplicate reviewed evidence: ${r.sourcePath}`);seen.add(r.sourcePath);const e=qa.papers?.[r.sourcePath];if(!e?.questionCountVerified||e.questionCount!==r.questionCount)throw new Error(`reviewed evidence not applied exactly: ${r.sourcePath}`);if(e.method!=='reviewed-official-answer-sheet')throw new Error(`reviewed evidence method mismatch: ${r.sourcePath}`);if(e.evidence?.reviewManifest!=='quality/stage-paper-question-count-reviewed-evidence-v1.json')throw new Error(`reviewed manifest provenance missing: ${r.sourcePath}`);if(e.evidence?.sourceUrl!==r.sourceUrl||e.evidence?.provider!==r.provider)throw new Error(`reviewed provenance mismatch: ${r.sourcePath}`);if(!/^https:\/\/(?:www\.)?acara\.edu\.au\//i.test(r.sourceUrl)||r.provider!=='ACARA')throw new Error(`non-official reviewed source: ${r.sourcePath}`)}
+console.log(JSON.stringify({release:'6.18.2',reviewedOfficialCountGate:'PASS',papers:seen.size,subjectDefaults:'FORBIDDEN',autoScoringImplied:false,progressionCreditImplied:false}));
