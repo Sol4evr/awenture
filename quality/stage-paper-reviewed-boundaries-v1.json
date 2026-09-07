@@ -5,7 +5,8 @@
     "sameBinaryEvidenceRequired": true,
     "practicePagesExcludedFromLearnerMode": true,
     "answerPagesExcludedFromLearnerMode": true,
-    "automaticBoundaryMayBeNarrowedByReviewedEvidence": true
+    "automaticBoundaryMayBeNarrowedByReviewedEvidence": true,
+    "automaticBoundaryMayBeExpandedOnlyByShaPinnedExactSourceCorrection": true
   },
   "overrides": [
     {
@@ -21,6 +22,20 @@
       "evidencePage": 14,
       "terminalQuestion": 35,
       "reviewNote": "Page 14 contains question 35 followed by STOP – END OF TEST. Page 15 says Do not write on this page and page 16 contains PRACTICE QUESTIONS P1/P2, so learner navigation must stop at page 14."
+    },
+    {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2015.pdf",
+      "sha256": "7636d8eed9d040b602d3098f7795c6ec2897ca1543433c070992bb8bdfadbb2c",
+      "stage": "icas-y4",
+      "subject": "English",
+      "year": 2015,
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+      "evidencePage": 16,
+      "terminalQuestion": 45,
+      "reviewNote": "Automatic boundary page 11 was a false positive. Same binary cover states 45 QUESTIONS and 45 MULTIPLE-CHOICE QUESTIONS (1-45). Pages 12-14 continue learner material, including questions 36-45; page 15 is the final branded blank learner-side page; page 16 begins the complete 1-45 answer key. Learner navigation therefore ends at page 15 and must not truncate questions 36-45."
     }
   ]
 }
