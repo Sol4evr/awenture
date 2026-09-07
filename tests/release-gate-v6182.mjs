@@ -19,7 +19,7 @@ if(!js.includes("score:null,verified:false"))throw new Error('unverified later-s
 
 const catalog=JSON.parse(fs.readFileSync(path.join(dist,'stage-papers','catalog.json'),'utf8'));
 if(catalog.release!=='6.18.2'||catalog.mode!=='stage-formal-lite-v2')throw new Error('stage formal catalog v2 missing');
-const remote=catalog.delivery==='github-source-proxy-v1';
+const remote=catalog.delivery==='github-source-proxy-v2-allowlist';
 const required={
   'icas-y3':['Digital Technologies','English','Mathematics','Science','Spelling','Writing'],
   'icas-y4':['Digital Technologies','English','Mathematics','Science','Spelling','Writing'],
@@ -32,7 +32,7 @@ for(const [stage,subjects] of Object.entries(required)){
   for(const subject of subjects)if(!present.has(subject))throw new Error(`${stage} missing ${subject} paper section`);
   for(const p of papers){
     if(remote){
-      if(p.delivery!=='github-source-proxy-v1'||!p.sourcePath?.startsWith('source/')||!String(p.assetPath||'').startsWith('/api/paper?path='))throw new Error(`invalid remote paper delivery contract ${p.sourcePath}`);
+      if(p.delivery!==catalog.delivery||!p.sourcePath?.startsWith('source/')||p.assetPath!==`/api/paper?id=${encodeURIComponent(p.id)}`)throw new Error(`invalid allowlisted paper delivery contract ${p.sourcePath}`);
     }else{
       const asset=path.join(dist,p.assetPath.replace(/^\//,''));
       if(!fs.existsSync(asset))throw new Error(`missing stage paper asset ${p.assetPath}`);
