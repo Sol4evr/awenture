@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run test:release",
+  "buildCommand": "npm run test:release && node scripts/check-deployment-size.mjs",
   "outputDirectory": "dist",
   "cleanUrls": true,
   "headers": [
@@ -16,7 +16,8 @@
   ],
   "git": {
     "deploymentEnabled": {
-      "main": true
+      "main": true,
+      "*": false
     }
   },
   "github": {
