@@ -27,6 +27,8 @@ for(const [src,e] of Object.entries(qa.papers||{})){
     const reason=ev.reason;
     if(reason==='same-PDF answer section with strong answer-number sequence'){
       if(!ev.answerHeading||!ev.answer||ev.answer.max!==e.questionCount||ev.answer.coverage<.8||ev.answer.head<2||ev.answer.tail<5)throw new Error(`weak second-pass answer evidence: ${src}`);
+      const learnerMax=Number.isInteger(ev?.learner?.max)?ev.learner.max:null;
+      if(learnerMax!==e.questionCount&&ev.terminalRange!==e.questionCount)throw new Error(`learner/answer terminal-count conflict survived strict gate: ${src}`);
     }else if(reason==='learner sequence with strong head/tail and terminal-page placement'){
       if(!ev.learner||ev.learner.max!==e.questionCount||ev.learner.coverage<.65||ev.learner.head<2||ev.learner.tail<5||ev.pageWithMax<Math.max(1,Math.ceil(ev.pageEnd*.65)))throw new Error(`weak second-pass learner evidence: ${src}`);
     }else if(reason==='explicit terminal range in learner paper'){
@@ -36,4 +38,4 @@ for(const [src,e] of Object.entries(qa.papers||{})){
   if(e.questionCountVerified&&/q(?:uestion)?s?\s*\d{1,3}\s*[-–—]\s*\d{1,3}.*q(?:uestion)?s?\s*\d{1,3}\s*[-–—]\s*\d{1,3}/i.test(path.basename(src))&&e.method==='filename-explicit-question-range')throw new Error(`discontinuous partial paper treated as full count: ${src}`);
 }
 for(const bad of ['source/original-icas/year3/Digital A/Digital AB 2012.pdf','source/original-icas/year3/English A/English A 2012.pdf','source/original-icas/year3/Maths A/Maths A 2017.pdf','source/original-icas/year3/Science A/Science A 2017.pdf'])if(qa.papers?.[bad]?.questionCountVerified)throw new Error(`known cross-subject false match survived strict gate: ${bad}`);
-console.log(JSON.stringify({release:'6.18.2',strictQuestionCountGate:'PASS',verified:qa.summary.verified,pending:qa.summary.pending,crossSubjectSupport:'FORBIDDEN',weakSequence:'FORBIDDEN',orphanedPropagation:'FORBIDDEN',partialPaperAsFullCount:'FORBIDDEN',secondPassSamePaper:'GATED',subjectDefault:'FORBIDDEN'}));
+console.log(JSON.stringify({release:'6.18.2',strictQuestionCountGate:'PASS',verified:qa.summary.verified,pending:qa.summary.pending,crossSubjectSupport:'FORBIDDEN',weakSequence:'FORBIDDEN',orphanedPropagation:'FORBIDDEN',partialPaperAsFullCount:'FORBIDDEN',learnerAnswerCountConflict:'FORBIDDEN',secondPassSamePaper:'GATED',subjectDefault:'FORBIDDEN'}));
