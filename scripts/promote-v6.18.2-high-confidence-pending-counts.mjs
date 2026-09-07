@@ -7,7 +7,7 @@ const diagPath=path.join(root,'dist/stage-papers/pending-question-count-diagnost
 if(!fs.existsSync(qaPath)||!fs.existsSync(diagPath))throw new Error('high-confidence promotion requires strict QA + pending diagnostic');
 const qa=JSON.parse(fs.readFileSync(qaPath,'utf8'));
 const diag=JSON.parse(fs.readFileSync(diagPath,'utf8'));
-let promoted=0,skipped=0;
+let promoted=0,skipped=0,blockedLearnerAnswerConflict=0;
 for(const c of diag.candidates||[]){
   if(c?.tier!=='A'){skipped++;continue}
   const e=qa.papers?.[c.sourcePath];
@@ -17,6 +17,12 @@ for(const c of diag.candidates||[]){
   if(!allowedReasons.has(c.reason))throw new Error(`unrecognised Tier A reason: ${c.sourcePath}`);
   if(c.reason==='same-PDF answer section with strong answer-number sequence'){
     if(!c.answerHeading||!c.answer||c.answer.max!==c.count||c.answer.coverage<.8||c.answer.head<2||c.answer.tail<5)throw new Error(`weak same-PDF answer evidence: ${c.sourcePath}`);
+    // Y2-equivalent governance: an answer-section maximum cannot overrule contradictory
+    // learner-side evidence. Require learner corroboration of the same terminal count, or an
+    // explicit learner terminal range. Otherwise keep the paper pending for source review.
+    const learnerMax=Number.isInteger(c?.learner?.max)?c.learner.max:null;
+    const corroborated=(learnerMax===c.count)||(c.terminalRange===c.count);
+    if(!corroborated){blockedLearnerAnswerConflict++;skipped++;continue}
   } else if(c.reason==='learner sequence with strong head/tail and terminal-page placement'){
     if(!c.learner||c.learner.max!==c.count||c.learner.coverage<.65||c.learner.head<2||c.learner.tail<5||c.pageWithMax<Math.max(1,Math.ceil(c.pageEnd*.65)))throw new Error(`weak learner terminal evidence: ${c.sourcePath}`);
   } else if(c.reason==='explicit terminal range in learner paper') {
@@ -24,8 +30,8 @@ for(const c of diag.candidates||[]){
   }
   e.questionCount=c.count;e.questionCountVerified=true;e.method='second-pass-same-paper-evidence';e.evidence={sourcePath:c.sourcePath,reason:c.reason,learner:c.learner||null,answer:c.answer||null,answerHeading:!!c.answerHeading,terminalRange:c.terminalRange||null,pageWithMax:c.pageWithMax||null,pageEnd:c.pageEnd||null};promoted++;
 }
-qa.summary={...(qa.summary||{}),secondPassPromoted:promoted};
+qa.summary={...(qa.summary||{}),secondPassPromoted:promoted,secondPassBlockedLearnerAnswerConflict:blockedLearnerAnswerConflict};
 qa.summary.verified=Object.values(qa.papers||{}).filter(e=>e.questionCountVerified).length;
 qa.summary.pending=(qa.summary.total||Object.keys(qa.papers||{}).length)-qa.summary.verified;
 fs.writeFileSync(qaPath,JSON.stringify(qa,null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',highConfidencePendingPromotion:'PASS',promoted,skipped,verified:qa.summary.verified,pending:qa.summary.pending}));
+console.log(JSON.stringify({release:'6.18.2',highConfidencePendingPromotion:'PASS',promoted,skipped,blockedLearnerAnswerConflict,verified:qa.summary.verified,pending:qa.summary.pending}));
