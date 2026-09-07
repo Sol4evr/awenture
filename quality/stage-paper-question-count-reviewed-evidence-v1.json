@@ -118,6 +118,17 @@
       "evidenceType": "official-year3-answer-sheet-column-end",
       "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2016-yr-3-paper-test-answers.pdf",
       "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+    },
+    {
+      "sourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Numeracy.pdf",
+      "stage": "naplan-y3",
+      "subject": "Numeracy",
+      "year": null,
+      "questionCount": 35,
+      "provider": "ACARA",
+      "evidenceType": "official-example-test-terminal-question",
+      "sourceUrl": "https://www.nap.edu.au/verve/_resources/Example_Test_Numeracy_Y3.pdf",
+      "reviewNote": "Official ACARA Year 3 Numeracy example test numbers learner questions through Q35 and then states STOP – END OF TEST. The source folder year is a collection location; the official PDF itself is the Year 3 example test."
     }
   ]
 }
