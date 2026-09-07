@@ -1,0 +1,26 @@
+{
+  "version": "aw-stage-paper-reviewed-source-count-evidence-v1",
+  "policy": {
+    "paperSpecificOnly": true,
+    "exactBinaryRequired": true,
+    "samePaperEvidenceOnly": true,
+    "subjectDefaultsForbidden": true,
+    "autoScoringNotImplied": true,
+    "progressionCreditNotImplied": true
+  },
+  "evidence": [
+    {
+      "sourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Numeracy.pdf",
+      "sha256": "72c84d1b0bf8f625ac5d31a72929bc64d0c8ba95c594a41266156d97ec226083",
+      "stage": "naplan-y3",
+      "subject": "Numeracy",
+      "year": null,
+      "questionCount": 35,
+      "provider": "ACARA",
+      "evidenceType": "same-paper-explicit-terminal-stop",
+      "evidencePage": 14,
+      "evidenceText": "Question 35 is followed by STOP – END OF TEST.",
+      "reviewNote": "Exact source binary independently reviewed. Page 14 contains Q35 followed by STOP – END OF TEST; later pages are non-test/practice material."
+    }
+  ]
+}
