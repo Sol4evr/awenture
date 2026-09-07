@@ -11,6 +11,7 @@ const catalog=JSON.parse(fs.readFileSync(catalogPath,'utf8'));
 
 const SUPPORT_RE=/answer|solution|worked|marking|mark scheme|rubric|criteria|explanation|commentary|analysis/i;
 const STRONG_HEAD_RE=/\b(answer\s*key|answers?|solutions?|worked\s+solutions?|marking\s+scheme|correct\s+answers?)\b/i;
+const NON_LEARNER_HEAD_RE=/\b(administration instructions|teacher instructions|instructions for teachers|marking instructions|answer key|worked solutions?)\b/i;
 const DEDICATED_QUESTION_RE=/\b(question|test|paper|practice|sample|assessment|prompt)\b/i;
 const QUESTION_CUE_RE=/\b(question|choose|select|which|what|why|how|read|write|calculate|number)\b/i;
 const OPTION_RE=/(^|\s)[A-E][\).:]\s+/g;
@@ -52,22 +53,23 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
     const doc=await pdfjs.getDocument({data:bytes,disableWorker:true,isEvalSupported:false,useSystemFonts:true}).promise;
     const start=Math.max(1,Math.floor(doc.numPages*.35));
     const tail=[];for(let n=start;n<=doc.numPages;n++)tail.push({page:n,text:await pageText(doc,n)});
-    evidence=tail.map(x=>({page:x.page,answerScore:answerPageScore(x.text),questionScore:questionPageScore(x.text),snippet:x.text.slice(0,180)})).filter(x=>x.answerScore>=3);
+    evidence=tail.map(x=>({page:x.page,answerScore:answerPageScore(x.text),questionScore:questionPageScore(x.text),snippet:x.text.slice(0,180)})).filter(x=>x.answerScore>=3||NON_LEARNER_HEAD_RE.test(x.text.slice(0,1400)));
     let boundary=null;
     for(let i=0;i<tail.length;i++){
       const {page,text}=tail[i],score=answerPageScore(text);
       const prev=i>0?tail[i-1].text:(page>1?await pageText(doc,page-1):'');
+      if(page>1&&NON_LEARNER_HEAD_RE.test(text.slice(0,1400))){boundary=page-1;break}
       if(score>=4&&page>1&&questionPageScore(prev)>=1){boundary=page-1;break}
       if(score>=5&&page>1){boundary=page-1;break}
     }
     if(boundary!==null){
       entry.questionEndPage=boundary;entry.pageBoundaryVerified=true;
-      entry.reviewEvidence=`automatic strict QA: answer/support section begins on PDF page ${boundary+1}; learner range 1-${boundary}`;
+      entry.reviewEvidence=`automatic strict QA: non-learner answer/administration/support section begins on PDF page ${boundary+1}; learner range 1-${boundary}`;
       result.summary.internalAnswerBoundary++;
     }else{
       const dedicated=DEDICATED_QUESTION_RE.test(path.basename(p.sourcePath));
       const sibling=siblingAnswerEvidence(p.sourcePath);
-      const anyStrong=tail.some(x=>answerPageScore(x.text)>=4);
+      const anyStrong=tail.some(x=>answerPageScore(x.text)>=4||NON_LEARNER_HEAD_RE.test(x.text.slice(0,1400)));
       if(!anyStrong){
         entry.questionEndPage=doc.numPages;entry.pageBoundaryVerified=true;
         if(dedicated){entry.reviewEvidence=`automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-${doc.numPages}`;result.summary.dedicatedQuestionFile++}
