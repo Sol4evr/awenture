@@ -37,6 +37,11 @@ function countEvidence(lines){
   const totals=[],ranges=[];
   for(const line of lines){
     const text=line.replace(/[–—]/g,'-');
+    const directPatterns=[
+      /\b(\d{1,3})\s+(?:questions?|items?)\b/ig,
+      /\b((?:\d\s*){1,3})\s+Q\s*U\s*E\s*S\s*T\s*I\s*O\s*N\s*S?\b/ig
+    ];
+    for(const re of directPatterns){let m;while((m=re.exec(text))){const raw=String(m[1]).replace(/\s+/g,'');const n=clampCount(raw);if(n)totals.push({n,line:text.slice(0,220),kind:'explicit-cover-total'})}}
     for(const re of [
       /\b(?:there (?:are|is)|contains?|consists? of)\s+(\d{1,3})\s+(?:questions?|items?)\b/ig,
       /\b(\d{1,3})\s+(?:questions?|items?)\s+(?:in total|altogether)\b/ig,
@@ -150,7 +155,7 @@ async function supportInference(sourcePath,p){
   return null;
 }
 
-const result={version:'aw-stage-question-count-4',generatedAt:new Date().toISOString(),policy:{paperSpecific:true,learnerPagesPreferred:true,supportPagesAllowedForCountVerification:true,separateAnswerKeysAllowedForIndependentCountEvidence:true,duplicateBinaryPropagation:true,strongTailInference:true,noSubjectDefaultForVerifiedAttempt:true,writingSingleResponse:true,sectionRangeAware:true,plausibilityFloor:true},papers:{},summary:{total:0,verified:0,pending:0,writing:0,learnerEvidence:0,fullDocumentEvidence:0,supportEvidence:0,sequence:0,strongTail:0,duplicateBinary:0},unresolved:[]};
+const result={version:'aw-stage-question-count-5-explicit-cover',generatedAt:new Date().toISOString(),policy:{paperSpecific:true,learnerPagesPreferred:true,supportPagesAllowedForCountVerification:true,separateAnswerKeysAllowedForIndependentCountEvidence:true,duplicateBinaryPropagation:true,strongTailInference:true,explicitCoverTotals:true,ocrSpacedCoverTotals:true,noSubjectDefaultForVerifiedAttempt:true,writingSingleResponse:true,sectionRangeAware:true,plausibilityFloor:true},papers:{},summary:{total:0,verified:0,pending:0,writing:0,learnerEvidence:0,fullDocumentEvidence:0,supportEvidence:0,sequence:0,strongTail:0,duplicateBinary:0},unresolved:[]};
 const paperList=[];
 for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[])paperList.push(p);
 for(const p of paperList){
@@ -183,8 +188,6 @@ for(const p of paperList){
   result.papers[p.sourcePath]=entry;
 }
 
-// Exact duplicate binaries are equivalent source evidence. Propagate only when every verified copy of
-// the same bytes agrees on the same count; conflicting duplicates remain unresolved and are reported.
 const byHash=new Map();
 for(const [src,e] of Object.entries(result.papers)){if(!e.sha256)continue;if(!byHash.has(e.sha256))byHash.set(e.sha256,[]);byHash.get(e.sha256).push([src,e])}
 for(const group of byHash.values()){
