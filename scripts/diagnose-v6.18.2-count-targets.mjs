@@ -10,7 +10,8 @@ const targets=[
  ['source/original-icas/year3/Digital A/Digital AB 2015.pdf','f291c91abf96cbfc7533ce1a7c1b0058c9b84ddad59e4c5e5d133034c16e97fd'],
  ['source/original-icas/year4/Digital yr 4/Digital AB 2015.pdf','bd16a5d7056221bd96d2a399e4ed3c8d249316f4c7bf945d6b5ad60e258ae540'],
  ['source/original-icas/year3/Spelling A/Spelling A 2016.pdf','250ea050d59c4044e5a98771e911a9255b918d23066bc7d9e368bfd5421383ce'],
- ['source/original-icas/year3/English A/English A 2014.pdf',null]
+ ['source/original-icas/year3/English A/English A 2014.pdf',null],
+ ['source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf',null]
 ];
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 async function pageText(doc,n){const pg=await doc.getPage(n),tc=await pg.getTextContent();return (tc.items||[]).map(x=>String(x.str||'').trim()).filter(Boolean).join(' ').replace(/\s+/g,' ').trim()}
@@ -21,5 +22,5 @@ function denom(text){const out=[];for(const m of String(text).matchAll(/(?:mark|
 function compact(s,n=1200){s=String(s||'').replace(/\s+/g,' ').trim();return s.length<=n?s:s.slice(0,n)}
 const rows=[];
 for(const [src,expected] of targets){const abs=path.join(root,src);if(!fs.existsSync(abs))throw new Error(`count target missing: ${src}`);const actual=sha(abs);if(expected&&actual!==expected)throw new Error(`count target SHA mismatch: ${src}`);const doc=await pdfjs.getDocument({data:new Uint8Array(fs.readFileSync(abs)),disableWorker:true,isEvalSupported:false,useSystemFonts:true}).promise;const pages=[];for(let n=1;n<=doc.numPages;n++){const text=await pageText(doc,n),ap=pairs(text),as=seq(ap),ds=denom(text);const answer=/\b(answer(?:s| key| keys| sheet)?|correct answer|solutions?)\b/i.test(text),results=/\bresults?\b|\bmark is\b|\bscore\b/i.test(text),cover=/TIME\s+ALLOWED|DO\s+NOT\s+OPEN|MULTIPLE[- ]?(?:CHOICE|GHOICE)|QUEST(?:I|T)ONS?/i.test(text);if(answer||results||as||ds.length||cover||n>=doc.numPages-2)pages.push({page:n,answer,results,cover,answerSequence:as,denominators:ds,numbers:genericNums(text),text:compact(text)})}rows.push({sourcePath:src,sha256:actual,totalPages:doc.numPages,pages});try{doc.destroy()}catch(_){}}
-const out={version:'aw-stage-count-target-diagnostic-v3-text',generatedAt:new Date().toISOString(),targets:rows};fs.writeFileSync(path.join(root,'dist/stage-papers/count-targets.json'),JSON.stringify(out,null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',countTargetDiagnostic:'PASS',version:'v3-text',targets:rows.map(r=>({sourcePath:r.sourcePath,sha256:r.sha256,totalPages:r.totalPages,pages:r.pages.map(p=>({page:p.page,answer:p.answer,results:p.results,cover:p.cover,answerSequence:p.answerSequence,denominators:p.denominators,numbers:p.numbers,text:compact(p.text,420)}))}))}));
+const out={version:'aw-stage-count-target-diagnostic-v4-y4-english-2019',generatedAt:new Date().toISOString(),targets:rows};fs.writeFileSync(path.join(root,'dist/stage-papers/count-targets.json'),JSON.stringify(out,null,2)+'\n');
+console.log(JSON.stringify({release:'6.18.2',countTargetDiagnostic:'PASS',version:'v4-y4-english-2019',targets:rows.map(r=>({sourcePath:r.sourcePath,sha256:r.sha256,totalPages:r.totalPages,pages:r.pages.map(p=>({page:p.page,answer:p.answer,results:p.results,cover:p.cover,answerSequence:p.answerSequence,denominators:p.denominators,numbers:p.numbers,text:compact(p.text,420)}))}))}));
