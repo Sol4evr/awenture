@@ -14,7 +14,7 @@ if(review.version!=='aw-stage-paper-reviewed-source-count-evidence-v1')throw new
 const meta=new Map();for(const s of Object.values(catalog.stages||{}))for(const p of s.papers||[])meta.set(p.sourcePath,p);
 function sha256(abs){return crypto.createHash('sha256').update(fs.readFileSync(abs)).digest('hex')}
 const allowedTypes=new Set(['same-paper-explicit-terminal-stop','same-paper-explicit-terminal-range','same-paper-complete-answer-sequence','same-paper-terminal-question-sequence']);
-let applied=0,alreadyVerified=0;
+let applied=0,upgradedExisting=0;
 for(const r of review.evidence||[]){
   const p=meta.get(r.sourcePath);if(!p)throw new Error(`reviewed source-count paper not in catalog: ${r.sourcePath}`);
   if(p.stage!==r.stage||p.subject!==r.subject||Number(p.year||0)!==Number(r.year||0))throw new Error(`reviewed source-count metadata mismatch: ${r.sourcePath}`);
@@ -25,10 +25,14 @@ for(const r of review.evidence||[]){
   if(!Number.isInteger(r.evidencePage)||r.evidencePage<1)throw new Error(`reviewed source-count evidence page required: ${r.sourcePath}`);
   if(typeof r.evidenceText!=='string'||r.evidenceText.trim().length<8)throw new Error(`reviewed source-count evidence text required: ${r.sourcePath}`);
   const e=qa.papers?.[r.sourcePath];if(!e)throw new Error(`QA entry missing: ${r.sourcePath}`);
-  if(e.questionCountVerified){if(e.questionCount!==r.questionCount)throw new Error(`reviewed source-count conflicts with existing verified count: ${r.sourcePath}`);alreadyVerified++;continue}
+  if(e.questionCountVerified&&e.questionCount!==r.questionCount)throw new Error(`reviewed source-count conflicts with existing verified count: ${r.sourcePath}`);
+  if(e.questionCountVerified)upgradedExisting++;else applied++;
+  // Exact-binary, same-paper reviewed evidence is the strongest provenance channel. If a weaker
+  // official/support inference already verified the same count, upgrade the provenance rather than
+  // silently retaining the weaker method. This makes overlapping evidence deterministic.
   e.questionCount=r.questionCount;e.questionCountVerified=true;e.method='reviewed-exact-source-evidence';
-  e.evidence={reviewManifest:'quality/stage-paper-question-count-reviewed-source-evidence-v1.json',sha256:r.sha256,provider:r.provider||null,evidenceType:r.evidenceType,evidencePage:r.evidencePage,evidenceText:r.evidenceText,reviewNote:r.reviewNote||null};applied++;
+  e.evidence={reviewManifest:'quality/stage-paper-question-count-reviewed-source-evidence-v1.json',sha256:r.sha256,provider:r.provider||null,evidenceType:r.evidenceType,evidencePage:r.evidencePage,evidenceText:r.evidenceText,reviewNote:r.reviewNote||null};
 }
-qa.summary={...(qa.summary||{}),reviewedExactSourceApplied:applied};qa.summary.verified=Object.values(qa.papers||{}).filter(e=>e.questionCountVerified).length;qa.summary.pending=(qa.summary.total||Object.keys(qa.papers||{}).length)-qa.summary.verified;
+qa.summary={...(qa.summary||{}),reviewedExactSourceApplied:applied,reviewedExactSourceUpgraded:upgradedExisting};qa.summary.verified=Object.values(qa.papers||{}).filter(e=>e.questionCountVerified).length;qa.summary.pending=(qa.summary.total||Object.keys(qa.papers||{}).length)-qa.summary.verified;
 fs.writeFileSync(qaPath,JSON.stringify(qa,null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',reviewedExactSourceCountEvidence:'PASS',applied,alreadyVerified,verified:qa.summary.verified,pending:qa.summary.pending}));
+console.log(JSON.stringify({release:'6.18.2',reviewedExactSourceCountEvidence:'PASS',applied,upgradedExisting,verified:qa.summary.verified,pending:qa.summary.pending}));
