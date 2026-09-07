@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const sourceRoot=path.join(root,'source');
 const outRoot=path.join(root,'dist','stage-papers');
+const proxyManifestPath=path.join(root,'api','paper-manifest.json');
 fs.rmSync(outRoot,{recursive:true,force:true});
 fs.mkdirSync(outRoot,{recursive:true});
 
@@ -22,7 +23,7 @@ const requiredSubjects={
   'oc-prep':['Reading','Mathematical Reasoning','Thinking Skills']
 };
 const activeStages=new Set(Object.keys(stageLabels));
-const delivery='github-source-proxy-v1';
+const delivery='github-source-proxy-v2-allowlist';
 
 function walk(dir,out=[]){
   if(!fs.existsSync(dir))return out;
@@ -95,7 +96,8 @@ function titleFor(p,subject){
   const base=path.basename(p,'.pdf').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim();
   return y?`${y} ${subject}`:`${subject} · ${base}`;
 }
-function paperUrl(r){return `/api/paper?path=${encodeURIComponent(r)}`}
+function paperId(r){return crypto.createHash('sha1').update(r).digest('hex').slice(0,16)}
+function paperUrl(id){return `/api/paper?id=${encodeURIComponent(id)}`}
 
 const files=walk(sourceRoot);
 const catalog={release:'6.18.2',mode:'stage-formal-lite-v2',delivery,generatedAtBuild:true,requiredSubjects,stages:{},summary:{sourcePdfs:files.length,activated:0,pending:0,ignoredFuture:0,deployedPdfCopies:0}};
@@ -111,11 +113,10 @@ for(const p of files){
   if(!isPdf(p)){
     catalog.stages[stage].pending++;catalog.summary.pending++;continue;
   }
-  const subject=subjectOf(r);
+  const subject=subjectOf(r),id=paperId(r);
   catalog.stages[stage].papers.push({
-    id:crypto.createHash('sha1').update(r).digest('hex').slice(0,16),
-    stage,subject,year:yearOf(path.basename(p)),title:titleFor(p,subject),
-    sourcePath:r,assetPath:paperUrl(r),pageCount:null,
+    id,stage,subject,year:yearOf(path.basename(p)),title:titleFor(p,subject),
+    sourcePath:r,assetPath:paperUrl(id),pageCount:null,
     delivery,scoring:'source-review',answerReference:false,provenance:provenanceOf(r),viewer:'lite-url-pdfjs'
   });
   catalog.summary.activated++;
@@ -125,5 +126,9 @@ for(const [stage,st] of Object.entries(catalog.stages)){
   const present=new Set(st.papers.map(p=>p.subject));
   st.missingSubjects=requiredSubjects[stage].filter(s=>!present.has(s));
 }
+const proxyPapers={};for(const st of Object.values(catalog.stages))for(const p of st.papers)proxyPapers[p.id]=p.sourcePath;
+if(Object.keys(proxyPapers).length!==catalog.summary.activated)throw new Error('Paper proxy manifest ID collision detected');
+fs.mkdirSync(path.dirname(proxyManifestPath),{recursive:true});
+fs.writeFileSync(proxyManifestPath,JSON.stringify({version:'aw-paper-proxy-manifest-v1',delivery,generatedAtBuild:true,papers:proxyPapers},null,2)+'\n');
 fs.writeFileSync(path.join(outRoot,'catalog.json'),JSON.stringify(catalog,null,2)+'\n');
-console.log(JSON.stringify({stagePaperLibrary:'PASS',mode:catalog.mode,delivery,...catalog.summary,stages:Object.fromEntries(Object.entries(catalog.stages).map(([k,v])=>[k,{activated:v.papers.length,pending:v.pending,missingSubjects:v.missingSubjects}]))}));
+console.log(JSON.stringify({stagePaperLibrary:'PASS',mode:catalog.mode,delivery,proxyAllowlist:Object.keys(proxyPapers).length,...catalog.summary,stages:Object.fromEntries(Object.entries(catalog.stages).map(([k,v])=>[k,{activated:v.papers.length,pending:v.pending,missingSubjects:v.missingSubjects}]))}));
