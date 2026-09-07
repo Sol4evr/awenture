@@ -13,7 +13,7 @@ const review=JSON.parse(fs.readFileSync(reviewPath,'utf8'));
 if(review.version!=='aw-stage-paper-reviewed-source-count-evidence-v1')throw new Error('reviewed source-count version mismatch');
 const meta=new Map();for(const s of Object.values(catalog.stages||{}))for(const p of s.papers||[])meta.set(p.sourcePath,p);
 function sha256(abs){return crypto.createHash('sha256').update(fs.readFileSync(abs)).digest('hex')}
-const allowedTypes=new Set(['same-paper-explicit-terminal-stop','same-paper-explicit-terminal-range','same-paper-complete-answer-sequence','same-paper-terminal-question-sequence']);
+const allowedTypes=new Set(['same-paper-explicit-terminal-stop','same-paper-explicit-terminal-range','same-paper-complete-answer-sequence','same-paper-terminal-question-sequence','same-paper-explicit-cover-total-and-terminal-range']);
 let applied=0,upgradedExisting=0;
 for(const r of review.evidence||[]){
   const p=meta.get(r.sourcePath);if(!p)throw new Error(`reviewed source-count paper not in catalog: ${r.sourcePath}`);
@@ -27,9 +27,6 @@ for(const r of review.evidence||[]){
   const e=qa.papers?.[r.sourcePath];if(!e)throw new Error(`QA entry missing: ${r.sourcePath}`);
   if(e.questionCountVerified&&e.questionCount!==r.questionCount)throw new Error(`reviewed source-count conflicts with existing verified count: ${r.sourcePath}`);
   if(e.questionCountVerified)upgradedExisting++;else applied++;
-  // Exact-binary, same-paper reviewed evidence is the strongest provenance channel. If a weaker
-  // official/support inference already verified the same count, upgrade the provenance rather than
-  // silently retaining the weaker method. This makes overlapping evidence deterministic.
   e.questionCount=r.questionCount;e.questionCountVerified=true;e.method='reviewed-exact-source-evidence';
   e.evidence={reviewManifest:'quality/stage-paper-question-count-reviewed-source-evidence-v1.json',sha256:r.sha256,provider:r.provider||null,evidenceType:r.evidenceType,evidencePage:r.evidencePage,evidenceText:r.evidenceText,reviewNote:r.reviewNote||null};
 }
