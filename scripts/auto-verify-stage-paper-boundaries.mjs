@@ -46,11 +46,13 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
   result.summary.total++;
   const abs=path.join(root,p.sourcePath);
   const entry={questionStartPage:1,questionEndPage:null,pageBoundaryVerified:false,reviewedBy:'AWenture automatic document QA',reviewedAt:new Date().toISOString(),reviewEvidence:null};
+  let evidence=[];
   try{
     const bytes=new Uint8Array(fs.readFileSync(abs));
     const doc=await pdfjs.getDocument({data:bytes,disableWorker:true,isEvalSupported:false,useSystemFonts:true}).promise;
     const start=Math.max(1,Math.floor(doc.numPages*.35));
     const tail=[];for(let n=start;n<=doc.numPages;n++)tail.push({page:n,text:await pageText(doc,n)});
+    evidence=tail.map(x=>({page:x.page,answerScore:answerPageScore(x.text),questionScore:questionPageScore(x.text),snippet:x.text.slice(0,180)})).filter(x=>x.answerScore>=3);
     let boundary=null;
     for(let i=0;i<tail.length;i++){
       const {page,text}=tail[i],score=answerPageScore(text);
@@ -76,7 +78,7 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
     try{doc.destroy()}catch(_){}
   }catch(err){entry.reviewEvidence=`automatic QA pending: ${String(err?.message||err).slice(0,180)}`}
   result.papers[p.sourcePath]=entry;
-  if(entry.pageBoundaryVerified)result.summary.verified++;else{result.summary.pending++;unresolved.push({sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,reason:entry.reviewEvidence})}
+  if(entry.pageBoundaryVerified)result.summary.verified++;else{result.summary.pending++;unresolved.push({sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,reason:entry.reviewEvidence,evidence})}
 }
 result.unresolved=unresolved;
 fs.writeFileSync(outPath,JSON.stringify(result,null,2)+'\n');
