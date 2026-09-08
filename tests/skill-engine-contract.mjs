@@ -17,6 +17,20 @@ if(new Set(out.map(q=>q.family)).size!==15)throw new Error('Duplicate families')
 if(!out.some(q=>q.subskill==='Unexplored skill'))throw new Error('Skill prioritisation did not prefer unexplored skills');
 const bad=engine.rebalance(existing.slice(0,14),bank,p,1,{familyKey:q=>q.family,recent:new Set()});
 if(bad.length!==14||bad.some((q,i)=>q!==existing[i]))throw new Error('Legacy fallback contract failed');
+
+const fnv=s=>{let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
+const required={English:6,Mathematics:6,Science:6};
+const plan=engine.coveragePlan('aw-topup-10-10-10-10-0',bank,p,required);
+if(!/-sg[0-9a-z]+$/.test(plan.requestKey))throw new Error('Coverage request nonce missing');
+for(const subject of ['English','Mathematics','Science']){
+  const focus=plan.focusSubskills[subject];
+  if(focus.length!==6)throw new Error(`Expected 6 coverage targets for ${subject}`);
+  const offset=fnv(`${plan.requestKey}|${subject}|recipe`)%12;
+  focus.forEach((target,i)=>{const mode=Number(target.match(/\|mode:(\d+)$/)?.[1]);if(mode!==(offset+i)%12)throw new Error(`Recipe alignment failed for ${subject} slot ${i}: ${mode} vs ${(offset+i)%12}`);if(!/^Y2\./.test(target))throw new Error(`Skill ID missing for ${subject}`)});
+}
+const explicit={subject:'Mathematics',subskill:'legacy label',quality:{focus:plan.focusSubskills.Mathematics[0]}};
+if(!engine.skillId(explicit).startsWith('Y2.MATH.'))throw new Error('Explicit coverage skill ID was not recovered from generated metadata');
+
 const patch=fs.readFileSync(new URL('../scripts/patch-v6.18.2-skill-graph.mjs',import.meta.url),'utf8');
-for(const marker of ['awLegacyPick','LEGACY_PLUS_SKILL_BALANCE','dailyQuestionCount:15','historicalPapers:\'UNCHANGED\''])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
-console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',visualProfile:'PASS',historicalIsolation:'PASS'}));
+for(const marker of ['awLegacyPick','STAGE_WEIGHTED_PLUS_SKILL_BALANCE','dailyQuestionCount:15','historicalPapers:\'UNCHANGED\'','coveragePlan','maxCoverageBatchPerSubject:6','directPublish:false'])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
+console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',visualProfile:'PASS',historicalIsolation:'PASS',coverageRecipeAlignment:'PASS',coverageBatchMaxPerSubject:6,explicitSkillMetadata:'PASS'}));
