@@ -11,6 +11,7 @@ const targets=[
   {id:'y4-maths-2008',stage:'icas-y4',subject:'Mathematics',year:2008,source:'source/original-icas/year4/Maths yr4/Maths B 2008 answers.pdf',learner:'source/original-icas/year4/Maths yr4/Maths B 2008 questions.pdf',pages:'all'},
   {id:'y4-maths-2017',stage:'icas-y4',subject:'Mathematics',year:2017,source:'source/original-icas/year4/Maths yr4/Maths B 2017 answers.pdf',learner:'source/original-icas/year4/Maths yr4/Maths B 2017 questions.pdf',pages:'all'},
   {id:'y4-maths-2018',stage:'icas-y4',subject:'Mathematics',year:2018,source:'source/original-icas/year4/Maths yr4/Maths B 2018 answers.pdf',learner:'source/original-icas/year4/Maths yr4/Maths B 2018 questions.pdf',pages:'all'},
+  {id:'y4-english-2007',stage:'icas-y4',subject:'English',year:2007,source:'source/original-icas/year4/English yr 4/English B 2007 answers.pdf',learner:'source/original-icas/year4/English yr 4/English B 2007 questions.pdf',pages:'all'},
   {id:'y3-maths-2015-answer-sheet',stage:'icas-y3',subject:'Mathematics',year:2015,source:'source/original-icas/year3/Maths A/Maths A 2015.pdf',learner:'source/original-icas/year3/Maths A/Maths A 2015.pdf',pages:[15]},
   {id:'y4-science-2010-answer-key',stage:'icas-y4',subject:'Science',year:2010,source:'source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf',learner:'source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf',pages:[15,16]}
 ];
@@ -31,5 +32,5 @@ for(const t of targets){
   }
   manifest.push({id:t.id,year:t.year,stage:t.stage,subject:t.subject,sourcePath:t.source,sourceSha256:sha(abs),learnerPath:t.learner,learnerSha256:sha(learnerAbs),totalPages:doc.numPages,pages});try{doc.destroy()}catch(_){}
 }
-fs.writeFileSync(path.join(outDir,'manifest.json'),JSON.stringify({version:'aw-companion-answer-review-v7-private-actions-artifact',generatedAt:new Date().toISOString(),reviewArtifactOutput,targets:manifest},null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',companionAnswerReview:'PASS',version:'v7-private-actions-artifact',reviewArtifactOutput,targets:manifest.map(x=>({id:x.id,year:x.year,sourceSha256:x.sourceSha256,learnerSha256:x.learnerSha256,totalPages:x.totalPages,pages:x.pages.map(p=>({page:p.page,file:p.file,text:p.text.slice(0,450)}))}))}));
+fs.writeFileSync(path.join(outDir,'manifest.json'),JSON.stringify({version:'aw-companion-answer-review-v8-private-actions-artifact',generatedAt:new Date().toISOString(),reviewArtifactOutput,targets:manifest},null,2)+'\n');
+console.log(JSON.stringify({release:'6.18.2',companionAnswerReview:'PASS',version:'v8-private-actions-artifact',reviewArtifactOutput,targets:manifest.map(x=>({id:x.id,year:x.year,sourceSha256:x.sourceSha256,learnerSha256:x.learnerSha256,totalPages:x.totalPages,pages:x.pages.map(p=>({page:p.page,file:p.file,text:p.text.slice(0,450)}))}))}));
