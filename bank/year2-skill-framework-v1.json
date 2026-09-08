@@ -1,0 +1,36 @@
+{
+  "schema": "awenture-skill-framework-v1",
+  "grade": 2,
+  "purpose": "Coverage framework for original AWenture questions. It is not copied question content from any third-party learning platform.",
+  "subjects": {
+    "Mathematics": {
+      "strands": [
+        {"id":"Y2.MATH.NUMBER","name":"Number","skills":["count-and-represent-numbers","place-value","compare-and-order-numbers","addition-strategies","subtraction-strategies","multiplication-as-groups","division-as-sharing","fractions-of-wholes-and-collections","money-values-and-combinations"]},
+        {"id":"Y2.MATH.ALGEBRA","name":"Algebra","skills":["recognise-and-continue-patterns","describe-pattern-rules","number-sentences-and-missing-values"]},
+        {"id":"Y2.MATH.MEASUREMENT","name":"Measurement","skills":["compare-and-measure-length","compare-mass","compare-capacity","tell-time","duration-and-calendars"]},
+        {"id":"Y2.MATH.SPACE","name":"Space","skills":["2d-shapes-and-properties","3d-objects-and-properties","position-direction-and-maps","symmetry-and-transformations"]},
+        {"id":"Y2.MATH.STATISTICS","name":"Statistics","skills":["collect-and-classify-data","read-tables-and-picture-graphs","compare-data-displays"]},
+        {"id":"Y2.MATH.PROBABILITY","name":"Probability","skills":["describe-likelihood","compare-chance-events"]}
+      ]
+    },
+    "English": {
+      "strands": [
+        {"id":"Y2.ENG.LANGUAGE","name":"Language","skills":["sentence-structure","nouns-verbs-adjectives-and-adverbs","pronouns-and-reference","punctuation-and-capitalisation","vocabulary-in-context","word-relationships","phonics-and-word-patterns","morphology-prefixes-suffixes-and-base-words","spelling-patterns"]},
+        {"id":"Y2.ENG.LITERATURE","name":"Literature","skills":["characters-setting-and-events","sequence-and-retell","theme-and-message","rhyme-rhythm-and-language-devices","compare-literary-texts","respond-to-literature"]},
+        {"id":"Y2.ENG.LITERACY","name":"Literacy","skills":["main-idea-and-key-details","literal-comprehension","inference","cause-and-effect","text-purpose-and-audience","informative-text-features","procedural-texts","persuasive-language","summarising","interpreting-images-and-multimodal-texts"]}
+      ]
+    },
+    "Science": {
+      "strands": [
+        {"id":"Y2.SCI.UNDERSTANDING","name":"Science understanding","skills":["living-things-needs-and-features","life-cycles-and-change","habitats-and-environments","materials-and-properties","changes-to-materials","forces-and-motion","light-sound-and-heat-observations","earth-sky-and-weather-patterns","natural-resources"]},
+        {"id":"Y2.SCI.HUMAN_ENDEAVOUR","name":"Science as a human endeavour","skills":["science-in-everyday-life","observations-and-evidence","using-science-to-solve-problems"]},
+        {"id":"Y2.SCI.INQUIRY","name":"Science inquiry","skills":["ask-testable-questions","make-predictions","observe-and-measure","classify-and-record","identify-patterns-in-results","compare-results-with-predictions","communicate-findings"]}
+      ]
+    },
+    "Spelling": {
+      "strands": [
+        {"id":"Y2.SPELL.WORD_KNOWLEDGE","name":"Word knowledge","skills":["short-and-long-vowels","consonant-patterns","digraphs-and-trigraphs","common-vowel-teams","silent-e-patterns","r-controlled-vowels","common-prefixes-and-suffixes","compound-words","high-frequency-irregular-words","syllables-and-word-segmentation"]}
+      ]
+    }
+  }
+}
