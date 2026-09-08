@@ -39,10 +39,11 @@ for(const [src,e] of Object.entries(qa.papers||{})){
 }
 for(const [src,count] of [
   ['source/original-icas/year3/Digital A/Digital AB 2012.pdf',30],
-  ['source/original-icas/year3/English A/English A 2012.pdf',45]
+  ['source/original-icas/year3/English A/English A 2012.pdf',45],
+  ['source/original-icas/year3/Maths A/Maths A 2017.pdf',40]
 ]){
   const e=qa.papers?.[src];
   if(!e?.questionCountVerified||e.questionCount!==count||e.method!=='reviewed-exact-source-evidence')throw new Error(`${src} must be verified at ${count} only through reviewed exact-source evidence`);
 }
-for(const bad of ['source/original-icas/year3/Maths A/Maths A 2017.pdf','source/original-icas/year3/Science A/Science A 2017.pdf'])if(qa.papers?.[bad]?.questionCountVerified)throw new Error(`known cross-subject false match survived strict gate: ${bad}`);
-console.log(JSON.stringify({release:'6.18.2',strictQuestionCountGate:'PASS',verified:qa.summary.verified,pending:qa.summary.pending,crossSubjectSupport:'FORBIDDEN',weakSequence:'FORBIDDEN',orphanedPropagation:'FORBIDDEN',partialPaperAsFullCount:'FORBIDDEN',learnerAnswerCountConflict:'FORBIDDEN',secondPassSamePaper:'GATED',subjectDefault:'FORBIDDEN',reviewedDigital2012ExactSource:'REQUIRED',reviewedEnglish2012ExactSource:'REQUIRED'}));
+const science2017='source/original-icas/year3/Science A/Science A 2017.pdf';if(qa.papers?.[science2017]?.questionCountVerified)throw new Error(`known cross-subject false match survived strict gate: ${science2017}`);
+console.log(JSON.stringify({release:'6.18.2',strictQuestionCountGate:'PASS',verified:qa.summary.verified,pending:qa.summary.pending,crossSubjectSupport:'FORBIDDEN',weakSequence:'FORBIDDEN',orphanedPropagation:'FORBIDDEN',partialPaperAsFullCount:'FORBIDDEN',learnerAnswerCountConflict:'FORBIDDEN',secondPassSamePaper:'GATED',subjectDefault:'FORBIDDEN',reviewedDigital2012ExactSource:'REQUIRED',reviewedEnglish2012ExactSource:'REQUIRED',reviewedMaths2017ExactSource:'REQUIRED'}));
