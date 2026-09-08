@@ -14,6 +14,7 @@ const targets=[
   {id:'y3-maths-2015-answer-sheet',stage:'icas-y3',subject:'Mathematics',year:2015,source:'source/original-icas/year3/Maths A/Maths A 2015.pdf',learner:'source/original-icas/year3/Maths A/Maths A 2015.pdf',pages:[15]},
   {id:'y4-science-2010-answer-key',stage:'icas-y4',subject:'Science',year:2010,source:'source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf',learner:'source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf',pages:[15,16]}
 ];
+const logIds=new Set(['y3-maths-2015-answer-sheet']);
 const outDir=path.join(root,'dist/stage-papers/companion-answer-review');fs.rmSync(outDir,{recursive:true,force:true});fs.mkdirSync(outDir,{recursive:true});
 const previewRawJpegs=process.env.VERCEL_ENV==='preview';
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -29,9 +30,9 @@ for(const t of targets){
     const jpeg=canvas.toBuffer('image/jpeg',90),file=`${t.id}-p${String(n).padStart(2,'0')}.jpg.b64.txt`;fs.writeFileSync(path.join(outDir,file),jpeg.toString('base64'));
     if(previewRawJpegs)fs.writeFileSync(path.join(outDir,file.replace(/\.b64\.txt$/,'')),jpeg);
     const raw=await text(doc,n);pages.push({page:n,file:`stage-papers/companion-answer-review/${file}`,text:raw.slice(0,3000)});
-    await emitThumbnail(t.id,n,pg);
+    if(logIds.has(t.id))await emitThumbnail(t.id,n,pg);
   }
   manifest.push({id:t.id,year:t.year,stage:t.stage,subject:t.subject,sourcePath:t.source,sourceSha256:sha(abs),learnerPath:t.learner,learnerSha256:sha(learnerAbs),totalPages:doc.numPages,pages});try{doc.destroy()}catch(_){}
 }
-fs.writeFileSync(path.join(outDir,'manifest.json'),JSON.stringify({version:'aw-companion-answer-review-v4-y4-maths-all-unresolved',generatedAt:new Date().toISOString(),previewRawJpegs,targets:manifest},null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',companionAnswerReview:'PASS',version:'v4-y4-maths-all-unresolved',previewRawJpegs,targets:manifest.map(x=>({id:x.id,year:x.year,sourceSha256:x.sourceSha256,learnerSha256:x.learnerSha256,totalPages:x.totalPages,pages:x.pages.map(p=>({page:p.page,file:p.file,text:p.text.slice(0,450)}))}))}));
+fs.writeFileSync(path.join(outDir,'manifest.json'),JSON.stringify({version:'aw-companion-answer-review-v5-isolated-log',generatedAt:new Date().toISOString(),previewRawJpegs,logIds:[...logIds],targets:manifest},null,2)+'\n');
+console.log(JSON.stringify({release:'6.18.2',companionAnswerReview:'PASS',version:'v5-isolated-log',previewRawJpegs,logIds:[...logIds],targets:manifest.map(x=>({id:x.id,year:x.year,sourceSha256:x.sourceSha256,learnerSha256:x.learnerSha256,totalPages:x.totalPages,pages:x.pages.map(p=>({page:p.page,file:p.file,text:p.text.slice(0,450)}))}))}));
