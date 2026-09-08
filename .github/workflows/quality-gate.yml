@@ -23,6 +23,19 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
+      - name: Render private v6.18.2 visual review evidence
+        env:
+          AW_REVIEW_ARTIFACT: '1'
+        run: node scripts/render-v6.18.2-companion-answer-review.mjs
+      - name: Upload private v6.18.2 visual review evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-companion-answer-review
+          path: |
+            dist/stage-papers/companion-answer-review/*.jpg
+            dist/stage-papers/companion-answer-review/manifest.json
+          if-no-files-found: error
+          retention-days: 1
       - run: npm run test:release
       - run: npx playwright install --with-deps webkit chromium
       - name: Run v6.16.1 browser checks
