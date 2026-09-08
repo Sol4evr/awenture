@@ -70,6 +70,21 @@
       "evidencePages": [1, 2],
       "evidenceText": "2018 ICAS Maths Paper B Answers page 1 visibly enumerates Q1-27 and page 2 continues Q28-40, ending at Q40.",
       "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed across both answer pages. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+    },
+    {
+      "learnerPath": "source/original-icas/year4/English yr 4/English B 2007 questions.pdf",
+      "learnerSha256": "e213de2a63ccacaa66672bb7a3b17b6e71936497468833fd103c437860fdbfae",
+      "companionPath": "source/original-icas/year4/English yr 4/English B 2007 answers.pdf",
+      "companionSha256": "05c491e983f4302ee271bc6acdc80c3b1deeae523a3aeea9aafb46e7f1eb273b",
+      "stage": "icas-y4",
+      "subject": "English",
+      "year": 2007,
+      "questionCount": 45,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "exact-companion-complete-answer-sequence",
+      "evidencePages": [1, 2],
+      "evidenceText": "2007 English Answer Keys show Paper B populated for Q1-40 on page 1 and Q41-45 on page 2; Paper B is blank from Q46 onward.",
+      "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed across both official answer-key pages. Q45 is the terminal populated row for Paper B. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
     }
   ]
 }
