@@ -37,4 +37,6 @@ for(const abs of walk(path.join(root,'source','original-icas'))){
 }
 const out={version:'aw-icas-cover-count-diagnostic-v4-raw-answer-resources',generatedAt:new Date().toISOString(),pendingIcas:unresolved.length,candidates:rows.length,byCount,rows,answerKeyRows,answerResourceRaw};
 fs.writeFileSync(path.join(root,'dist/stage-papers/icas-cover-count-diagnostic.json'),JSON.stringify(out,null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',icasCoverCountDiagnostic:'PASS',version:'v4-raw-answer-resources',pendingIcas:out.pendingIcas,candidates:rows.length,byCount,answerKeyCandidates:answerKeyRows.length,answerResources:answerResourceRaw.length,resourcesWithUnresolvedPairs:answerResourceRaw.filter(r=>r.candidateLearners?.length).length}));
+const unresolvedPairs=answerResourceRaw.filter(r=>r.candidateLearners?.length).map(r=>({answerResource:r.sourcePath,answerSha256:r.sha256,stage:r.stage,subject:r.subject,year:r.year,numPages:r.numPages,candidateLearners:r.candidateLearners,pages:(r.pages||[]).map(p=>({page:p.page,adjacentSequence:p.adjacentSequence,standaloneNumbers:p.standaloneNumbers?.slice(-12),text:compact(p.text,320)}))}));
+console.log(JSON.stringify({release:'6.18.2',icasCoverCountDiagnostic:'PASS',version:'v4-raw-answer-resources',pendingIcas:out.pendingIcas,candidates:rows.length,byCount,answerKeyCandidates:answerKeyRows.length,answerResources:answerResourceRaw.length,resourcesWithUnresolvedPairs:unresolvedPairs.length}));
+console.log(JSON.stringify({release:'6.18.2',compactUnresolvedAnswerPairs:'PASS',pairs:unresolvedPairs}));
