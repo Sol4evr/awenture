@@ -9,7 +9,8 @@ const reviewSpecs=[
   {path:'quality/stage-paper-question-count-reviewed-source-evidence-v1.json',version:'aw-stage-paper-reviewed-source-count-evidence-v1'},
   {path:'quality/stage-paper-question-count-reviewed-source-evidence-v2.json',version:'aw-stage-paper-reviewed-source-count-evidence-v2'},
   {path:'quality/stage-paper-question-count-reviewed-source-evidence-v3.json',version:'aw-stage-paper-reviewed-source-count-evidence-v3'},
-  {path:'quality/stage-paper-question-count-reviewed-source-evidence-v4.json',version:'aw-stage-paper-reviewed-source-count-evidence-v4'}
+  {path:'quality/stage-paper-question-count-reviewed-source-evidence-v4.json',version:'aw-stage-paper-reviewed-source-count-evidence-v4'},
+  {path:'quality/stage-paper-question-count-reviewed-source-evidence-v5.json',version:'aw-stage-paper-reviewed-source-count-evidence-v5'}
 ];
 for(const p of [qaPath,catalogPath,...reviewSpecs.map(x=>path.join(root,x.path))])if(!fs.existsSync(p))throw new Error(`reviewed source-count input missing: ${p}`);
 const qa=JSON.parse(fs.readFileSync(qaPath,'utf8'));
