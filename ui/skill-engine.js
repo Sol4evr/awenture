@@ -23,11 +23,14 @@ function score(q,p,seen,recent,helpers){
   if(q.kind==='visual')n+=2;
   return n;
 }
-function eligible(q,slot,chosenFamilies,chosenIds,helpers){
+function eligible(q,slot,chosenFamilies,chosenIds,seen,recent,helpers){
   if(!q||q.subject!==slot.subject||q.kind!==slot.kind)return false;
   if(UNSAFE_VISUAL_IDS.has(q.id))return false;
   if(chosenIds.has(q.id))return false;
-  const f=family(q,helpers);if(chosenFamilies.has(f))return false;
+  if(!seen.has(slot.id)&&seen.has(q.id))return false;
+  const f=family(q,helpers),slotFamily=family(slot,helpers);
+  if(chosenFamilies.has(f))return false;
+  if(!recent.has(slotFamily)&&recent.has(f))return false;
   return true;
 }
 function rebalance(existing,bank,p,sd,helpers={}){
@@ -38,7 +41,7 @@ function rebalance(existing,bank,p,sd,helpers={}){
     const seen=new Set(Array.isArray(p?.seenIds)?p.seenIds:[]),recent=helpers?.recent instanceof Set?helpers.recent:new Set();
     const chosen=[],chosenIds=new Set(),chosenFamilies=new Set();
     for(let i=0;i<existing.length;i++){
-      const slot=existing[i],pool=bank.filter(q=>eligible(q,slot,chosenFamilies,chosenIds,helpers));
+      const slot=existing[i],pool=bank.filter(q=>eligible(q,slot,chosenFamilies,chosenIds,seen,recent,helpers));
       pool.sort((a,b)=>score(b,p,seen,recent,helpers)-score(a,p,seen,recent,helpers)||String(a.id).localeCompare(String(b.id)));
       const best=pool[0]||slot;
       if(!best||chosenIds.has(best.id)||chosenFamilies.has(family(best,helpers)))return existing;
