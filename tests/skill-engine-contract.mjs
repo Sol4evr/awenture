@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+const code=fs.readFileSync(new URL('../ui/skill-engine.js',import.meta.url),'utf8');
+const context={window:{AW_BANK:[]},console};vm.createContext(context);vm.runInContext(code,context);
+const engine=context.window.__AW_SKILL_ENGINE;
+if(!engine||engine.version!=='y2-v1')throw new Error('Skill engine unavailable');
+const subjects=[['English',4],['Mathematics',4],['Science',4],['Spelling',3]];
+const bank=[],existing=[];
+for(const [subject,count] of subjects){for(let i=0;i<8;i++){const q={id:`${subject[0]}${i}`,subject,kind:subject==='Spelling'?'audio':(i===0?'visual':'text'),subskill:i<4?'Mastered skill':'Unexplored skill',family:`${subject}-${i}`};bank.push(q);if(i<count)existing.push(q)}}
+const p={seenIds:existing.map(q=>q.id),skillStats:{'English|Mastered skill':{a:8,c:8},'Mathematics|Mastered skill':{a:8,c:8},'Science|Mastered skill':{a:8,c:8},'Spelling|Mastered skill':{a:8,c:8}}};
+const out=engine.rebalance(existing,bank,p,1,{familyKey:q=>q.family,recent:new Set()});
+if(out.length!==15)throw new Error(`Expected 15 questions, got ${out.length}`);
+for(const [subject,count] of subjects)if(out.filter(q=>q.subject===subject).length!==count)throw new Error(`Subject mix changed for ${subject}`);
+if(out.filter(q=>q.kind==='visual').length!==existing.filter(q=>q.kind==='visual').length)throw new Error('Visual profile changed');
+if(new Set(out.map(q=>q.id)).size!==15)throw new Error('Duplicate question IDs');
+if(new Set(out.map(q=>q.family)).size!==15)throw new Error('Duplicate families');
+if(!out.some(q=>q.subskill==='Unexplored skill'))throw new Error('Skill prioritisation did not prefer unexplored skills');
+const bad=engine.rebalance(existing.slice(0,14),bank,p,1,{familyKey:q=>q.family,recent:new Set()});
+if(bad.length!==14||bad.some((q,i)=>q!==existing[i]))throw new Error('Legacy fallback contract failed');
+const patch=fs.readFileSync(new URL('../scripts/patch-v6.18.2-skill-graph.mjs',import.meta.url),'utf8');
+for(const marker of ['awLegacyPick','LEGACY_PLUS_SKILL_BALANCE','dailyQuestionCount:15','historicalPapers:\'UNCHANGED\''])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
+console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',visualProfile:'PASS',historicalIsolation:'PASS'}));
