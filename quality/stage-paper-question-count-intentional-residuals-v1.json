@@ -1,0 +1,36 @@
+{
+  "version":"aw-stage-paper-question-count-intentional-residuals-v1",
+  "policy":{"failClosed":true,"questionCountVerified":false,"subjectDefaultsForbidden":true,"autoScoring":false,"progressionCredit":false,"fabricatedFullCountsForbidden":true},
+  "residuals":[
+    {
+      "sourcePath":"source/original-icas/year3/Digital A/Digital AB 2016.pdf",
+      "sha256":"a75990f4ae06c3617dea403d3cdd759a3ab720f7cf324c948f145ba810c1eb4a",
+      "stage":"icas-y3","subject":"Digital Technologies","year":2016,
+      "classification":"source-binary-no-terminal-evidence",
+      "reviewedPages":[1,14,15,16],
+      "evidence":"Private visual review found no legible terminal-question or exact-count evidence in the available review pages; repository review found no exact 2016 Digital answer/support resource. No adjacent-year or subject-default inference is permitted.",
+      "binaryAliasGroup":"y3-digital-ab-2016-a75990f4",
+      "autoScoring":false,"progressionCredit":false
+    },
+    {
+      "sourcePath":"source/original-icas/year3/Digital/Digital AB 2016.pdf",
+      "sha256":"a75990f4ae06c3617dea403d3cdd759a3ab720f7cf324c948f145ba810c1eb4a",
+      "stage":"icas-y3","subject":"Digital Technologies","year":2016,
+      "classification":"source-binary-no-terminal-evidence",
+      "reviewedPages":[1,14,15,16],
+      "evidence":"Exact binary duplicate of the independently reviewed Digital A 2016 source. The binary still contains no safely reviewable terminal-count evidence; duplicate identity does not create a count and no adjacent-year inference is permitted.",
+      "binaryAliasGroup":"y3-digital-ab-2016-a75990f4",
+      "autoScoring":false,"progressionCredit":false
+    },
+    {
+      "sourcePath":"source/original-icas/year3/Spelling A/Spelling A 2016 (Q1-12, Q26-40).pdf",
+      "sha256":"bc53863a3f9277a18dadc1430a8d56d6424e43cabeadf0012c3d4adceeba4def",
+      "stage":"icas-y3","subject":"Spelling","year":2016,
+      "classification":"intentional-discontinuous-partial",
+      "presentRanges":[[1,12],[26,40]],
+      "missingRanges":[[13,25]],
+      "evidence":"The source is explicitly a discontinuous partial paper containing Q1–12 and Q26–40; Q13–25 are absent. It must never be represented as a complete 40-question paper.",
+      "autoScoring":false,"progressionCredit":false
+    }
+  ]
+}
