@@ -1,0 +1,7 @@
+{
+  "version":"aw-stage-paper-reviewed-source-count-evidence-v5",
+  "policy":{"paperSpecificOnly":true,"exactBinaryRequired":true,"samePaperEvidenceOnly":true,"subjectDefaultsForbidden":true,"autoScoringNotImplied":true,"progressionCreditNotImplied":true},
+  "evidence":[
+    {"sourcePath":"source/original-icas/year4/Spellings/Spellings/2018 ICAS Spelling Paper BC.pdf","sha256":"44b08c3e1c3e578b89ac73927b00f68ddf14396d344b137bada8ffddcdee8423","stage":"icas-y4","subject":"Spelling","year":2018,"questionCount":45,"provider":"UNSW Global","evidenceType":"same-paper-complete-answer-sequence","evidencePage":9,"evidenceText":"Exact same-paper Analysis by Question pages enumerate through terminal Q45; page 9 contains Q41–45, with no later question number.","reviewNote":"Exact source independently visually reviewed from the private QA artifact. No subject default or cross-year inference used; count verification does not imply answer-map release, auto-scoring, or progression credit."}
+  ]
+}
