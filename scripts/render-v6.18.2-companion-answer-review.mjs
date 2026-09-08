@@ -16,7 +16,7 @@ const targets=[
 ];
 const logIds=new Set(['y3-maths-2015-answer-sheet']);
 const outDir=path.join(root,'dist/stage-papers/companion-answer-review');fs.rmSync(outDir,{recursive:true,force:true});fs.mkdirSync(outDir,{recursive:true});
-const previewRawJpegs=process.env.VERCEL_ENV==='preview';
+const reviewArtifactOutput=process.env.VERCEL_ENV==='preview'||process.env.AW_REVIEW_ARTIFACT==='1';
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 async function text(doc,n){const pg=await doc.getPage(n),tc=await pg.getTextContent();return (tc.items||[]).map(x=>String(x.str||'').trim()).filter(Boolean).join(' ').replace(/\s+/g,' ').trim()}
 function emitThumbnail(id,page,pg){return (async()=>{const base=pg.getViewport({scale:1}),scale=Math.min(1.2,760/base.width),vp=pg.getViewport({scale}),canvas=createCanvas(Math.ceil(vp.width),Math.ceil(vp.height)),ctx=canvas.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,canvas.width,canvas.height);await pg.render({canvasContext:ctx,viewport:vp,canvas}).promise;const b64=canvas.toBuffer('image/jpeg',52).toString('base64'),chunkSize=6000,total=Math.ceil(b64.length/chunkSize);console.log(JSON.stringify({release:'6.18.2',visualReviewThumbnail:'BEGIN',id,page,width:canvas.width,height:canvas.height,base64Chars:b64.length,chunks:total}));for(let i=0;i<total;i++)console.log(JSON.stringify({release:'6.18.2',visualReviewThumbnail:'CHUNK',id,page,index:i,total,data:b64.slice(i*chunkSize,(i+1)*chunkSize)}));console.log(JSON.stringify({release:'6.18.2',visualReviewThumbnail:'END',id,page,chunks:total}));})();}
@@ -28,11 +28,11 @@ for(const t of targets){
   for(const n of pageNos){
     const pg=await doc.getPage(n),base=pg.getViewport({scale:1}),scale=Math.min(2.25,1900/base.width),vp=pg.getViewport({scale}),canvas=createCanvas(Math.ceil(vp.width),Math.ceil(vp.height)),ctx=canvas.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,canvas.width,canvas.height);await pg.render({canvasContext:ctx,viewport:vp,canvas}).promise;
     const jpeg=canvas.toBuffer('image/jpeg',90),file=`${t.id}-p${String(n).padStart(2,'0')}.jpg.b64.txt`;fs.writeFileSync(path.join(outDir,file),jpeg.toString('base64'));
-    if(previewRawJpegs)fs.writeFileSync(path.join(outDir,file.replace(/\.b64\.txt$/,'')),jpeg);
+    if(reviewArtifactOutput)fs.writeFileSync(path.join(outDir,file.replace(/\.b64\.txt$/,'')),jpeg);
     const raw=await text(doc,n);pages.push({page:n,file:`stage-papers/companion-answer-review/${file}`,text:raw.slice(0,3000)});
     if(logIds.has(t.id))await emitThumbnail(t.id,n,pg);
   }
   manifest.push({id:t.id,year:t.year,stage:t.stage,subject:t.subject,sourcePath:t.source,sourceSha256:sha(abs),learnerPath:t.learner,learnerSha256:sha(learnerAbs),totalPages:doc.numPages,pages});try{doc.destroy()}catch(_){}
 }
-fs.writeFileSync(path.join(outDir,'manifest.json'),JSON.stringify({version:'aw-companion-answer-review-v5-isolated-log',generatedAt:new Date().toISOString(),previewRawJpegs,logIds:[...logIds],targets:manifest},null,2)+'\n');
-console.log(JSON.stringify({release:'6.18.2',companionAnswerReview:'PASS',version:'v5-isolated-log',previewRawJpegs,logIds:[...logIds],targets:manifest.map(x=>({id:x.id,year:x.year,sourceSha256:x.sourceSha256,learnerSha256:x.learnerSha256,totalPages:x.totalPages,pages:x.pages.map(p=>({page:p.page,file:p.file,text:p.text.slice(0,450)}))}))}));
+fs.writeFileSync(path.join(outDir,'manifest.json'),JSON.stringify({version:'aw-companion-answer-review-v6-private-artifact',generatedAt:new Date().toISOString(),reviewArtifactOutput,logIds:[...logIds],targets:manifest},null,2)+'\n');
+console.log(JSON.stringify({release:'6.18.2',companionAnswerReview:'PASS',version:'v6-private-artifact',reviewArtifactOutput,logIds:[...logIds],targets:manifest.map(x=>({id:x.id,year:x.year,sourceSha256:x.sourceSha256,learnerSha256:x.learnerSha256,totalPages:x.totalPages,pages:x.pages.map(p=>({page:p.page,file:p.file,text:p.text.slice(0,450)}))}))}));
