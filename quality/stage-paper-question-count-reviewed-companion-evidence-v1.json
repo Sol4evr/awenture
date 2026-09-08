@@ -1,0 +1,75 @@
+{
+  "version": "aw-stage-paper-reviewed-companion-count-evidence-v1",
+  "policy": {
+    "paperSpecificOnly": true,
+    "exactLearnerBinaryRequired": true,
+    "exactCompanionBinaryRequired": true,
+    "learnerAndCompanionShaRequired": true,
+    "sameStageSubjectYearRequired": true,
+    "subjectDefaultsForbidden": true,
+    "autoScoringNotImplied": true,
+    "progressionCreditNotImplied": true
+  },
+  "evidence": [
+    {
+      "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2007 questions.pdf",
+      "learnerSha256": "0e878a600e66cea45b63332233ed3b5b7aad71b165411e6fc63b20b344c61e87",
+      "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2007 answers.pdf",
+      "companionSha256": "de85fe365f13b96baad3f7569687adadd72547087ca63dacf19e8a8f4df54130",
+      "stage": "icas-y4",
+      "subject": "Mathematics",
+      "year": 2007,
+      "questionCount": 40,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "exact-companion-complete-answer-sequence",
+      "evidencePages": [1],
+      "evidenceText": "2007 Mathematics Answer Keys visibly enumerate Question Number 1 through 40; the Paper B column is populated through terminal row Q40.",
+      "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+    },
+    {
+      "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2008 questions.pdf",
+      "learnerSha256": "352ebc1d8cc2a7fd35d6cc894db2a71293c96d5f1b6cc895002f375d11471fd8",
+      "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2008 answers.pdf",
+      "companionSha256": "7ee1adf0682fc41844bafae988f9c4cbf356ed4edb4f8096525c76295f66b181",
+      "stage": "icas-y4",
+      "subject": "Mathematics",
+      "year": 2008,
+      "questionCount": 40,
+      "provider": "Educational Assessment Australia",
+      "evidenceType": "exact-companion-complete-answer-sequence",
+      "evidencePages": [1],
+      "evidenceText": "2008 ICAS Mathematics Answer Keys visibly enumerate Question Number 1 through 40; the Paper B column is populated through terminal row Q40.",
+      "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+    },
+    {
+      "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2017 questions.pdf",
+      "learnerSha256": "1c669e8c1114491f6a66ede9edab7a590bb6e2ea3432ce091359bd4a850594ff",
+      "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2017 answers.pdf",
+      "companionSha256": "d08fafd6207ef2753a7b68317dabb58da85198a317c7962146f12f93fe45f8a6",
+      "stage": "icas-y4",
+      "subject": "Mathematics",
+      "year": 2017,
+      "questionCount": 40,
+      "provider": "UNSW Global Assessments",
+      "evidenceType": "exact-companion-complete-answer-sequence",
+      "evidencePages": [1, 2],
+      "evidenceText": "2017 Mathematics Answer Keys page 1 visibly enumerates Q1-25 and page 2 continues Q26-40; the Paper B column is populated through terminal row Q40.",
+      "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed across both answer-key pages. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+    },
+    {
+      "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2018 questions.pdf",
+      "learnerSha256": "ba602fc283dffd930295faeb37747b68f8a59ccced8aa18dc0b7df3fbc745f97",
+      "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2018 answers.pdf",
+      "companionSha256": "7ca6c0aeb248d351e4d30322dfff949049647dfa9a5fd017993faafc0293cc7d",
+      "stage": "icas-y4",
+      "subject": "Mathematics",
+      "year": 2018,
+      "questionCount": 40,
+      "provider": "UNSW Global",
+      "evidenceType": "exact-companion-complete-answer-sequence",
+      "evidencePages": [1, 2],
+      "evidenceText": "2018 ICAS Maths Paper B Answers page 1 visibly enumerates Q1-27 and page 2 continues Q28-40, ending at Q40.",
+      "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed across both answer pages. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+    }
+  ]
+}
