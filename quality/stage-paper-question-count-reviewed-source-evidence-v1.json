@@ -99,19 +99,6 @@
       "evidencePage": 15,
       "evidenceText": "MATHS A 2015 – ANSWER SHEET visibly enumerates Question Number 1 through 40 for Paper A.",
       "reviewNote": "Exact source binary independently reviewed from the rendered embedded answer sheet. The table is continuous from Q1-30 and Q31-40, with Q40 as the terminal row. Count verification does not imply answer-map release, auto-scoring, or progression credit."
-    },
-    {
-      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf",
-      "sha256": "73ccd89aafc4bac30415c5d15936b13adea5a3ca69f966907f338f38105d3811",
-      "stage": "icas-y4",
-      "subject": "Science",
-      "year": 2010,
-      "questionCount": 30,
-      "provider": "Educational Assessment Australia",
-      "evidenceType": "same-paper-complete-answer-sequence",
-      "evidencePage": 16,
-      "evidenceText": "2010 Science Answer Keys visibly enumerate Question Number 1 through 30; the Paper B column is complete through Q30.",
-      "reviewNote": "Exact source binary independently reviewed. Embedded page 15 is titled SCIENCE 2010 B – ANSWER KEY and visibly contains Q1-30; page 16 independently shows the official multi-paper 2010 Science key with Paper B and terminal row Q30. Count verification remains separate from answer-map release and progression credit."
     }
   ]
 }
