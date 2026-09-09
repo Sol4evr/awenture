@@ -59,6 +59,8 @@ jobs:
           AW_ORIENTATION_BATCH_SIZE: '12'
           AW_ORIENTATION_BATCH_OFFSET: '0'
         run: node scripts/render-v6.18.2-orientation-review-batch.mjs
+      - name: Render targeted terminal-page answer-leak review
+        run: node scripts/render-v6.18.2-answer-leak-review.mjs
       - name: Upload formal-paper maturity artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -72,6 +74,8 @@ jobs:
             dist/stage-papers/answer-candidate-review-batch/manifest.json
             dist/stage-papers/orientation-review-batch/*.jpg
             dist/stage-papers/orientation-review-batch/manifest.json
+            dist/stage-papers/answer-leak-review/*.jpg
+            dist/stage-papers/answer-leak-review/manifest.json
           if-no-files-found: error
           retention-days: 7
       - name: Render private unresolved question-count review batch
