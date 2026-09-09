@@ -1,10 +1,13 @@
 import {test,expect} from '@playwright/test';
 
 async function openSubject(section){
-  const heading=section.locator('.aw-form-heading[data-aw-accordion="1"]');
-  await expect(heading).toBeVisible();
-  if(await heading.getAttribute('aria-expanded')!=='true')await heading.click();
-  await expect(heading).toHaveAttribute('aria-expanded','true');
+  await expect(section).toHaveJSProperty('tagName','DETAILS');
+  const summary=section.locator(':scope > summary.aw-stage-subject-summary');
+  const choices=section.locator(':scope > .aw-form-choices');
+  await expect(summary).toBeVisible();
+  if(!(await section.evaluate(el=>el.open)))await summary.click();
+  await expect.poll(()=>section.evaluate(el=>el.open)).toBeTruthy();
+  await expect(choices).toBeVisible();
 }
 
 test('v6.16.1 runs the authentic 2016 Spelling Section B paper',async({page})=>{
