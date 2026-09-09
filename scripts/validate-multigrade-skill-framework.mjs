@@ -5,8 +5,10 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const catalogPath=path.join(root,'bank','multigrade-skill-framework-v1.json');
 const year2Path=path.join(root,'bank','year2-skill-framework-v1.json');
+const stageMapPath=path.join(root,'bank','stage-skill-framework-map-v1.json');
 const catalog=JSON.parse(fs.readFileSync(catalogPath,'utf8'));
 const year2=JSON.parse(fs.readFileSync(year2Path,'utf8'));
+const stageMap=JSON.parse(fs.readFileSync(stageMapPath,'utf8'));
 const expectedGrades=['F',...Array.from({length:12},(_,i)=>String(i+1))];
 const expectedSubjects=['Mathematics','English','Science','Spelling'];
 const expectedStrands={
@@ -55,4 +57,15 @@ for(const subject of expectedSubjects){
   if(overlap<Math.min(3,existingSkills.size))fail(`Year 2 ${subject} reference drifted from live framework`);
 }
 
-console.log(JSON.stringify({frameworkCatalog:'PASS',grades:13,range:'Foundation-Year 12',runtimeActiveGrades:[2],bands:Object.keys(catalog.bands).length,totalResolvedSkillEntries:totalSkills,year2Compatibility:'PASS',proprietaryContentCopied:false}));
+if(stageMap.schema!=='awenture-stage-skill-framework-map-v1'||stageMap.activation!=='metadata_only')fail('stage map must remain metadata-only');
+const expectedStages=['icas-y2','icas-y3','naplan-y3','icas-y4','oc-prep'];
+if(JSON.stringify(Object.keys(stageMap.stages||{}))!==JSON.stringify(expectedStages))fail('learning-stage framework map incomplete');
+for(const [stage,entry] of Object.entries(stageMap.stages)){
+  if(!Array.isArray(entry.frameworkGrades)||entry.frameworkGrades.length===0)fail(`${stage} has no framework grades`);
+  if(!entry.frameworkGrades.includes(entry.primaryGrade))fail(`${stage} primary grade missing from frameworkGrades`);
+  for(const grade of entry.frameworkGrades){if(!catalog.grades[String(grade)])fail(`${stage} references unknown grade ${grade}`)}
+}
+if(stageMap.stages['icas-y2'].primaryGrade!==2||stageMap.stages['icas-y3'].primaryGrade!==3||stageMap.stages['naplan-y3'].primaryGrade!==3||stageMap.stages['icas-y4'].primaryGrade!==4)fail('stage-to-grade alignment incorrect');
+if(JSON.stringify(stageMap.stages['oc-prep'].frameworkGrades)!=='[3,4]')fail('OC framework must blend Years 3 and 4');
+
+console.log(JSON.stringify({frameworkCatalog:'PASS',grades:13,range:'Foundation-Year 12',runtimeActiveGrades:[2],bands:Object.keys(catalog.bands).length,totalResolvedSkillEntries:totalSkills,year2Compatibility:'PASS',stageFrameworkMap:'PASS',mappedStages:expectedStages.length,proprietaryContentCopied:false}));
