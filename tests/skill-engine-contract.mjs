@@ -32,7 +32,23 @@ const explicit={subject:'Mathematics',subskill:'legacy label',quality:{focus:pla
 if(!engine.skillId(explicit).startsWith('Y2.MATH.'))throw new Error('Explicit coverage skill ID was not recovered from generated metadata');
 
 const patch=fs.readFileSync(new URL('../scripts/patch-v6.18.2-skill-graph.mjs',import.meta.url),'utf8');
-for(const marker of ['awLegacyPick','__AW_SKILL_BALANCE_READY===true','STAGE_WEIGHTED_LEGACY_UNTIL_SKILL_READY','dailyQuestionCount:15','historicalPapers:\'UNCHANGED\'','parentTopUpRuntime:\'UNCHANGED\'','COVERAGE_PLANNER_AVAILABLE_NOT_WIRED','directPublish:false'])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
-if(!patch.includes('awSkillReady?')||!patch.includes(':awLegacyPick'))throw new Error('Legacy selector must remain the live default until explicit skill readiness');
-if(patch.includes('insightsPath')||patch.includes('backendPayload(req)')||patch.includes('requestReplacement'))throw new Error('v6.18.2 must not mutate proven Parent Top-Up runtime');
-console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',liveLegacyCompatibility:'PASS',parentTopUpRuntime:'UNCHANGED',visualProfile:'PASS',historicalIsolation:'PASS',coverageRecipeAlignment:'PASS',coveragePlanner:'READY_NOT_WIRED',explicitSkillMetadata:'PASS'}));
+for(const marker of [
+  'awLegacyPick',
+  '__AW_SKILL_BALANCE_READY=true',
+  '__AW_SKILL_BALANCE_READY===true',
+  "selector:'STAGE_WEIGHTED_THEN_SKILL_AWARE'",
+  'dailyQuestionCount:15',
+  "historicalPapers:'UNCHANGED'",
+  "parentTopUpRuntime:'GOVERNED_COVERAGE_TARGETING'",
+  'COVERAGE_PLANNER_WIRED_EXISTING_RECIPES_ONLY',
+  "supabaseFunctions:'UNCHANGED'",
+  'coverageFocusSubskills',
+  'currentRequestMatches',
+  'requiredBySubject:req.requested',
+  'directPublish:false'
+])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
+if(!patch.includes('awSkillReady?')||!patch.includes(':awLegacyPick'))throw new Error('Skill-aware selector must retain legacy fail-safe fallback');
+if(!patch.includes('req.coverageFocusSubskills||Object.fromEntries'))throw new Error('Governed coverage focus must flow into existing Question Factory payload');
+if(!patch.includes("Math.min(6" )&& !code.includes('Math.min(6'))throw new Error('Coverage generation cap missing');
+if(patch.includes('service_role')||patch.includes('SUPABASE_SERVICE_ROLE'))throw new Error('Privileged Supabase credentials must not enter browser/runtime patch');
+console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',skillBalancing:'ACTIVE_FAIL_SAFE',parentTopUpRuntime:'GOVERNED_COVERAGE_TARGETING',visualProfile:'PASS',historicalIsolation:'PASS',coverageRecipeAlignment:'PASS',coveragePlanner:'WIRED_EXISTING_RECIPES_ONLY',explicitSkillMetadata:'PASS',supabaseFunctions:'UNCHANGED'}));
