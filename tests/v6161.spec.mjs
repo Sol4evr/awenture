@@ -1,13 +1,21 @@
 import {test,expect} from '@playwright/test';
 
+async function openSubject(section){
+  const heading=section.locator('.aw-form-heading[data-aw-accordion="1"]');
+  await expect(heading).toBeVisible();
+  if(await heading.getAttribute('aria-expanded')!=='true')await heading.click();
+  await expect(heading).toHaveAttribute('aria-expanded','true');
+}
+
 test('v6.16.1 runs the authentic 2016 Spelling Section B paper',async({page})=>{
   await page.route('**/released-bank',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({release:'aw-dynamic-bank-1',count:0,items:[]})}));
   await page.goto('/');
   await page.locator('[data-a="tests"]').click();
-  const spelling=page.locator('.aw-form-subject.aw-spelling-subject');
+  const spelling=page.locator('.aw-form-subject').filter({hasText:'Spelling'});
   await expect(spelling).toBeVisible();
   await expect(spelling).toContainText('Spelling');
   await expect(spelling).toContainText('15 questions · 25 min · 1 paper');
+  await openSubject(spelling);
   const tile=spelling.locator('[data-aw-original-subject="Spelling"][data-aw-original-year="2016"]');
   await expect(tile).toBeVisible();
   await tile.click();
