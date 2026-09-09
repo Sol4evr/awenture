@@ -22,14 +22,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-audit --no-fund
-      - name: Upload generated dependency lock candidate
-        uses: actions/upload-artifact@v4
-        with:
-          name: v6182-package-lock-candidate
-          path: package-lock.json
-          if-no-files-found: error
-          retention-days: 1
+          cache: npm
+      - run: npm ci --no-audit --no-fund
       - name: Render private v6.18.2 visual review evidence
         env:
           AW_REVIEW_ARTIFACT: '1'
@@ -97,7 +91,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-audit --no-fund
+          cache: npm
+      - run: npm ci --no-audit --no-fund
       - uses: actions/download-artifact@v4
         with:
           name: v6182-tested-dist
@@ -124,7 +119,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-audit --no-fund
+          cache: npm
+      - run: npm ci --no-audit --no-fund
       - uses: actions/download-artifact@v4
         with:
           name: v6182-tested-dist
