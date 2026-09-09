@@ -27,5 +27,21 @@ jobs:
       - run: npx playwright install --with-deps webkit chromium
       - name: Run v6.16.1 browser checks
         run: npx playwright test tests/v6161.spec.mjs
-      - name: Run full browser regression suite
-        run: npm run test:browser
+      - name: Browser regression · smoke
+        run: npx playwright test tests/smoke.spec.mjs
+      - name: Browser regression · v6.15
+        run: npx playwright test tests/v615.spec.mjs
+      - name: Browser regression · v6.15.2
+        run: npx playwright test tests/v6152.spec.mjs
+      - name: Browser regression · v6.15.3
+        run: npx playwright test tests/v6153.spec.mjs
+      - name: Browser regression · v6.16.0
+        run: npx playwright test tests/v6160.spec.mjs
+      - name: Browser regression · v6.16.1
+        run: npx playwright test tests/v6161.spec.mjs
+      - name: Browser regression · v6.17.0
+        run: npx playwright test tests/v6170.spec.mjs
+      - name: Browser regression · v6.17.1
+        run: npx playwright test tests/v6171.spec.mjs
+      - name: Browser regression · wide paper
+        run: npx playwright test tests/wide-paper.spec.mjs
