@@ -49,6 +49,11 @@ jobs:
         run: node scripts/diagnose-v6.18.2-paper-timing-evidence.mjs
       - name: Discover exact companion answer candidates
         run: node scripts/diagnose-v6.18.2-answer-resource-candidates.mjs
+      - name: Render companion answer candidate review batch
+        env:
+          AW_ANSWER_REVIEW_BATCH_SIZE: '8'
+          AW_ANSWER_REVIEW_BATCH_OFFSET: '0'
+        run: node scripts/render-v6.18.2-answer-candidate-review-batch.mjs
       - name: Render orientation/readability review batch
         env:
           AW_ORIENTATION_BATCH_SIZE: '12'
@@ -63,6 +68,8 @@ jobs:
             dist/stage-papers/maturity-work-queues/*.json
             dist/stage-papers/timing-evidence-candidates-v1.json
             dist/stage-papers/answer-resource-candidates-v1.json
+            dist/stage-papers/answer-candidate-review-batch/*.jpg
+            dist/stage-papers/answer-candidate-review-batch/manifest.json
             dist/stage-papers/orientation-review-batch/*.jpg
             dist/stage-papers/orientation-review-batch/manifest.json
           if-no-files-found: error
@@ -105,7 +112,7 @@ jobs:
           path: dist
       - run: npx playwright install --with-deps webkit chromium
       - name: Run v6.16.1 browser compatibility checks
-        run: npx playwright test tests/v6161.spec.mjs --trace=retain-on-failure --screenshot=only-on-failure
+        run: npx playwright test tests/v6161.spec.mjs
       - name: Upload legacy browser diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -133,7 +140,7 @@ jobs:
           path: dist
       - run: npx playwright install --with-deps webkit chromium
       - name: Run full browser regression suite
-        run: npm run test:browser -- --trace=retain-on-failure --screenshot=only-on-failure
+        run: npm run test:browser
       - name: Upload full browser diagnostics
         if: always()
         uses: actions/upload-artifact@v4
