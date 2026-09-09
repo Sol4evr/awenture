@@ -1,0 +1,178 @@
+{
+  "schema": "awenture-multigrade-skill-framework-v1",
+  "purpose": "Canonical AWenture-owned coverage frameworks for original questions. Public curriculum and third-party skill taxonomies are coverage benchmarks only; no proprietary exercise content is copied.",
+  "runtime": {
+    "activeGrades": [2],
+    "activationPolicy": "All grades except Year 2 are framework-only until explicitly enabled by a release-gated stage adapter."
+  },
+  "subjectStrands": {
+    "Mathematics": ["Number", "Algebra", "Measurement", "Space", "Statistics", "Probability"],
+    "English": ["Language", "Literature", "Literacy"],
+    "Science": ["Science understanding", "Science as a human endeavour", "Science inquiry"],
+    "Spelling": ["Word knowledge"]
+  },
+  "bands": {
+    "foundation": {
+      "Mathematics": {
+        "Number": ["count-small-collections", "subitise-small-quantities", "connect-numerals-and-quantities", "compare-small-collections", "combine-and-separate-small-collections"],
+        "Algebra": ["copy-and-continue-patterns", "describe-repeating-patterns"],
+        "Measurement": ["compare-length-mass-capacity-directly", "sequence-daily-events", "use-everyday-time-language"],
+        "Space": ["name-common-2d-shapes", "describe-position", "follow-simple-directions"],
+        "Statistics": ["sort-and-classify-familiar-objects", "answer-questions-from-simple-displays"],
+        "Probability": ["describe-events-as-will-might-wont"]
+      },
+      "English": {
+        "Language": ["recognise-sentences-and-words", "upper-and-lower-case-letters", "basic-punctuation", "oral-vocabulary", "rhyme-and-alliteration", "phonological-awareness", "letter-sound-correspondence", "blend-and-segment-cvc-words"],
+        "Literature": ["identify-characters-and-settings", "sequence-simple-story-events", "respond-to-rhymes-and-stories"],
+        "Literacy": ["listen-for-key-ideas", "retell-familiar-texts", "make-simple-predictions", "identify-purpose-of-familiar-texts", "interpret-simple-images-and-symbols"]
+      },
+      "Science": {
+        "Science understanding": ["living-and-nonliving-observations", "needs-of-living-things", "properties-of-everyday-materials", "movement-of-objects", "daily-weather-observations"],
+        "Science as a human endeavour": ["science-in-everyday-life", "notice-change-and-pattern"],
+        "Science inquiry": ["ask-simple-questions", "make-predictions-from-experience", "observe-with-senses", "sort-and-group-observations", "record-with-drawings", "share-findings"]
+      },
+      "Spelling": {"Word knowledge": ["letter-names-and-sounds", "short-vowels", "initial-and-final-consonants", "cvc-words", "common-digraphs", "high-frequency-words"]}
+    },
+    "years1-2": {
+      "Mathematics": {
+        "Number": ["count-and-represent-numbers", "place-value", "compare-and-order-numbers", "addition-strategies", "subtraction-strategies", "multiplication-as-groups", "division-as-sharing", "fractions-of-wholes-and-collections", "money-values-and-combinations"],
+        "Algebra": ["recognise-and-continue-patterns", "describe-pattern-rules", "number-sentences-and-missing-values"],
+        "Measurement": ["compare-and-measure-length", "compare-mass", "compare-capacity", "tell-time", "duration-and-calendars"],
+        "Space": ["2d-shapes-and-properties", "3d-objects-and-properties", "position-direction-and-maps", "symmetry-and-transformations"],
+        "Statistics": ["collect-and-classify-data", "read-tables-and-picture-graphs", "compare-data-displays"],
+        "Probability": ["describe-likelihood", "compare-chance-events"]
+      },
+      "English": {
+        "Language": ["sentence-structure", "parts-of-speech-basics", "pronouns-and-reference", "punctuation-and-capitalisation", "vocabulary-in-context", "word-relationships", "phonics-and-word-patterns", "morphology-prefixes-suffixes-and-base-words", "spelling-patterns"],
+        "Literature": ["characters-setting-and-events", "sequence-and-retell", "theme-and-message", "rhyme-rhythm-and-language-devices", "compare-literary-texts", "respond-to-literature"],
+        "Literacy": ["main-idea-and-key-details", "literal-comprehension", "inference", "cause-and-effect", "text-purpose-and-audience", "informative-text-features", "procedural-texts", "persuasive-language", "summarising", "interpreting-images-and-multimodal-texts"]
+      },
+      "Science": {
+        "Science understanding": ["living-things-needs-and-features", "life-cycles-and-change", "habitats-and-environments", "materials-and-properties", "changes-to-materials", "forces-and-motion", "light-sound-and-heat-observations", "earth-sky-and-weather-patterns", "natural-resources"],
+        "Science as a human endeavour": ["science-in-everyday-life", "observations-and-evidence", "using-science-to-solve-problems"],
+        "Science inquiry": ["ask-testable-questions", "make-predictions", "observe-and-measure", "classify-and-record", "identify-patterns-in-results", "compare-results-with-predictions", "communicate-findings"]
+      },
+      "Spelling": {"Word knowledge": ["short-and-long-vowels", "consonant-patterns", "digraphs-and-trigraphs", "common-vowel-teams", "silent-e-patterns", "r-controlled-vowels", "common-prefixes-and-suffixes", "compound-words", "high-frequency-irregular-words", "syllables-and-word-segmentation"]}
+    },
+    "years3-4": {
+      "Mathematics": {
+        "Number": ["whole-number-place-value", "compare-and-order-whole-numbers", "addition-and-subtraction-strategies", "multiplication-facts", "division-facts-and-remainders", "unit-fractions-and-equivalence", "decimal-money", "multi-step-word-problems"],
+        "Algebra": ["number-patterns-and-rules", "unknowns-in-number-sentences", "properties-of-operations", "function-machines"],
+        "Measurement": ["metric-length-mass-capacity", "perimeter", "area-by-counting-units", "time-to-minute", "elapsed-time", "calendars-and-timetables", "temperature"],
+        "Space": ["angles-as-turns", "classify-2d-shapes", "nets-and-3d-objects", "coordinates-and-grid-maps", "symmetry", "translations-reflections-rotations"],
+        "Statistics": ["collect-and-represent-data", "column-graphs", "tables-and-line-plots", "compare-data-sets", "interpret-scales"],
+        "Probability": ["list-possible-outcomes", "compare-likelihood", "conduct-simple-chance-experiments"]
+      },
+      "English": {
+        "Language": ["simple-compound-and-complex-sentences", "parts-of-speech", "subject-verb-agreement", "pronoun-reference", "verb-tense", "punctuation-dialogue-and-apostrophes", "vocabulary-roots-prefixes-suffixes", "figurative-language-basics", "spelling-morphemes"],
+        "Literature": ["character-motivation", "setting-and-plot", "theme-and-message", "point-of-view", "poetic-devices", "compare-texts", "author-language-choices"],
+        "Literacy": ["main-idea-and-supporting-details", "literal-and-inferential-comprehension", "cause-and-effect", "sequence", "fact-and-opinion", "text-structure", "purpose-and-audience", "summarise-paragraphs", "interpret-diagrams-maps-and-charts", "persuasive-techniques", "procedural-and-informative-texts"]
+      },
+      "Science": {
+        "Science understanding": ["classification-of-living-things", "life-cycles", "adaptations-and-habitats", "solids-liquids-and-material-properties", "heat-and-temperature", "forces-contact-and-noncontact", "light-and-shadows", "earth-sun-moon-patterns", "weathering-and-earth-materials"],
+        "Science as a human endeavour": ["scientific-knowledge-changes-with-evidence", "science-solves-community-problems", "responsible-use-of-resources"],
+        "Science inquiry": ["pose-testable-questions", "identify-variables-basics", "make-predictions", "use-standard-measurement", "record-data-in-tables", "construct-simple-graphs", "identify-patterns", "evaluate-predictions", "communicate-evidence-based-conclusions"]
+      },
+      "Spelling": {"Word knowledge": ["multisyllabic-word-segmentation", "common-prefixes", "common-suffixes", "vowel-digraphs-and-diphthongs", "consonant-patterns", "homophones", "plurals-and-tense-endings", "base-word-changes", "high-frequency-irregular-words"]}
+    },
+    "years5-6": {
+      "Mathematics": {
+        "Number": ["large-whole-number-place-value", "factors-and-multiples", "prime-and-composite-numbers", "fraction-equivalence", "add-and-subtract-fractions", "multiply-fractions-by-whole-numbers", "decimal-place-value-and-operations", "percentages-introduction", "financial-mathematics-and-unit-pricing", "multi-step-problem-solving"],
+        "Algebra": ["patterns-with-whole-numbers-and-fractions", "order-of-operations", "variables-and-formulas", "equivalent-number-sentences", "coordinate-rules"],
+        "Measurement": ["perimeter-and-area-formulas", "volume-of-prisms", "metric-unit-conversions", "time-zones-and-timetables", "angles-measure-and-construct"],
+        "Space": ["classify-triangles-and-quadrilaterals", "3d-nets-and-views", "cartesian-plane-first-quadrant", "transformations", "line-and-rotational-symmetry"],
+        "Statistics": ["data-types-and-surveys", "dot-plots-column-and-line-graphs", "mean-median-mode-introduction", "range", "compare-distributions", "interpret-misleading-displays"],
+        "Probability": ["sample-spaces", "fractions-and-decimals-as-probabilities", "experimental-vs-theoretical-probability"]
+      },
+      "English": {
+        "Language": ["clause-and-phrase-structure", "complex-sentences", "cohesive-devices", "active-and-passive-voice-introduction", "verb-tense-consistency", "advanced-punctuation", "nominalisation-introduction", "morphology-and-etymology", "academic-vocabulary", "figurative-and-idiomatic-language"],
+        "Literature": ["character-development", "theme-across-text", "narrative-point-of-view", "symbolism-introduction", "poetic-structure-and-devices", "compare-representations-of-ideas", "evaluate-author-language-choices"],
+        "Literacy": ["central-idea-and-evidence", "inference-with-text-evidence", "summarise-multiple-paragraphs", "compare-and-contrast-sources", "argument-and-reasons", "bias-and-perspective-introduction", "text-structure-and-cohesion", "interpret-complex-multimodal-texts", "research-note-taking", "plan-draft-edit-written-responses"]
+      },
+      "Science": {
+        "Science understanding": ["cell-and-organism-introduction", "adaptations-and-survival", "ecosystems-and-food-webs", "states-of-matter-and-particle-model-introduction", "physical-and-chemical-change-introduction", "electric-circuits", "light-and-sound", "earth-sun-moon-system", "geological-change-and-resources"],
+        "Science as a human endeavour": ["scientific-models-and-evidence", "science-technology-and-society", "sustainability-decisions", "ethical-considerations-introduction"],
+        "Science inquiry": ["formulate-testable-questions", "identify-independent-dependent-controlled-variables", "plan-fair-tests", "select-measuring-tools", "repeat-measurements", "construct-data-displays", "analyse-patterns-and-anomalies", "evaluate-methods", "justify-conclusions-with-evidence"]
+      },
+      "Spelling": {"Word knowledge": ["morphemes-and-word-families", "latin-and-greek-roots", "complex-prefixes-and-suffixes", "unstressed-vowels", "double-consonant-rules", "homophones-and-homographs", "plurals-and-possessives", "technical-vocabulary"]}
+    },
+    "years7-8": {
+      "Mathematics": {
+        "Number": ["integers", "rational-numbers", "fraction-decimal-percent-conversion", "ratio-and-rate", "percentage-change", "index-notation", "estimation-and-rounding", "financial-mathematics"],
+        "Algebra": ["algebraic-expressions", "substitution", "expanding-and-factorising-simple-expressions", "linear-equations", "inequalities-introduction", "linear-patterns", "coordinate-graphs", "proportional-relationships"],
+        "Measurement": ["perimeter-area-and-circumference", "surface-area-and-volume", "unit-conversions", "time-and-rate", "pythagoras-introduction"],
+        "Space": ["angle-relationships", "properties-of-polygons", "congruence-and-similarity-introduction", "transformations-on-cartesian-plane", "coordinates-in-four-quadrants"],
+        "Statistics": ["mean-median-mode-range", "stem-and-leaf-and-dot-plots", "histograms-introduction", "sampling", "compare-distributions", "bivariate-data-introduction"],
+        "Probability": ["sample-spaces", "complementary-events", "two-step-chance-experiments", "relative-frequency", "tree-diagrams-introduction"]
+      },
+      "English": {
+        "Language": ["sentence-variety-and-control", "clause-types", "cohesion-and-reference", "modality", "active-and-passive-voice", "nominalisation", "punctuation-for-complex-syntax", "etymology-and-morphology", "register-and-formality", "rhetorical-devices"],
+        "Literature": ["characterisation", "theme-and-ideas", "narrative-voice", "genre-conventions", "symbolism", "imagery-and-figurative-language", "poetic-form", "compare-contexts-and-perspectives", "evaluate-aesthetic-effects"],
+        "Literacy": ["close-reading", "infer-and-justify", "synthesise-across-texts", "analyse-argument", "evidence-and-reasoning", "bias-and-credibility", "media-and-multimodal-analysis", "summarise-and-paraphrase", "research-source-selection", "structured-analytical-writing"]
+      },
+      "Science": {
+        "Science understanding": ["cells-and-body-systems", "classification-and-ecosystems", "particle-model", "elements-compounds-and-mixtures", "chemical-and-physical-change", "forces-and-motion", "energy-transfer-and-transformation", "waves-light-and-sound", "earth-systems-and-rock-cycle", "astronomy-and-space"],
+        "Science as a human endeavour": ["development-of-scientific-theories", "applications-of-science", "risk-benefit-and-ethics", "sustainability-and-systems-thinking"],
+        "Science inquiry": ["develop-hypotheses", "plan-controlled-investigations", "measurement-precision", "identify-sources-of-error", "analyse-quantitative-data", "construct-and-interpret-graphs", "correlation-and-causation-introduction", "evaluate-evidence-quality", "write-scientific-reports"]
+      },
+      "Spelling": {"Word knowledge": ["discipline-specific-vocabulary", "greek-and-latin-roots", "advanced-affixes", "etymology", "homophones-in-context", "spelling-variants", "proofreading-and-editing"]}
+    },
+    "years9-10": {
+      "Mathematics": {
+        "Number": ["real-numbers", "surds-introduction", "scientific-notation", "percent-growth-and-decay", "compound-interest", "rates-and-proportions", "error-and-accuracy"],
+        "Algebra": ["expand-and-factorise", "linear-equations-and-inequalities", "simultaneous-equations", "quadratic-expressions-and-equations", "linear-and-quadratic-functions", "exponential-relations-introduction", "algebraic-fractions-introduction"],
+        "Measurement": ["surface-area-and-volume-composite-solids", "pythagoras", "trigonometry-right-triangles", "scale-and-similarity", "measurement-error"],
+        "Space": ["geometric-reasoning", "similarity-and-congruence", "coordinate-geometry", "transformations", "circle-geometry-introduction"],
+        "Statistics": ["univariate-distributions", "box-plots", "standard-deviation-introduction", "bivariate-data", "scatterplots-and-trend-lines", "sampling-and-bias", "statistical-investigations"],
+        "Probability": ["conditional-probability-introduction", "two-way-tables", "tree-diagrams", "independent-and-dependent-events", "expected-frequency"]
+      },
+      "English": {
+        "Language": ["syntax-for-effect", "cohesion-across-long-texts", "register-and-style", "rhetorical-grammar", "nominalisation-and-abstraction", "punctuation-as-style", "lexical-choice-and-connotation", "language-variation-and-change"],
+        "Literature": ["complex-characterisation", "themes-and-values", "narrative-reliability", "intertextuality", "genre-and-subversion", "symbolism-and-motif", "poetic-and-dramatic-techniques", "context-and-representation", "critical-comparison"],
+        "Literacy": ["critical-reading", "synthesise-multiple-sources", "analyse-rhetoric-and-argument", "evaluate-evidence-and-source-credibility", "detect-bias-and-misinformation", "multimodal-rhetoric", "precise-summary-and-paraphrase", "research-and-citation", "thesis-led-analytical-writing", "persuasive-and-discursive-writing"]
+      },
+      "Science": {
+        "Science understanding": ["genetics-and-evolution", "homeostasis-and-body-systems", "ecosystem-dynamics", "atomic-structure-and-periodic-table", "chemical-reactions-and-stoichiometry-introduction", "forces-motion-and-newtons-laws", "energy-and-electricity", "waves-and-electromagnetic-spectrum", "plate-tectonics-and-earth-systems", "universe-and-cosmology-introduction"],
+        "Science as a human endeavour": ["evidence-theory-and-peer-review", "technology-and-innovation", "science-policy-and-society", "ethics-risk-and-uncertainty", "sustainability-and-global-challenges"],
+        "Science inquiry": ["formulate-testable-hypotheses", "design-valid-investigations", "uncertainty-and-significant-figures", "reliability-validity-and-accuracy", "analyse-multivariable-data", "correlation-vs-causation", "evaluate-models", "critique-methods-and-evidence", "scientific-argumentation"]
+      },
+      "Spelling": {"Word knowledge": ["academic-and-technical-vocabulary", "etymological-spelling-patterns", "discipline-specific-morphemes", "proofreading-complex-texts", "style-guide-consistency"]}
+    },
+    "years11-12": {
+      "Mathematics": {
+        "Number": ["real-number-fluency", "financial-growth-models", "scientific-notation-and-scale", "approximation-and-error"],
+        "Algebra": ["polynomial-algebra", "functions-and-inverses", "exponential-and-logarithmic-relations", "systems-of-equations", "sequences-and-series", "modelling-with-functions"],
+        "Measurement": ["trigonometric-modelling", "measurement-and-units-in-applications", "rates-and-change-introduction"],
+        "Space": ["coordinate-geometry", "vectors-introduction", "geometric-modelling"],
+        "Statistics": ["descriptive-statistics", "normal-distribution-introduction", "regression-and-correlation", "sampling-and-inference-introduction", "data-modelling"],
+        "Probability": ["conditional-probability", "combinatorics-introduction", "discrete-random-variables-introduction", "expected-value"]
+      },
+      "English": {
+        "Language": ["precision-and-style", "register-for-purpose", "cohesion-and-rhetorical-structure", "discipline-specific-vocabulary", "editing-for-control-and-effect"],
+        "Literature": ["close-analysis-of-form", "context-values-and-perspectives", "comparative-literary-analysis", "intertextuality-and-adaptation", "critical-interpretations", "authorial-style"],
+        "Literacy": ["synthesise-complex-sources", "evaluate-claims-evidence-and-assumptions", "research-literacy", "source-credibility-and-citation", "analytical-essay-structure", "argumentative-writing", "discursive-writing", "multimodal-composition", "oral-presentation-and-defence"]
+      },
+      "Science": {
+        "Science understanding": ["discipline-models-and-systems", "quantitative-relationships", "energy-matter-and-information-flows", "structure-function-and-change", "earth-and-environment-systems"],
+        "Science as a human endeavour": ["scientific-paradigms-and-evidence", "peer-review-and-reproducibility", "ethics-and-responsible-innovation", "science-policy-and-communication", "uncertainty-and-risk"],
+        "Science inquiry": ["research-question-and-hypothesis", "experimental-design", "uncertainty-error-and-propagation-introduction", "data-analysis-and-modelling", "evaluate-validity-and-reliability", "literature-evidence-synthesis", "scientific-reporting-and-referencing", "defend-conclusions-and-limitations"]
+      },
+      "Spelling": {"Word knowledge": ["academic-register-and-terminology", "discipline-specific-spelling", "etymology-and-word-formation", "proofreading-and-style-consistency"]}
+    }
+  },
+  "grades": {
+    "F": {"label": "Foundation", "band": "foundation", "status": "framework_only", "emphasis": ["foundational-number-sense", "phonological-awareness", "observation-and-classification"]},
+    "1": {"label": "Year 1", "band": "years1-2", "status": "framework_only", "emphasis": ["two-digit-number-sense", "decoding-and-literal-comprehension", "everyday-materials-and-weather"]},
+    "2": {"label": "Year 2", "band": "years1-2", "status": "active_reference", "emphasis": ["place-value-and-operations", "inference-and-text-purpose", "life-cycles-materials-and-inquiry"]},
+    "3": {"label": "Year 3", "band": "years3-4", "status": "framework_only", "emphasis": ["multiplication-division-and-fractions", "paragraph-comprehension", "fair-testing-and-data"]},
+    "4": {"label": "Year 4", "band": "years3-4", "status": "framework_only", "emphasis": ["multi-step-number-and-measurement", "evidence-based-inference", "systems-patterns-and-graphs"]},
+    "5": {"label": "Year 5", "band": "years5-6", "status": "framework_only", "emphasis": ["fractions-decimals-and-area", "source-comparison", "particle-model-and-variables"]},
+    "6": {"label": "Year 6", "band": "years5-6", "status": "framework_only", "emphasis": ["percentages-rates-and-volume", "argument-and-synthesis", "ecosystems-electricity-and-method-evaluation"]},
+    "7": {"label": "Year 7", "band": "years7-8", "status": "framework_only", "emphasis": ["rational-numbers-and-linear-relations", "close-reading-and-argument", "cells-particles-forces-and-controlled-investigation"]},
+    "8": {"label": "Year 8", "band": "years7-8", "status": "framework_only", "emphasis": ["algebra-geometry-and-bivariate-data", "perspective-and-rhetoric", "energy-reactions-earth-systems-and-error"]},
+    "9": {"label": "Year 9", "band": "years9-10", "status": "framework_only", "emphasis": ["quadratics-trigonometry-and-statistics", "critical-comparison-and-credibility", "genetics-atoms-motion-and-validity"]},
+    "10": {"label": "Year 10", "band": "years9-10", "status": "framework_only", "emphasis": ["functions-probability-and-financial-modelling", "synthesis-and-thesis-led-writing", "evolution-chemistry-energy-and-scientific-argument"]},
+    "11": {"label": "Year 11", "band": "years11-12", "status": "framework_only", "emphasis": ["senior-secondary-mathematical-modelling", "complex-source-analysis", "discipline-science-methods"]},
+    "12": {"label": "Year 12", "band": "years11-12", "status": "framework_only", "emphasis": ["advanced-pre-tertiary-modelling", "independent-critical-analysis", "research-evidence-and-communication"]}
+  }
+}
