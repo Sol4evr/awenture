@@ -5,6 +5,8 @@ const manifest=require('./paper-manifest.json');
 const OWNER='Sol4evr';
 const REPO='awenture';
 const DELIVERY='github-source-proxy-v2-allowlist';
+const MAX_SAFE_PDF_CACHE=2;
+const safePdfCache=new Map();
 
 function token(){return process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||''}
 function cleanId(value){const id=String(Array.isArray(value)?value[0]:value||'');return /^[a-f0-9]{16}$/.test(id)?id:null}
@@ -43,28 +45,46 @@ async function learnerPdf(sourceBytes,deliveryEndPage){
   const pages=await out.copyPages(src,indexes);for(const page of pages)out.addPage(page);
   return {bytes:Buffer.from(await out.save()),sourcePages,learnerPages:deliveryEndPage};
 }
+function cacheKey(id,entry,ref){return `${ref}:${id}:${entry.deliveryEndPage}:${entry.sourceSha256||'unreviewed'}`}
+function cacheGet(key){
+  const v=safePdfCache.get(key);if(!v)return null;
+  safePdfCache.delete(key);safePdfCache.set(key,v);return v;
+}
+function cacheSet(key,value){
+  safePdfCache.delete(key);safePdfCache.set(key,value);
+  while(safePdfCache.size>MAX_SAFE_PDF_CACHE)safePdfCache.delete(safePdfCache.keys().next().value);
+}
+async function resolveSafePaper(id,entry,ref,auth){
+  const cacheable=ref!=='main';
+  const key=cacheKey(id,entry,ref);
+  if(cacheable){const hit=cacheGet(key);if(hit)return {...hit,cache:'HIT'}}
+  const headers={Authorization:`Bearer ${auth}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'AWenture-paper-resolver'};
+  const metaUrl=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodePath(entry.sourcePath)}?ref=${encodeURIComponent(ref)}`;
+  const metaResp=await fetch(metaUrl,{headers,redirect:'follow'});
+  if(!metaResp.ok){const e=new Error(metaResp.status===404?'Paper not found':'Unable to resolve historical paper');e.status=metaResp.status===404?404:502;throw e}
+  const meta=await metaResp.json();
+  if(meta?.type!=='file'||!meta.download_url){const e=new Error('Paper not found');e.status=404;throw e}
+  const upstream=await fetch(meta.download_url,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/octet-stream','User-Agent':'AWenture-paper-resolver'},redirect:'follow'});
+  if(!upstream.ok){const e=new Error('Unable to fetch historical paper');e.status=upstream.status===404?404:502;throw e}
+  const sourceBytes=Buffer.from(await upstream.arrayBuffer());
+  if(entry.sourceSha256&&sha256(sourceBytes)!==entry.sourceSha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
+  const safe=await learnerPdf(sourceBytes,entry.deliveryEndPage);
+  const resolved={...safe,etag:`"${sha256(safe.bytes)}"`};
+  if(cacheable)cacheSet(key,resolved);
+  return {...resolved,cache:'MISS'};
+}
 
 module.exports=async function handler(req,res){
   if(req.method!=='GET'&&req.method!=='HEAD'){res.setHeader('Allow','GET, HEAD');return res.status(405).end('Method not allowed')}
   if(manifest?.version!=='aw-paper-proxy-manifest-v2'||manifest?.delivery!==DELIVERY||manifest?.learnerOnly!==true)return res.status(503).end('Historical paper allowlist is not configured');
   const id=cleanId(req.query?.id),entry=id&&entryFor(id);
   if(!entry){res.setHeader('Cache-Control','no-store');return res.status(404).end('Paper not found')}
-  const {sourcePath,deliveryEndPage,sourceSha256}=entry;
+  const {sourcePath}=entry;
   const auth=token();
   if(!auth){res.setHeader('Cache-Control','no-store');return res.status(503).end('Historical paper source is not configured')}
   const ref=process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA||'main';
-  const headers={Authorization:`Bearer ${auth}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'AWenture-paper-resolver'};
   try{
-    const metaUrl=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodePath(sourcePath)}?ref=${encodeURIComponent(ref)}`;
-    const metaResp=await fetch(metaUrl,{headers,redirect:'follow'});
-    if(!metaResp.ok){res.setHeader('Cache-Control','no-store');return res.status(metaResp.status===404?404:502).end(metaResp.status===404?'Paper not found':'Unable to resolve historical paper')}
-    const meta=await metaResp.json();
-    if(meta?.type!=='file'||!meta.download_url)return res.status(404).end('Paper not found');
-    const upstream=await fetch(meta.download_url,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/octet-stream','User-Agent':'AWenture-paper-resolver'},redirect:'follow'});
-    if(!upstream.ok){res.setHeader('Cache-Control','no-store');return res.status(upstream.status===404?404:502).end('Unable to fetch historical paper')}
-    const sourceBytes=Buffer.from(await upstream.arrayBuffer());
-    if(sourceSha256&&sha256(sourceBytes)!==sourceSha256){res.setHeader('Cache-Control','no-store');return res.status(502).end('Historical paper source identity mismatch')}
-    const safe=await learnerPdf(sourceBytes,deliveryEndPage);
+    const safe=await resolveSafePaper(id,entry,ref,auth);
     const total=safe.bytes.length;
     const range=byteRange(req.headers.range,total);
     if(range?.error){res.statusCode=416;res.setHeader('Content-Range',`bytes */${total}`);res.setHeader('Accept-Ranges','bytes');res.setHeader('Cache-Control','no-store');return res.end()}
@@ -76,19 +96,20 @@ module.exports=async function handler(req,res){
     res.setHeader('Accept-Ranges','bytes');
     res.setHeader('Content-Length',String(body.length));
     if(range)res.setHeader('Content-Range',`bytes ${range.start}-${range.end}/${total}`);
-    res.setHeader('ETag',`"${sha256(safe.bytes)}"`);
+    res.setHeader('ETag',safe.etag);
     res.setHeader('X-AW-Paper-Source','github');
     res.setHeader('X-AW-Paper-Ref',ref);
     res.setHeader('X-AW-Paper-Delivery',DELIVERY);
     res.setHeader('X-AW-Paper-Learner-Pages',String(safe.learnerPages));
     res.setHeader('X-AW-Paper-Source-Pages',String(safe.sourcePages));
+    res.setHeader('X-AW-Paper-Safe-Cache',safe.cache);
     if(req.method==='HEAD')return res.end();
     return res.end(body);
   }catch(err){
     console.error('AW_PAPER_PROXY_ERROR',id,String(err?.message||err));
-    if(!res.headersSent){res.setHeader('Cache-Control','no-store');res.status(502).end('Unable to fetch historical paper')}
+    if(!res.headersSent){res.setHeader('Cache-Control','no-store');res.status(Number(err?.status)||502).end(err?.status===404?'Paper not found':'Unable to fetch historical paper')}
     else try{res.destroy()}catch(_){}
   }
 };
 
-module.exports._test={byteRange,learnerPdf,entryFor};
+module.exports._test={byteRange,learnerPdf,entryFor,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};
