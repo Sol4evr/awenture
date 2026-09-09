@@ -9,6 +9,7 @@ const catalog=JSON.parse(fs.readFileSync(path.join(dist,'stage-papers','catalog.
 const auto=JSON.parse(fs.readFileSync(path.join(dist,'stage-papers','auto-boundary-verification.json'),'utf8'));
 if(!html.includes('/y2-test-accordion.js?v=61822'))throw new Error('Year 2 accordion runtime not wired');
 if(!y2.includes('aria-expanded')||!y2.includes('.aw-historical-grid,.grid[data-aw-historical="1"]')||!y2.includes('ICAS Grade 2'))throw new Error('Year 2 accordion/footer cleanup contract missing or lacks historical-grid fallback');
+if(!y2.includes('const PREPARE_DELAYS=[0,50,140,300,650]')||!y2.includes('function schedulePrepare()')||!y2.includes("if(e.target.closest('[data-a=\"tests\"],[data-a=\"home\"]'))schedulePrepare()")||!y2.includes("window.addEventListener('awenture:stage-change',schedulePrepare)")||!y2.includes("window.addEventListener('awenture:progression-ready',schedulePrepare)"))throw new Error('Year 2 accordion does not reinitialize across asynchronous navigation/render lifecycle');
 if(auto.version!=='aw-stage-auto-boundary-1')throw new Error('automatic boundary QA report missing');
 let papers=0,pending=0;
 for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
@@ -19,4 +20,4 @@ for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[]){
 if(!papers)throw new Error('no later-stage papers available');
 if(pending)throw new Error(`later-stage learner-page clearance incomplete: ${pending}/${papers} papers still need boundary verification`);
 if(catalog.governance?.pendingBoundary!==0)throw new Error('catalog governance still reports pending learner-page boundaries');
-console.log(JSON.stringify({release:'6.18.2',finalUX:'PASS',y2Accordion:'PASS',historicalGridFallback:'PASS',footerGrade2Removed:'PASS',automaticBoundaryQA:'PASS',papers,learnerPageClearance:'100%',autoScoring:'VERIFIED_ANSWER_MAP_ONLY'}));
+console.log(JSON.stringify({release:'6.18.2',finalUX:'PASS',y2Accordion:'PASS',historicalGridFallback:'PASS',accordionLifecycleReinit:'PASS',footerGrade2Removed:'PASS',automaticBoundaryQA:'PASS',papers,learnerPageClearance:'100%',autoScoring:'VERIFIED_ANSWER_MAP_ONLY'}));
