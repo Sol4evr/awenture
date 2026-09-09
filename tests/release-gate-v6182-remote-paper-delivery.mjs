@@ -47,7 +47,7 @@ function walk(dir){if(!fs.existsSync(dir))return;for(const e of fs.readdirSync(d
 walk(stageDir);
 if(deployedPdfs.length)throw new Error(`stage PDFs must not be deployed: ${deployedPdfs.slice(0,5).join(', ')}`);
 const api=fs.readFileSync(apiPath,'utf8');
-for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','api.github.com/repos','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
+for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','api.github.com/repos','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
 if(api.includes('req.query?.path'))throw new Error('paper proxy must not accept arbitrary repository source paths');
 if(/fileHeaders\.Range|headers\.Range|upstream[^\n]*range/i.test(api))throw new Error('learner byte range must never be forwarded to the uncropped source PDF');
 if(/gh[pousr]_[A-Za-z0-9_]{20,}/.test(api))throw new Error('GitHub credential must never be embedded in source');
@@ -66,6 +66,14 @@ for(const [value,expected] of [['bytes=0-4',{start:0,end:4}],['bytes=5-',{start:
   const got=helpers.byteRange(value,total);if(got?.start!==expected.start||got?.end!==expected.end)throw new Error(`cropped PDF byte range regression: ${value}`);
 }
 if(!helpers.byteRange(`bytes=${total}-`,total)?.error||!helpers.byteRange('bytes=bad',total)?.error)throw new Error('invalid cropped PDF ranges must fail closed');
+if(helpers.MAX_SAFE_PDF_CACHE!==2)throw new Error(`safe PDF cache must remain tightly bounded: ${helpers.MAX_SAFE_PDF_CACHE}`);
+helpers.safePdfCache.clear();
+for(let i=1;i<=3;i++)helpers.cacheSet(`sha:${i}`,{bytes:Buffer.from([i]),learnerPages:i,sourcePages:i});
+if(helpers.safePdfCache.size!==2||helpers.safePdfCache.has('sha:1')||!helpers.safePdfCache.has('sha:2')||!helpers.safePdfCache.has('sha:3'))throw new Error('safe PDF cache LRU bound/eviction regression');
+if(!helpers.cacheGet('sha:2'))throw new Error('safe PDF cache hit regression');
+helpers.cacheSet('sha:4',{bytes:Buffer.from([4]),learnerPages:4,sourcePages:4});
+if(helpers.safePdfCache.has('sha:3')||!helpers.safePdfCache.has('sha:2')||!helpers.safePdfCache.has('sha:4'))throw new Error('safe PDF cache recency regression');
+helpers.safePdfCache.clear();
 
 let githubSmoke='LOCAL_SKIP';
 if(process.env.VERCEL==='1'){
@@ -86,4 +94,4 @@ if(process.env.VERCEL==='1'){
     githubSmoke='PASS';
   }else githubSmoke='SKIP_NO_PREVIEW_TOKEN';
 }
-console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_VERCEL_GIT_COMMIT_SHA',githubSourceSmoke:githubSmoke}));
+console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',safePdfCache:'LRU_2_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_VERCEL_GIT_COMMIT_SHA',githubSourceSmoke:githubSmoke}));
