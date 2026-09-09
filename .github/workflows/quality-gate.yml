@@ -47,6 +47,8 @@ jobs:
         run: node scripts/export-v6.18.2-maturity-work-queues.mjs
       - name: Diagnose paper-specific timing evidence
         run: node scripts/diagnose-v6.18.2-paper-timing-evidence.mjs
+      - name: Render paper-specific timing evidence
+        run: node scripts/render-v6.18.2-timing-candidate-review.mjs
       - name: Discover exact companion answer candidates
         run: node scripts/diagnose-v6.18.2-answer-resource-candidates.mjs
       - name: Render companion answer candidate review batch
@@ -69,6 +71,8 @@ jobs:
             dist/stage-papers/paper-maturity-v1.json
             dist/stage-papers/maturity-work-queues/*.json
             dist/stage-papers/timing-evidence-candidates-v1.json
+            dist/stage-papers/timing-candidate-review/*.jpg
+            dist/stage-papers/timing-candidate-review/manifest.json
             dist/stage-papers/answer-resource-candidates-v1.json
             dist/stage-papers/answer-candidate-review-batch/*.jpg
             dist/stage-papers/answer-candidate-review-batch/manifest.json
