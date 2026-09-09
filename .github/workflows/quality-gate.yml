@@ -23,6 +23,13 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
+      - name: Upload generated dependency lock candidate
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-package-lock-candidate
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 1
       - name: Render private v6.18.2 visual review evidence
         env:
           AW_REVIEW_ARTIFACT: '1'
@@ -44,6 +51,11 @@ jobs:
         run: node tests/release-gate-v6182-paper-maturity.mjs
       - name: Export maturity work queues
         run: node scripts/export-v6.18.2-maturity-work-queues.mjs
+      - name: Render orientation/readability review batch
+        env:
+          AW_ORIENTATION_BATCH_SIZE: '12'
+          AW_ORIENTATION_BATCH_OFFSET: '0'
+        run: node scripts/render-v6.18.2-orientation-review-batch.mjs
       - name: Upload formal-paper maturity artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -51,6 +63,8 @@ jobs:
           path: |
             dist/stage-papers/paper-maturity-v1.json
             dist/stage-papers/maturity-work-queues/*.json
+            dist/stage-papers/orientation-review-batch/*.jpg
+            dist/stage-papers/orientation-review-batch/manifest.json
           if-no-files-found: error
           retention-days: 7
       - name: Render private unresolved question-count review batch
