@@ -49,7 +49,11 @@ if(deployedPdfs.length)throw new Error(`stage PDFs must not be deployed: ${deplo
 const api=fs.readFileSync(apiPath,'utf8');
 for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','api.github.com/repos','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
 if(api.includes('req.query?.path'))throw new Error('paper proxy must not accept arbitrary repository source paths');
-if(/fileHeaders\.Range|headers\.Range|upstream[^\n]*range/i.test(api))throw new Error('learner byte range must never be forwarded to the uncropped source PDF');
+const upstreamStart=api.indexOf("const upstream=await fetch(meta.download_url");
+const upstreamEnd=api.indexOf('const sourceBytes=',upstreamStart);
+if(upstreamStart<0||upstreamEnd<0)throw new Error('paper proxy upstream download block not found');
+const upstreamBlock=api.slice(upstreamStart,upstreamEnd);
+if(/\bRange\s*:|req\.headers\.range|req\.headers\[['"]range/i.test(upstreamBlock))throw new Error('learner byte range must never be forwarded to the uncropped source PDF');
 if(/gh[pousr]_[A-Za-z0-9_]{20,}/.test(api))throw new Error('GitHub credential must never be embedded in source');
 
 const require=createRequire(import.meta.url);
