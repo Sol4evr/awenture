@@ -18,16 +18,4 @@ if(!html.includes(scriptAnchor))throw new Error('UI script anchor missing');
 html=html.replace(scriptAnchor,'<script src="/skill-engine.js?v=61820" defer></script><script src="/premium.js');
 fs.copyFileSync(engineSource,engineDest);
 fs.writeFileSync(htmlPath,html);
-
-const insightsPath=path.join(root,'dist/insights.js');
-let insights=fs.readFileSync(insightsPath,'utf8');
-const requestMarker="function requestId(unseen,seenCount){const key=TOPUP_SUBJECTS.map(s=>unseen[s]).join('-');return `aw-topup-${key}-${seenCount}`}";
-const requestReplacement="function requestId(unseen,seenCount){const key=TOPUP_SUBJECTS.map(s=>unseen[s]).join('-'),base=`aw-topup-${key}-${seenCount}`;return window.__AW_SKILL_ENGINE?.coverageRequestKey?.(base,bank(),progress(),unseen)||base}";
-if(!insights.includes(requestMarker))throw new Error('Parent top-up requestId marker missing');
-insights=insights.replace(requestMarker,requestReplacement);
-const payloadMarker="function backendPayload(req){return {requestKey:req.requestId,sourceRelease:req.release,bankSize:req.bankSize,targetUnseenPerSubject:TOPUP_TARGET,unseenBySubject:Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,req.unseen[s]])),requiredBySubject:req.requested,focusSubskills:Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,req.weakest[s].map(x=>x.skill)])),qaPolicy:req.qualityPolicy}}";
-const payloadReplacement="function backendPayload(req){const required=Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,Math.min(6,Math.max(0,Number(req.requested[s]||0)))])),plan=window.__AW_SKILL_ENGINE?.coveragePlan?.(req.requestId,bank(),progress(),required),coverage=plan?.focusSubskills||{};return {requestKey:req.requestId,sourceRelease:req.release,bankSize:req.bankSize,targetUnseenPerSubject:TOPUP_TARGET,unseenBySubject:Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,req.unseen[s]])),requiredBySubject:required,focusSubskills:Object.fromEntries(TOPUP_SUBJECTS.map(s=>[s,(coverage[s]?.length?coverage[s]:req.weakest[s].map(x=>x.skill)).slice(0,6)])),qaPolicy:{...req.qualityPolicy,skillCoverageTargeted:true,recipeAlignmentRequired:true,maxCoverageBatchPerSubject:6}}}";
-if(!insights.includes(payloadMarker))throw new Error('Parent top-up payload marker missing');
-insights=insights.replace(payloadMarker,payloadReplacement);
-fs.writeFileSync(insightsPath,insights);
-console.log(JSON.stringify({release:'6.18.2',uiChange:'NONE',dailyQuestionCount:15,dailyMix:{English:4,Mathematics:4,Science:4,Spelling:3},selector:'STAGE_WEIGHTED_LEGACY_UNTIL_SKILL_READY',skillBalanceActivation:'EXPLICIT_READINESS_FLAG',fallback:'STAGE_WEIGHTED_LEGACY_PICK',visualProfile:'PRESERVED',historicalPapers:'UNCHANGED',questionFactory:'COVERAGE_GAP_TARGETED_EXISTING_RECIPES',coverageBatchMaxPerSubject:6,directPublish:false}));
+console.log(JSON.stringify({release:'6.18.2',uiChange:'NONE',dailyQuestionCount:15,dailyMix:{English:4,Mathematics:4,Science:4,Spelling:3},selector:'STAGE_WEIGHTED_LEGACY_UNTIL_SKILL_READY',skillBalanceActivation:'EXPLICIT_READINESS_FLAG',fallback:'STAGE_WEIGHTED_LEGACY_PICK',visualProfile:'PRESERVED',historicalPapers:'UNCHANGED',parentTopUpRuntime:'UNCHANGED',questionFactory:'COVERAGE_PLANNER_AVAILABLE_NOT_WIRED',directPublish:false}));
