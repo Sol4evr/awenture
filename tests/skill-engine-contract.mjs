@@ -32,5 +32,6 @@ const explicit={subject:'Mathematics',subskill:'legacy label',quality:{focus:pla
 if(!engine.skillId(explicit).startsWith('Y2.MATH.'))throw new Error('Explicit coverage skill ID was not recovered from generated metadata');
 
 const patch=fs.readFileSync(new URL('../scripts/patch-v6.18.2-skill-graph.mjs',import.meta.url),'utf8');
-for(const marker of ['awLegacyPick','STAGE_WEIGHTED_PLUS_SKILL_BALANCE','dailyQuestionCount:15','historicalPapers:\'UNCHANGED\'','coveragePlan','maxCoverageBatchPerSubject:6','directPublish:false'])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
-console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',visualProfile:'PASS',historicalIsolation:'PASS',coverageRecipeAlignment:'PASS',coverageBatchMaxPerSubject:6,explicitSkillMetadata:'PASS'}));
+for(const marker of ['awLegacyPick','__AW_SKILL_BALANCE_READY===true','STAGE_WEIGHTED_LEGACY_UNTIL_SKILL_READY','dailyQuestionCount:15','historicalPapers:\'UNCHANGED\'','coveragePlan','maxCoverageBatchPerSubject:6','directPublish:false'])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
+if(!patch.includes('awSkillReady?')||!patch.includes(':awLegacyPick'))throw new Error('Legacy selector must remain the live default until explicit skill readiness');
+console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',liveLegacyCompatibility:'PASS',visualProfile:'PASS',historicalIsolation:'PASS',coverageRecipeAlignment:'PASS',coverageBatchMaxPerSubject:6,explicitSkillMetadata:'PASS'}));
