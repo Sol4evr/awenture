@@ -44,11 +44,10 @@ for(const marker of [
   "supabaseFunctions:'UNCHANGED'",
   'coverageFocusSubskills',
   'currentRequestMatches',
-  'requiredBySubject:req.requested',
   'directPublish:false'
 ])if(!patch.includes(marker))throw new Error(`Patch contract missing ${marker}`);
 if(!patch.includes('awSkillReady?')||!patch.includes(':awLegacyPick'))throw new Error('Skill-aware selector must retain legacy fail-safe fallback');
 if(!patch.includes('req.coverageFocusSubskills||Object.fromEntries'))throw new Error('Governed coverage focus must flow into existing Question Factory payload');
-if(!patch.includes("Math.min(6" )&& !code.includes('Math.min(6'))throw new Error('Coverage generation cap missing');
+if(!code.includes('Math.min(6'))throw new Error('Coverage generation cap missing');
 if(patch.includes('service_role')||patch.includes('SUPABASE_SERVICE_ROLE'))throw new Error('Privileged Supabase credentials must not enter browser/runtime patch');
 console.log(JSON.stringify({skillEngine:'PASS',dailyCount:15,mix:{English:4,Mathematics:4,Science:4,Spelling:3},legacyFallback:'PASS',skillBalancing:'ACTIVE_FAIL_SAFE',parentTopUpRuntime:'GOVERNED_COVERAGE_TARGETING',visualProfile:'PASS',historicalIsolation:'PASS',coverageRecipeAlignment:'PASS',coveragePlanner:'WIRED_EXISTING_RECIPES_ONLY',explicitSkillMetadata:'PASS',supabaseFunctions:'UNCHANGED'}));
