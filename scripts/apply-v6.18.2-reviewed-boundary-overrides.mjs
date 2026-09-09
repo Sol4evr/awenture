@@ -39,3 +39,4 @@ for(const r of review.overrides||[]){
 catalog.governance={...(catalog.governance||{}),reviewedBoundaryOverrides:'aw-stage-paper-reviewed-boundaries-v1'};
 fs.writeFileSync(reportPath,JSON.stringify(report,null,2)+'\n');fs.writeFileSync(catalogPath,JSON.stringify(catalog,null,2)+'\n');
 console.log(JSON.stringify({release:'6.18.2',reviewedBoundaryOverrides:'PASS',applied,expanded,narrowed}));
+await import('./finalize-v6.18.2-paper-proxy-manifest.mjs');
