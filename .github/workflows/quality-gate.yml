@@ -36,7 +36,8 @@ jobs:
             dist/stage-papers/companion-answer-review/manifest.json
           if-no-files-found: error
           retention-days: 1
-      - run: npm run test:release
+      - name: Run release gates
+        run: npm run test:release
       - name: Render private unresolved question-count review batch
         env:
           AW_REVIEW_BATCH_SIZE: '8'
@@ -51,8 +52,64 @@ jobs:
             dist/stage-papers/unresolved-review-batch/manifest.json
           if-no-files-found: error
           retention-days: 1
+      - name: Upload tested dist for independent browser jobs
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-tested-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 1
+
+  legacy-browser:
+    needs: release-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          name: v6182-tested-dist
+          path: dist
       - run: npx playwright install --with-deps webkit chromium
-      - name: Run v6.16.1 browser checks
-        run: npx playwright test tests/v6161.spec.mjs
+      - name: Run v6.16.1 browser compatibility checks
+        run: npx playwright test tests/v6161.spec.mjs --trace=retain-on-failure --screenshot=only-on-failure
+      - name: Upload legacy browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6161-browser-diagnostics
+          path: |
+            test-results
+            playwright-report
+          if-no-files-found: ignore
+          retention-days: 3
+
+  full-browser:
+    needs: release-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          name: v6182-tested-dist
+          path: dist
+      - run: npx playwright install --with-deps webkit chromium
       - name: Run full browser regression suite
-        run: npm run test:browser
+        run: npm run test:browser -- --trace=retain-on-failure --screenshot=only-on-failure
+      - name: Upload full browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-browser-diagnostics
+          path: |
+            test-results
+            playwright-report
+          if-no-files-found: ignore
+          retention-days: 3
