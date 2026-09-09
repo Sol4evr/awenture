@@ -8,7 +8,7 @@ const engineDest=path.join(root,'dist/skill-engine.js');
 if(!fs.existsSync(engineSource))throw new Error('Skill engine source missing');
 let html=fs.readFileSync(htmlPath,'utf8');
 const marker="window.__AW_LAST_PICK_MS=Math.round((performance.now()-t0)*100)/100;return shuffle((window.AW_PROGRESSION?window.AW_PROGRESSION.rebalanceDaily(out.slice(0,15),BANK,P.seenIds,sd):out.slice(0,15)),sd+173);";
-const replacement=`const awLegacyPick=(window.AW_PROGRESSION?window.AW_PROGRESSION.rebalanceDaily(out.slice(0,15),BANK,P.seenIds,sd):out.slice(0,15));\n  const awSkillPick=window.__AW_SKILL_ENGINE?.rebalance?.(awLegacyPick,BANK,P,sd,{familyKey,recent})||awLegacyPick;\n  window.__AW_LAST_PICK_MS=Math.round((performance.now()-t0)*100)/100;return shuffle(awSkillPick.slice(0,15),sd+173);`;
+const replacement=`const awLegacyPick=(window.AW_PROGRESSION?window.AW_PROGRESSION.rebalanceDaily(out.slice(0,15),BANK,P.seenIds,sd):out.slice(0,15));\n  const awSkillReady=window.__AW_SKILL_BALANCE_READY===true;\n  const awSkillPick=awSkillReady?(window.__AW_SKILL_ENGINE?.rebalance?.(awLegacyPick,BANK,P,sd,{familyKey,recent})||awLegacyPick):awLegacyPick;\n  window.__AW_LAST_PICK_MS=Math.round((performance.now()-t0)*100)/100;return shuffle(awSkillPick.slice(0,15),sd+173);`;
 if(!html.includes(marker))throw new Error('v6.18.2 stage-weighted Daily Practice selector marker not found');
 if((html.match(new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'))||[]).length!==1)throw new Error('Daily Practice selector marker is not unique');
 html=html.replace(marker,replacement);
@@ -30,4 +30,4 @@ const payloadReplacement="function backendPayload(req){const required=Object.fro
 if(!insights.includes(payloadMarker))throw new Error('Parent top-up payload marker missing');
 insights=insights.replace(payloadMarker,payloadReplacement);
 fs.writeFileSync(insightsPath,insights);
-console.log(JSON.stringify({release:'6.18.2',uiChange:'NONE',dailyQuestionCount:15,dailyMix:{English:4,Mathematics:4,Science:4,Spelling:3},selector:'STAGE_WEIGHTED_PLUS_SKILL_BALANCE',fallback:'STAGE_WEIGHTED_LEGACY_PICK',visualProfile:'PRESERVED',historicalPapers:'UNCHANGED',questionFactory:'COVERAGE_GAP_TARGETED_EXISTING_RECIPES',coverageBatchMaxPerSubject:6,directPublish:false}));
+console.log(JSON.stringify({release:'6.18.2',uiChange:'NONE',dailyQuestionCount:15,dailyMix:{English:4,Mathematics:4,Science:4,Spelling:3},selector:'STAGE_WEIGHTED_LEGACY_UNTIL_SKILL_READY',skillBalanceActivation:'EXPLICIT_READINESS_FLAG',fallback:'STAGE_WEIGHTED_LEGACY_PICK',visualProfile:'PRESERVED',historicalPapers:'UNCHANGED',questionFactory:'COVERAGE_GAP_TARGETED_EXISTING_RECIPES',coverageBatchMaxPerSubject:6,directPublish:false}));
