@@ -16,7 +16,7 @@ function rel(p){return path.relative(root,p).split(path.sep).join('/')}
 function norm(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-')}
 function activeStage(r){const n=norm(r);return n.includes('source/original-icas/year3/')||n.includes('source/original-icas/year4/')||(n.includes('source/naplan/')&&(/year[ _-]?3/.test(n)||/year 3/.test(n)))||n.includes('source/oc/')}
 function classifyResource(r){
-  const n=norm(path.basename(r));
+  const n=norm(path.basename(r)),full=norm(r);
   if(/answer key|answers|answer-key/.test(n))return 'answer-key';
   if(/answer sheet/.test(n))return 'answer-sheet';
   if(/marking|mark scheme|worked solution|solution|explanation/.test(n))return 'marking-guide';
@@ -24,7 +24,10 @@ function classifyResource(r){
   if(/rubric|criteria/.test(n))return 'writing-rubric';
   if(/report|results|certificate/.test(n))return 'results-report';
   if(/magazine|materials|large print|black and white|commentary/.test(n))return 'stimulus-support-resource';
-  if(/question|test|paper|prompt|sample|practice|assessment/.test(n)||/source\/original-icas\/year[34]\//.test(norm(r)))return 'learner-paper';
+  // Match the stage library's explicit NAPLAN Year 3 learner-paper rules. Some 2017
+  // example files are named only by subject and therefore do not contain “test” or “paper”.
+  if(full.includes('source/naplan/')&&(/language[_ ]convention|numeracy|reading[_ ]questions|writing[_ ]prompt|writing[_ ]test/.test(n)))return 'learner-paper';
+  if(/question|test|paper|prompt|sample|practice|assessment/.test(n)||/source\/original-icas\/year[34]\//.test(full))return 'learner-paper';
   return 'unclassified';
 }
 
@@ -45,6 +48,7 @@ for(const p of papers){
 
 const resources=walk(path.join(root,'source')).map(rel).filter(activeStage).map(sourcePath=>({sourcePath,classification:classifyResource(sourcePath)}));
 const classCounts={};for(const r of resources)classCounts[r.classification]=(classCounts[r.classification]||0)+1;
+const unclassifiedPaths=resources.filter(x=>x.classification==='unclassified').map(x=>x.sourcePath);
 const summary={
   papers:maturity.length,
   boundaryVerified:maturity.filter(x=>x.learnerBoundary==='verified').length,
@@ -60,7 +64,8 @@ const summary={
   maturityWorkRequired:maturity.filter(x=>x.maturityState==='maturity-work-required').length,
   activeStageSourceResources:resources.length,
   resourceClassifications:classCounts,
-  unclassifiedResources:resources.filter(x=>x.classification==='unclassified').length
+  unclassifiedResources:unclassifiedPaths.length,
+  unclassifiedPaths
 };
 const report={version:'aw-stage-paper-maturity-v1',release:'6.18.2',policy:{failClosed:true,timingDefaultsAreNotHistoricalEvidence:true,orientationRequiresVisualQA:true,answerMappingRequiresIndependentCrossCheck:true,governedExceptionsAllowed:true},summary,papers:maturity,resources};
 fs.writeFileSync(outPath,JSON.stringify(report,null,2)+'\n');
