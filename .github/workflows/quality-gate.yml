@@ -38,6 +38,17 @@ jobs:
           retention-days: 1
       - name: Run release gates
         run: npm run test:release
+      - name: Build formal-paper maturity matrix
+        run: node scripts/audit-v6.18.2-paper-maturity.mjs
+      - name: Gate formal-paper maturity accounting
+        run: node tests/release-gate-v6182-paper-maturity.mjs
+      - name: Upload formal-paper maturity report
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-paper-maturity
+          path: dist/stage-papers/paper-maturity-v1.json
+          if-no-files-found: error
+          retention-days: 7
       - name: Render private unresolved question-count review batch
         env:
           AW_REVIEW_BATCH_SIZE: '8'
