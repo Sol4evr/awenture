@@ -1,0 +1,38 @@
+{
+  "version": "aw-stage-paper-maturity-policy-v1",
+  "release": "6.18.2",
+  "benchmark": "strongest-mature-ICAS-Year-2-formal-paper-runtime",
+  "terminalStates": {
+    "mature-verified": {
+      "description": "Learner-ready paper with source-bound identity, verified learner boundary, exact question count, source-verified conditions, visual/orientation QA, and independently verified answer mapping for objective papers.",
+      "progressionCreditAllowed": true
+    },
+    "mature-governed-exception": {
+      "description": "Paper or source whose evidence cannot safely support one or more mature capabilities; deficiency is explicitly classified and those capabilities remain disabled.",
+      "progressionCreditAllowed": false
+    }
+  },
+  "requiredDimensions": [
+    "sourceIdentity",
+    "learnerBoundary",
+    "questionCount",
+    "timing",
+    "orientation",
+    "answerMapping",
+    "responseSchema",
+    "scoring",
+    "progressionCredit"
+  ],
+  "rules": {
+    "noSubjectDefaultMayBePresentedAsHistoricalEvidence": true,
+    "noAutoScoringWithoutIndependentAnswerMapping": true,
+    "noProgressionCreditWithoutVerifiedScoring": true,
+    "writingAutoScoringForbidden": true,
+    "orientationRequiresVisualQA": true,
+    "answerAndSupportResourcesNeverLearnerVisible": true,
+    "sameFileAndCompanionEvidenceRemainSeparate": true,
+    "partialPaperNeverPromotedToFullPaper": true,
+    "unclassifiedActiveStageSourceResourcesTarget": 0,
+    "browserWebKitAndChromiumRequired": true
+  }
+}
