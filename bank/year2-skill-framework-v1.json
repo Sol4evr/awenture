@@ -1,6 +1,8 @@
 {
   "schema": "awenture-skill-framework-v1",
   "grade": 2,
+  "catalog": "multigrade-skill-framework-v1",
+  "runtimeStatus": "active_reference",
   "purpose": "Coverage framework for original AWenture questions. It is not copied question content from any third-party learning platform.",
   "subjects": {
     "Mathematics": {
