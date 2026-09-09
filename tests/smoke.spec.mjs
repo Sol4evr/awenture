@@ -1,5 +1,12 @@
 import { test, expect } from '@playwright/test';
 
+async function openSubject(section){
+  const heading=section.locator('.aw-form-heading[data-aw-accordion="1"]');
+  await expect(heading).toBeVisible();
+  if(await heading.getAttribute('aria-expanded')!=='true')await heading.click();
+  await expect(heading).toHaveAttribute('aria-expanded','true');
+}
+
 test('hardened learner shell, governed top-up, historical tests and bonus isolation', async ({ page }) => {
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   let posted=null;
@@ -56,13 +63,20 @@ test('hardened learner shell, governed top-up, historical tests and bonus isolat
 
   await page.locator('[data-a="tests"]').click();
   await expect(page.locator('.aw-form-subject')).toHaveCount(4);
-  await expect(page.locator('.aw-spelling-subject')).toHaveCount(1);
-  await expect(page.locator('.aw-spelling-subject [data-aw-original-subject="Spelling"][data-aw-original-year="2016"]')).toHaveCount(1);
+  const spelling=page.locator('.aw-form-subject').filter({hasText:'Spelling'});
+  await expect(spelling).toHaveCount(1);
+  await expect(spelling).toContainText('15 questions · 25 min · 1 paper');
+  await openSubject(spelling);
+  const spelling2016=spelling.locator('[data-aw-original-subject="Spelling"][data-aw-original-year="2016"]');
+  await expect(spelling2016).toBeVisible();
   await expect(page.locator('[data-aw-original-year]')).toHaveCount(22);
   await expect(page.locator('[data-aw-form-id]')).toHaveCount(0);
   const english=page.locator('.aw-form-subject').filter({hasText:'English'});
   await expect(english).toContainText('35 questions · 35 min · 8 papers');
-  await english.locator('[data-aw-original-year="2013"]').click();
+  await openSubject(english);
+  const english2013=english.locator('[data-aw-original-year="2013"]');
+  await expect(english2013).toBeVisible();
+  await english2013.click();
   await expect(page.locator('.aw-instruction-overlay').getByText('Historical ICAS paper')).toBeVisible();
   await page.locator('[data-aw-start-original]').click();
   await expect(page.locator('[data-aw-original-timer]')).toBeVisible();
