@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const reportPath=path.join(root,'dist','stage-papers','paper-maturity-v1.json');
+if(!fs.existsSync(reportPath))throw new Error('paper maturity report missing');
+const report=JSON.parse(fs.readFileSync(reportPath,'utf8'));
+const outDir=path.join(root,'dist','stage-papers','maturity-work-queues');
+fs.rmSync(outDir,{recursive:true,force:true});fs.mkdirSync(outDir,{recursive:true});
+const papers=report.papers||[];
+const orientation=papers.filter(p=>p.orientation!=='verified').map(p=>({id:p.id,sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,year:p.year,reviewPages:'first-middle-last-learner-pages',requiredChecks:['upright-orientation','blank-render','crop','diagram-legibility','answer-leak']}));
+const timing=papers.filter(p=>p.timing!=='source-verified').map(p=>({id:p.id,sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,year:p.year,currentTimingStatus:p.timing,requiredEvidence:['same-paper-cover-or-instructions','exact-same-paper-support-resource'],forbiddenEvidence:['subject-default','adjacent-year-default']}));
+const answers=papers.filter(p=>p.answerMapping==='pending').map(p=>({id:p.id,sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,year:p.year,questionCount:p.questionCount,requiredChecks:['locate-exact-answer-resource','bind-learner-sha','bind-answer-resource-sha','verify-question-answer-alignment','extract-response-types','independent-cross-check','synthetic-perfect-and-wrong-attempt']}));
+const governed=papers.filter(p=>p.maturityState==='mature-governed-exception').map(p=>({id:p.id,sourcePath:p.sourcePath,classification:p.residualClassification,scoring:p.scoring,progressionCredit:p.progressionCredit}));
+for(const [name,items] of Object.entries({orientation,timing,answers,governedExceptions:governed}))fs.writeFileSync(path.join(outDir,`${name}.json`),JSON.stringify({version:'aw-stage-paper-maturity-work-queue-v1',release:'6.18.2',queue:name,count:items.length,items},null,2)+'\n');
+console.log(JSON.stringify({release:'6.18.2',maturityWorkQueues:'PASS',orientation:orientation.length,timing:timing.length,answers:answers.length,governedExceptions:governed.length}));
