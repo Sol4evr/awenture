@@ -42,11 +42,15 @@ jobs:
         run: node scripts/audit-v6.18.2-paper-maturity.mjs
       - name: Gate formal-paper maturity accounting
         run: node tests/release-gate-v6182-paper-maturity.mjs
-      - name: Upload formal-paper maturity report
+      - name: Export maturity work queues
+        run: node scripts/export-v6.18.2-maturity-work-queues.mjs
+      - name: Upload formal-paper maturity artifacts
         uses: actions/upload-artifact@v4
         with:
           name: v6182-paper-maturity
-          path: dist/stage-papers/paper-maturity-v1.json
+          path: |
+            dist/stage-papers/paper-maturity-v1.json
+            dist/stage-papers/maturity-work-queues/*.json
           if-no-files-found: error
           retention-days: 7
       - name: Render private unresolved question-count review batch
