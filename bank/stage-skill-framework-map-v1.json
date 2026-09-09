@@ -1,0 +1,12 @@
+{
+  "schema": "awenture-stage-skill-framework-map-v1",
+  "activation": "metadata_only",
+  "stages": {
+    "icas-y2": {"primaryGrade": 2, "frameworkGrades": [2]},
+    "icas-y3": {"primaryGrade": 3, "frameworkGrades": [3]},
+    "naplan-y3": {"primaryGrade": 3, "frameworkGrades": [3]},
+    "icas-y4": {"primaryGrade": 4, "frameworkGrades": [4]},
+    "oc-prep": {"primaryGrade": 4, "frameworkGrades": [3, 4], "policy": "mixed-year3-year4-coverage-with-oc-reasoning-overlay"}
+  },
+  "safeguard": "This map does not activate non-Year-2 skill balancing. Stage activation requires a separate release-gated adapter and tests."
+}
