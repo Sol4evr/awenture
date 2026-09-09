@@ -45,6 +45,10 @@ jobs:
         run: node tests/release-gate-v6182-paper-maturity.mjs
       - name: Export maturity work queues
         run: node scripts/export-v6.18.2-maturity-work-queues.mjs
+      - name: Diagnose paper-specific timing evidence
+        run: node scripts/diagnose-v6.18.2-paper-timing-evidence.mjs
+      - name: Discover exact companion answer candidates
+        run: node scripts/diagnose-v6.18.2-answer-resource-candidates.mjs
       - name: Render orientation/readability review batch
         env:
           AW_ORIENTATION_BATCH_SIZE: '12'
@@ -57,6 +61,8 @@ jobs:
           path: |
             dist/stage-papers/paper-maturity-v1.json
             dist/stage-papers/maturity-work-queues/*.json
+            dist/stage-papers/timing-evidence-candidates-v1.json
+            dist/stage-papers/answer-resource-candidates-v1.json
             dist/stage-papers/orientation-review-batch/*.jpg
             dist/stage-papers/orientation-review-batch/manifest.json
           if-no-files-found: error
