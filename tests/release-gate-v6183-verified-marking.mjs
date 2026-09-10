@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {spawnSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 
@@ -43,9 +44,7 @@ for(const paper of Object.values(VERIFIED_PAPERS)){
 
 const numeracy=VERIFIED_PAPERS['5d634c70edf0b6cd'];
 assert(JSON.stringify(numeracy.responseSchema.shortResponse)===JSON.stringify([11,25,29,32,33,34,35]),'NAPLAN Numeracy short-response schema changed');
-for(const id of ['c7b97767539d3dd9','cc8d05b92191637d','c8b34fa6f3fa0da7','133a3630a64d1ef1']){
-  assert(VERIFIED_PAPERS[id].questionCount===40,`${id}: ICAS Maths Paper B must have 40 mapped answers`);
-}
+for(const id of ['c7b97767539d3dd9','cc8d05b92191637d','c8b34fa6f3fa0da7','133a3630a64d1ef1'])assert(VERIFIED_PAPERS[id].questionCount===40,`${id}: ICAS Maths Paper B must have 40 mapped answers`);
 assert(VERIFIED_PAPERS['40bc74882938492a'].questionCount===45,'ICAS English Paper B 2007 must have 45 mapped answers');
 assert(VERIFIED_PAPERS['c05b515983bc8614'].questionCount===30,'ICAS Digital Paper B 2009 must have 30 mapped answers');
 assert(scorePaper('not-verified',{})===null,'Unverified paper must fail closed');
@@ -58,4 +57,8 @@ assert(!api.includes('answers: Object.freeze'),'API handler must not duplicate o
 assert(!api.includes('correctAnswers'),'API must not expose per-question answers');
 assert(!api.includes('answerKey'),'API must not expose answer-key fields');
 
-console.log(JSON.stringify({release:'6.18.3',verifiedMarkingGate:'PASS',verifiedPapers:expectedIds.length,syntheticScoring:['all-correct','all-wrong','mixed'],progressionCredit:false,learnerAnswerKeyExposure:false}));
+const review=spawnSync(process.execPath,['scripts/render-v6.18.3-remaining-answer-review.mjs'],{cwd:root,stdio:'inherit',env:process.env});
+assert(review.status===0,'Remaining answer candidate review rendering failed');
+for(const dir of ['answer-candidate-review-batch-08','answer-candidate-review-batch-20'])assert(fs.existsSync(path.join(root,'dist','stage-papers',dir,'manifest.json')),`${dir}: review manifest missing`);
+
+console.log(JSON.stringify({release:'6.18.3',verifiedMarkingGate:'PASS',verifiedPapers:expectedIds.length,syntheticScoring:['all-correct','all-wrong','mixed'],progressionCredit:false,learnerAnswerKeyExposure:false,remainingCandidatesRendered:true}));
