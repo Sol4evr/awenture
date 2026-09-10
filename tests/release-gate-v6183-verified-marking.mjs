@@ -29,7 +29,7 @@ for(const paper of Object.values(VERIFIED_PAPERS)){
   assert(allCorrect.percentage===100,`${paper.paperId}: all-correct percentage failed`);
   assert(allCorrect.progressionCredit===false,`${paper.paperId}: progression credit must remain disabled`);
 
-  const allWrong=scorePaper(paper.paperId,responseObject(paper.answers.map(v=>String(v)==='A'?'B':'A'));
+  const allWrong=scorePaper(paper.paperId,responseObject(paper.answers.map(v=>String(v)==='A'?'B':'A')));
   assert(allWrong.correct===0,`${paper.paperId}: all-wrong synthetic score failed`);
   assert(allWrong.percentage===0,`${paper.paperId}: all-wrong percentage failed`);
 
