@@ -13,7 +13,9 @@ const api=fs.readFileSync(path.join(root,'api','mark-paper.js'),'utf8');
 function assert(condition,message){if(!condition)throw new Error(message)}
 function responseObject(values){return Object.fromEntries(values.map((v,i)=>[i+1,v]))}
 
-assert(Object.keys(VERIFIED_PAPERS).length===2,'Initial verified marking tranche must contain exactly two papers');
+const expectedIds=['5d634c70edf0b6cd','c7b97767539d3dd9','cc8d05b92191637d','c8b34fa6f3fa0da7','133a3630a64d1ef1'];
+assert(Object.keys(VERIFIED_PAPERS).length===expectedIds.length,'Verified marking tranche count mismatch');
+assert(expectedIds.every(id=>VERIFIED_PAPERS[id]),'Verified marking tranche IDs changed');
 for(const paper of Object.values(VERIFIED_PAPERS)){
   assert(paper.review?.status==='verified',`${paper.paperId}: review status must be verified`);
   assert(/^[a-f0-9]{64}$/.test(paper.learnerSha256),`${paper.paperId}: learner SHA missing`);
@@ -34,19 +36,24 @@ for(const paper of Object.values(VERIFIED_PAPERS)){
   const mixed=paper.answers.map((v,i)=>i<split?v:(String(v)==='A'?'B':'A'));
   const mixedScore=scorePaper(paper.paperId,responseObject(mixed));
   assert(mixedScore.correct===split,`${paper.paperId}: mixed synthetic score failed`);
+
+  assert(!distRuntime.includes(`'${paper.paperId}': Object.freeze`),`${paper.paperId}: answer mapping must not be bundled into learner runtime`);
+  assert(!distRuntime.includes(paper.answerSha256),`${paper.paperId}: answer-resource SHA must not leak into learner runtime`);
 }
 
 const numeracy=VERIFIED_PAPERS['5d634c70edf0b6cd'];
 assert(JSON.stringify(numeracy.responseSchema.shortResponse)===JSON.stringify([11,25,29,32,33,34,35]),'NAPLAN Numeracy short-response schema changed');
+for(const id of ['c7b97767539d3dd9','cc8d05b92191637d','c8b34fa6f3fa0da7','133a3630a64d1ef1']){
+  assert(VERIFIED_PAPERS[id].questionCount===40,`${id}: ICAS Maths Paper B must have 40 mapped answers`);
+  assert(VERIFIED_PAPERS[id].responseSchema.shortResponse.length===0,`${id}: unexpected short-response schema`);
+}
 assert(scorePaper('not-verified',{})===null,'Unverified paper must fail closed');
 assert(html.includes('awenture-release\" content=\"6.18.3\"'),'v6.18.3 release marker missing');
 assert(distRuntime.includes("fetch('/api/mark-paper'"),'Runtime must call server-side marking endpoint');
 assert(distRuntime.includes('progressionCredit:false'),'Runtime must not grant progression credit');
 assert(distRuntime.includes('independently verified answer mapping'),'Verified marking result copy missing');
-assert(!distRuntime.includes("'5d634c70edf0b6cd': Object.freeze"),'Answer mapping must not be bundled into learner runtime');
-assert(!distRuntime.includes("'c7b97767539d3dd9': Object.freeze"),'ICAS answer mapping must not be bundled into learner runtime');
 assert(!api.includes('answers: Object.freeze'),'API handler must not duplicate or serialize answer maps');
 assert(!api.includes('correctAnswers'),'API must not expose per-question answers');
 assert(!api.includes('answerKey'),'API must not expose answer-key fields');
 
-console.log(JSON.stringify({release:'6.18.3',verifiedMarkingGate:'PASS',verifiedPapers:2,syntheticScoring:['all-correct','all-wrong','mixed'],progressionCredit:false,learnerAnswerKeyExposure:false}));
+console.log(JSON.stringify({release:'6.18.3',verifiedMarkingGate:'PASS',verifiedPapers:expectedIds.length,syntheticScoring:['all-correct','all-wrong','mixed'],progressionCredit:false,learnerAnswerKeyExposure:false}));
