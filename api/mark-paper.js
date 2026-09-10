@@ -1,6 +1,6 @@
 'use strict';
 
-const {scorePaper} = require('../server/stage-paper-answer-keys.cjs');
+const {scorePaper} = require('../server/stage-paper-answer-keys-registry.cjs');
 
 function send(res, status, body) {
   res.statusCode = status;
