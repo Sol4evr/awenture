@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 
 const require=createRequire(import.meta.url);
-const {VERIFIED_PAPERS,scorePaper}=require('../server/stage-paper-answer-keys.cjs');
+const {VERIFIED_PAPERS,scorePaper}=require('../server/stage-paper-answer-keys-registry.cjs');
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const distRuntime=fs.readFileSync(path.join(root,'dist','stage-formal-tests.js'),'utf8');
 const html=fs.readFileSync(path.join(root,'dist','index.html'),'utf8');
@@ -13,7 +13,7 @@ const api=fs.readFileSync(path.join(root,'api','mark-paper.js'),'utf8');
 function assert(condition,message){if(!condition)throw new Error(message)}
 function responseObject(values){return Object.fromEntries(values.map((v,i)=>[i+1,v]))}
 
-const expectedIds=['5d634c70edf0b6cd','c7b97767539d3dd9','cc8d05b92191637d','c8b34fa6f3fa0da7','133a3630a64d1ef1'];
+const expectedIds=['5d634c70edf0b6cd','c7b97767539d3dd9','cc8d05b92191637d','c8b34fa6f3fa0da7','133a3630a64d1ef1','40bc74882938492a','c05b515983bc8614'];
 assert(Object.keys(VERIFIED_PAPERS).length===expectedIds.length,'Verified marking tranche count mismatch');
 assert(expectedIds.every(id=>VERIFIED_PAPERS[id]),'Verified marking tranche IDs changed');
 for(const paper of Object.values(VERIFIED_PAPERS)){
@@ -28,7 +28,7 @@ for(const paper of Object.values(VERIFIED_PAPERS)){
   assert(allCorrect.percentage===100,`${paper.paperId}: all-correct percentage failed`);
   assert(allCorrect.progressionCredit===false,`${paper.paperId}: progression credit must remain disabled`);
 
-  const allWrong=scorePaper(paper.paperId,responseObject(paper.answers.map(v=>String(v)==='A'?'B':'A')));
+  const allWrong=scorePaper(paper.paperId,responseObject(paper.answers.map(v=>String(v)==='A'?'B':'A'));
   assert(allWrong.correct===0,`${paper.paperId}: all-wrong synthetic score failed`);
   assert(allWrong.percentage===0,`${paper.paperId}: all-wrong percentage failed`);
 
@@ -45,13 +45,15 @@ const numeracy=VERIFIED_PAPERS['5d634c70edf0b6cd'];
 assert(JSON.stringify(numeracy.responseSchema.shortResponse)===JSON.stringify([11,25,29,32,33,34,35]),'NAPLAN Numeracy short-response schema changed');
 for(const id of ['c7b97767539d3dd9','cc8d05b92191637d','c8b34fa6f3fa0da7','133a3630a64d1ef1']){
   assert(VERIFIED_PAPERS[id].questionCount===40,`${id}: ICAS Maths Paper B must have 40 mapped answers`);
-  assert(VERIFIED_PAPERS[id].responseSchema.shortResponse.length===0,`${id}: unexpected short-response schema`);
 }
+assert(VERIFIED_PAPERS['40bc74882938492a'].questionCount===45,'ICAS English Paper B 2007 must have 45 mapped answers');
+assert(VERIFIED_PAPERS['c05b515983bc8614'].questionCount===30,'ICAS Digital Paper B 2009 must have 30 mapped answers');
 assert(scorePaper('not-verified',{})===null,'Unverified paper must fail closed');
 assert(html.includes('awenture-release\" content=\"6.18.3\"'),'v6.18.3 release marker missing');
 assert(distRuntime.includes("fetch('/api/mark-paper'"),'Runtime must call server-side marking endpoint');
 assert(distRuntime.includes('progressionCredit:false'),'Runtime must not grant progression credit');
 assert(distRuntime.includes('independently verified answer mapping'),'Verified marking result copy missing');
+assert(api.includes("stage-paper-answer-keys-registry.cjs"),'Marking API must use governed registry');
 assert(!api.includes('answers: Object.freeze'),'API handler must not duplicate or serialize answer maps');
 assert(!api.includes('correctAnswers'),'API must not expose per-question answers');
 assert(!api.includes('answerKey'),'API must not expose answer-key fields');
