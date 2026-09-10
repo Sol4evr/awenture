@@ -10,6 +10,20 @@ if(!fs.existsSync(runtimePath))throw new Error('v6.18.3 requires stage-formal-te
 let js=fs.readFileSync(runtimePath,'utf8');
 let lines=js.split('\n');
 
+const publicSchemas={
+  '6f723aa0818d12b6':{choiceCount:4,questionNumbers:Array.from({length:35},(_,i)=>i+1)},
+  '75ebf21a849f3e35':{choiceCount:7,questionNumbers:Array.from({length:25},(_,i)=>i+1)},
+  '7127d30d75e6909c':{choiceCount:7,questionNumbers:Array.from({length:25},(_,i)=>i+1)},
+  '5575cbf572df45f7':{choiceCount:7,questionNumbers:Array.from({length:19},(_,i)=>i+7)},
+  'a96fae118504d88e':{choiceCount:7,questionNumbers:Array.from({length:14},(_,i)=>i+12)},
+  'e815a30ac10f1df6':{choiceCount:7,questionNumbers:Array.from({length:25},(_,i)=>i+1)},
+  '8da83e9407965710':{choiceCount:7,questionNumbers:Array.from({length:25},(_,i)=>i+1)},
+  '508f944973ca8c55':{choiceCount:7,questionNumbers:Array.from({length:25},(_,i)=>i+1)}
+};
+const conditionIndex=lines.findIndex(line=>line.startsWith('function conditionFor(p)'));
+if(conditionIndex<0)throw new Error('v6.18.3 marking patch could not locate conditionFor contract');
+lines[conditionIndex]=`const VERIFIED_RESPONSE_SCHEMAS=${JSON.stringify(publicSchemas)};\nfunction conditionFor(p){const base=CONDITIONS[p.stage]?.[p.subject]||null,s=VERIFIED_RESPONSE_SCHEMAS[p.id];if(!base||!s)return base;return {...base,questions:s.questionNumbers.length,choices:s.choiceCount,questionNumbers:s.questionNumbers}}`;
+
 const saveIndex=lines.findIndex(line=>line.startsWith('function saveAttempt(timedOut)'));
 if(saveIndex<0)throw new Error('v6.18.3 marking patch could not locate final saveAttempt contract');
 lines.splice(saveIndex,1,
@@ -22,6 +36,9 @@ if(submitIndex<0)throw new Error('v6.18.3 marking patch could not locate final s
 lines[submitIndex]=`async function submit(timedOut=false){if(!active||active.submitted)return;active.submitted=true;if(timer)clearInterval(timer);timer=null;const p=active.paper,responses={...active.answers},marking=await requestVerifiedMarking(p,responses);if(!active)return;const a=saveAttempt(timedOut,marking),result=marking?.verified?\`<p>This paper uses an independently verified answer mapping and was marked automatically.</p><div class="aw-form-result"><b>Score: \${marking.score} / \${marking.total} (\${marking.percentage}%)</b><span>Answered: \${marking.answered} / \${marking.total} · Time used: \${Math.floor(a.durationSeconds/60)} min \${a.durationSeconds%60} sec</span></div>\`:\`<p>Your responses have been saved. Auto-marking remains disabled until this paper's answer key is independently verified.</p><div class="aw-form-result"><b>\${a.timedOut?'Time expired — submitted automatically':'Paper submitted'}</b><span>Time used: \${Math.floor(a.durationSeconds/60)} min \${a.durationSeconds%60} sec</span></div>\`;overlay(\`<div class="aw-exam-dialog aw-result-dialog"><div class="ey">\${esc(STAGE_LABELS[p.stage]||p.stage)} formal practice</div><h1>Paper submitted</h1><h2>\${esc(p.title)}</h2>\${result}<button class="primary wide" data-aw-stage-done>Done</button></div>\`,'aw-result-overlay')}`;
 
 js=lines.join('\n');
+const gridNeedle="Array.from({length:cfg.questions},(_,i)=>responseCell(i+1,cfg)).join('')";
+if(!js.includes(gridNeedle))throw new Error('v6.18.3 marking patch could not locate response grid contract');
+js=js.replace(gridNeedle,"(cfg.questionNumbers||Array.from({length:cfg.questions},(_,i)=>i+1)).map(n=>responseCell(n,cfg)).join('')");
 const instructionCopy='Responses are saved but are not auto-marked until the answer key is verified.';
 if(!js.includes(instructionCopy))throw new Error('v6.18.3 marking patch could not locate instruction copy');
 js=js.replace(instructionCopy,'Responses are saved. Papers with independently verified answer mappings are marked automatically; all others remain safely unmarked.');
@@ -34,4 +51,4 @@ if(!html.includes('awenture-release\" content=\"6.18.2\"'))throw new Error('v6.1
 html=html.replace('awenture-release\" content=\"6.18.2\"','awenture-release\" content=\"6.18.3\"');
 html=html.replaceAll("RELEASE='6.18.2'","RELEASE='6.18.3'");
 fs.writeFileSync(htmlPath,html);
-console.log(JSON.stringify({release:'6.18.3',feature:'verified-past-paper-marking',marking:'SERVER_SIDE_VERIFIED_ONLY',progressionCredit:false,answerKeyExposure:false}));
+console.log(JSON.stringify({release:'6.18.3',feature:'verified-past-paper-marking',marking:'SERVER_SIDE_VERIFIED_ONLY',progressionCredit:false,answerKeyExposure:false,publicResponseSchemas:Object.keys(publicSchemas).length}));
