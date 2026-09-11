@@ -16,10 +16,15 @@ fs.copyFileSync(parentSrc,path.join(dist,'skills-parent.js'));
 const frameworkScript='<script src="/skills-framework.js?v=61900" defer></script>';
 const parentScript='<script src="/skills-parent.js?v=61900" defer></script>';
 if(!html.includes('/skills-framework.js?v=61900')){
-  const insights='<script src="/insights.js?v=6130" defer></script>';
-  if(!html.includes(insights))throw new Error('Insights script marker missing');
-  html=html.replace(insights,frameworkScript+insights+parentScript);
+  const insightsRe=/<script src="\/insights\.js\?v=[^\"]+" defer><\/script>/;
+  const match=html.match(insightsRe);
+  if(!match)throw new Error('Insights script anchor missing');
+  html=html.replace(match[0],frameworkScript+match[0]+parentScript);
 }
-html=html.replaceAll('6.18.3','6.19.0').replaceAll('61830','61900');
+if(!html.includes('/skills-parent.js?v=61900'))throw new Error('Parent skills script injection missing');
+if(!html.includes('awenture-release\\" content=\\"6.18.3\\"')&&!html.includes('awenture-release" content="6.18.3"'))throw new Error('v6.19.0 requires v6.18.3 release marker');
+html=html.replace('awenture-release\\" content=\\"6.18.3\\"','awenture-release\\" content=\\"6.19.0\\"');
+html=html.replace('awenture-release" content="6.18.3"','awenture-release" content="6.19.0"');
+html=html.replaceAll("RELEASE='6.18.3'","RELEASE='6.19.0'");
 fs.writeFileSync(htmlFile,html);
 console.log(JSON.stringify({release:'6.19.0',skillsFramework:'awenture-skills-v1',parentSkills:'lazy-parent-only',progressionEnabled:false,dailyPracticeMix:'unchanged'}));
