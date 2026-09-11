@@ -16,4 +16,16 @@ if(y2.includes('timer=setInterval(updateTimer,1000);updateTimer();initPaperViewe
 if(stage.includes('timer=setInterval(updateTimer,1000);updateTimer();initViewer()'))throw new Error('stage timer still starts before paper render');
 if(!y2.includes('pdfjs().catch(()=>{});const c=cfg(p.subject)'))throw new Error('Y2 PDF.js warmup missing from instructions');
 if(!stage.includes('function instruction(p){pdfjs().catch(()=>{});'))throw new Error('stage PDF.js warmup missing from instructions');
-console.log(JSON.stringify({release:'6.18.2',startupUX:'PASS',accordionParity:'EXACT_SHARED_DETAILS',timerSafety:'START_AFTER_FIRST_PAGE_VISIBLE',moduleWarmup:'PASS'}));
+
+// Regression contracts: the accordion enhancer must not accumulate delayed rescans during
+// repeated iPad navigation, and desktop viewer controls must remain subordinate to the coarse-
+// pointer touch contract. These guard the exact cross-patch failures found in v6.18.3 QA.
+if(acc.includes('for(const d of [0,40,100,220,450,800])'))throw new Error('accordion multi-timeout rescan regression returned');
+if(acc.includes('[data-a="tests"],[data-a="home"]'))throw new Error('Home navigation must not schedule formal-test DOM rescans');
+if(!acc.includes('requestAnimationFrame')||!acc.includes('setTimeout(prepare,120)'))throw new Error('bounded coalesced accordion scheduling missing');
+const desktopControlRule=css.lastIndexOf('.aw-running-exam .aw-zoom-controls{display:inline-flex!important');
+const touchContract=css.lastIndexOf('@media(hover:none) and (pointer:coarse){.aw-running-exam .aw-zoom-controls,.aw-running-exam .aw-pan-controls{display:none!important}');
+if(desktopControlRule<0)throw new Error('desktop formal viewer controls missing');
+if(touchContract<0||touchContract<desktopControlRule)throw new Error('touch-first viewer contract must override desktop controls at final cascade position');
+
+console.log(JSON.stringify({release:'6.18.2',startupUX:'PASS',accordionParity:'EXACT_SHARED_DETAILS',accordionScheduling:'COALESCED_BOUNDED',timerSafety:'START_AFTER_FIRST_PAGE_VISIBLE',moduleWarmup:'PASS',touchViewerContract:'PINCH_PAN_NO_DESKTOP_CONTROLS'}));

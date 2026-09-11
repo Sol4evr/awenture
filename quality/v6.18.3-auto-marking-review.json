@@ -1,0 +1,24 @@
+{
+  "version": "aw-v6.18.3-auto-marking-review-v1",
+  "release": "6.18.3",
+  "exactCompanionCandidates": 30,
+  "verifiedAutoMarking": 29,
+  "governedUnverified": 1,
+  "progressionCredit": false,
+  "automaticPromotion": false,
+  "governedExceptions": [
+    {
+      "paperId": "0c01f6761d02b363",
+      "stage": "naplan-y3",
+      "subject": "Reading",
+      "learnerSourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Reading_Questions.pdf",
+      "learnerSha256": "df874dc608c709e4652ca19e445ae5f92e64fbf88f9db706a74f1c078810cbca",
+      "answerSourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Reading_Answers.pdf",
+      "answerSha256": "fc6f195409fa18c45d74082e18c073cd5f8de8812ed804ff3a478825a4089955",
+      "reason": "Q23 is an open free-response item scored by a semantic rubric; exact-string or multiple-choice auto-marking would reject valid responses or guess at meaning.",
+      "autoMarking": false,
+      "progressionCredit": false,
+      "requiredFutureCapability": "independently validated rubric-aware free-response scorer"
+    }
+  ]
+}

@@ -37,6 +37,22 @@ jobs:
             dist/stage-papers/companion-answer-review/manifest.json
           if-no-files-found: error
           retention-days: 1
+      - name: Render remaining v6.18.3 answer candidates before gates
+        run: |
+          npm run build:stage-papers
+          node scripts/diagnose-v6.18.2-answer-resource-candidates.mjs
+          node scripts/render-v6.18.3-remaining-answer-review.mjs
+      - name: Upload remaining v6.18.3 answer review evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6183-remaining-answer-review
+          path: |
+            dist/stage-papers/answer-candidate-review-batch-08/*.jpg
+            dist/stage-papers/answer-candidate-review-batch-08/manifest.json
+            dist/stage-papers/answer-candidate-review-batch-20/*.jpg
+            dist/stage-papers/answer-candidate-review-batch-20/manifest.json
+          if-no-files-found: error
+          retention-days: 3
       - name: Run release gates
         run: npm run test:release
       - name: Build formal-paper maturity matrix
