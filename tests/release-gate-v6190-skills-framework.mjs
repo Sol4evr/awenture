@@ -45,7 +45,7 @@ for(const forbiddenRuntime of ['finishBonus','function start(','sess.items=','AW
 for(const required of ['insightsRe','aw:parent-view-ready','skills-mapping-v2.js?v=61901'])if(!patchSource.includes(required))throw new Error(`Build patch missing resilient lifecycle/mapping invariant: ${required}`);
 if(patchSource.includes('insights.js?v=6130'))throw new Error('Build patch must not depend on a stale exact insights cache version');
 const packageJson=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
-if(packageJson.version!=='6.19.0')throw new Error(`Package release marker is ${packageJson.version}`);
+if(packageJson.version!=='6.19.1')throw new Error(`Package release marker is ${packageJson.version}`);
 if(!packageJson.scripts.build.includes('patch-v6.19.0-skills-framework.mjs'))throw new Error('v6.19 runtime patch missing from build');
 if(!packageJson.scripts['test:release'].includes('release-gate-v6190-skills-framework.mjs'))throw new Error('v6.19 release gate missing from test:release');
-console.log(JSON.stringify({release:'6.19.0',framework:fw.version,mapping:fw.mappingVersion,grades:fw.grades.length,subjects:fw.subjects.length,skills:fw.skills.length,progressionEnabled:fw.progressionEnabled,parentLifecycleOnly:true,gate:'PASS'}));
+console.log(JSON.stringify({release:'6.19.1',framework:fw.version,mapping:fw.mappingVersion,grades:fw.grades.length,subjects:fw.subjects.length,skills:fw.skills.length,progressionEnabled:fw.progressionEnabled,parentLifecycleOnly:true,gate:'PASS'}));
