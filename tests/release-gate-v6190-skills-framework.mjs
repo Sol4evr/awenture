@@ -27,7 +27,7 @@ if(fw.mappingVersion!=='conservative-v2'||fw.mappingPolicy!=='metadata-match-or-
 const mappedSamples=[
  {id:'gate-e1',subject:'English',grade:'2',skill:'Syntax',subskill:'punctuation meaning'},
  {id:'gate-m1',subject:'Mathematics',grade:'2',subskill:'fractions and number'},
- {id:'gate-s1',subject:'Science',grade:'2',subskill:'materials observation'},
+ {id:'gate-s1',subject:'Science',grade:'2',skill:'Understanding',subskill:'observe properties'},
  {id:'gate-sp1',subject:'Spelling',grade:'2',subskill:'phonics spelling'}
 ];
 for(const q of mappedSamples){const a=fw.mapQuestion(q),b=fw.mapQuestion({...q});if(!a||a!==b)throw new Error(`Non-deterministic/unmapped supported sample ${q.id}`);if(!fw.safeSkill(a))throw new Error(`Mapped sample has unknown skill ${a}`)}
