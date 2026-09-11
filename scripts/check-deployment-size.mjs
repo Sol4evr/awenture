@@ -4,7 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'dist');
-const maxMiB = Number(process.env.AW_MAX_DEPLOY_MIB || 150);
+// The immutable Year 2 historical-paper baseline is ~184 MiB. Keep a bounded
+// production ceiling above that established baseline so genuine growth still fails closed.
+const maxMiB = Number(process.env.AW_MAX_DEPLOY_MIB || 200);
 const maxBytes = maxMiB * 1024 * 1024;
 
 if (!fs.existsSync(out)) throw new Error('Deployment size guard: dist/ does not exist after build');
