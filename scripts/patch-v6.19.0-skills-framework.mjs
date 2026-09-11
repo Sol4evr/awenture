@@ -37,9 +37,9 @@ if(!insights.includes("aw:parent-view-ready")){
   fs.writeFileSync(insightsFile,insights);
 }
 if(!insights.includes("new CustomEvent('aw:parent-view-ready')"))throw new Error('Parent View lifecycle event injection missing');
-if(!html.includes('awenture-release\\" content=\\"6.18.3\\"')&&!html.includes('awenture-release" content="6.18.3"'))throw new Error('v6.19.0 requires v6.18.3 release marker');
-html=html.replace('awenture-release\\" content=\\"6.18.3\\"','awenture-release\\" content=\\"6.19.0\\"');
-html=html.replace('awenture-release" content="6.18.3"','awenture-release" content="6.19.0"');
-html=html.replaceAll("RELEASE='6.18.3'","RELEASE='6.19.0'");
+if(!html.includes('awenture-release\\" content=\\"6.18.3\\"')&&!html.includes('awenture-release" content="6.18.3"'))throw new Error('v6.19.1 requires v6.18.3 release marker');
+html=html.replace('awenture-release\\" content=\\"6.18.3\\"','awenture-release\\" content=\\"6.19.1\\"');
+html=html.replace('awenture-release" content="6.18.3"','awenture-release" content="6.19.1"');
+html=html.replaceAll("RELEASE='6.18.3'","RELEASE='6.19.1'");
 fs.writeFileSync(htmlFile,html);
-console.log(JSON.stringify({release:'6.19.0',skillsFramework:'awenture-skills-v1',skillsMapping:'conservative-v2',parentSkills:'parent-lifecycle-only',progressionEnabled:false,dailyPracticeMix:'unchanged'}));
+console.log(JSON.stringify({release:'6.19.1',skillsFramework:'awenture-skills-v1',skillsMapping:'conservative-v2',parentSkills:'parent-lifecycle-only',progressionEnabled:false,dailyPracticeMix:'unchanged'}));
