@@ -1,6 +1,7 @@
 (()=>{
 'use strict';
 const fw=window.__AW_SKILLS_FRAMEWORK;if(!fw)return;
+const legacyMap=fw.mapQuestion.bind(fw);
 const STOP=new Set(['and','the','a','an','of','to','in','for','with','using','use','simple','appropriate','everyday','from','or','by','into','across','where','how','what','their','its','on','as']);
 const SYN={
   infer:['infer','inference','implicit','evidence'],inference:['infer','inference','implicit','evidence'],
@@ -22,7 +23,7 @@ function tokens(value){const out=new Set;for(const raw of stem(String(value||'')
 function metadata(q){return `${q?.skill||''} ${q?.subskill||''} ${q?.topic||''} ${q?.quality?.focus||''}`.trim()}
 function subject(q){const s=String(q?.subject||'');if(/^math/i.test(s))return'Mathematics';if(/^science/i.test(s))return'Science';if(/^spell/i.test(s)||/^english/i.test(s))return'English';return fw.subjects.includes(s)?s:null}
 function grade(q){const explicit=String(q?.grade||q?.yearLevel||'').match(/(?:Y|YEAR\s*)?(F|[1-9]|1[0-2])/i);return explicit?explicit[1].toUpperCase():'2'}
-function candidateDomain(q,subj,yr){const legacy=fw.mapQuestion(q);if(legacy){const s=fw.safeSkill(legacy);if(s?.subject===subj&&s?.grade===yr)return s.domain}return null}
+function candidateDomain(q,subj,yr){const legacy=legacyMap(q);if(legacy){const s=fw.safeSkill(legacy);if(s?.subject===subj&&s?.grade===yr)return s.domain}return null}
 function conservativeMap(q){
   if(!q?.id)return null;const subj=subject(q),yr=grade(q);if(!subj)return null;
   const text=tokens(metadata(q));if(!text.size)return null;
