@@ -4,7 +4,13 @@ async function openPaper(page, year='2017') {
   await page.goto('/');
   await page.locator('[data-a="tests"]').click();
   const english=page.locator('.aw-form-subject').filter({hasText:'English'});
-  await english.locator(`[data-aw-original-year="${year}"]`).click();
+  const heading=english.locator('.aw-form-heading[data-aw-accordion="1"]');
+  await expect(heading).toBeVisible();
+  if(await heading.getAttribute('aria-expanded')!=='true')await heading.click();
+  await expect(heading).toHaveAttribute('aria-expanded','true');
+  const tile=english.locator(`[data-aw-original-year="${year}"]`);
+  await expect(tile).toBeVisible();
+  await tile.click();
   await page.locator('[data-aw-start-original]').click();
   const selector=page.locator('[data-aw-page-select]');
   await expect(selector).toBeEnabled({timeout:15000});

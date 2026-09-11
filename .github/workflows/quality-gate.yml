@@ -22,10 +22,140 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-audit --no-fund
-      - run: npm run test:release
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Render private v6.18.2 visual review evidence
+        env:
+          AW_REVIEW_ARTIFACT: '1'
+        run: node scripts/render-v6.18.2-companion-answer-review.mjs
+      - name: Upload private v6.18.2 visual review evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-companion-answer-review
+          path: |
+            dist/stage-papers/companion-answer-review/*.jpg
+            dist/stage-papers/companion-answer-review/manifest.json
+          if-no-files-found: error
+          retention-days: 1
+      - name: Run release gates
+        run: npm run test:release
+      - name: Build formal-paper maturity matrix
+        run: node scripts/audit-v6.18.2-paper-maturity.mjs
+      - name: Gate formal-paper maturity accounting
+        run: node tests/release-gate-v6182-paper-maturity.mjs
+      - name: Export maturity work queues
+        run: node scripts/export-v6.18.2-maturity-work-queues.mjs
+      - name: Diagnose paper-specific timing evidence
+        run: node scripts/diagnose-v6.18.2-paper-timing-evidence.mjs
+      - name: Render paper-specific timing evidence
+        run: node scripts/render-v6.18.2-timing-candidate-review.mjs
+      - name: Discover exact companion answer candidates
+        run: node scripts/diagnose-v6.18.2-answer-resource-candidates.mjs
+      - name: Render companion answer candidate review batch
+        env:
+          AW_ANSWER_REVIEW_BATCH_SIZE: '8'
+          AW_ANSWER_REVIEW_BATCH_OFFSET: '0'
+        run: node scripts/render-v6.18.2-answer-candidate-review-batch.mjs
+      - name: Render orientation/readability review batch
+        env:
+          AW_ORIENTATION_BATCH_SIZE: '12'
+          AW_ORIENTATION_BATCH_OFFSET: '0'
+        run: node scripts/render-v6.18.2-orientation-review-batch.mjs
+      - name: Render targeted terminal-page answer-leak review
+        run: node scripts/render-v6.18.2-answer-leak-review.mjs
+      - name: Upload formal-paper maturity artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-paper-maturity
+          path: |
+            dist/stage-papers/paper-maturity-v1.json
+            dist/stage-papers/maturity-work-queues/*.json
+            dist/stage-papers/timing-evidence-candidates-v1.json
+            dist/stage-papers/timing-candidate-review/*.jpg
+            dist/stage-papers/timing-candidate-review/manifest.json
+            dist/stage-papers/answer-resource-candidates-v1.json
+            dist/stage-papers/answer-candidate-review-batch/*.jpg
+            dist/stage-papers/answer-candidate-review-batch/manifest.json
+            dist/stage-papers/orientation-review-batch/*.jpg
+            dist/stage-papers/orientation-review-batch/manifest.json
+            dist/stage-papers/answer-leak-review/*.jpg
+            dist/stage-papers/answer-leak-review/manifest.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Render private unresolved question-count review batch
+        env:
+          AW_REVIEW_BATCH_SIZE: '8'
+          AW_REVIEW_BATCH_OFFSET: '0'
+        run: node scripts/render-v6.18.2-unresolved-review-batch.mjs
+      - name: Upload private unresolved question-count review batch
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-unresolved-review-batch-0
+          path: |
+            dist/stage-papers/unresolved-review-batch/*.jpg
+            dist/stage-papers/unresolved-review-batch/manifest.json
+          if-no-files-found: error
+          retention-days: 1
+      - name: Upload tested dist for independent browser jobs
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6182-tested-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 1
+
+  legacy-browser:
+    needs: release-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          name: v6182-tested-dist
+          path: dist
       - run: npx playwright install --with-deps webkit chromium
-      - name: Run v6.16.1 browser checks
+      - name: Run v6.16.1 browser compatibility checks
         run: npx playwright test tests/v6161.spec.mjs
+      - name: Upload legacy browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6161-browser-diagnostics
+          path: |
+            test-results
+            playwright-report
+          if-no-files-found: ignore
+          retention-days: 3
+
+  full-browser:
+    needs: release-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          name: v6182-tested-dist
+          path: dist
+      - run: npx playwright install --with-deps webkit chromium
       - name: Run full browser regression suite
         run: npm run test:browser
+      - name: Upload full browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-browser-diagnostics
+          path: |
+            test-results
+            playwright-report
+          if-no-files-found: ignore
+          retention-days: 3

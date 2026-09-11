@@ -1,0 +1,65 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const verifyPath=path.join(root,'dist/stage-papers/auto-question-count-verification.json');
+const catalogPath=path.join(root,'dist/stage-papers/catalog.json');
+if(!fs.existsSync(verifyPath)||!fs.existsSync(catalogPath))throw new Error('strict count reconciliation requires verification + catalog');
+const qa=JSON.parse(fs.readFileSync(verifyPath,'utf8'));
+const catalog=JSON.parse(fs.readFileSync(catalogPath,'utf8'));
+const papers=[];for(const st of Object.values(catalog.stages||{}))for(const p of st.papers||[])papers.push(p);
+const meta=new Map(papers.map(p=>[p.sourcePath,p]));
+function norm(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-').replace(/[^a-z0-9]+/g,' ').trim()}
+function subjectTokens(subject){const s=norm(subject);if(s==='digital technologies')return ['digital'];if(s==='mathematics'||s==='mathematical reasoning')return ['math'];if(s==='language conventions')return ['language'];if(s==='thinking skills')return ['thinking'];return s.split(' ').filter(Boolean)}
+function filenameRanges(sourcePath){const base=path.basename(sourcePath);const nums=[];for(const m of base.matchAll(/q(?:uestion)?s?\s*(\d{1,3})\s*[-–—]\s*(\d{1,3})/ig)){const a=Number(m[1]),b=Number(m[2]);if(Number.isInteger(a)&&Number.isInteger(b)&&b>=a&&b<=100)nums.push({a,b,text:m[0]})}return nums}
+function filenameCount(sourcePath){const nums=filenameRanges(sourcePath);if(!nums.length)return null;const sorted=[...nums].sort((a,b)=>a.a-b.a||a.b-b.b);if(sorted[0].a!==1)return null;let end=sorted[0].b;for(let i=1;i<sorted.length;i++){if(sorted[i].a>end+1)return {partial:true,evidence:nums};end=Math.max(end,sorted[i].b)}if(end>=10)return {count:end,evidence:nums,partial:false};return null}
+function supportMatchesSubject(sourcePath,supportPath,p){if(!supportPath)return true;const n=norm(supportPath),tokens=subjectTokens(p.subject);if(tokens.some(t=>n.includes(t)))return true;const srcStem=norm(path.basename(sourcePath,'.pdf')).replace(/\b(?:answers?|solutions?|questions?|paper|test|practice|sample|with|without|no)\b/g,'').trim();const supStem=norm(path.basename(supportPath,'.pdf')).replace(/\b(?:answers?|solutions?|questions?|paper|test|practice|sample|with|without|no)\b/g,'').trim();return !!(srcStem&&supStem&&(srcStem.includes(supStem)||supStem.includes(srcStem)))}
+function sequenceCoverage(e){if(typeof e?.evidence?.coverage==='number')return e.evidence.coverage;if(typeof e?.evidence?.evidence?.coverage==='number')return e.evidence.evidence.coverage;return null}
+function reset(e,reason){e.questionCount=null;e.questionCountVerified=false;e.method=null;e.evidence=`question-count QA pending: ${reason}`}
+const propagatedMethods=new Set(['duplicate-binary-match','same-source-identity-match']);
+function hasIndependentVerifiedProvenance(src,seen=new Set()){
+  if(seen.has(src))return false;seen.add(src);
+  const e=qa.papers?.[src];if(!e?.questionCountVerified)return false;
+  if(!propagatedMethods.has(e.method))return true;
+  const ref=e?.evidence?.matchingSourcePath;if(!ref)return false;
+  const r=qa.papers?.[ref];if(!r?.questionCountVerified||r.questionCount!==e.questionCount)return false;
+  if(e.method==='duplicate-binary-match'&&e.sha256&&r.sha256&&e.sha256!==r.sha256)return false;
+  return hasIndependentVerifiedProvenance(ref,seen);
+}
+let revokedCrossSubject=0,revokedWeakSequence=0,revokedWeakTail=0,revokedInvalidPropagation=0,revokedPartialFilename=0,filenameVerified=0,sourceIdentityVerified=0;
+for(const [src,e] of Object.entries(qa.papers||{})){
+  const p=meta.get(src);if(!p)continue;
+  const supportPath=e?.evidence?.supportPath;
+  if(e.questionCountVerified&&supportPath&&!supportMatchesSubject(src,supportPath,p)){
+    reset(e,'rejected cross-subject support evidence');revokedCrossSubject++;continue;
+  }
+  if(e.questionCountVerified&&['learner-numbered-sequence','embedded-answer-sequence','support-answer-sequence','support-numbered-sequence'].includes(e.method)){
+    const cov=sequenceCoverage(e);if(cov===null||cov<.95){reset(e,`sequence evidence below 95% completeness (${cov??'unknown'})`);revokedWeakSequence++;continue}
+  }
+  if(e.questionCountVerified&&e.method==='learner-strong-tail'){
+    const cov=sequenceCoverage(e);if(cov===null||cov<.8){reset(e,`terminal-sequence evidence below 80% completeness (${cov??'unknown'})`);revokedWeakTail++;continue}
+  }
+  if(e.questionCountVerified&&e.method==='filename-explicit-question-range'){
+    const f=filenameCount(src);if(f?.partial){reset(e,'discontinuous partial-paper filename range cannot be treated as a contiguous full-paper count');revokedPartialFilename++;continue}
+  }
+  if(!e.questionCountVerified){const f=filenameCount(src);if(f?.partial){e.evidence='question-count QA pending: discontinuous partial-paper filename range';continue}if(f?.count){e.questionCount=f.count;e.questionCountVerified=true;e.method='filename-explicit-question-range';e.evidence=f.evidence;filenameVerified++}}
+}
+let propagationChanged=true;
+while(propagationChanged){propagationChanged=false;for(const [src,e] of Object.entries(qa.papers||{})){if(!e?.questionCountVerified||!propagatedMethods.has(e.method))continue;if(!hasIndependentVerifiedProvenance(src)){reset(e,'propagated count has no surviving independently verified source');revokedInvalidPropagation++;propagationChanged=true}}}
+const boundaryPath=path.join(root,'dist/stage-papers/auto-boundary-verification.json');
+const bounds=fs.existsSync(boundaryPath)?JSON.parse(fs.readFileSync(boundaryPath,'utf8')):{papers:{}};
+const groups=new Map();
+for(const p of papers){const b=bounds.papers?.[p.sourcePath];const base=norm(path.basename(p.sourcePath,'.pdf'));const key=[p.stage,p.subject,p.year||'',base,b?.questionEndPage||''].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(p.sourcePath)}
+for(const srcs of groups.values()){
+  if(srcs.length<2)continue;
+  const trusted=srcs.filter(s=>qa.papers?.[s]?.questionCountVerified&&hasIndependentVerifiedProvenance(s));
+  const verified=[...new Set(trusted.map(s=>qa.papers[s].questionCount))];if(verified.length!==1)continue;
+  const count=verified[0],ref=trusted.find(s=>qa.papers?.[s]?.questionCountVerified);if(!ref)continue;
+  for(const s of srcs){const e=qa.papers?.[s];if(!e||e.questionCountVerified)continue;e.questionCount=count;e.questionCountVerified=true;e.method='same-source-identity-match';e.evidence={matchingSourcePath:ref};sourceIdentityVerified++}
+}
+for(const [src,e] of Object.entries(qa.papers||{})){if(e?.questionCountVerified&&propagatedMethods.has(e.method)&&!hasIndependentVerifiedProvenance(src)){reset(e,'propagated count has no surviving independently verified source');revokedInvalidPropagation++}}
+qa.version='aw-stage-question-count-8-strict-partials';qa.policy={...(qa.policy||{}),crossSubjectSupportForbidden:true,weakSequenceForbidden:true,minimumSequenceCoverage:.95,minimumStrongTailCoverage:.8,filenameExplicitRangeAllowed:true,discontinuousPartialFilenameForbiddenAsFullCount:true,sameSourceIdentityPropagation:true,propagatedEvidenceRequiresIndependentVerifiedSource:true,subjectDefaultForbidden:true};qa.summary={...(qa.summary||{}),revokedCrossSubject,revokedWeakSequence,revokedWeakTail,revokedInvalidPropagation,revokedPartialFilename,filenameVerified,sourceIdentityVerified};qa.summary.verified=Object.values(qa.papers||{}).filter(e=>e.questionCountVerified).length;qa.summary.total=papers.length;qa.summary.pending=qa.summary.total-qa.summary.verified;qa.unresolved=[];for(const p of papers){const e=qa.papers?.[p.sourcePath];if(!e?.questionCountVerified)qa.unresolved.push({sourcePath:p.sourcePath,stage:p.stage,subject:p.subject,year:p.year,reason:e?.evidence||'question-count QA pending'})}
+fs.writeFileSync(verifyPath,JSON.stringify(qa,null,2)+'\n');
+const unresolvedByStageSubject={};for(const u of qa.unresolved){const k=`${u.stage}|${u.subject}`;unresolvedByStageSubject[k]=(unresolvedByStageSubject[k]||0)+1}
+console.log(JSON.stringify({release:'6.18.2',strictQuestionCountReconciliation:'PASS',verified:qa.summary.verified,pending:qa.summary.pending,revokedCrossSubject,revokedWeakSequence,revokedWeakTail,revokedInvalidPropagation,revokedPartialFilename,filenameVerified,sourceIdentityVerified,unresolvedByStageSubject}));

@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const dist=path.join(root,'dist');
+const htmlPath=path.join(dist,'index.html');
+const cssPath=path.join(dist,'formal-tests.css');
+const srcPath=path.join(root,'ui','stage-formal-tests.js');
+if(!fs.existsSync(srcPath))throw new Error('Missing stage formal test runtime source');
+let html=fs.readFileSync(htmlPath,'utf8');
+if(!html.includes('awenture-release" content="6.18.1"'))throw new Error('v6.18.2 requires v6.18.1 build');
+html=html.replace('awenture-release" content="6.18.1"','awenture-release" content="6.18.2"');
+html=html.replaceAll("RELEASE='6.18.0'","RELEASE='6.18.2'");
+if(!html.includes('</head>'))throw new Error('Missing head close marker');
+html=html.replace('</head>','<script defer src="/stage-formal-tests.js?v=61820"></script></head>');
+fs.writeFileSync(htmlPath,html);
+fs.copyFileSync(srcPath,path.join(dist,'stage-formal-tests.js'));
+fs.appendFileSync(cssPath,`\n[data-aw-formal-stage]:not([data-aw-formal-stage="icas-y2"]) .aw-historical-grid,[data-aw-formal-stage]:not([data-aw-formal-stage="icas-y2"]) .aw-form-note{display:none!important}.aw-stage-short-response{min-width:96px;max-width:150px}.aw-answer-text textarea{min-height:180px;width:100%;resize:vertical}@media(max-width:700px){.aw-stage-short-response{min-width:72px;max-width:110px}}\n`);
+console.log(JSON.stringify({release:'6.18.2',feature:'stage-aware-formal-tests',y2Isolation:'ENFORCED',runtime:'LITE_EVENT_DRIVEN',autoMarking:'VERIFIED_KEYS_ONLY'}));

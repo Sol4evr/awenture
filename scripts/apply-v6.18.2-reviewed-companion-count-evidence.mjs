@@ -1,0 +1,37 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const qaPath=path.join(root,'dist/stage-papers/auto-question-count-verification.json');
+const catalogPath=path.join(root,'dist/stage-papers/catalog.json');
+const reviewPath=path.join(root,'quality/stage-paper-question-count-reviewed-companion-evidence-v1.json');
+for(const p of [qaPath,catalogPath,reviewPath])if(!fs.existsSync(p))throw new Error(`reviewed companion-count input missing: ${p}`);
+const qa=JSON.parse(fs.readFileSync(qaPath,'utf8'));
+const catalog=JSON.parse(fs.readFileSync(catalogPath,'utf8'));
+const review=JSON.parse(fs.readFileSync(reviewPath,'utf8'));
+if(review.version!=='aw-stage-paper-reviewed-companion-count-evidence-v1')throw new Error('reviewed companion-count version mismatch');
+const meta=new Map();for(const s of Object.values(catalog.stages||{}))for(const p of s.papers||[])meta.set(p.sourcePath,p);
+const sha256=abs=>crypto.createHash('sha256').update(fs.readFileSync(abs)).digest('hex');
+let applied=0,upgradedExisting=0;
+for(const r of review.evidence||[]){
+  if(!r.learnerPath||!r.companionPath||r.learnerPath===r.companionPath)throw new Error(`companion evidence requires distinct learner and companion paths: ${r.learnerPath||'unknown'}`);
+  const p=meta.get(r.learnerPath);if(!p)throw new Error(`reviewed companion learner not in catalog: ${r.learnerPath}`);
+  if(p.stage!==r.stage||p.subject!==r.subject||Number(p.year||0)!==Number(r.year||0))throw new Error(`reviewed companion metadata mismatch: ${r.learnerPath}`);
+  const learnerAbs=path.join(root,r.learnerPath),companionAbs=path.join(root,r.companionPath);
+  if(!fs.existsSync(learnerAbs)||!fs.existsSync(companionAbs))throw new Error(`reviewed companion binary missing: ${r.learnerPath}`);
+  if(sha256(learnerAbs)!==r.learnerSha256)throw new Error(`reviewed companion learner SHA mismatch: ${r.learnerPath}`);
+  if(sha256(companionAbs)!==r.companionSha256)throw new Error(`reviewed companion answer SHA mismatch: ${r.companionPath}`);
+  if(r.evidenceType!=='exact-companion-complete-answer-sequence')throw new Error(`unapproved companion evidence type: ${r.learnerPath}`);
+  if(!Number.isInteger(r.questionCount)||r.questionCount<1||r.questionCount>100)throw new Error(`invalid reviewed companion count: ${r.learnerPath}`);
+  if(!Array.isArray(r.evidencePages)||!r.evidencePages.length||r.evidencePages.some(n=>!Number.isInteger(n)||n<1))throw new Error(`reviewed companion evidence pages required: ${r.learnerPath}`);
+  if(typeof r.evidenceText!=='string'||r.evidenceText.trim().length<8)throw new Error(`reviewed companion evidence text required: ${r.learnerPath}`);
+  const e=qa.papers?.[r.learnerPath];if(!e)throw new Error(`QA entry missing: ${r.learnerPath}`);
+  if(e.questionCountVerified&&e.questionCount!==r.questionCount)throw new Error(`reviewed companion count conflicts with existing verified count: ${r.learnerPath}`);
+  if(e.questionCountVerified)upgradedExisting++;else applied++;
+  e.questionCount=r.questionCount;e.questionCountVerified=true;e.method='reviewed-exact-companion-evidence';
+  e.evidence={reviewManifest:'quality/stage-paper-question-count-reviewed-companion-evidence-v1.json',learnerPath:r.learnerPath,learnerSha256:r.learnerSha256,companionPath:r.companionPath,companionSha256:r.companionSha256,provider:r.provider||null,evidenceType:r.evidenceType,evidencePages:r.evidencePages,evidenceText:r.evidenceText,reviewNote:r.reviewNote||null};
+}
+qa.summary={...(qa.summary||{}),reviewedExactCompanionApplied:applied,reviewedExactCompanionUpgraded:upgradedExisting};qa.summary.verified=Object.values(qa.papers||{}).filter(e=>e.questionCountVerified).length;qa.summary.pending=(qa.summary.total||Object.keys(qa.papers||{}).length)-qa.summary.verified;
+fs.writeFileSync(qaPath,JSON.stringify(qa,null,2)+'\n');
+console.log(JSON.stringify({release:'6.18.2',reviewedExactCompanionCountEvidence:'PASS',applied,upgradedExisting,verified:qa.summary.verified,pending:qa.summary.pending}));
