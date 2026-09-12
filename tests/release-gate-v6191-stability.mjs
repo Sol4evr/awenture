@@ -11,6 +11,7 @@ const lock=JSON.parse(read('package-lock.json'));
 const startup=read('scripts/patch-v6.18.2.4-formal-paper-startup.mjs');
 const parent=read('ui/skills-parent.js');
 const patch619=read('scripts/patch-v6.19.0-skills-framework.mjs');
+const finalize6191=read('scripts/finalize-v6.19.1-stability.mjs');
 const app=read('app.js');
 const index=read('index.html');
 
@@ -25,6 +26,17 @@ assert(patchNames.length===new Set(patchNames).size,'duplicate mutable patch/fin
 const i6183=build.indexOf('patch-v6.18.3-verified-marking.mjs');
 const i6190=build.indexOf('patch-v6.19.0-skills-framework.mjs');
 assert(i6183>=0&&i6190>i6183,'v6.19 patch must execute after verified-marking patch');
+
+// Release ownership: a stability release cannot rewrite an earlier release patch.
+assert(patch619.includes("release:'6.19.0'"),'v6.19.0 patch release ownership changed');
+assert(patch619.includes("content=\\\"6.19.0\\\"" )||patch619.includes('content="6.19.0"'),'v6.19.0 patch must still stamp 6.19.0');
+assert(!patch619.includes("release:'6.19.1'"),'v6.19.1 must not be stamped by the v6.19.0 patch');
+assert(String(pkg.scripts?.postbuild||'')==='node scripts/finalize-v6.19.1-stability.mjs','v6.19.1 must be finalized in its own postbuild step');
+assert(finalize6191.includes("parentRelease:'6.19.0'"),'v6.19.1 finalizer parent release contract missing');
+assert(finalize6191.includes("runtimeFeatureDelta:'none'"),'stability-only release contract missing');
+const releaseScript=String(pkg.scripts?.['test:release']||'');
+assert(releaseScript.includes('patch-v6.19.0-skills-framework.mjs')&&releaseScript.includes('finalize-v6.19.1-stability.mjs'),'release test must exercise both v6.19.0 and v6.19.1 ownership steps');
+assert(releaseScript.indexOf('finalize-v6.19.1-stability.mjs')>releaseScript.indexOf('release-gate-v6190-skills-framework.mjs'),'v6.19.1 finalizer must run only after the v6.19.0 gate');
 
 // Regression root-cause guard: no timer fan-out or Home-triggered formal-test rescans.
 assert(startup.includes('requestAnimationFrame'),'formal-paper enhancer must remain coalesced on animation frame');
@@ -44,10 +56,10 @@ assert(parent.includes('progressionEnabled:false'),'skills coverage must not ena
 
 // v6.19 remains an additive layer and cannot replace the core learner runtime.
 for(const required of ['skills-framework.js','skills-mapping-v2.js','skills-parent.js'])assert(patch619.includes(required),`skills patch missing ${required}`);
-assert(patch619.includes('dailyPracticeMix:\'unchanged\''),'Daily Practice preservation marker missing');
+assert(patch619.includes("dailyPracticeMix:'unchanged'"),'Daily Practice preservation marker missing');
 
 // Safari/PWA stability: do not silently introduce a service worker without a separately governed cache design.
 const swNeedle='navigator.serviceWorker.register';
 assert(!app.includes(swNeedle)&&!index.includes(swNeedle),'ungoverned service-worker registration introduced');
 
-console.log(JSON.stringify({release:pkg.version,stabilityGate:'PASS',contracts:{metadataAligned:true,patchChainUnique:true,accordionScheduling:'COALESCED',touchViewer:'CAPABILITY_FIRST',parentLifecycle:'EVENT_BOUND',serviceWorker:'NOT_REGISTERED'}}));
+console.log(JSON.stringify({release:pkg.version,stabilityGate:'PASS',contracts:{metadataAligned:true,patchChainUnique:true,releaseOwnership:'ISOLATED',accordionScheduling:'COALESCED',touchViewer:'CAPABILITY_FIRST',parentLifecycle:'EVENT_BOUND',serviceWorker:'NOT_REGISTERED'}}));
