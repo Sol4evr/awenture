@@ -14,10 +14,22 @@ const patch619=read('scripts/patch-v6.19.0-skills-framework.mjs');
 const finalize6191=read('scripts/finalize-v6.19.1-stability.mjs');
 const app=read('app.js');
 const index=read('index.html');
+const invariants=JSON.parse(read('quality/production-invariants-v1.json'));
 
 // Reproducible release metadata: package and root lock metadata must agree.
 assert(pkg.version===lock.version,'package/package-lock release version drift');
 assert(pkg.version===lock.packages?.['']?.version,'package/package-lock root package version drift');
+assert(invariants.release===pkg.version,'production invariants release drift');
+assert(invariants.productionBaseline?.release==='6.18.3','immutable production baseline release drift');
+assert(invariants.productionBaseline?.gitSha==='fa42a56fd2d0ec08fbbedf3e711727b2b56201df','immutable production baseline SHA drift');
+assert(invariants.dailyPractice?.questionCount===15,'Daily Practice invariant must remain 15');
+assert(JSON.stringify(invariants.dailyPractice?.subjectMix)===JSON.stringify({English:4,Mathematics:4,Science:4,Spelling:3}),'Daily Practice subject mix drift');
+assert(JSON.stringify(invariants.dailyPractice?.quarantinedVisualIds)===JSON.stringify(['M09','M18','M19','M23','M26','M31']),'visual quarantine invariant drift');
+assert(invariants.historicalPapers?.learnerModuleCount===21&&invariants.historicalPapers?.isolatedFromDailyPractice===true,'historical-paper invariant drift');
+assert(invariants.formalPaperGovernance?.strictlyVerified===29&&invariants.formalPaperGovernance?.governedRubricExceptions===1&&invariants.formalPaperGovernance?.reviewed===30,'formal marking governance drift');
+assert(invariants.laterStageAccounting?.strictlyVerified===184&&invariants.laterStageAccounting?.governedResidualEntries===3&&invariants.laterStageAccounting?.accounted===187,'later-stage accounting invariant drift');
+assert(invariants.delivery?.maxDeploymentMiB===200,'deployment ceiling must remain 200 MiB');
+assert(invariants.skillsFramework?.progressionEnabledByTaxonomy===false,'taxonomy must not enable progression');
 
 // Build patch chain is ordered and each mutable release patch runs at most once.
 const build=String(pkg.scripts?.build||'');
@@ -31,7 +43,10 @@ assert(i6183>=0&&i6190>i6183,'v6.19 patch must execute after verified-marking pa
 assert(patch619.includes("release:'6.19.0'"),'v6.19.0 patch release ownership changed');
 assert(patch619.includes("content=\\\"6.19.0\\\"" )||patch619.includes('content="6.19.0"'),'v6.19.0 patch must still stamp 6.19.0');
 assert(!patch619.includes("release:'6.19.1'"),'v6.19.1 must not be stamped by the v6.19.0 patch');
-assert(String(pkg.scripts?.postbuild||'')==='node scripts/finalize-v6.19.1-stability.mjs','v6.19.1 must be finalized in its own postbuild step');
+const postbuild=String(pkg.scripts?.postbuild||'');
+assert(postbuild.startsWith('node scripts/finalize-v6.19.1-stability.mjs'),'v6.19.1 must be finalized in its own postbuild step');
+assert(postbuild.includes('node scripts/audit-patch-ownership.mjs'),'postbuild patch ownership audit missing');
+assert(postbuild.includes('node scripts/check-deployment-size.mjs'),'postbuild deployment size governance missing');
 assert(finalize6191.includes("parentRelease:'6.19.0'"),'v6.19.1 finalizer parent release contract missing');
 assert(finalize6191.includes("runtimeFeatureDelta:'none'"),'stability-only release contract missing');
 const releaseScript=String(pkg.scripts?.['test:release']||'');
@@ -53,6 +68,7 @@ assert(parent.includes('requestAnimationFrame(mount)'),'Parent skills mount must
 for(const forbidden of ['MutationObserver','setInterval(','setTimeout('])assert(!parent.includes(forbidden),`Parent skills background work forbidden: ${forbidden}`);
 assert(parent.includes('parentLifecycleOnly:true'),'Parent-only lifecycle invariant missing');
 assert(parent.includes('progressionEnabled:false'),'skills coverage must not enable progression');
+assert(!parent.includes('class="aw-subject-panel aw-skills-subject"'),'skills coverage must not share the legacy Parent accordion ownership class');
 
 // v6.19 remains an additive layer and cannot replace the core learner runtime.
 for(const required of ['skills-framework.js','skills-mapping-v2.js','skills-parent.js'])assert(patch619.includes(required),`skills patch missing ${required}`);

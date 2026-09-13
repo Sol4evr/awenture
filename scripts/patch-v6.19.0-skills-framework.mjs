@@ -8,6 +8,7 @@ let html=fs.readFileSync(htmlFile,'utf8');
 const frameworkSrc=path.join(root,'ui','skills-framework.js');
 const mappingSrc=path.join(root,'ui','skills-mapping-v2.js');
 const parentSrc=path.join(root,'ui','skills-parent.js');
+const parentCssSrc=path.join(root,'ui','skills-parent.css');
 const runtime=fs.readFileSync(frameworkSrc,'utf8');
 const mappingRuntime=fs.readFileSync(mappingSrc,'utf8');
 const parentRuntime=fs.readFileSync(parentSrc,'utf8');
@@ -17,6 +18,8 @@ for(const required of ['skillsFramework','focusSkillIds','progressionCredit:fals
 fs.copyFileSync(frameworkSrc,path.join(dist,'skills-framework.js'));
 fs.copyFileSync(mappingSrc,path.join(dist,'skills-mapping-v2.js'));
 fs.copyFileSync(parentSrc,path.join(dist,'skills-parent.js'));
+fs.copyFileSync(parentCssSrc,path.join(dist,'skills-parent.css'));
+if(!html.includes('/skills-parent.css?v=61901'))html=html.replace('</head>','<link rel="stylesheet" href="/skills-parent.css?v=61901"></head>');
 const frameworkScript='<script src="/skills-framework.js?v=61900" defer></script>';
 const mappingScript='<script src="/skills-mapping-v2.js?v=61901" defer></script>';
 const parentScript='<script src="/skills-parent.js?v=61901" defer></script>';
@@ -28,6 +31,7 @@ if(!html.includes('/skills-framework.js?v=61900')){
 }
 if(!html.includes('/skills-mapping-v2.js?v=61901'))throw new Error('Conservative skills mapping injection missing');
 if(!html.includes('/skills-parent.js?v=61901'))throw new Error('Parent skills script injection missing');
+if(!html.includes('/skills-parent.css?v=61901'))throw new Error('Parent skills ownership stylesheet missing');
 const insightsFile=path.join(dist,'insights.js');
 let insights=fs.readFileSync(insightsFile,'utf8');
 if(!insights.includes("aw:parent-view-ready")){

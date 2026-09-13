@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "release": "6.19.1",
+  "parentRelease": "6.19.0",
+  "productionBaseline": {
+    "release": "6.18.3",
+    "gitSha": "fa42a56fd2d0ec08fbbedf3e711727b2b56201df"
+  },
+  "dailyPractice": {
+    "questionCount": 15,
+    "subjectMix": {
+      "English": 4,
+      "Mathematics": 4,
+      "Science": 4,
+      "Spelling": 3
+    },
+    "visualTarget": 3,
+    "visualMaximum": 4,
+    "quarantinedVisualIds": ["M09", "M18", "M19", "M23", "M26", "M31"]
+  },
+  "historicalPapers": {
+    "learnerModuleCount": 21,
+    "isolatedFromDailyPractice": true
+  },
+  "formalPaperGovernance": {
+    "reviewed": 30,
+    "strictlyVerified": 29,
+    "governedRubricExceptions": 1,
+    "rubricExceptionIds": ["0c01f6761d02b363"],
+    "progressionCreditEnabled": false,
+    "writingAutoScoreEnabled": false
+  },
+  "laterStageAccounting": {
+    "accounted": 187,
+    "strictlyVerified": 184,
+    "governedResidualEntries": 3
+  },
+  "delivery": {
+    "maxDeploymentMiB": 200,
+    "baselineDeploymentMiB": 184,
+    "maxUnexplainedGrowthMiB": 12,
+    "learnerSafeApiRoutes": ["/api/paper", "/api/mark-paper"],
+    "rawSourcePdfExposureAllowed": false
+  },
+  "skillsFramework": {
+    "progressionEnabledByTaxonomy": false,
+    "parentViewLazy": true
+  }
+}
