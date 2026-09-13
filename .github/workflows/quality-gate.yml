@@ -116,6 +116,8 @@ jobs:
             dist/stage-papers/unresolved-review-batch/manifest.json
           if-no-files-found: error
           retention-days: 1
+      - name: Remove uploaded review evidence from tested runtime artifact
+        run: node scripts/prune-release-evidence.mjs
       - name: Bind tested artifact to workflow SHA
         run: printf '%s\n' "$GITHUB_SHA" > dist/.aw-tested-sha
       - name: Upload tested dist for independent browser jobs
