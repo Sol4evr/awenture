@@ -14,6 +14,7 @@ const patch619=read('scripts/patch-v6.19.0-skills-framework.mjs');
 const finalize6191=read('scripts/finalize-v6.19.1-stability.mjs');
 const app=read('app.js');
 const index=read('index.html');
+const workflow=read('.github/workflows/quality-gate.yml');
 const invariants=JSON.parse(read('quality/production-invariants-v1.json'));
 
 // Reproducible release metadata: package and root lock metadata must agree.
@@ -30,6 +31,7 @@ assert(invariants.formalPaperGovernance?.strictlyVerified===29&&invariants.forma
 assert(invariants.laterStageAccounting?.strictlyVerified===184&&invariants.laterStageAccounting?.governedResidualEntries===3&&invariants.laterStageAccounting?.accounted===187,'later-stage accounting invariant drift');
 assert(invariants.delivery?.maxDeploymentMiB===200,'deployment ceiling must remain 200 MiB');
 assert(invariants.skillsFramework?.progressionEnabledByTaxonomy===false,'taxonomy must not enable progression');
+assert(workflow.includes('include-hidden-files: true'),'exact-SHA artifact marker must be uploaded for browser consumers');
 
 // Build patch chain is ordered and each mutable release patch runs at most once.
 const build=String(pkg.scripts?.build||'');
