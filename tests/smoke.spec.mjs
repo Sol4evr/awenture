@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { PDFDocument } from 'pdf-lib';
 
 async function openSubject(section){
   await expect(section).toHaveJSProperty('tagName','DETAILS');
@@ -13,6 +14,10 @@ async function openSubject(section){
 test('hardened learner shell, governed top-up, historical tests and bonus isolation', async ({ page }) => {
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   let posted=null;
+  const syntheticPaper=await PDFDocument.create();
+  for(let i=0;i<60;i++)syntheticPaper.addPage([595,842]);
+  const syntheticPaperBytes=Buffer.from(await syntheticPaper.save());
+  await page.route('**/api/paper?id=*',route=>route.fulfill({status:200,contentType:'application/pdf',headers:{'Accept-Ranges':'bytes','X-AW-Paper-Delivery':'github-source-proxy-v2-allowlist'},body:syntheticPaperBytes}));
   await page.route('https://yvvwjdnazxzhzrfhudwx.supabase.co/functions/v1/released-bank',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'offline'})}));
   await page.route('https://yvvwjdnazxzhzrfhudwx.supabase.co/functions/v1/topup-request*',async route=>{
     const req=route.request();
@@ -108,6 +113,8 @@ test('hardened learner shell, governed top-up, historical tests and bonus isolat
   await page.locator('[data-aw-start-stage-formal]').click();
   await expect(page.locator('[data-aw-stage-timer]')).toBeVisible();
   await expect(page.locator('[data-aw-stage-answer-row]')).toHaveCount(30);
+  await expect(page.locator('[data-aw-stage-page-select]')).toBeEnabled({timeout:20000});
+  await expect(page.locator('[data-aw-stage-paper-status]')).not.toHaveClass(/error/);
   page.once('dialog',dialog=>dialog.accept());
   await page.locator('[data-aw-stage-exit]').click();
   await page.locator('[data-a="home"]').last().click();
