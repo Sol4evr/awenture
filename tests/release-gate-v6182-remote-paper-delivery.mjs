@@ -47,19 +47,28 @@ function walk(dir){if(!fs.existsSync(dir))return;for(const e of fs.readdirSync(d
 walk(stageDir);
 if(deployedPdfs.length)throw new Error(`stage PDFs must not be deployed: ${deployedPdfs.slice(0,5).join(', ')}`);
 const api=fs.readFileSync(apiPath,'utf8');
-for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','api.github.com/repos','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
+for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','media.githubusercontent.com/media','cleanRef','sourceUrl','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
 if(api.includes('req.query?.path'))throw new Error('paper proxy must not accept arbitrary repository source paths');
-const upstreamStart=api.indexOf("const upstream=await fetch(meta.download_url");
+const upstreamStart=api.indexOf('const upstream=await fetch(sourceUrl(entry,ref)');
 const upstreamEnd=api.indexOf('const sourceBytes=',upstreamStart);
-if(upstreamStart<0||upstreamEnd<0)throw new Error('paper proxy upstream download block not found');
+if(upstreamStart<0||upstreamEnd<0)throw new Error('paper proxy pinned raw download block not found');
 const upstreamBlock=api.slice(upstreamStart,upstreamEnd);
 if(/\bRange\s*:|req\.headers\.range|req\.headers\[['"]range/i.test(upstreamBlock))throw new Error('learner byte range must never be forwarded to the uncropped source PDF');
+if(api.includes('if(!auth)')||api.includes('meta.download_url'))throw new Error('public source delivery must not depend on a runtime token or GitHub metadata API');
 if(/gh[pousr]_[A-Za-z0-9_]{20,}/.test(api))throw new Error('GitHub credential must never be embedded in source');
 
 const require=createRequire(import.meta.url);
 const handler=require('../api/paper.js');
 const helpers=handler._test;
-if(!helpers?.learnerPdf||!helpers?.byteRange)throw new Error('paper proxy test helpers unavailable');
+if(!helpers?.learnerPdf||!helpers?.byteRange||!helpers?.cleanRef||!helpers?.sourceUrl)throw new Error('paper proxy test helpers unavailable');
+const pinnedRef='0123456789abcdef0123456789abcdef01234567';
+if(helpers.cleanRef(pinnedRef)!==pinnedRef||helpers.cleanRef('main')!==null||helpers.cleanRef('release/v6.19.1')!==null)throw new Error('paper source ref must be an immutable 40-character SHA');
+for(const paper of papers){
+  const entry=manifest.papers[paper.id];
+  const url=helpers.sourceUrl(entry,pinnedRef);
+  if(!url.startsWith(`https://media.githubusercontent.com/media/Sol4evr/awenture/${pinnedRef}/source/`)||!url.toLowerCase().endsWith('.pdf'))throw new Error(`invalid pinned source URL: ${paper.id}`);
+  if(url.includes(' ')||url.includes('?ref='))throw new Error(`unpinned or unencoded source URL: ${paper.id}`);
+}
 const synthetic=await PDFDocument.create();for(let i=0;i<5;i++)synthetic.addPage([200,200]);
 const sourceBytes=Buffer.from(await synthetic.save());
 const cropped=await helpers.learnerPdf(sourceBytes,3);
@@ -81,21 +90,14 @@ helpers.safePdfCache.clear();
 
 let githubSmoke='LOCAL_SKIP';
 if(process.env.VERCEL==='1'){
-  const auth=process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||'';
-  if(auth){
-    const ref=process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA;
-    if(!ref)throw new Error('Private GitHub paper delivery smoke check has credentials but no VERCEL_GIT_COMMIT_SHA or AW_GITHUB_SOURCE_REF');
-    const sample=papers.find(p=>p.sourcePath.includes('Digital AB 2006.pdf'))||papers[0];
-    const encodePath=p=>p.split('/').map(encodeURIComponent).join('/');
-    const meta=await fetch(`https://api.github.com/repos/Sol4evr/awenture/contents/${encodePath(sample.sourcePath)}?ref=${encodeURIComponent(ref)}`,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'AWenture-release-gate'}});
-    if(!meta.ok)throw new Error(`Private GitHub paper source metadata smoke check failed: HTTP ${meta.status}`);
-    const body=await meta.json();
-    if(body?.type!=='file'||!body.download_url)throw new Error('Private GitHub paper source smoke check did not resolve a file');
-    const bytes=await fetch(body.download_url,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/octet-stream',Range:'bytes=0-4','User-Agent':'AWenture-release-gate'}});
-    if(!(bytes.ok||bytes.status===206))throw new Error(`Private GitHub paper byte-range smoke check failed: HTTP ${bytes.status}`);
-    const head=Buffer.from(await bytes.arrayBuffer()).subarray(0,5).toString('ascii');
-    if(head!=='%PDF-')throw new Error(`Private GitHub paper byte-range smoke check returned non-PDF bytes: ${JSON.stringify(head)}`);
-    githubSmoke='PASS';
-  }else githubSmoke='SKIP_NO_PREVIEW_TOKEN';
+  const ref=helpers.cleanRef(process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA);
+  if(!ref)throw new Error('Vercel paper delivery smoke check requires an immutable source SHA');
+  const sample=papers.find(p=>p.sourcePath.includes('Digital AB 2006.pdf'))||papers[0];
+  const url=helpers.sourceUrl(manifest.papers[sample.id],ref);
+  const bytes=await fetch(url,{headers:{Accept:'application/octet-stream',Range:'bytes=0-4','User-Agent':'AWenture-release-gate'},redirect:'follow'});
+  if(!(bytes.ok||bytes.status===206))throw new Error(`Public GitHub paper source smoke check failed: HTTP ${bytes.status}`);
+  const head=Buffer.from(await bytes.arrayBuffer()).subarray(0,5).toString('ascii');
+  if(head!=='%PDF-')throw new Error(`Public GitHub paper source smoke check returned non-PDF bytes: ${JSON.stringify(head)}`);
+  githubSmoke='PASS';
 }
 console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',safePdfCache:'LRU_2_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_VERCEL_GIT_COMMIT_SHA',githubSourceSmoke:githubSmoke}));

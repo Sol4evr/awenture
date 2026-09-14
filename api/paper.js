@@ -9,6 +9,7 @@ const MAX_SAFE_PDF_CACHE=2;
 const safePdfCache=new Map();
 
 function token(){return process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||''}
+function cleanRef(value){const ref=String(value||'');return /^[a-f0-9]{40}$/.test(ref)?ref:null}
 function cleanId(value){const id=String(Array.isArray(value)?value[0]:value||'');return /^[a-f0-9]{16}$/.test(id)?id:null}
 function entryFor(id){
   const p=manifest?.papers?.[id];
@@ -19,6 +20,7 @@ function entryFor(id){
   return p;
 }
 function encodePath(p){return p.split('/').map(encodeURIComponent).join('/')}
+function sourceUrl(entry,ref){return `https://media.githubusercontent.com/media/${OWNER}/${REPO}/${ref}/${encodePath(entry.sourcePath)}`}
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function byteRange(value,total){
   if(!value)return null;
@@ -58,13 +60,9 @@ async function resolveSafePaper(id,entry,ref,auth){
   const cacheable=ref!=='main';
   const key=cacheKey(id,entry,ref);
   if(cacheable){const hit=cacheGet(key);if(hit)return {...hit,cache:'HIT'}}
-  const headers={Authorization:`Bearer ${auth}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'AWenture-paper-resolver'};
-  const metaUrl=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodePath(entry.sourcePath)}?ref=${encodeURIComponent(ref)}`;
-  const metaResp=await fetch(metaUrl,{headers,redirect:'follow'});
-  if(!metaResp.ok){const e=new Error(metaResp.status===404?'Paper not found':'Unable to resolve historical paper');e.status=metaResp.status===404?404:502;throw e}
-  const meta=await metaResp.json();
-  if(meta?.type!=='file'||!meta.download_url){const e=new Error('Paper not found');e.status=404;throw e}
-  const upstream=await fetch(meta.download_url,{headers:{Authorization:`Bearer ${auth}`,Accept:'application/octet-stream','User-Agent':'AWenture-paper-resolver'},redirect:'follow'});
+  const headers={Accept:'application/octet-stream','User-Agent':'AWenture-paper-resolver'};
+  if(auth)headers.Authorization=`Bearer ${auth}`;
+  const upstream=await fetch(sourceUrl(entry,ref),{headers,redirect:'follow'});
   if(!upstream.ok){const e=new Error('Unable to fetch historical paper');e.status=upstream.status===404?404:502;throw e}
   const sourceBytes=Buffer.from(await upstream.arrayBuffer());
   if(entry.sourceSha256&&sha256(sourceBytes)!==entry.sourceSha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
@@ -81,8 +79,8 @@ module.exports=async function handler(req,res){
   if(!entry){res.setHeader('Cache-Control','no-store');return res.status(404).end('Paper not found')}
   const {sourcePath}=entry;
   const auth=token();
-  if(!auth){res.setHeader('Cache-Control','no-store');return res.status(503).end('Historical paper source is not configured')}
-  const ref=process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA||'main';
+  const ref=cleanRef(process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA);
+  if(!ref){res.setHeader('Cache-Control','no-store');console.error('AW_PAPER_PROXY_CONFIG_ERROR','missing immutable source ref');return res.status(503).end('Historical paper source is not configured')}
   try{
     const safe=await resolveSafePaper(id,entry,ref,auth);
     const total=safe.bytes.length;
@@ -106,10 +104,10 @@ module.exports=async function handler(req,res){
     if(req.method==='HEAD')return res.end();
     return res.end(body);
   }catch(err){
-    console.error('AW_PAPER_PROXY_ERROR',id,String(err?.message||err));
+    console.error('AW_PAPER_PROXY_ERROR',JSON.stringify({paperId:id,ref,status:Number(err?.status)||502,reason:String(err?.message||err)}));
     if(!res.headersSent){res.setHeader('Cache-Control','no-store');res.status(Number(err?.status)||502).end(err?.status===404?'Paper not found':'Unable to fetch historical paper')}
     else try{res.destroy()}catch(_){}
   }
 };
 
-module.exports._test={byteRange,learnerPdf,entryFor,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};
+module.exports._test={byteRange,learnerPdf,entryFor,cleanRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};

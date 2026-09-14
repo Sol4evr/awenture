@@ -14,6 +14,7 @@ test('primary iPad navigation remains responsive through repeated long-session t
   const pageErrors=[];page.on('pageerror',e=>pageErrors.push(String(e)));
   await page.goto('/');
   await expect(page.getByText('Hello Alistair')).toBeVisible();
+  await page.waitForLoadState('networkidle');
   const timings=[];
   for(let i=0;i<4;i++){
     timings.push(await transition(page,'[data-a="tests"]',()=>expect(page.getByText('Subject tests')).toBeVisible(),`tests-${i+1}`));

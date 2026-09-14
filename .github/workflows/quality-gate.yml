@@ -5,9 +5,13 @@ on:
     branches: [main]
 permissions:
   contents: read
+concurrency:
+  group: awenture-quality-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   release-gate:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -112,17 +116,23 @@ jobs:
             dist/stage-papers/unresolved-review-batch/manifest.json
           if-no-files-found: error
           retention-days: 1
+      - name: Remove uploaded review evidence from tested runtime artifact
+        run: node scripts/prune-release-evidence.mjs
+      - name: Bind tested artifact to workflow SHA
+        run: printf '%s\n' "$GITHUB_SHA" > dist/.aw-tested-sha
       - name: Upload tested dist for independent browser jobs
         uses: actions/upload-artifact@v4
         with:
           name: v6182-tested-dist
           path: dist
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 1
 
   legacy-browser:
     needs: release-gate
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -134,6 +144,8 @@ jobs:
         with:
           name: v6182-tested-dist
           path: dist
+      - name: Verify tested artifact SHA
+        run: test "$(cat dist/.aw-tested-sha)" = "$GITHUB_SHA"
       - run: npx playwright install --with-deps webkit chromium
       - name: Run v6.16.1 browser compatibility checks
         run: npx playwright test tests/v6161.spec.mjs
@@ -151,6 +163,7 @@ jobs:
   full-browser:
     needs: release-gate
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -162,6 +175,8 @@ jobs:
         with:
           name: v6182-tested-dist
           path: dist
+      - name: Verify tested artifact SHA
+        run: test "$(cat dist/.aw-tested-sha)" = "$GITHUB_SHA"
       - run: npx playwright install --with-deps webkit chromium
       - name: Run full browser regression suite
         run: npm run test:browser
