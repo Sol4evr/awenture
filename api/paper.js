@@ -20,6 +20,7 @@ function entryFor(id){
   return p;
 }
 function encodePath(p){return p.split('/').map(encodeURIComponent).join('/')}
+function sourceUrl(entry,ref){return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${ref}/${encodePath(entry.sourcePath)}`}
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function byteRange(value,total){
   if(!value)return null;
@@ -61,8 +62,7 @@ async function resolveSafePaper(id,entry,ref,auth){
   if(cacheable){const hit=cacheGet(key);if(hit)return {...hit,cache:'HIT'}}
   const headers={Accept:'application/octet-stream','User-Agent':'AWenture-paper-resolver'};
   if(auth)headers.Authorization=`Bearer ${auth}`;
-  const sourceUrl=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${ref}/${encodePath(entry.sourcePath)}`;
-  const upstream=await fetch(sourceUrl,{headers,redirect:'follow'});
+  const upstream=await fetch(sourceUrl(entry,ref),{headers,redirect:'follow'});
   if(!upstream.ok){const e=new Error('Unable to fetch historical paper');e.status=upstream.status===404?404:502;throw e}
   const sourceBytes=Buffer.from(await upstream.arrayBuffer());
   if(entry.sourceSha256&&sha256(sourceBytes)!==entry.sourceSha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
@@ -110,4 +110,4 @@ module.exports=async function handler(req,res){
   }
 };
 
-module.exports._test={byteRange,learnerPdf,entryFor,cleanRef,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};
+module.exports._test={byteRange,learnerPdf,entryFor,cleanRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};
