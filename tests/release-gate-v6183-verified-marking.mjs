@@ -10,6 +10,8 @@ const distRuntime=fs.readFileSync(path.join(root,'dist','stage-formal-tests.js')
 const html=fs.readFileSync(path.join(root,'dist','index.html'),'utf8');
 const api=fs.readFileSync(path.join(root,'api','mark-paper.js'),'utf8');
 const review=JSON.parse(fs.readFileSync(path.join(root,'quality','v6.18.3-auto-marking-review.json'),'utf8'));
+const catalog=JSON.parse(fs.readFileSync(path.join(root,'dist','stage-papers','catalog.json'),'utf8'));
+const catalogPapers=Object.values(catalog.stages||{}).flatMap(stage=>stage.papers||[]);
 
 function assert(condition,message){if(!condition)throw new Error(message)}
 function questionNumbers(paper){return paper.sourceQuestionNumbers||paper.responseSchema?.sourceQuestionNumbers||paper.answers.map((_,i)=>i+1)}
@@ -65,6 +67,16 @@ assert(distRuntime.includes("fetch('/api/mark-paper'"),'Runtime must call server
 assert(distRuntime.includes('progressionCredit:false'),'Runtime must not grant progression credit');
 assert(distRuntime.includes('independently verified answer mapping'),'Verified marking result copy missing');
 assert(distRuntime.includes('VERIFIED_RESPONSE_SCHEMAS'),'Public non-answer response schemas must be present');
+assert(distRuntime.includes('questionCountVerified:true'),'Verified marking patch must preserve the timed-start question-count contract');
+const timedPapers=catalogPapers.filter(p=>p.governance?.learnerReady===true&&p.questionCountVerified===true);
+const governedCountResiduals=catalogPapers.filter(p=>p.governance?.learnerReady===true&&p.questionCountVerified!==true);
+assert(timedPapers.length===184,'Exactly 184 strictly count-verified papers must be timed-startable');
+assert(governedCountResiduals.length===3,'Exactly three governed residual entries must remain blocked from timed start');
+for(const paper of timedPapers){
+  assert(Number.isInteger(Number(paper.questionCount))&&Number(paper.questionCount)>0,`${paper.id}: timed paper has an invalid verified question count`);
+}
+assert(!!distRuntime.match(/function start\(p\)\{const cfg=conditionFor\(p\);if\(!cfg\|\|!cfg\.questionCountVerified\|\|!Number\.isInteger\(cfg\.questions\)\|\|cfg\.questions<1\)return;/), 'Timed start must fail closed on an unverified count');
+assert(timedPapers.some(p=>p.id==='406fef68c08d7e1c'&&p.stage==='icas-y3'&&p.subject==='Science'&&Number(p.year)===2016),'ICAS Y3 2016 Science must remain in the learner-ready startability contract');
 assert(distRuntime.includes('"choiceCount":7'),'OC Reading A-G response schema missing');
 assert(distRuntime.includes('7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25'),'OC Reading 2022 source numbering missing');
 assert(distRuntime.includes('12,13,14,15,16,17,18,19,20,21,22,23,24,25'),'OC Reading 2023 source numbering missing');
@@ -74,4 +86,4 @@ assert(!api.includes('answers: Object.freeze'),'API handler must not duplicate o
 assert(!api.includes('correctAnswers'),'API must not expose per-question answers');
 assert(!api.includes('answerKey'),'API must not expose answer-key fields');
 
-console.log(JSON.stringify({release:'6.18.3',verifiedMarkingGate:'PASS',exactCompanionCandidates:30,verifiedPapers:29,governedRubricExceptions:1,syntheticScoring:['all-correct','all-wrong','mixed'],progressionCredit:false,learnerAnswerKeyExposure:false,ocReadingChoiceRange:'A-G',nonContiguousSourceNumbering:'VERIFIED'}));
+console.log(JSON.stringify({release:'6.18.3',verifiedMarkingGate:'PASS',exactCompanionCandidates:30,verifiedPapers:29,governedRubricExceptions:1,syntheticScoring:['all-correct','all-wrong','mixed'],progressionCredit:false,learnerAnswerKeyExposure:false,ocReadingChoiceRange:'A-G',nonContiguousSourceNumbering:'VERIFIED',timedPaperStartability:{catalogueWide:true,strictlyVerifiedPapers:timedPapers.length,governedResidualEntries:governedCountResiduals.length,reportedRegression:'406fef68c08d7e1c'}}));

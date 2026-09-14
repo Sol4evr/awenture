@@ -22,7 +22,7 @@ const publicSchemas={
 };
 const conditionIndex=lines.findIndex(line=>line.startsWith('function conditionFor(p)'));
 if(conditionIndex<0)throw new Error('v6.18.3 marking patch could not locate conditionFor contract');
-lines[conditionIndex]=`const VERIFIED_RESPONSE_SCHEMAS=${JSON.stringify(publicSchemas)};\nfunction conditionFor(p){const base=CONDITIONS[p.stage]?.[p.subject]||null,s=VERIFIED_RESPONSE_SCHEMAS[p.id];if(!base||!s)return base;return {...base,questions:s.questionNumbers.length,choices:s.choiceCount,questionNumbers:s.questionNumbers}}`;
+lines[conditionIndex]=`const VERIFIED_RESPONSE_SCHEMAS=${JSON.stringify(publicSchemas)};\nfunction conditionFor(p){const base=CONDITIONS[p.stage]?.[p.subject]||null,s=VERIFIED_RESPONSE_SCHEMAS[p.id];if(!base)return null;if(!p?.questionCountVerified||!Number.isInteger(Number(p.questionCount))||Number(p.questionCount)<1)return {...base,questions:null,questionCountVerified:false};if(!s)return {...base,questions:Number(p.questionCount),questionCountVerified:true};return {...base,questions:s.questionNumbers.length,choices:s.choiceCount,questionNumbers:s.questionNumbers,questionCountVerified:true}}`;
 
 const saveIndex=lines.findIndex(line=>line.startsWith('function saveAttempt(timedOut)'));
 if(saveIndex<0)throw new Error('v6.18.3 marking patch could not locate final saveAttempt contract');

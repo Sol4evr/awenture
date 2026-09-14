@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { PDFDocument } from 'pdf-lib';
 
 async function openSubject(section){
   await expect(section).toHaveJSProperty('tagName','DETAILS');
@@ -13,6 +14,10 @@ async function openSubject(section){
 test('hardened learner shell, governed top-up, historical tests and bonus isolation', async ({ page }) => {
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));
   let posted=null;
+  const syntheticPaper=await PDFDocument.create();
+  for(let i=0;i<60;i++)syntheticPaper.addPage([595,842]);
+  const syntheticPaperBytes=Buffer.from(await syntheticPaper.save());
+  await page.route('**/api/paper?id=*',route=>route.fulfill({status:200,contentType:'application/pdf',headers:{'Accept-Ranges':'bytes','X-AW-Paper-Delivery':'github-source-proxy-v2-allowlist'},body:syntheticPaperBytes}));
   await page.route('https://yvvwjdnazxzhzrfhudwx.supabase.co/functions/v1/released-bank',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'offline'})}));
   await page.route('https://yvvwjdnazxzhzrfhudwx.supabase.co/functions/v1/topup-request*',async route=>{
     const req=route.request();
@@ -92,6 +97,27 @@ test('hardened learner shell, governed top-up, historical tests and bonus isolat
   const formalAttempt=await page.evaluate(()=>JSON.parse(localStorage.getItem('oc-ready-progress-v1')).attempts.at(-1));
   expect(formalAttempt.type).toBe('icas-original');expect(formalAttempt.subject).toBe('English');expect(formalAttempt.sourceYear).toBe(2013);expect(formalAttempt.correct).toBe(1);
   await page.locator('[data-aw-result-done]').click();
+
+  // Regression contract: v6.18.3 marking enrichment must preserve the verified
+  // question-count flag consumed by the timed-paper start guard.
+  await page.locator('[data-a="home"]').last().click();
+  await page.locator('[data-stage="icas-y3"]').click();
+  await page.locator('[data-a="tests"]').click();
+  const science=page.locator('details.aw-stage-subject-details').filter({hasText:/Science\s*12 papers/});
+  await expect(science).toHaveCount(1);
+  if(!(await science.evaluate(el=>el.open)))await science.locator(':scope > summary.aw-stage-subject-summary').click();
+  const science2016=science.locator('[data-aw-stage-paper="406fef68c08d7e1c"]');
+  await expect(science2016).toBeVisible();
+  await science2016.click();
+  await expect(page.locator('[data-aw-start-stage-formal]')).toBeVisible();
+  await page.locator('[data-aw-start-stage-formal]').click();
+  await expect(page.locator('[data-aw-stage-timer]')).toBeVisible();
+  await expect(page.locator('[data-aw-stage-answer-row]')).toHaveCount(30);
+  await expect(page.locator('[data-aw-stage-page-select]')).toBeEnabled({timeout:20000});
+  await expect(page.locator('[data-aw-stage-paper-status]')).not.toHaveClass(/error/);
+  page.once('dialog',dialog=>dialog.accept());
+  await page.locator('[data-aw-stage-exit]').click();
+  await page.locator('[data-a="home"]').last().click();
 
   const perfectDate=new Date().toISOString();
   await page.evaluate(({perfectDate})=>localStorage.setItem('oc-ready-progress-v1',JSON.stringify({attempts:[{date:perfectDate,score:100,subject:'Daily',type:'practice'}],seenIds:[],reviewQueue:[],recentFamilies:[],xp:0,streak:1,skillStats:{},lastActiveDate:null})),{perfectDate});
