@@ -93,6 +93,25 @@ test('hardened learner shell, governed top-up, historical tests and bonus isolat
   expect(formalAttempt.type).toBe('icas-original');expect(formalAttempt.subject).toBe('English');expect(formalAttempt.sourceYear).toBe(2013);expect(formalAttempt.correct).toBe(1);
   await page.locator('[data-aw-result-done]').click();
 
+  // Regression contract: v6.18.3 marking enrichment must preserve the verified
+  // question-count flag consumed by the timed-paper start guard.
+  await page.locator('[data-a="home"]').last().click();
+  await page.locator('[data-stage="icas-y3"]').click();
+  await page.locator('[data-a="tests"]').click();
+  const science=page.locator('details.aw-stage-subject-details').filter({hasText:/Science\s*12 papers/});
+  await expect(science).toHaveCount(1);
+  if(!(await science.evaluate(el=>el.open)))await science.locator(':scope > summary.aw-stage-subject-summary').click();
+  const science2016=science.locator('[data-aw-stage-paper="406fef68c08d7e1c"]');
+  await expect(science2016).toBeVisible();
+  await science2016.click();
+  await expect(page.locator('[data-aw-start-stage-formal]')).toBeVisible();
+  await page.locator('[data-aw-start-stage-formal]').click();
+  await expect(page.locator('[data-aw-stage-timer]')).toBeVisible();
+  await expect(page.locator('[data-aw-stage-answer-row]')).toHaveCount(30);
+  page.once('dialog',dialog=>dialog.accept());
+  await page.locator('[data-aw-stage-exit]').click();
+  await page.locator('[data-a="home"]').last().click();
+
   const perfectDate=new Date().toISOString();
   await page.evaluate(({perfectDate})=>localStorage.setItem('oc-ready-progress-v1',JSON.stringify({attempts:[{date:perfectDate,score:100,subject:'Daily',type:'practice'}],seenIds:[],reviewQueue:[],recentFamilies:[],xp:0,streak:1,skillStats:{},lastActiveDate:null})),{perfectDate});
   await page.reload();
