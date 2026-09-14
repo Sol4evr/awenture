@@ -47,7 +47,7 @@ function walk(dir){if(!fs.existsSync(dir))return;for(const e of fs.readdirSync(d
 walk(stageDir);
 if(deployedPdfs.length)throw new Error(`stage PDFs must not be deployed: ${deployedPdfs.slice(0,5).join(', ')}`);
 const api=fs.readFileSync(apiPath,'utf8');
-for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','raw.githubusercontent.com','cleanRef','sourceUrl','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
+for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','media.githubusercontent.com/media','cleanRef','sourceUrl','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
 if(api.includes('req.query?.path'))throw new Error('paper proxy must not accept arbitrary repository source paths');
 const upstreamStart=api.indexOf('const upstream=await fetch(sourceUrl(entry,ref)');
 const upstreamEnd=api.indexOf('const sourceBytes=',upstreamStart);
@@ -66,7 +66,7 @@ if(helpers.cleanRef(pinnedRef)!==pinnedRef||helpers.cleanRef('main')!==null||hel
 for(const paper of papers){
   const entry=manifest.papers[paper.id];
   const url=helpers.sourceUrl(entry,pinnedRef);
-  if(!url.startsWith(`https://raw.githubusercontent.com/Sol4evr/awenture/${pinnedRef}/source/`)||!url.toLowerCase().endsWith('.pdf'))throw new Error(`invalid pinned source URL: ${paper.id}`);
+  if(!url.startsWith(`https://media.githubusercontent.com/media/Sol4evr/awenture/${pinnedRef}/source/`)||!url.toLowerCase().endsWith('.pdf'))throw new Error(`invalid pinned source URL: ${paper.id}`);
   if(url.includes(' ')||url.includes('?ref='))throw new Error(`unpinned or unencoded source URL: ${paper.id}`);
 }
 const synthetic=await PDFDocument.create();for(let i=0;i<5;i++)synthetic.addPage([200,200]);
