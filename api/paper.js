@@ -20,7 +20,7 @@ function entryFor(id){
   return p;
 }
 function encodePath(p){return p.split('/').map(encodeURIComponent).join('/')}
-function sourceUrl(entry,ref){return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${ref}/${encodePath(entry.sourcePath)}`}
+function sourceUrl(entry,ref){return `https://media.githubusercontent.com/media/${OWNER}/${REPO}/${ref}/${encodePath(entry.sourcePath)}`}
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function byteRange(value,total){
   if(!value)return null;
