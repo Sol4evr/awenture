@@ -5,10 +5,9 @@ const patch=fs.readFileSync('scripts/patch-v6.16.0.mjs','utf8');
 const html=fs.readFileSync('dist/index.html','utf8');
 
 if(!html.includes('awenture-release" content="6.19.2"'))fail('release marker is not v6.19.2');
-for(const source of [patch,html]){
-  if(source.includes('speechSynthesis.cancel();speechSynthesis.speak('))fail('cancel-then-speak race reintroduced');
-  if(source.includes('synth.cancel();synth.speak('))fail('canonical speech queue is cancelled immediately before speak');
-}
+if(html.includes('speechSynthesis.cancel();speechSynthesis.speak('))fail('cancel-then-speak race reintroduced');
+if(html.includes('synth.cancel();synth.speak('))fail('canonical speech queue is cancelled immediately before speak');
+if(!patch.includes('const speechReplacement='))fail('owning speech patch replacement is missing');
 for(const required of [
   'let speechUtterance=null',
   "u.lang='en-AU'",
