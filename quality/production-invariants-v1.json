@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "release": "6.19.2",
-  "parentRelease": "6.19.1",
+  "release": "6.19.3",
+  "parentRelease": "6.19.2",
   "productionBaseline": {
     "release": "6.19.1",
     "gitSha": "7c9725010ad635bd5646c306ddd18ff39aca9317"
