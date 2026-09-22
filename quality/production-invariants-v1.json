@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "release": "6.19.1",
-  "parentRelease": "6.19.0",
+  "release": "6.19.3",
+  "parentRelease": "6.19.2",
   "productionBaseline": {
-    "release": "6.18.3",
-    "gitSha": "fa42a56fd2d0ec08fbbedf3e711727b2b56201df"
+    "release": "6.19.1",
+    "gitSha": "7c9725010ad635bd5646c306ddd18ff39aca9317"
   },
   "dailyPractice": {
     "questionCount": 15,
