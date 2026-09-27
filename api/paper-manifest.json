@@ -1,4 +1,1317 @@
 {
-  "version": "aw-paper-proxy-manifest-v1",
-  "papers": {}
+  "version": "aw-paper-proxy-manifest-v2",
+  "delivery": "github-source-proxy-v2-allowlist",
+  "generatedAtBuild": true,
+  "learnerOnly": true,
+  "papers": {
+    "61e95d3e47ef6697": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2004.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d5213acc1e495413": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2004.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "350f112132d76233": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2006.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "bd90549d45dc4ebb": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2006.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "69cf35c1baa2f6fe": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8"
+    },
+    "4f744df10cb45e0e": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8"
+    },
+    "6a511baf70ecf37e": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e"
+    },
+    "37ab0dabc42e0c47": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e"
+    },
+    "3265591bc1341b0b": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1"
+    },
+    "74d8f30a6dd3b840": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1"
+    },
+    "e327fe9ba71dd529": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "7b68fca6f777713d01ca79dfe566e87a077ddbc37f285d7c9c4d935a0a4a11d6"
+    },
+    "47c5d5e5bb0ab4ae": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "7b68fca6f777713d01ca79dfe566e87a077ddbc37f285d7c9c4d935a0a4a11d6"
+    },
+    "a59b3812ed32eef7": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "01e460e78e076cc2": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "736dd05682747e43": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d838628ebdeb171e": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "8a4eb6ab40e9eadd": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "40b66be143b6ab9c": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "44a6a00bad2989af": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "86c1d3c49a507598": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "56bc8e09dd515f42": {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2018.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 33,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "cf458f685091e04c": {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2018.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 33,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "79447cbc70263988": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2007.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "9f951125ed42bc39": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2008.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "9e3a9eb0ac4e8440": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2009.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "04eb439a4a160fde": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "e11ce20c53c74f20": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "1d4a580586d3b23b": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "58fba5b434a71dd3": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 19,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "a9ae9ff670733433": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "9a0fb6606fafd55a3ac1aab4cffff681c71e8b860139ed1c22519f4d17aba177"
+    },
+    "1a4842e1994eabbe": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "95dd69c96b16ed8f": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "985e242edc37e8e5": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "4022176cfe22f169": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2018.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "6f723aa0818d12b6": {
+      "sourcePath": "source/original-icas/year3/English A/English A 2019 REACH.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "68d7834dd084a029": {
+      "sourcePath": "source/original-icas/year3/English A/PP-2020-ICAS-EN-ENG-D-B[1]-pages[1][1] (1) (8).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 38,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "ebc5a762617bea5d": {
+      "sourcePath": "source/original-icas/year3/English A/2021 English ICAS Paper/ICAS_English 2021.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 47,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "1a214c4272aa1386": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2005.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 9,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "4cd3829cac764eaf": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2007.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 11,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "f02ceaaabce3331a": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2008.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "573b1cddd7332654": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2009.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "9850dc53da9e803a": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 10,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "1c769854a314c41b": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "91f246d2b6ecffa2": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "165d64d9f04c0e38": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "9a0e9b2cd0ac52ac": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "23a6089d1893721b": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "0484c9d0db26d042": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "208c82b195ece730": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "f1926f075ab950e5": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2018.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "26f383a9d2eeb7a0": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths A 2019.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 11,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "82daaa2ae46b2fb2": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths ICAS 2021/2021 Maths A.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "8746680edb48fb2f": {
+      "sourcePath": "source/original-icas/year3/Maths A/Maths ICAS 2021/Maths A 2021.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "bf44805885a93234": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2009.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "853283ecfa6c58c4": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "69845a35ed3bc71e": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "498541c7e3af9941": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "22e8e3d6543add7a": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "0e4b138eedf83e73": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "7061274f330b9b94": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "406fef68c08d7e1c": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "598f12e2a498cc4c": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "800dc0d7798c19e7": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2018.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "ad5894756f97a44e": {
+      "sourcePath": "source/original-icas/year3/Science A/Science A 2019.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b0a1e9bf092d2dea": {
+      "sourcePath": "source/original-icas/year3/Science A/2021 SCIENCE ICAS/ICAS_Science_2021.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "50005318ed10527a": {
+      "sourcePath": "source/original-icas/year3/Spelling A/Spelling A 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 6,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d4857048cfb46866": {
+      "sourcePath": "source/original-icas/year3/Spelling A/Spelling A 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 6,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "93c988b276a223e3": {
+      "sourcePath": "source/original-icas/year3/Spelling A/Spelling A 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 9,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "8ff1a54f4edf5bb3": {
+      "sourcePath": "source/original-icas/year3/Spelling A/Spelling A 2016 (Q1-12, Q26-40).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "364daf5647eb9f32": {
+      "sourcePath": "source/original-icas/year3/Spelling A/Spelling A 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "eb89a27a6871783e": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2003.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "17828dfe421ddf54": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2004.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 2,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "299bac24820ef521": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2006.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 3,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "612e24b8bd23bd15": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2008.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "60315b349a7c99ea": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2009.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b59cf15280cb7a4a": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 2,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "911981c29135ffc3": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "1ab709915f236afd": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c1038f545da2dba4": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 8,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "717b728cfbf32e18": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 3,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "12c0162a3de3a8fc": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "5a7025d99b04e2bf": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "41b61b983565902f": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 2,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "6824ef758a09dbca": {
+      "sourcePath": "source/original-icas/year3/Writing A/Writing A 2018.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "83c5d94c3c4eb224": {
+      "sourcePath": "source/naplan/2008/Year 3/NAPLAN 2008, final test – language conventions, Year 3 (PDF 696 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "4026261da7025649": {
+      "sourcePath": "source/naplan/2009/Year 3/NAPLAN 2009, final test – language conventions, Year 3 (PDF 531 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "0f974ccece537e1f": {
+      "sourcePath": "source/naplan/2010/Year 3/NAPLAN 2010, final test – language conventions, Year 3 (PDF 914 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "41e34e287be428bb": {
+      "sourcePath": "source/naplan/2011/Year 3/NAPLAN 2011, final test – language conventions, Year 3 (PDF 700 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "7b864152814c652f": {
+      "sourcePath": "source/naplan/2013/Shared/NAPLAN 2013 final test, language conventions, Year 3 (PDF 412 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "62324c496da3954a": {
+      "sourcePath": "source/naplan/2014/Shared/NAPLAN 2014 final test, language conventions, Year 3 (PDF 247 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "cf9ccc4bcd720dea": {
+      "sourcePath": "source/naplan/2015/Shared/NAPLAN 2015 final test, language conventions, Year 3 (PDF 645 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "7186c1b0d7bd1526": {
+      "sourcePath": "source/naplan/2016/Shared/NAPLAN 2016 final test, language conventions, Year 3 (PDF 321 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "5d634c70edf0b6cd": {
+      "sourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Numeracy.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "72c84d1b0bf8f625ac5d31a72929bc64d0c8ba95c594a41266156d97ec226083"
+    },
+    "5f1bc032edbd204a": {
+      "sourcePath": "source/naplan/2008/Year 3/NAPLAN 2008, final test – numeracy, Year 3 (PDF 3.2 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "6172508811550292": {
+      "sourcePath": "source/naplan/2009/Year 3/NAPLAN 2009, final test – numeracy, Year 3 (PDF 2.5 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "02e5c57d6725e6c6": {
+      "sourcePath": "source/naplan/2010/Year 3/NAPLAN 2010, final test – numeracy, Year 3 (PDF 5 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "f27cfa771203ccb7": {
+      "sourcePath": "source/naplan/2011/Year 3/NAPLAN 2011, final test – numeracy, Year 3 (PDF 4.5 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 10,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d9492e407d77b554": {
+      "sourcePath": "source/naplan/2013/Shared/NAPLAN 2013 final test, numeracy, Year 3 (with redacted image) (PDF 1.3 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "cb7f1cf1f5f2cd17": {
+      "sourcePath": "source/naplan/2014/Shared/NAPLAN 2014 final test, numeracy, Year 3 (PDF 4.6 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c5e0efe2df5c681e": {
+      "sourcePath": "source/naplan/2015/Shared/NAPLAN 2015 final test, numeracy, Year 3 (PDF 3 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "e5b15fa9adbcb488": {
+      "sourcePath": "source/naplan/2016/Shared/NAPLAN 2016 final test, numeracy, Year 3 (PDF 2.5 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "0c01f6761d02b363": {
+      "sourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Reading_Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "6f4e2773c4a6e024": {
+      "sourcePath": "source/naplan/2008/Year 3/NAPLAN 2008, final test – reading, Year 3 (PDF 774 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "3c846e0d5c3af914": {
+      "sourcePath": "source/naplan/2009/Year 3/NAPLAN 2009, final test – reading, Year 3 (PDF 746 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d417d6c5a2cb7003": {
+      "sourcePath": "source/naplan/2010/Year 3/NAPLAN 2010, final test – reading, Year 3 (PDF 1 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "9601772b7d5e1fb7": {
+      "sourcePath": "source/naplan/2011/Year 3/NAPLAN 2011, final test – reading, Year 3 (PDF 1.2 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "bdd72bd4b87dc2a3": {
+      "sourcePath": "source/naplan/2013/Shared/NAPLAN 2013 final test, reading, Year 3 (PDF 1 MB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c78c38018b4ee29c": {
+      "sourcePath": "source/naplan/2014/Shared/NAPLAN 2014 final test, reading, Year 3 (PDF 290 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "9a10006168132ef9": {
+      "sourcePath": "source/naplan/2015/Shared/NAPLAN 2015 final test, reading, Year 3 (PDF 310 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "769bb441f7ecceb1": {
+      "sourcePath": "source/naplan/2016/Shared/NAPLAN 2016 final test, reading, Year 3 (PDF 500 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "873d6c5ff25e8b88": {
+      "sourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Writing_Prompt_Narrative.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "45f5d1c113a14e56": {
+      "sourcePath": "source/naplan/2017/Year 3/Example_Yr_3_Writing_Prompt_Persuasive.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "f0c3dac394c3d77b": {
+      "sourcePath": "source/naplan/2013/Shared/NAPLAN 2013 final test, writing, Year 3 (PDF 204 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "7de1e4d38fd1ddd4": {
+      "sourcePath": "source/naplan/2014/Shared/NAPLAN 2014 final test, writing, Year 3 (PDF 120 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "e12c9ea8f17bad1a": {
+      "sourcePath": "source/naplan/2015/Shared/NAPLAN 2015 final test, writing, Year 3 (PDF 121 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "e62d5675cd06a32e": {
+      "sourcePath": "source/naplan/2016/Shared/NAPLAN 2016 final test, writing, Year 3 (PDF 105 KB).pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c05b515983bc8614": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital B 2009 (A) questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "73b3dce5d08d44b1": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "db48e049d90bc1e8": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB  2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b608eb338466936c": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "3a8f4e6870ecc8c3": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "71a73bc91f646808": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "358b4f13f2449c10": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "76bd6834c2115daa": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "1e58d3d2a2b891aa": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "cdbb6c21dbc0b0b1": {
+      "sourcePath": "source/original-icas/year4/Digital yr 4/Digital AB - 2018.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 33,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "40bc74882938492a": {
+      "sourcePath": "source/original-icas/year4/English yr 4/English B 2007 questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "67e5a5c7ba90d667": {
+      "sourcePath": "source/original-icas/year4/English yr 4/2008 ICAS English Paper B.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "8a9e53470f73a190": {
+      "sourcePath": "source/original-icas/year4/English yr 4/2009 ICAS English Paper B.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "823fc025e13f5965": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "472462f10b5ea99e": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "70657ff67bc09716": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "e4889446f27acbd1": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "59018bd4e3435215": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "f0780f085090aee9": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 15,
+      "pageBoundaryVerified": true,
+      "sourceSha256": "7636d8eed9d040b602d3098f7795c6ec2897ca1543433c070992bb8bdfadbb2c"
+    },
+    "642b5dba80949b55": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "4bffe42c97cdd7e5": {
+      "sourcePath": "source/original-icas/year4/English yr 4/Icas Yr 4 English 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "de7beb530b17e21c": {
+      "sourcePath": "source/original-icas/year4/English yr 4/2018 ICAS English Paper B.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "76c70ca554c7a811": {
+      "sourcePath": "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 40,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c7b97767539d3dd9": {
+      "sourcePath": "source/original-icas/year4/Maths yr4/Maths B 2007 questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 9,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "cc8d05b92191637d": {
+      "sourcePath": "source/original-icas/year4/Maths yr4/Maths B 2008 questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 9,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c8b34fa6f3fa0da7": {
+      "sourcePath": "source/original-icas/year4/Maths yr4/Maths B 2017 questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "133a3630a64d1ef1": {
+      "sourcePath": "source/original-icas/year4/Maths yr4/Maths B 2018 questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "024b3ce2fc35a9d3": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/2009 ICAS Science Paper B.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "17b6c105d43aedd7": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 14,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c6482895c9fe3eec": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2011.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "26c3bf24a0274f17": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2012.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d9bd3da3c3336e9f": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 19,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "359d8b284c3eda00": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 19,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "0302ba2e7ff0e206": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 16,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b6cd453d3527aabd": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d84509f2eee569e0": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "102d379fdde4d17d": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/2018 ICAS Science Paper B 1.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 33,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "0f47df06a5e95381": {
+      "sourcePath": "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2020.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 32,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "e15cf12a55740be3": {
+      "sourcePath": "source/original-icas/year4/Spellings/Spellings/Practice B Spelling.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 8,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "ab26de4b50ada4ac": {
+      "sourcePath": "source/original-icas/year4/Spellings/Spellings/2008 Spelling Paper B.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "f37bf2aa4cef1b1e": {
+      "sourcePath": "source/original-icas/year4/Spellings/Spellings/2013 Spelling B.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 5,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "69abe027c08540b6": {
+      "sourcePath": "source/original-icas/year4/Spellings/Spellings/2014 Spelling Paper BC.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 5,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "fc2f1be81a271849": {
+      "sourcePath": "source/original-icas/year4/Spellings/Spellings/2018 ICAS Spelling Paper BC.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 9,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "db60ec73e1f24255": {
+      "sourcePath": "source/original-icas/year4/Writing/Writing/Writing B 2004.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 2,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "846229ae3df1d483": {
+      "sourcePath": "source/original-icas/year4/Writing/Writing/Writing B 2006.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 3,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c30972c6ff72f0f3": {
+      "sourcePath": "source/original-icas/year4/Writing/Writing/Writing AB 2013.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 8,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "8385a9302ca658f6": {
+      "sourcePath": "source/original-icas/year4/Writing/Writing/Writing AB 2014.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 3,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b4fca69f507e9ee4": {
+      "sourcePath": "source/original-icas/year4/Writing/Writing/Writing AB 2015.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 1,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "7f5e10a77595a153": {
+      "sourcePath": "source/original-icas/year4/Writing/Writing/Writing AB 2016.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 4,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "447711ce7763bfcd": {
+      "sourcePath": "source/original-icas/year4/Writing/Writing/Writing B 2017.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 2,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "4399fd94a4ba2d0f": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-mathematical-reasoning-2024-s1-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 10,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "c24a93f8ef6242bd": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-mathematical-reasoning-2024-s2-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "4bd478f9c47f17ea": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-mathematical-reasoning-2024-s3-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "75ebf21a849f3e35": {
+      "sourcePath": "source/oc/2024 Sample Tests/Reading Sample Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "7127d30d75e6909c": {
+      "sourcePath": "source/oc/2021 Practice Tests/2021 Reading Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 9,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "5575cbf572df45f7": {
+      "sourcePath": "source/oc/2022 Practice Tests/2022 Reading Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 9,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "a96fae118504d88e": {
+      "sourcePath": "source/oc/2023 Practice Tests/2023 Reading Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 8,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "e815a30ac10f1df6": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-reading-2024-s1-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 12,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "8da83e9407965710": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-reading-2024-s2-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 13,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "508f944973ca8c55": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-reading-2024-s3-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 6,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "41877a81a2f7281a": {
+      "sourcePath": "source/oc/2024 Sample Tests/Mathematical Reasoning Sample Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 10,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "2ecb2ba2ee8ca10a": {
+      "sourcePath": "source/oc/2021 Practice Tests/2021 Mathematical Reasoning Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 17,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "95d3a6e01b5dd901": {
+      "sourcePath": "source/oc/2022 Practice Tests/2022 Mathematical Reasoning Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 28,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "7bbb84bb7de18dce": {
+      "sourcePath": "source/oc/2023 Practice Tests/2023 Mathematical Reasoning Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 18,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "d5109ce33ab72154": {
+      "sourcePath": "source/oc/2024 Sample Tests/Thinking Skills Sample Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b6e6e2292b6264de": {
+      "sourcePath": "source/oc/2021 Practice Tests/2021 Thinking Skills Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 24,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "a07dc66ba598b3a3": {
+      "sourcePath": "source/oc/2022 Practice Tests/2022 Thinking Skills Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 24,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "a0c45551dccd634d": {
+      "sourcePath": "source/oc/2023 Practice Tests/2023 Thinking Skills Practice Test - Questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 24,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b88ec036475dbd48": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-thinking-skills-2024-s1-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 20,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "97ee35d20a4544b2": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-thinking-skills-2024-s2-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 24,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    },
+    "b254f58988cc80bb": {
+      "sourcePath": "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-thinking-skills-2024-s3-questions.pdf",
+      "deliveryStartPage": 1,
+      "deliveryEndPage": 24,
+      "pageBoundaryVerified": true,
+      "sourceSha256": null
+    }
+  }
 }

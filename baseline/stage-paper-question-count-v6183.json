@@ -1,0 +1,4276 @@
+{
+  "version": "aw-stage-question-count-8-strict-partials",
+  "generatedAt": "2026-09-22T09:58:14.732Z",
+  "policy": {
+    "paperSpecific": true,
+    "learnerPagesPreferred": true,
+    "supportPagesAllowedForCountVerification": true,
+    "separateAnswerKeysAllowedForIndependentCountEvidence": true,
+    "duplicateBinaryPropagation": true,
+    "strongTailInference": true,
+    "explicitCoverTotals": true,
+    "ocrSpacedCoverTotals": true,
+    "noSubjectDefaultForVerifiedAttempt": true,
+    "writingSingleResponse": true,
+    "sectionRangeAware": true,
+    "plausibilityFloor": true,
+    "explicitCoverTotalsOpeningPagesOnly": true,
+    "ocrFuzzyCoverTotalsRequireCorroboration": true,
+    "crossSubjectSupportForbidden": true,
+    "weakSequenceForbidden": true,
+    "minimumSequenceCoverage": 0.95,
+    "minimumStrongTailCoverage": 0.8,
+    "filenameExplicitRangeAllowed": true,
+    "discontinuousPartialFilenameForbiddenAsFullCount": true,
+    "sameSourceIdentityPropagation": true,
+    "propagatedEvidenceRequiresIndependentVerifiedSource": true,
+    "subjectDefaultForbidden": true,
+    "terminalRangeRequiresMatchingLearnerSequence": true
+  },
+  "papers": {
+    "source/original-icas/year3/Digital A/Digital AB 2004.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "8a731cf2dc347d3212ad8a591cc6486d1b13f94cb41af418d23133e5b021e20d",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 14,
+        "evidenceText": "Learner pages 13–14 visibly continue Q27, Q28, Q29 and terminate at Q30 on the final page of the exact paper.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "8a731cf2dc347d3212ad8a591cc6486d1b13f94cb41af418d23133e5b021e20d"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2004.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2004.pdf"
+      },
+      "sha256": "8a731cf2dc347d3212ad8a591cc6486d1b13f94cb41af418d23133e5b021e20d"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2006.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "ocr-fuzzy-total",
+            "page": 1,
+            "match": "30 QUESTTONS"
+          },
+          {
+            "count": 30,
+            "kind": "explicit-1-to-n-range",
+            "page": 1,
+            "match": "QUESTIONS(1-30)"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "1cdc1a36df055942d0642130b11ea5013a95fc0e66cfae5a160beb2b01c06b91"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2006.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "ocr-fuzzy-total",
+            "page": 1,
+            "match": "30 QUESTTONS"
+          },
+          {
+            "count": 30,
+            "kind": "explicit-1-to-n-range",
+            "page": 1,
+            "match": "QUESTIONS(1-30)"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "1cdc1a36df055942d0642130b11ea5013a95fc0e66cfae5a160beb2b01c06b91"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2010.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 14,
+        "evidenceText": "Learner pages 13–14 explicitly cover questions 29 and 30; Q30 is the final learner question before the embedded answer-key page.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2010.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2010.pdf"
+      },
+      "sha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2011.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Embedded 2011 Computer Skills Answer Keys populate Papers A & B for Q1–30 and leave Papers A & B blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2011.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2011.pdf"
+      },
+      "sha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2012.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Embedded 2012 Computer Skills Answer Keys populate Papers A & B for Q1–30 and leave Papers A & B blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2012.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2012.pdf"
+      },
+      "sha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2013.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "7b68fca6f777713d01ca79dfe566e87a077ddbc37f285d7c9c4d935a0a4a11d6",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Embedded 2013 Computer Skills Answer Keys populate Papers A & B for Q1–30 and leave Papers A & B blank from Q31 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "7b68fca6f777713d01ca79dfe566e87a077ddbc37f285d7c9c4d935a0a4a11d6"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2013.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2013.pdf"
+      },
+      "sha256": "7b68fca6f777713d01ca79dfe566e87a077ddbc37f285d7c9c4d935a0a4a11d6"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2014.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "fbe269be9aa7e3b3dfa6f9803c5ac397ead346fab3e6717a133d20eead4c7c85",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Embedded 2014 Computer Skills Answer Keys populate Papers A & B for Q1–30 and leave Papers A & B blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "fbe269be9aa7e3b3dfa6f9803c5ac397ead346fab3e6717a133d20eead4c7c85"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2014.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2014.pdf"
+      },
+      "sha256": "fbe269be9aa7e3b3dfa6f9803c5ac397ead346fab3e6717a133d20eead4c7c85"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2015.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "f291c91abf96cbfc7533ce1a7c1b0058c9b84ddad59e4c5e5d133034c16e97fd",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Question Number Papers A & B 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45",
+        "reviewNote": "Exact source binary independently reviewed. Embedded answer key page 16 labels Papers A & B and enumerates Q1-30; page 17 continues the same Papers A & B column from Q31 through Q45. This proves the A/B paper contains 45 questions. Auto-scoring is not implied by count verification."
+      },
+      "sha256": "f291c91abf96cbfc7533ce1a7c1b0058c9b84ddad59e4c5e5d133034c16e97fd"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2015.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2015.pdf"
+      },
+      "sha256": "f291c91abf96cbfc7533ce1a7c1b0058c9b84ddad59e4c5e5d133034c16e97fd"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2016.pdf": {
+      "questionCount": null,
+      "questionCountVerified": false,
+      "method": null,
+      "evidence": "question-count QA pending: no high-confidence paper, support-page, answer-key, or terminal-sequence evidence",
+      "sha256": "a75990f4ae06c3617dea403d3cdd759a3ab720f7cf324c948f145ba810c1eb4a"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2016.pdf": {
+      "questionCount": null,
+      "questionCountVerified": false,
+      "method": null,
+      "evidence": "question-count QA pending: no high-confidence paper, support-page, answer-key, or terminal-sequence evidence",
+      "sha256": "a75990f4ae06c3617dea403d3cdd759a3ab720f7cf324c948f145ba810c1eb4a"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2017.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "72dfe83eca0580a7de84af684b34e849efb1ac03b6abd20b6414340de12b9c85",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Learner page 14 contains Q29 and Q30; the following same-paper Analysis by Question page lists question numbers through 30 with correct answers.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "72dfe83eca0580a7de84af684b34e849efb1ac03b6abd20b6414340de12b9c85"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2017.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2017.pdf"
+      },
+      "sha256": "72dfe83eca0580a7de84af684b34e849efb1ac03b6abd20b6414340de12b9c85"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2018.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "bde2f684902f62738c0e08e8ac53bf797d22d9d5a9f650d112c73c721afdb792",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 33,
+        "evidenceText": "Same-paper analysis/results pages enumerate question numbers through Q30, with Q30 as the terminal row on the final page.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "bde2f684902f62738c0e08e8ac53bf797d22d9d5a9f650d112c73c721afdb792"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2018.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "same-source-identity-match",
+      "evidence": {
+        "matchingSourcePath": "source/original-icas/year3/Digital A/Digital AB 2018.pdf"
+      },
+      "sha256": "bde2f684902f62738c0e08e8ac53bf797d22d9d5a9f650d112c73c721afdb792"
+    },
+    "source/original-icas/year3/English A/English A 2007.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "1084c25d09171556b32d76f30737d9eec32562f54a6585e0744f9f82536be6ba",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Embedded 2007 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "1084c25d09171556b32d76f30737d9eec32562f54a6585e0744f9f82536be6ba"
+    },
+    "source/original-icas/year3/English A/English A 2008.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "cca4fa32a8f9e4f83dc5dd4a781c163dc59e2c1164e3bf9bde7a3471153a49ab",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Embedded 2008 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "cca4fa32a8f9e4f83dc5dd4a781c163dc59e2c1164e3bf9bde7a3471153a49ab"
+    },
+    "source/original-icas/year3/English A/English A 2009.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "895a6c59935a2dc1143938f792f967c39509062b4ac4a1ab935fbc2379513f8c",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Embedded 2009 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "895a6c59935a2dc1143938f792f967c39509062b4ac4a1ab935fbc2379513f8c"
+    },
+    "source/original-icas/year3/English A/English A 2010.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "77531d019f0f2972b67544d34421c2c930a3e34a636ff53330f2fac0b5590c07",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Embedded 2010 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "77531d019f0f2972b67544d34421c2c930a3e34a636ff53330f2fac0b5590c07"
+    },
+    "source/original-icas/year3/English A/English A 2011.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "23fd43760e82434603eedee656f2c782449e47f584d01cbbc65b1e6ab6ab7e13",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Embedded 2011 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "23fd43760e82434603eedee656f2c782449e47f584d01cbbc65b1e6ab6ab7e13"
+    },
+    "source/original-icas/year3/English A/English A 2012.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "2fc0cf77385787de1f44da57fcd7b87a49242665f0989689f5a82416cc657253",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Embedded 2012 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "2fc0cf77385787de1f44da57fcd7b87a49242665f0989689f5a82416cc657253"
+    },
+    "source/original-icas/year3/English A/English A 2013.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "5cf70eba071ea651fd86b4a2e7afcc0432857afc7aa2b95952bcbb70dd58a69f",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Embedded 2013 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "5cf70eba071ea651fd86b4a2e7afcc0432857afc7aa2b95952bcbb70dd58a69f"
+    },
+    "source/original-icas/year3/English A/English A 2014.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "second-pass-same-paper-evidence",
+      "evidence": {
+        "sourcePath": "source/original-icas/year3/English A/English A 2014.pdf",
+        "reason": "explicit terminal range in learner paper",
+        "learner": {
+          "max": 45,
+          "present": 42,
+          "coverage": 0.933,
+          "head": 3,
+          "tail": 5
+        },
+        "answer": {
+          "max": 60,
+          "present": 60,
+          "coverage": 1,
+          "head": 3,
+          "tail": 6
+        },
+        "answerHeading": true,
+        "terminalRange": 45,
+        "pageWithMax": 14,
+        "pageEnd": 14
+      },
+      "sha256": "9a0fb6606fafd55a3ac1aab4cffff681c71e8b860139ed1c22519f4d17aba177"
+    },
+    "source/original-icas/year3/English A/English A 2015.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "1331a3bce6e23da211bb804a2b135df5edd471d3f2332faf2ec8193569dc273d",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 20,
+        "evidenceText": "Embedded 2015 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "1331a3bce6e23da211bb804a2b135df5edd471d3f2332faf2ec8193569dc273d"
+    },
+    "source/original-icas/year3/English A/English A 2016.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "0f4d7eb3a6e9e6bef71e67db6c95fa752ca7fddd254b21196316c046c92c494a",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Embedded 2016 English Answer Keys populate Paper A through Q45 and leave Paper A blank from Q46 onward.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "0f4d7eb3a6e9e6bef71e67db6c95fa752ca7fddd254b21196316c046c92c494a"
+    },
+    "source/original-icas/year3/English A/English A 2017.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "e96bbe74b75972e630063447feac6c639c4bcfd059ecd669014277a002c2cdda",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Learner page 15 visibly contains questions 39 through 45, with Q45 as the terminal learner question before acknowledgement and analysis pages.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "e96bbe74b75972e630063447feac6c639c4bcfd059ecd669014277a002c2cdda"
+    },
+    "source/original-icas/year3/English A/English A 2018.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "f835431b85ac5ca9a511e92e534dc5a3c1b78720e0898aee5c5ea0c7ffaf92e0",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 13,
+        "evidenceText": "Learner page 13 visibly contains questions 39 through 45, with Q45 as the terminal learner question before acknowledgement and analysis pages.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "f835431b85ac5ca9a511e92e534dc5a3c1b78720e0898aee5c5ea0c7ffaf92e0"
+    },
+    "source/original-icas/year3/English A/English A 2019 REACH.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "support-answer-sequence",
+      "evidence": {
+        "supportPath": "source/original-icas/year3/English A/English A 2019 REACH Answers.pdf",
+        "evidence": {
+          "n": 35,
+          "coverage": 1,
+          "present": 35
+        }
+      },
+      "sha256": "eb27bd552f0edf3c1fa67628ca307944d7ab89f3cc4a0c7fa34a694b3f5ebae9"
+    },
+    "source/original-icas/year3/English A/PP-2020-ICAS-EN-ENG-D-B[1]-pages[1][1] (1) (8).pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "e0765912656d3d8620b79d07179fe4b3e9c6240d5b4e93616f7ece6bac210176",
+        "provider": "Janison Solutions",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 38,
+        "evidenceText": "Same-paper learner pages explicitly display Question 43 of 45, Question 44 of 45 and Question 45 of 45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. The learner UI itself states the 45-question denominator. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "e0765912656d3d8620b79d07179fe4b3e9c6240d5b4e93616f7ece6bac210176"
+    },
+    "source/original-icas/year3/English A/2021 English ICAS Paper/ICAS_English 2021.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "support-answer-sequence",
+      "evidence": {
+        "supportPath": "source/original-icas/year3/English A/2021 English ICAS Paper/2021 English ICAS Answer.pdf",
+        "evidence": {
+          "n": 45,
+          "coverage": 0.956,
+          "present": 43
+        }
+      },
+      "sha256": "f653f20df04a88ae9fbe5d6f62794a06a8815a49ad406f7becdb3438d1e5c149"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2005.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "04bff2c79e8649231b7ded11a7ca599c36554ce42eaecb4f3d40d41a2af84e20",
+        "provider": "UNSW Educational Assessment Australia",
+        "evidenceType": "same-paper-explicit-terminal-stop",
+        "evidencePage": 9,
+        "evidenceText": "Learner page 9 contains questions 37 through 40 and an explicit END OF PAPER marker immediately after Q40.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "04bff2c79e8649231b7ded11a7ca599c36554ce42eaecb4f3d40d41a2af84e20"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2007.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "6efefd1b6e6053d6c3b0c73a926df4efff707d2d4b61125deb3a681aa6010157",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 11,
+        "evidenceText": "The exact paper's 2007 Mathematics Answer Keys enumerate Question Number 1 through 40, with Paper A populated through terminal row Q40.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or cross-paper inference used."
+      },
+      "sha256": "6efefd1b6e6053d6c3b0c73a926df4efff707d2d4b61125deb3a681aa6010157"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2008.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "686c6196c22811785b4595073182c32032905b830346cf29f4d460cb4196cbd7",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 13,
+        "evidenceText": "The exact paper's 2008 ICAS Mathematics Answer Keys enumerate Question Number 1 through 40, with Paper A populated through terminal row Q40.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or cross-paper inference used."
+      },
+      "sha256": "686c6196c22811785b4595073182c32032905b830346cf29f4d460cb4196cbd7"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2009.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "7d48fb2faa5bc3f4b0531cb92e58098f8ba6f4f981ed95f286d2088021003355",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 11,
+        "evidenceText": "The exact learner paper's final question page visibly contains Q38, Q39 and Q40, with Q40 terminal before non-learner material.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification does not imply auto-scoring or progression credit."
+      },
+      "sha256": "7d48fb2faa5bc3f4b0531cb92e58098f8ba6f4f981ed95f286d2088021003355"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2010.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "embedded-answer-sequence",
+      "evidence": {
+        "n": 40,
+        "coverage": 1,
+        "present": 40
+      },
+      "sha256": "25767b0d0f9015be3b14a86d8dee587276edb5ce1175f36d235c32bb86f00011"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2011.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "bf864ed2efbd9459d1e85a28c6fe501dc81e95a5ca27c395046b17be30bb8364",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 11,
+        "evidenceText": "The exact learner paper's final question page visibly contains Q39 and Q40, with Q40 terminal before answer-key material.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification does not imply auto-scoring or progression credit."
+      },
+      "sha256": "bf864ed2efbd9459d1e85a28c6fe501dc81e95a5ca27c395046b17be30bb8364"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2012.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "embedded-answer-sequence",
+      "evidence": {
+        "n": 40,
+        "coverage": 1,
+        "present": 40
+      },
+      "sha256": "809bb5c62ff82262491e05fc5a13b65f56af64dcb259a6a3d92da96e513eeba1"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2013.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "46b16f766a8ecc5e1a8435f0ce0bd9089b481aff2548313e1f81496d625662b5",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 15,
+        "evidenceText": "The exact paper's 2013 Mathematics Answer Keys continuation page enumerates Q31 through Q40, with Paper A populated through terminal row Q40.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or cross-paper inference used."
+      },
+      "sha256": "46b16f766a8ecc5e1a8435f0ce0bd9089b481aff2548313e1f81496d625662b5"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2014.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "fe62082cdda315fa91d30f897ceef38388614ea89abff31418fc67a38e07ba77",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 14,
+        "evidenceText": "The exact paper's 2014 Mathematics Answer Keys continuation page enumerates Q31 through Q40, with Paper A populated through terminal row Q40.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or cross-paper inference used."
+      },
+      "sha256": "fe62082cdda315fa91d30f897ceef38388614ea89abff31418fc67a38e07ba77"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2015.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "378c27ec0118418067533262415aa3aa68c87f67c37b076638101fe595c36700",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 15,
+        "evidenceText": "MATHS A 2015 – ANSWER SHEET visibly enumerates Question Number 1 through 40 for Paper A.",
+        "reviewNote": "Exact source binary independently reviewed from the rendered embedded answer sheet. The table is continuous from Q1-30 and Q31-40, with Q40 as the terminal row. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "378c27ec0118418067533262415aa3aa68c87f67c37b076638101fe595c36700"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2016.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "embedded-answer-sequence",
+      "evidence": {
+        "n": 40,
+        "coverage": 1,
+        "present": 40
+      },
+      "sha256": "ed89f133e3c6b173554d93f75e9f6f91446df94ef4030e0fb9f635ec753ae36e"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2017.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "c50efd05e40000580220179d972f0279243dd4554198f1f26cebb4cc6bf5ad9d",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 11,
+        "evidenceText": "The exact 2017 ICAS Mathematics Paper A learner page visibly contains Q39 and Q40; Q40 is the terminal learner question before acknowledgement and analysis material.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. This replaces the earlier false-positive sentinel only with exact-source evidence."
+      },
+      "sha256": "c50efd05e40000580220179d972f0279243dd4554198f1f26cebb4cc6bf5ad9d"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2018.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "fdf75ab9a4a6b04a660829290f7a80f3e66ee19b0be88ab0d4b19f60b1449b60",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 14,
+        "evidenceText": "Same-paper analysis/results page enumerates Mathematics questions through Q40, with Q40 the terminal row.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "fdf75ab9a4a6b04a660829290f7a80f3e66ee19b0be88ab0d4b19f60b1449b60"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2019.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "343dde8307fc7e1e0b52c0c2530fd89cf30367e0e4ed4e14b4bd14b7b01c3fcd",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 10,
+        "evidenceText": "Learner page 10 visibly contains Q33, Q34 and Q35, with Q35 terminal; the following same-paper answer sheet enumerates answers 1 through 35.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "343dde8307fc7e1e0b52c0c2530fd89cf30367e0e4ed4e14b4bd14b7b01c3fcd"
+    },
+    "source/original-icas/year3/Maths A/Maths ICAS 2021/2021 Maths A.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "support-numbered-sequence",
+      "evidence": {
+        "supportPath": "source/original-icas/year3/Maths A/Maths ICAS 2021/Maths A 2021 Answer sheet.pdf",
+        "evidence": {
+          "n": 40,
+          "coverage": 1,
+          "present": 40
+        }
+      },
+      "sha256": "2b19fb93f99f411dfb5bb8b1fa39b9f0c05920bc9a2ab2b8abbcb3567869fa18"
+    },
+    "source/original-icas/year3/Maths A/Maths ICAS 2021/Maths A 2021.pdf": {
+      "questionCount": 15,
+      "questionCountVerified": true,
+      "method": "learner-numbered-sequence",
+      "evidence": {
+        "n": 15,
+        "coverage": 1,
+        "present": 15
+      },
+      "sha256": "2574225d4791db17899270d3480256bddcde9be2ce8cb1ea06317a8c972aa977"
+    },
+    "source/original-icas/year3/Science A/Science A 2009.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "af076f9c2fe7844b08d9f3a910383ab59e7699d6412e1a404d031514b3bfe257",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Official same-paper 2009 Science Answer Keys populate Paper A through Q30 and leave Paper A blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or adjacent-year inference used."
+      },
+      "sha256": "af076f9c2fe7844b08d9f3a910383ab59e7699d6412e1a404d031514b3bfe257"
+    },
+    "source/original-icas/year3/Science A/Science A 2010.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "b964dbe245f2e486aab979a2399c645a7b1ced8132092f909733056e20c3fffb",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Official same-paper 2010 Science Answer Keys populate Paper A through Q30 and leave Paper A blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or adjacent-year inference used."
+      },
+      "sha256": "b964dbe245f2e486aab979a2399c645a7b1ced8132092f909733056e20c3fffb"
+    },
+    "source/original-icas/year3/Science A/Science A 2011.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "649c7fa594e37f424a0a5fb8cf4ab6fea16383da0f9497293cf3717324263bfa",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Official same-paper 2011 Science Answer Keys populate Paper A through Q30 and leave Paper A blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or adjacent-year inference used."
+      },
+      "sha256": "649c7fa594e37f424a0a5fb8cf4ab6fea16383da0f9497293cf3717324263bfa"
+    },
+    "source/original-icas/year3/Science A/Science A 2012.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "72f0daec82a91b5503659e297d9b49ddb27f26fac9d044e6484ddcc7ace9cb95",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Official same-paper 2012 Science Answer Keys populate Paper A through Q30 and leave Paper A blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or adjacent-year inference used."
+      },
+      "sha256": "72f0daec82a91b5503659e297d9b49ddb27f26fac9d044e6484ddcc7ace9cb95"
+    },
+    "source/original-icas/year3/Science A/Science A 2013.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v2.json",
+        "sha256": "ea946afee58decd6e6feaeba77a45021e0c92f50211524b37dee0a4d9fa20809",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 20,
+        "evidenceText": "Official same-paper 2013 Science Answer Keys populate Paper A through Q30 and leave Paper A blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or adjacent-year inference used."
+      },
+      "sha256": "ea946afee58decd6e6feaeba77a45021e0c92f50211524b37dee0a4d9fa20809"
+    },
+    "source/original-icas/year3/Science A/Science A 2014.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "7c90550b9904b7197394d6eeab88f2194ac3b810e82c8d68a221addc6a94bc5d",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Official same-paper 2014 Science Answer Keys populate Paper A through Q30 and leave Paper A blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or adjacent-year inference used; count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "7c90550b9904b7197394d6eeab88f2194ac3b810e82c8d68a221addc6a94bc5d"
+    },
+    "source/original-icas/year3/Science A/Science A 2015.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "c5ee4a3dda72b241a6bb5b66fd843cbb56d9a3346a4165d836a92e0d908cba6e",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 20,
+        "evidenceText": "Official same-paper 2015 Science Answer Keys populate Paper A through Q30 and leave Paper A blank for Q31–45.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. No subject default or adjacent-year inference used; count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "c5ee4a3dda72b241a6bb5b66fd843cbb56d9a3346a4165d836a92e0d908cba6e"
+    },
+    "source/original-icas/year3/Science A/Science A 2016.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "81012c6edb1fdc44b9aacda16be32d71d3b5b52cad98fb458e3988ba0551b899",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Exact learner page 15 visibly contains Q30 as the terminal learner question before acknowledgement and analysis material.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "81012c6edb1fdc44b9aacda16be32d71d3b5b52cad98fb458e3988ba0551b899"
+    },
+    "source/original-icas/year3/Science A/Science A 2017.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "a06c30a34e7fdda50ae17592214bacd318f6a891618a35e316f312535b375ea6",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Exact learner page 15 visibly states For questions 29 and 30 and contains Q29 and Q30; Q30 is the terminal learner question before non-question pages.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. This replaces the former false-positive sentinel only with exact-source evidence; no cross-subject inference is used."
+      },
+      "sha256": "a06c30a34e7fdda50ae17592214bacd318f6a891618a35e316f312535b375ea6"
+    },
+    "source/original-icas/year3/Science A/Science A 2018.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "6b75b0ad14ca5d3eab8a50f96e1833847a4ae9168b452ac84d795141d2a49e15",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Exact learner page 15 visibly contains Q28 and the terminal Q29–Q30 sequence; Q30 is the final learner question.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "6b75b0ad14ca5d3eab8a50f96e1833847a4ae9168b452ac84d795141d2a49e15"
+    },
+    "source/original-icas/year3/Science A/Science A 2019.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "abdcb1021f01fee43e2cc61600f3d8c5c117f22d21001b258229b7106103f07c",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Exact same-paper page 16 contains an answer sequence numbered 1 through 30 and identifies Question 30, establishing Q30 as terminal.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "abdcb1021f01fee43e2cc61600f3d8c5c117f22d21001b258229b7106103f07c"
+    },
+    "source/original-icas/year3/Science A/2021 SCIENCE ICAS/ICAS_Science_2021.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "support-numbered-sequence",
+      "evidence": {
+        "supportPath": "source/original-icas/year3/Science A/2021 SCIENCE ICAS/Science A 2021 Answers.pdf",
+        "evidence": {
+          "n": 30,
+          "coverage": 1,
+          "present": 30
+        }
+      },
+      "sha256": "b20fa8476c8fc499f84ece7dff89bd3cfa5e553f9604a6c9a3eddb4e69a621a2"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2013.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "84b3bdbf85eebf53f5a6f02100d924aaeb0af6d686d4e10adbfc450da007eacb",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 4,
+        "evidenceText": "Exact learner page 4 runs through Q18–Q25 and terminates at Q25; the next page is acknowledgement, and the paper's own answer page covers Q13–25.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. This is a complete 25-question paper and is distinct from the known discontinuous 2016 partial-paper file; count verification does not imply auto-scoring or progression credit."
+      },
+      "sha256": "84b3bdbf85eebf53f5a6f02100d924aaeb0af6d686d4e10adbfc450da007eacb"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2014.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "a5a17a71f78d8f7da5b0dfb51f239b60693b20d51db64cd1eee485cf209b01d8",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 5,
+        "evidenceText": "Exact learner page 5 labels Section D as questions 32 to 40 and visibly enumerates Q32 through Q40, with Q40 terminal.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "a5a17a71f78d8f7da5b0dfb51f239b60693b20d51db64cd1eee485cf209b01d8"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2015.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "learner-numbered-sequence",
+      "evidence": {
+        "n": 40,
+        "coverage": 1,
+        "present": 40
+      },
+      "sha256": "005180dbdfbbd8af8e108920916f1dbe22ac787ec8bdc5bab3f079fc57dcdac0"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2016 (Q1-12, Q26-40).pdf": {
+      "questionCount": null,
+      "questionCountVerified": false,
+      "method": null,
+      "evidence": "question-count QA pending: discontinuous partial-paper filename range",
+      "sha256": "bc53863a3f9277a18dadc1430a8d56d6424e43cabeadf0012c3d4adceeba4def"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2016.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "250ea050d59c4044e5a98771e911a9255b918d23066bc7d9e368bfd5421383ce",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 3,
+        "evidenceText": "Exact learner page 3 contains questions 17 through 25 and terminates at Q25; page 4 is acknowledgement and page 5 is the paper's answer material.",
+        "reviewNote": "Exact source binary independently visually reviewed from the private QA artifact. This complete 25-question source is distinct from the separately named discontinuous partial paper file (Q1-12, Q26-40), which remains governed separately and is not treated as a complete paper."
+      },
+      "sha256": "250ea050d59c4044e5a98771e911a9255b918d23066bc7d9e368bfd5421383ce"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2003.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "1c1e5d322427ade8131cea56fdb9be4fada5d9e93f50af34192b0caf6e142ee0"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2004.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "b3b2dc92db000dbef55f38be043aa5b9ee2e4203285ec77fd89eb8d6249ad054"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2006.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "5c042f14d8a0ed5a79bab4e2808866fbcd95448a922b7a45151a4ecdecf707f1"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2008.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "b23e4ded03ca0c233e7b15e8b4fbad61ae76d3a642f55d81347934f152f0b96f"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2009.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "ae44b7aa5637346fddda679c8bebf4ee7db1936413ff316edc5ac374b198b9f3"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2010.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "e9042ece40b39cbad28d0158c1508e357567eaac0ce5d8f3a51dd003c84ccd7c"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2011.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "e7ec0896806ff79dd863f37ca8b5c189907c8a7053c7e38295b6e7fd7308dc06"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2012.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "c352642bf09bfba609489b5a07c63582ea182a20aa60b93e3732f78849d6c112"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2013.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "adbfa5b1414d72c2fc5522e93d0308d587e2359c0e3d6501fc888ccab3506796"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2014.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "38d999ec76f6716b8284383bc5ad564858cf1a21fd74d1905bc4f7ecfca093b9"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2015.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "b10d0b7e65ba45f996ac14367aabd09e687046d447f5e369b23191216722b5c1"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2016.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "cc2dff3ef1f595e125637532e48b962114fe4010bc8179fb93658700b657db1a"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2017.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "6942a194e465bbf428495f8ef6eaed31e4bf795bf00d1b3cec9619b5e18e1a34"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2018.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "1ce56645c70a22e4d966efd0b5ccf4661b921cd3fda0717ca63155ca79829c93"
+    },
+    "source/naplan/2008/Year 3/NAPLAN 2008, final test – language conventions, Year 3 (PDF 696 KB).pdf": {
+      "questionCount": 50,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2008-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Language Conventions answers through Q50."
+      },
+      "sha256": "16406dee14f3c59f57f34c0141b2a9924677e1c8aaebc672cf77d3d4021853b8"
+    },
+    "source/naplan/2009/Year 3/NAPLAN 2009, final test – language conventions, Year 3 (PDF 531 KB).pdf": {
+      "questionCount": 46,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2009-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Language Conventions answers through Q46."
+      },
+      "sha256": "02f15d463377d80fac5db8eb9faf824df9d089f2c3d14103dd5da9a7c2764463"
+    },
+    "source/naplan/2010/Year 3/NAPLAN 2010, final test – language conventions, Year 3 (PDF 914 KB).pdf": {
+      "questionCount": 48,
+      "questionCountVerified": true,
+      "method": "learner-numbered-sequence",
+      "evidence": {
+        "n": 48,
+        "coverage": 1,
+        "present": 48
+      },
+      "sha256": "f0580dd3eaabb008019153d94348d02b2dbf68609770a4c9be6356a7864cb34d"
+    },
+    "source/naplan/2011/Year 3/NAPLAN 2011, final test – language conventions, Year 3 (PDF 700 KB).pdf": {
+      "questionCount": 50,
+      "questionCountVerified": true,
+      "method": "learner-numbered-sequence",
+      "evidence": {
+        "n": 50,
+        "coverage": 1,
+        "present": 50
+      },
+      "sha256": "30726af7d83bd9d19f50feda492200003f939a7d931ff7e4a6358eb3f8d59508"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, language conventions, Year 3 (PDF 412 KB).pdf": {
+      "questionCount": 51,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 26,
+          "end": 51,
+          "line": "For questions 26 to 51, shade one bubble to show your answer."
+        }
+      ],
+      "sha256": "38b0e32c87d3ea96c2d1681d2c069bc7ae438df297148c03681a5bd3098edb45"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, language conventions, Year 3 (PDF 247 KB).pdf": {
+      "questionCount": 51,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 26,
+          "end": 51,
+          "line": "For questions 26 to 51, shade one bubble to show your answer."
+        }
+      ],
+      "sha256": "9f8262b5d64768b870bcd36c75fb571027c8b3a81756efdd37f13673ef152e7d"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, language conventions, Year 3 (PDF 645 KB).pdf": {
+      "questionCount": 51,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 26,
+          "end": 51,
+          "line": "For questions 26 to 51, shade one bubble to show your answer."
+        }
+      ],
+      "sha256": "5064815b8428ee4634f001a6a62095d5a87c0ea80d77dd22ddd65424647e81e7"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, language conventions, Year 3 (PDF 321 KB).pdf": {
+      "questionCount": 51,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 26,
+          "end": 51,
+          "line": "For questions 26 to 51, shade one bubble to show your answer."
+        }
+      ],
+      "sha256": "ca71a1e35c1d0eec69b6dced598af323fb782fbb5fc21d19ef966957baa833bb"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Numeracy.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "72c84d1b0bf8f625ac5d31a72929bc64d0c8ba95c594a41266156d97ec226083",
+        "provider": "ACARA",
+        "evidenceType": "same-paper-explicit-terminal-stop",
+        "evidencePage": 14,
+        "evidenceText": "Question 35 is followed by STOP – END OF TEST.",
+        "reviewNote": "Exact source binary independently reviewed. Page 14 contains Q35 followed by STOP – END OF TEST; later pages are non-test/practice material."
+      },
+      "sha256": "72c84d1b0bf8f625ac5d31a72929bc64d0c8ba95c594a41266156d97ec226083"
+    },
+    "source/naplan/2008/Year 3/NAPLAN 2008, final test – numeracy, Year 3 (PDF 3.2 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2008-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "aa156e4aa4f645917e71144b5fbdece37d07c45b77e9dcac055bc0816370b658"
+    },
+    "source/naplan/2009/Year 3/NAPLAN 2009, final test – numeracy, Year 3 (PDF 2.5 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2009-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "580acfbef8668a6f2e396842678936d89d1f9137096b0b7378c811ecdf8f01f6"
+    },
+    "source/naplan/2010/Year 3/NAPLAN 2010, final test – numeracy, Year 3 (PDF 5 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2010-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "0dc54bd26c847a94f7fe5610f7cd358a84615faff0081b9fc82c93dfe285e791"
+    },
+    "source/naplan/2011/Year 3/NAPLAN 2011, final test – numeracy, Year 3 (PDF 4.5 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2011-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "dc53ff0ef7b1e31decd45a0f5aac9b1078fa0c225d91359d2cc6915511665c5c"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, numeracy, Year 3 (with redacted image) (PDF 1.3 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2013-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "7148f8c8b2df9d9803ef4aafa5d29a419a3ed4c37a9f66f314138b99318ac688"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, numeracy, Year 3 (PDF 4.6 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2014-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "43141dab2eea5b1c73d3dd42d9200c3691d310150b4a1e6741e6173c06887c07"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, numeracy, Year 3 (PDF 3 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2015-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "1bb529fe327b18cac8a0e2a430cc8b73ec6f9557d53248e10ea967ba80874902"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, numeracy, Year 3 (PDF 2.5 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "reviewed-official-answer-sheet",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-evidence-v1.json",
+        "provider": "ACARA",
+        "evidenceType": "official-year3-answer-sheet-column-end",
+        "sourceUrl": "https://www.acara.edu.au/docs/default-source/assessment-and-reporting-publications/naplan-2016-yr-3-paper-test-answers.pdf",
+        "reviewNote": "Official Year 3 answer table contains Numeracy answers through Q35; Numeracy cells are blank from Q36 onward."
+      },
+      "sha256": "481b0bbc1c6d4b6da7fc94392756fea437b7effbed3d6d3a5f9a033caad8e90c"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Reading_Questions.pdf": {
+      "questionCount": 36,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 31,
+          "end": 36,
+          "line": "questions 31 to 36."
+        }
+      ],
+      "sha256": "df874dc608c709e4652ca19e445ae5f92e64fbf88f9db706a74f1c078810cbca"
+    },
+    "source/naplan/2008/Year 3/NAPLAN 2008, final test – reading, Year 3 (PDF 774 KB).pdf": {
+      "questionCount": 38,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 33,
+          "end": 38,
+          "line": "and answer questions 33 to 38."
+        }
+      ],
+      "sha256": "faff2116147b89e5ec01cdbed9d79f1b9b50d879a0a201df82926acbaf429fe4"
+    },
+    "source/naplan/2009/Year 3/NAPLAN 2009, final test – reading, Year 3 (PDF 746 KB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 30,
+          "end": 35,
+          "line": "and answer questions 30 to 35."
+        }
+      ],
+      "sha256": "fd3a15b49b9d9cdf63afc897f7d582f5d77aa521dfec8715fac8b4ed6034a398"
+    },
+    "source/naplan/2010/Year 3/NAPLAN 2010, final test – reading, Year 3 (PDF 1 MB).pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 30,
+          "end": 35,
+          "line": "and answer questions 30 to 35."
+        }
+      ],
+      "sha256": "388171e186ce57c409446b24343af4f00ffa6c4abef1cc55120afde019dc08ce"
+    },
+    "source/naplan/2011/Year 3/NAPLAN 2011, final test – reading, Year 3 (PDF 1.2 MB).pdf": {
+      "questionCount": 36,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 31,
+          "end": 36,
+          "line": "questions 31 to 36."
+        }
+      ],
+      "sha256": "f4654a42c8160d159fecd0675d8085d8b3b145cd7595129a72168a5b08f33036"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, reading, Year 3 (PDF 1 MB).pdf": {
+      "questionCount": 36,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 31,
+          "end": 36,
+          "line": "questions 31 to 36."
+        }
+      ],
+      "sha256": "ecdc353d391648e87b9bb45ba32d661f421426e8f864e1f89889abdedcade973"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, reading, Year 3 (PDF 290 KB).pdf": {
+      "questionCount": 38,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 33,
+          "end": 38,
+          "line": "questions 33 to 38."
+        }
+      ],
+      "sha256": "0415558ae1fca59a64c3462f439c042526c83975ad1072e0c7034f565ae94e53"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, reading, Year 3 (PDF 310 KB).pdf": {
+      "questionCount": 39,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 32,
+          "end": 39,
+          "line": "questions 32 to 39."
+        }
+      ],
+      "sha256": "60ebc77a3dc91436995558b19208aedbfcb318399572d7673c385f0996e894bb"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, reading, Year 3 (PDF 500 KB).pdf": {
+      "questionCount": 38,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 33,
+          "end": 38,
+          "line": "questions 33 to 38."
+        }
+      ],
+      "sha256": "9d82acff39d894a2f6aa218e219a8c031004fd070454e430b1ad142b35f60603"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Writing_Prompt_Narrative.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "db90a496876e301e8fc15e69918ae10733590a453f18db39f318a203d58ba650"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Writing_Prompt_Persuasive.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "4b438d4a3afa632580cbb1f9cbe944bf075ba066f843ef5e8bc2e1198e9a6be1"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, writing, Year 3 (PDF 204 KB).pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "7c084213ad436e6c848aab6ba9d8cde136786d9a9112d6238eb4bd7d1773f7ce"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, writing, Year 3 (PDF 120 KB).pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "725f66cbf79903d11ea7363f732cb5c9548e9a235b72c7a240033af03c162b2b"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, writing, Year 3 (PDF 121 KB).pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "50b62054b068957dc979b38ce0d4ef728274ea9cfecb727a8888268b4b8ca39a"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, writing, Year 3 (PDF 105 KB).pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "8f2537fb6a02530248704dc18a09ac2c4a54c09d61e75b4b6f4049cc94ac8e1e"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital B 2009 (A) questions.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "support-answer-sequence",
+      "evidence": {
+        "supportPath": "source/original-icas/year4/Digital yr 4/Digital B 2009 (A) answers.pdf",
+        "evidence": {
+          "n": 45,
+          "coverage": 1,
+          "present": 45
+        }
+      },
+      "sha256": "960c2827e078e43c5ed8d75efd46cceda2447d42e6f7dde334bd63a52a571e3f"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2010.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Exact Y4 source paper's embedded 2010 Computer Skills Answer Keys populate Papers A & B through Q30 and do not continue A & B beyond Q30.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed. No cross-stage or adjacent-year inference is used even though identical binary content exists elsewhere in the corpus."
+      },
+      "sha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB  2011.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Exact Y4 source paper's embedded 2011 Computer Skills Answer Keys populate Papers A & B through Q30 and leave A & B blank from Q31 onward.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed. No cross-stage or adjacent-year inference is used."
+      },
+      "sha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2012.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Exact Y4 source paper's embedded 2012 Computer Skills Answer Keys populate Papers A & B through Q30 and leave A & B blank from Q31 onward.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed. No cross-stage or adjacent-year inference is used."
+      },
+      "sha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2013.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "c48d73a87f698feaeb740f43fb79f64df9d8a20ea1330d0b016e97d606f2cfb0",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Exact Y4 source paper's embedded 2013 Computer Skills Answer Keys explicitly enumerate Papers A & B from Q1 through terminal row Q30.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed. No cross-stage or adjacent-year inference is used."
+      },
+      "sha256": "c48d73a87f698feaeb740f43fb79f64df9d8a20ea1330d0b016e97d606f2cfb0"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2014.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "0055cfbe84d822510d70abf313227e1bc07f3100f2a330cbd469244531da4378",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Exact Y4 source paper's embedded 2014 Computer Skills Answer Keys populate Papers A & B through Q30 and leave A & B blank after Q30.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed. No cross-stage or adjacent-year inference is used."
+      },
+      "sha256": "0055cfbe84d822510d70abf313227e1bc07f3100f2a330cbd469244531da4378"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2015.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "bd16a5d7056221bd96d2a399e4ed3c8d249316f4c7bf945d6b5ad60e258ae540",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Question Number Papers A & B 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45",
+        "reviewNote": "Exact Y4 source binary independently reviewed. Embedded answer key page 16 labels Papers A & B and enumerates Q1-30; page 17 continues the same A/B column through Q45. The count is established from this paper's own SHA and not inferred from the Year 3 copy."
+      },
+      "sha256": "bd16a5d7056221bd96d2a399e4ed3c8d249316f4c7bf945d6b5ad60e258ae540"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2016.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "7f40d8f92cd6d8a7bcbb94b798e638f47f0ca779de704f825b1500742e3dd520",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Exact Y4 2016 Digital Technologies Answer Keys populate Papers A and B through Q30 and leave both A and B blank from Q31 through Q45.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed from the private QA artifact. No cross-stage or adjacent-year inference used."
+      },
+      "sha256": "7f40d8f92cd6d8a7bcbb94b798e638f47f0ca779de704f825b1500742e3dd520"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2017.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "72dfe83eca0580a7de84af684b34e849efb1ac03b6abd20b6414340de12b9c85",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 15,
+        "evidenceText": "Exact Y4 learner/analysis material terminates the Digital Technologies A/B paper at Q30.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "72dfe83eca0580a7de84af684b34e849efb1ac03b6abd20b6414340de12b9c85"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB - 2018.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "75ecd93f1662d79bd603cb55aa1bc932e5e236854ccded9a59e86b3c016d5aa0",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 33,
+        "evidenceText": "Exact same-paper 2018 analysis/results page enumerates Q21 through terminal Q30, with no later questions.",
+        "reviewNote": "Exact Y4 source binary independently visually reviewed from the private QA artifact. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "75ecd93f1662d79bd603cb55aa1bc932e5e236854ccded9a59e86b3c016d5aa0"
+    },
+    "source/original-icas/year4/English yr 4/English B 2007 questions.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-companion-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-companion-evidence-v1.json",
+        "learnerPath": "source/original-icas/year4/English yr 4/English B 2007 questions.pdf",
+        "learnerSha256": "e213de2a63ccacaa66672bb7a3b17b6e71936497468833fd103c437860fdbfae",
+        "companionPath": "source/original-icas/year4/English yr 4/English B 2007 answers.pdf",
+        "companionSha256": "05c491e983f4302ee271bc6acdc80c3b1deeae523a3aeea9aafb46e7f1eb273b",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "exact-companion-complete-answer-sequence",
+        "evidencePages": [
+          1,
+          2
+        ],
+        "evidenceText": "2007 English Answer Keys show Paper B populated for Q1-40 on page 1 and Q41-45 on page 2; Paper B is blank from Q46 onward.",
+        "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed across both official answer-key pages. Q45 is the terminal populated row for Paper B. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "e213de2a63ccacaa66672bb7a3b17b6e71936497468833fd103c437860fdbfae"
+    },
+    "source/original-icas/year4/English yr 4/2008 ICAS English Paper B.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "3a5f344d2e4c19b99ecca485703536b2753ca322ba81c473755fadc61135eb5c",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Exact paper's 2008 English Answer Keys populate Paper B through Q45 and leave Paper B blank from Q46 onward.",
+        "reviewNote": "Exact Paper B source independently visually reviewed. No Paper A or cross-year count inference used."
+      },
+      "sha256": "3a5f344d2e4c19b99ecca485703536b2753ca322ba81c473755fadc61135eb5c"
+    },
+    "source/original-icas/year4/English yr 4/2009 ICAS English Paper B.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "53a891b962d071f04ffcdffc6df3679f1b8e71cf3b6860c64980eead2c58408c",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Exact paper's 2009 English Answer Keys populate Paper B through Q45 and leave Paper B blank from Q46 onward.",
+        "reviewNote": "Exact Paper B source independently visually reviewed. No Paper A or cross-year count inference used."
+      },
+      "sha256": "53a891b962d071f04ffcdffc6df3679f1b8e71cf3b6860c64980eead2c58408c"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2010.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "e693319622fca55d41f965573e33ed41de657bfd5dbe4803a335f3e5c7929941",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Exact paper's 2010 English Answer Keys populate Paper B through Q45 and leave Paper B blank from Q46 onward.",
+        "reviewNote": "Exact Paper B source independently visually reviewed. No Paper A or cross-year count inference used."
+      },
+      "sha256": "e693319622fca55d41f965573e33ed41de657bfd5dbe4803a335f3e5c7929941"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2011.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v3.json",
+        "sha256": "9769ba381963e929a82d68547ed7cd53f30cd4a6da43681cb85ef37c863b5a72",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 19,
+        "evidenceText": "Exact learner page 19 visibly contains Q42, Q43, Q44 and terminal Q45 on the 2011 ICAS English Paper B.",
+        "reviewNote": "Exact Paper B learner source independently visually reviewed. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "9769ba381963e929a82d68547ed7cd53f30cd4a6da43681cb85ef37c863b5a72"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2012.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "14bd5b11bba279f26e7b5e08ad1cdfc84f95e102a147494c2e598d9d8ca77991",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 19,
+        "evidenceText": "Exact 2012 ICAS English Paper B learner page 19 visibly contains Q39 through terminal Q45; the following page is non-question material.",
+        "reviewNote": "Exact Paper B source independently visually reviewed from the private QA artifact. No cross-year or Paper A inference used; count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "14bd5b11bba279f26e7b5e08ad1cdfc84f95e102a147494c2e598d9d8ca77991"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2013.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "b98921bae1b660728fb2778e208937f057df4434dc71f1a2b793391285ce63a8",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 19,
+        "evidenceText": "Exact 2013 ICAS English Paper B learner page 19 visibly contains Q40 through terminal Q45; the following page is non-question material.",
+        "reviewNote": "Exact Paper B source independently visually reviewed from the private QA artifact. No cross-year or Paper A inference used."
+      },
+      "sha256": "b98921bae1b660728fb2778e208937f057df4434dc71f1a2b793391285ce63a8"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2014.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "5caf8d1befe172f30558ed03509a2926ab905055b9b3bcb91fa4cf3ade5b47ee",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-explicit-cover-total-and-terminal-range",
+        "evidencePage": 1,
+        "evidenceText": "There are 45 MULTIPLE-CHOICE QUESTIONS (1-45).",
+        "reviewNote": "Exact source binary independently reviewed. The learner paper opening page explicitly states there are 45 multiple-choice questions and gives the complete range 1-45. This supersedes the earlier weaker subsection-range heuristic. Auto-scoring and progression credit remain separately gated."
+      },
+      "sha256": "5caf8d1befe172f30558ed03509a2926ab905055b9b3bcb91fa4cf3ade5b47ee"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2015.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 45,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "4 5 Q U E S T I O N S"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "7636d8eed9d040b602d3098f7795c6ec2897ca1543433c070992bb8bdfadbb2c"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2016.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "a9a2e940bf655938f26e712fc2353bff904295fb3d46205dec342a75844dceb8",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 16,
+        "evidenceText": "Exact 2016 ICAS English Paper B response sheet explicitly enumerates question positions 1 through 45 and terminates at Q45.",
+        "reviewNote": "Exact same-paper Paper B response sheet independently visually reviewed. Count verification is paper-specific and does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "a9a2e940bf655938f26e712fc2353bff904295fb3d46205dec342a75844dceb8"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2017.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "4ca23c4345e5a9625afded02fcc5889e7775d04b4ce017f56d4afafbe03fc789",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Exact same-paper Analysis by Question table accounts for question numbers 1 through 45, with Q45 included and no later question number; page 15 is END OF PAPER.",
+        "reviewNote": "Exact Paper B source independently visually reviewed. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "4ca23c4345e5a9625afded02fcc5889e7775d04b4ce017f56d4afafbe03fc789"
+    },
+    "source/original-icas/year4/English yr 4/2018 ICAS English Paper B.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "c53f1db794751ec1b0634c4286575545f724c6da50ac4ab17e980970fe5319bb",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 17,
+        "evidenceText": "Exact same-paper Analysis by Question table accounts for question numbers 1 through 45, including terminal Q45 and no later question number.",
+        "reviewNote": "Exact Paper B source independently visually reviewed. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "c53f1db794751ec1b0634c4286575545f724c6da50ac4ab17e980970fe5319bb"
+    },
+    "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "109af09fb98f7f36678e98907519f07f27aa399a3ce8791839c01cd3dfa1ae93",
+        "provider": "Janison Solutions",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 39,
+        "evidenceText": "Results page 37 enumerates Q1-30; page 38 enumerates Q31-45; completion page states mark / 45.",
+        "reviewNote": "Exact source binary independently reviewed. Consecutive results pages provide the entire question-number and correct-answer sequence from Q1 to Q45, and the completion page confirms a 45-mark denominator. Count verification does not imply answer-map release."
+      },
+      "sha256": "109af09fb98f7f36678e98907519f07f27aa399a3ce8791839c01cd3dfa1ae93"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2007 questions.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-companion-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-companion-evidence-v1.json",
+        "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2007 questions.pdf",
+        "learnerSha256": "0e878a600e66cea45b63332233ed3b5b7aad71b165411e6fc63b20b344c61e87",
+        "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2007 answers.pdf",
+        "companionSha256": "de85fe365f13b96baad3f7569687adadd72547087ca63dacf19e8a8f4df54130",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "exact-companion-complete-answer-sequence",
+        "evidencePages": [
+          1
+        ],
+        "evidenceText": "2007 Mathematics Answer Keys visibly enumerate Question Number 1 through 40; the Paper B column is populated through terminal row Q40.",
+        "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "0e878a600e66cea45b63332233ed3b5b7aad71b165411e6fc63b20b344c61e87"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2008 questions.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-companion-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-companion-evidence-v1.json",
+        "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2008 questions.pdf",
+        "learnerSha256": "352ebc1d8cc2a7fd35d6cc894db2a71293c96d5f1b6cc895002f375d11471fd8",
+        "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2008 answers.pdf",
+        "companionSha256": "7ee1adf0682fc41844bafae988f9c4cbf356ed4edb4f8096525c76295f66b181",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "exact-companion-complete-answer-sequence",
+        "evidencePages": [
+          1
+        ],
+        "evidenceText": "2008 ICAS Mathematics Answer Keys visibly enumerate Question Number 1 through 40; the Paper B column is populated through terminal row Q40.",
+        "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "352ebc1d8cc2a7fd35d6cc894db2a71293c96d5f1b6cc895002f375d11471fd8"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2017 questions.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-companion-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-companion-evidence-v1.json",
+        "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2017 questions.pdf",
+        "learnerSha256": "1c669e8c1114491f6a66ede9edab7a590bb6e2ea3432ce091359bd4a850594ff",
+        "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2017 answers.pdf",
+        "companionSha256": "d08fafd6207ef2753a7b68317dabb58da85198a317c7962146f12f93fe45f8a6",
+        "provider": "UNSW Global Assessments",
+        "evidenceType": "exact-companion-complete-answer-sequence",
+        "evidencePages": [
+          1,
+          2
+        ],
+        "evidenceText": "2017 Mathematics Answer Keys page 1 visibly enumerates Q1-25 and page 2 continues Q26-40; the Paper B column is populated through terminal row Q40.",
+        "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed across both answer-key pages. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "1c669e8c1114491f6a66ede9edab7a590bb6e2ea3432ce091359bd4a850594ff"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2018 questions.pdf": {
+      "questionCount": 40,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-companion-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-companion-evidence-v1.json",
+        "learnerPath": "source/original-icas/year4/Maths yr4/Maths B 2018 questions.pdf",
+        "learnerSha256": "ba602fc283dffd930295faeb37747b68f8a59ccced8aa18dc0b7df3fbc745f97",
+        "companionPath": "source/original-icas/year4/Maths yr4/Maths B 2018 answers.pdf",
+        "companionSha256": "7ca6c0aeb248d351e4d30322dfff949049647dfa9a5fd017993faafc0293cc7d",
+        "provider": "UNSW Global",
+        "evidenceType": "exact-companion-complete-answer-sequence",
+        "evidencePages": [
+          1,
+          2
+        ],
+        "evidenceText": "2018 ICAS Maths Paper B Answers page 1 visibly enumerates Q1-27 and page 2 continues Q28-40, ending at Q40.",
+        "reviewNote": "Exact learner and exact same-year Paper B companion binaries independently reviewed across both answer pages. No subject default or cross-paper inference used. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "ba602fc283dffd930295faeb37747b68f8a59ccced8aa18dc0b7df3fbc745f97"
+    },
+    "source/original-icas/year4/Science Year 4/2009 ICAS Science Paper B.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "ed02dc5b9e83369945011ff6f1e94fb2a62a9946b56b59ec4ad1afab135eb654",
+        "provider": "UNSW Educational Assessment Australia",
+        "evidenceType": "same-paper-explicit-cover-total-and-terminal-range",
+        "evidencePage": 1,
+        "evidenceText": "Exact 2009 ICAS Science Paper B cover explicitly states 30 QUESTIONS and There are 30 MULTIPLE-CHOICE QUESTIONS (1–30).",
+        "reviewNote": "Exact Paper B cover independently visually reviewed from the private QA artifact. No adjacent-year or subject-default inference used."
+      },
+      "sha256": "ed02dc5b9e83369945011ff6f1e94fb2a62a9946b56b59ec4ad1afab135eb654"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "73ccd89aafc4bac30415c5d15936b13adea5a3ca69f966907f338f38105d3811",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 15,
+        "evidenceText": "SCIENCE 2010 B – ANSWER KEY visibly enumerates Paper B question numbers 1 through 30.",
+        "reviewNote": "Terminal count accepted by Arthur following direct review of the exact source paper. Treat Paper B Q30 as terminal for this learner paper. Count verification remains separate from answer-map release, auto-scoring, and progression credit."
+      },
+      "sha256": "73ccd89aafc4bac30415c5d15936b13adea5a3ca69f966907f338f38105d3811"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2011.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "d1fd2107a13b651a890b7a481fd2b5bb7d3132fbbf103fc991845e3888fcd64b",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 19,
+        "evidenceText": "Exact 2011 ICAS Science Paper B learner page 19 visibly contains Q29 and terminal Q30; no later learner question follows.",
+        "reviewNote": "Exact Paper B learner source independently visually reviewed from the private QA artifact. No adjacent-year or subject-default inference used."
+      },
+      "sha256": "d1fd2107a13b651a890b7a481fd2b5bb7d3132fbbf103fc991845e3888fcd64b"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2012.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "a75239dc431e9bd52e4f7743aea953a6262441e2e8b87b54d3da397e1096022b",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 19,
+        "evidenceText": "Exact 2012 ICAS Science Paper B learner material terminates at question 30 before non-question pages.",
+        "reviewNote": "Exact Paper B source independently visually reviewed from the private QA artifact. No adjacent-year or subject-default inference used."
+      },
+      "sha256": "a75239dc431e9bd52e4f7743aea953a6262441e2e8b87b54d3da397e1096022b"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2013.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "df4228d8136670e688aaaddff5222d2331165a348f5aee1e64b0062111be672c",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 18,
+        "evidenceText": "Exact 2013 ICAS Science Paper B learner material visibly reaches terminal question 30 before non-question material.",
+        "reviewNote": "Exact Paper B source independently visually reviewed from the private QA artifact. No adjacent-year or subject-default inference used."
+      },
+      "sha256": "df4228d8136670e688aaaddff5222d2331165a348f5aee1e64b0062111be672c"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2014.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "c69242c0aad7051bb3ffbf9735dd3d81bb371f6859eb75ee1b6dc0d2f4c43af3",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-explicit-cover-total-and-terminal-range",
+        "evidencePage": 1,
+        "evidenceText": "Exact 2014 ICAS Science Paper B cover explicitly states 30 QUESTIONS and 30 MULTIPLE-CHOICE QUESTIONS (1–30).",
+        "reviewNote": "Exact Paper B cover independently visually reviewed from the private QA artifact. Later legacy scan pages are ignored because the same file's own 2014 cover gives the explicit total."
+      },
+      "sha256": "c69242c0aad7051bb3ffbf9735dd3d81bb371f6859eb75ee1b6dc0d2f4c43af3"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2015.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "embedded-answer-sequence",
+      "evidence": {
+        "n": 30,
+        "coverage": 1,
+        "present": 30
+      },
+      "sha256": "a45e706baad4c7bda0a17a0ae1b393dcc1f75249bd92e7c28933d4289687c057"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2016.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "35c17c21e7f9f0eda66d7159f69e36c5d97ecd99f7e12fa6240bb1e3d64fa7cf",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-explicit-cover-total-and-terminal-range",
+        "evidencePage": 1,
+        "evidenceText": "Exact 2016 ICAS Science Paper B cover explicitly states 30 QUESTIONS and 30 MULTIPLE-CHOICE QUESTIONS (1–30).",
+        "reviewNote": "Exact Paper B cover independently visually reviewed from the private QA artifact. No adjacent-year or subject-default inference used."
+      },
+      "sha256": "35c17c21e7f9f0eda66d7159f69e36c5d97ecd99f7e12fa6240bb1e3d64fa7cf"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2017.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "eabfb8ca3e0f4d7d03cf80e97c05c9020e801249715a176fc0e729757f15b860",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-explicit-cover-total-and-terminal-range",
+        "evidencePage": 1,
+        "evidenceText": "Exact 2017 ICAS Science Paper B cover explicitly states 30 QUESTIONS and 30 MULTIPLE-CHOICE QUESTIONS (1–30).",
+        "reviewNote": "Exact Paper B cover independently visually reviewed from the private QA artifact. No adjacent-year or subject-default inference used."
+      },
+      "sha256": "eabfb8ca3e0f4d7d03cf80e97c05c9020e801249715a176fc0e729757f15b860"
+    },
+    "source/original-icas/year4/Science Year 4/2018 ICAS Science Paper B 1.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "learner-numbered-sequence",
+      "evidence": {
+        "n": 30,
+        "coverage": 1,
+        "present": 30
+      },
+      "sha256": "260d4b7ac4a25e11bd27b86d43b66b8215b50abbc20a3c12e01530227b3e5f89"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2020.pdf": {
+      "questionCount": 29,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v1.json",
+        "sha256": "fa561d7d06744633b484338534402fa94dfcb628673e85e28b4d82de73cdc58e",
+        "provider": "Janison Solutions",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 32,
+        "evidenceText": "Results pages enumerate Question number 1 through 29; completion page states Your mark is / 29.",
+        "reviewNote": "Exact source binary independently reviewed. Page 31 contains the complete results table for Q1-29 with correct answers and descriptors; page 32 explicitly confirms the completed practice-test mark denominator is 29. Auto-scoring remains separately gated."
+      },
+      "sha256": "fa561d7d06744633b484338534402fa94dfcb628673e85e28b4d82de73cdc58e"
+    },
+    "source/original-icas/year4/Spellings/Spellings/Practice B Spelling.pdf": {
+      "questionCount": 12,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 10,
+          "end": 12,
+          "line": "For questions 10 to 12 read the following passage. The three (3) words in the shaded"
+        }
+      ],
+      "sha256": "ee2b1364dc6d1876db2edbe5755ecafc8db42b5b70b8d9e8f76588aa8e5fa7ae"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2008 Spelling Paper B.pdf": {
+      "questionCount": 28,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v4.json",
+        "sha256": "e482c41ac961f58c16b33dbc8c95f1baaf7c915f4b3846e78545224296d54ec7",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-terminal-question-sequence",
+        "evidencePage": 3,
+        "evidenceText": "Exact 2008 ICAS Spelling Paper B learner page 3 runs through questions 21–28 and terminates at Q28; page 4 is acknowledgement material.",
+        "reviewNote": "Exact Paper B learner source independently visually reviewed from the private QA artifact. Count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "e482c41ac961f58c16b33dbc8c95f1baaf7c915f4b3846e78545224296d54ec7"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2013 Spelling B.pdf": {
+      "questionCount": 28,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 16,
+          "end": 28,
+          "line": "For questions 16 to 28 read the instructions carefully. Fill in the oval in the ANSWER"
+        },
+        {
+          "start": 26,
+          "end": 28,
+          "line": "For questions 26 to 28 choose the sentence which contains a SPELLING ERROR."
+        }
+      ],
+      "sha256": "5428587cb54a5494f6cf8f6df536dd6e9c8f73b7d5069f47d9c88fbe27a4a12b"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2014 Spelling Paper BC.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "learner-range-end",
+      "evidence": [
+        {
+          "start": 37,
+          "end": 45,
+          "line": "For questions 37 to 45 read the following passage. The nine (9) words in the shaded"
+        }
+      ],
+      "sha256": "5cbd0035c9ab87eeb1b87d09e69e051976198bf515a491094b13b543c2ced42d"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2018 ICAS Spelling Paper BC.pdf": {
+      "questionCount": 45,
+      "questionCountVerified": true,
+      "method": "reviewed-exact-source-evidence",
+      "evidence": {
+        "reviewManifest": "quality/stage-paper-question-count-reviewed-source-evidence-v5.json",
+        "sha256": "44b08c3e1c3e578be3a7dec299d6ada86f3fdf79f96e145995f716e36a6d8da1",
+        "provider": "UNSW Global",
+        "evidenceType": "same-paper-complete-answer-sequence",
+        "evidencePage": 9,
+        "evidenceText": "Exact same-paper Analysis by Question pages enumerate through terminal Q45; page 9 contains Q41–45, with no later question number.",
+        "reviewNote": "Exact source independently visually reviewed from the private QA artifact. No subject default or cross-year inference used; count verification does not imply answer-map release, auto-scoring, or progression credit."
+      },
+      "sha256": "44b08c3e1c3e578be3a7dec299d6ada86f3fdf79f96e145995f716e36a6d8da1"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing B 2004.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "b3b2dc92db000dbef55f38be043aa5b9ee2e4203285ec77fd89eb8d6249ad054"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing B 2006.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "5c042f14d8a0ed5a79bab4e2808866fbcd95448a922b7a45151a4ecdecf707f1"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2013.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "adbfa5b1414d72c2fc5522e93d0308d587e2359c0e3d6501fc888ccab3506796"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2014.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "38d999ec76f6716b8284383bc5ad564858cf1a21fd74d1905bc4f7ecfca093b9"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2015.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "b10d0b7e65ba45f996ac14367aabd09e687046d447f5e369b23191216722b5c1"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2016.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "cc2dff3ef1f595e125637532e48b962114fe4010bc8179fb93658700b657db1a"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing B 2017.pdf": {
+      "questionCount": 1,
+      "questionCountVerified": true,
+      "method": "writing-single-response",
+      "evidence": "Writing paper uses one writing response",
+      "sha256": "6942a194e465bbf428495f8ef6eaed31e4bf795bf00d1b3cec9619b5e18e1a34"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-mathematical-reasoning-2024-s1-questions.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "e7fd6762046aec0954f175e18196c219e0e29f41e6ba8187b50efa18049db2af"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-mathematical-reasoning-2024-s2-questions.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "8a8608f53b32238bb42380fd34347a1c71b54affd2b672d02721aa4215adf60f"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-mathematical-reasoning-2024-s3-questions.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "23c4f4b5d51246ad49aa0354de96bdad39a6d903d7d6a325cc9cb73eb7c580e3"
+    },
+    "source/oc/2024 Sample Tests/Reading Sample Test - Questions.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "efe9518d669d780e094379c80137d8acc73e98a668b583334b3bace6ae420ddd"
+    },
+    "source/oc/2021 Practice Tests/2021 Reading Practice Test - Questions.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "5b15a1a158fd11f20b25e6b84891f2337f4a2994934ee30e7cf6b6a224de2260"
+    },
+    "source/oc/2022 Practice Tests/2022 Reading Practice Test - Questions.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "66127785534cdab246bb40129e822c5adbcc2c60f19498a8dade1cbbab7a9bc0"
+    },
+    "source/oc/2023 Practice Tests/2023 Reading Practice Test - Questions.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "4dfc48541962327d60d96125441cf09fcae77dd953116ed2e8cb0932717fa9c5"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-reading-2024-s1-questions.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "84aaabd53d14bf5f926315ed9835b64c5dd458cbb9038f56e8ba8e283d330bf6"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-reading-2024-s2-questions.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "490e442b159e264eeea5fe1489eac9fc2d7ff6f005b1896036a4f3d860c3b313"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-reading-2024-s3-questions.pdf": {
+      "questionCount": 25,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "900707463d9518ce769c871426e302ffbedbece5b89417fec9062d4f06ce9269"
+    },
+    "source/oc/2024 Sample Tests/Mathematical Reasoning Sample Test - Questions.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "1372e183595b9fa66330cb042cc15ce4ac0ca31359c4a506f0d3f7dc3eecafe6"
+    },
+    "source/oc/2021 Practice Tests/2021 Mathematical Reasoning Practice Test - Questions.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "5218bda63021794f21f2602e74276ce8bea923101520686212674027abd9e454"
+    },
+    "source/oc/2022 Practice Tests/2022 Mathematical Reasoning Practice Test - Questions.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "60442d53c81b8868ac510dcf8769d1e1e4ea1cf5798bec053a0cf02dd028d60b"
+    },
+    "source/oc/2023 Practice Tests/2023 Mathematical Reasoning Practice Test - Questions.pdf": {
+      "questionCount": 35,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "31fe5d23e59f4029975d1c96e3b291f40aad8b85a0141947a57156eb3ccb4be0"
+    },
+    "source/oc/2024 Sample Tests/Thinking Skills Sample Test - Questions.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "67cb6e3d53465b5035276fd66a419279b1feef10789d39181519eb3e8cd82194"
+    },
+    "source/oc/2021 Practice Tests/2021 Thinking Skills Practice Test - Questions.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "9d04a6386e4315f6d8eac7891c433aca0dcfe856090c9e965b1c6d34f90b0072"
+    },
+    "source/oc/2022 Practice Tests/2022 Thinking Skills Practice Test - Questions.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "a710a26c88e9a96fc0da1be60ec3be933d3156d18944767f7f50e70774b09053"
+    },
+    "source/oc/2023 Practice Tests/2023 Thinking Skills Practice Test - Questions.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "496b026e0e2852e5fdf07a68baa39ac68534652db586d80578b46f1b98a044fd"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-thinking-skills-2024-s1-questions.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "e7d2fac2147bf6c071a37617f53badb7d99e05dd279175973baf23d8262ed8a4"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-thinking-skills-2024-s2-questions.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "d653d13c6768e27b07f86b58016a51597e8472358906c8c253dc8101235edc4f"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-thinking-skills-2024-s3-questions.pdf": {
+      "questionCount": 30,
+      "questionCountVerified": true,
+      "method": "cover-explicit-total",
+      "evidence": {
+        "pages": [
+          1
+        ],
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "scope": "opening-pages-only"
+      },
+      "sha256": "31e21f3b98d62cfffc80c82cd5521ba068e150fa20d60711ba96dd64cf3dcdfb"
+    }
+  },
+  "summary": {
+    "total": 187,
+    "verified": 184,
+    "pending": 3,
+    "writing": 27,
+    "learnerEvidence": 40,
+    "fullDocumentEvidence": 7,
+    "supportEvidence": 24,
+    "sequence": 13,
+    "strongTail": 1,
+    "duplicateBinary": 4,
+    "revokedCrossSubject": 0,
+    "revokedWeakSequence": 0,
+    "revokedWeakTail": 0,
+    "revokedInvalidPropagation": 0,
+    "revokedPartialFilename": 0,
+    "filenameVerified": 0,
+    "sourceIdentityVerified": 9,
+    "secondPassPromoted": 1,
+    "secondPassBlockedLearnerAnswerConflict": 0,
+    "secondPassBlockedSubsectionRange": 1,
+    "reviewedOfficialApplied": 11,
+    "reviewedExactSourceApplied": 77,
+    "reviewedExactSourceUpgraded": 1,
+    "reviewedExactCompanionApplied": 5,
+    "reviewedExactCompanionUpgraded": 0
+  },
+  "unresolved": [
+    {
+      "sourcePath": "source/original-icas/year3/Digital A/Digital AB 2016.pdf",
+      "stage": "icas-y3",
+      "subject": "Digital Technologies",
+      "year": 2016,
+      "reason": "question-count QA pending: no high-confidence paper, support-page, answer-key, or terminal-sequence evidence"
+    },
+    {
+      "sourcePath": "source/original-icas/year3/Digital/Digital AB 2016.pdf",
+      "stage": "icas-y3",
+      "subject": "Digital Technologies",
+      "year": 2016,
+      "reason": "question-count QA pending: no high-confidence paper, support-page, answer-key, or terminal-sequence evidence"
+    },
+    {
+      "sourcePath": "source/original-icas/year3/Spelling A/Spelling A 2016 (Q1-12, Q26-40).pdf",
+      "stage": "icas-y3",
+      "subject": "Spelling",
+      "year": 2016,
+      "reason": "question-count QA pending: discontinuous partial-paper filename range"
+    }
+  ],
+  "coverCountProvenance": {
+    "version": "aw-stage-cover-count-provenance-v1",
+    "scanned": 160,
+    "promoted": 2,
+    "revoked": 2,
+    "confirmed": 22,
+    "audit": {
+      "source/original-icas/year3/Digital A/Digital AB 2004.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2004.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2006.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "ocr-fuzzy-total",
+            "page": 1,
+            "match": "30 QUESTTONS"
+          },
+          {
+            "count": 30,
+            "kind": "explicit-1-to-n-range",
+            "page": 1,
+            "match": "QUESTIONS(1-30)"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/original-icas/year3/Digital/Digital AB 2006.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "ocr-fuzzy-total",
+            "page": 1,
+            "match": "30 QUESTTONS"
+          },
+          {
+            "count": 30,
+            "kind": "explicit-1-to-n-range",
+            "page": 1,
+            "match": "QUESTIONS(1-30)"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2014.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2014.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital A/Digital AB 2018.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Digital/Digital AB 2018.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2007.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2008.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2009.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2014.pdf": {
+        "trustedCount": null,
+        "signals": [
+          {
+            "count": 45,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "4 5 Q U E S T I O N S"
+          }
+        ],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2018.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/English A 2019 REACH.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/English A/PP-2020-ICAS-EN-ENG-D-B[1]-pages[1][1] (1) (8).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": true
+      },
+      "source/original-icas/year3/English A/2021 English ICAS Paper/ICAS_English 2021.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2005.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2007.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2008.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2009.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2014.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2018.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths A 2019.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths ICAS 2021/2021 Maths A.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Maths A/Maths ICAS 2021/Maths A 2021.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": true
+      },
+      "source/original-icas/year3/Science A/Science A 2009.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2014.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2018.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/Science A 2019.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Science A/2021 SCIENCE ICAS/ICAS_Science_2021.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Spelling A/Spelling A 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Spelling A/Spelling A 2014.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Spelling A/Spelling A 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Spelling A/Spelling A 2016 (Q1-12, Q26-40).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year3/Spelling A/Spelling A 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2008/Year 3/NAPLAN 2008, final test – language conventions, Year 3 (PDF 696 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2009/Year 3/NAPLAN 2009, final test – language conventions, Year 3 (PDF 531 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2010/Year 3/NAPLAN 2010, final test – language conventions, Year 3 (PDF 914 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2011/Year 3/NAPLAN 2011, final test – language conventions, Year 3 (PDF 700 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2013/Shared/NAPLAN 2013 final test, language conventions, Year 3 (PDF 412 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2014/Shared/NAPLAN 2014 final test, language conventions, Year 3 (PDF 247 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2015/Shared/NAPLAN 2015 final test, language conventions, Year 3 (PDF 645 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2016/Shared/NAPLAN 2016 final test, language conventions, Year 3 (PDF 321 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2017/Year 3/Example_Yr_3_Numeracy.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2008/Year 3/NAPLAN 2008, final test – numeracy, Year 3 (PDF 3.2 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2009/Year 3/NAPLAN 2009, final test – numeracy, Year 3 (PDF 2.5 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2010/Year 3/NAPLAN 2010, final test – numeracy, Year 3 (PDF 5 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2011/Year 3/NAPLAN 2011, final test – numeracy, Year 3 (PDF 4.5 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2013/Shared/NAPLAN 2013 final test, numeracy, Year 3 (with redacted image) (PDF 1.3 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2014/Shared/NAPLAN 2014 final test, numeracy, Year 3 (PDF 4.6 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2015/Shared/NAPLAN 2015 final test, numeracy, Year 3 (PDF 3 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2016/Shared/NAPLAN 2016 final test, numeracy, Year 3 (PDF 2.5 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2017/Year 3/Example_Yr_3_Reading_Questions.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2008/Year 3/NAPLAN 2008, final test – reading, Year 3 (PDF 774 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2009/Year 3/NAPLAN 2009, final test – reading, Year 3 (PDF 746 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2010/Year 3/NAPLAN 2010, final test – reading, Year 3 (PDF 1 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2011/Year 3/NAPLAN 2011, final test – reading, Year 3 (PDF 1.2 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2013/Shared/NAPLAN 2013 final test, reading, Year 3 (PDF 1 MB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2014/Shared/NAPLAN 2014 final test, reading, Year 3 (PDF 290 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2015/Shared/NAPLAN 2015 final test, reading, Year 3 (PDF 310 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/naplan/2016/Shared/NAPLAN 2016 final test, reading, Year 3 (PDF 500 KB).pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital B 2009 (A) questions.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB  2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB 2014.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Digital yr 4/Digital AB - 2018.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/English B 2007 questions.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/2008 ICAS English Paper B.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/2009 ICAS English Paper B.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2014.pdf": {
+        "trustedCount": null,
+        "signals": [
+          {
+            "count": 45,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "4 5 Q U E S T I O N S"
+          }
+        ],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2015.pdf": {
+        "trustedCount": 45,
+        "signals": [
+          {
+            "count": 45,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "4 5 Q U E S T I O N S"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/Icas Yr 4 English 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/2018 ICAS English Paper B.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Maths yr4/Maths B 2007 questions.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Maths yr4/Maths B 2008 questions.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Maths yr4/Maths B 2017 questions.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Maths yr4/Maths B 2018 questions.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/2009 ICAS Science Paper B.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2011.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2012.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2013.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2014.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2015.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2016.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2017.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/2018 ICAS Science Paper B 1.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2020.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": true
+      },
+      "source/original-icas/year4/Spellings/Spellings/Practice B Spelling.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": true
+      },
+      "source/original-icas/year4/Spellings/Spellings/2008 Spelling Paper B.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Spellings/Spellings/2013 Spelling B.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Spellings/Spellings/2014 Spelling Paper BC.pdf": {
+        "trustedCount": null,
+        "signals": [],
+        "instructionContext": false
+      },
+      "source/original-icas/year4/Spellings/Spellings/2018 ICAS Spelling Paper BC.pdf": {
+        "trustedCount": null,
+        "signals": [
+          {
+            "count": 15,
+            "kind": "explicit-1-to-n-range",
+            "page": 1,
+            "match": "QUESTIONS (1-15)"
+          }
+        ],
+        "instructionContext": false
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-mathematical-reasoning-2024-s1-questions.pdf": {
+        "trustedCount": 35,
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-mathematical-reasoning-2024-s2-questions.pdf": {
+        "trustedCount": 35,
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-mathematical-reasoning-2024-s3-questions.pdf": {
+        "trustedCount": 35,
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2024 Sample Tests/Reading Sample Test - Questions.pdf": {
+        "trustedCount": 25,
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2021 Practice Tests/2021 Reading Practice Test - Questions.pdf": {
+        "trustedCount": 25,
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2022 Practice Tests/2022 Reading Practice Test - Questions.pdf": {
+        "trustedCount": 25,
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2023 Practice Tests/2023 Reading Practice Test - Questions.pdf": {
+        "trustedCount": 25,
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-reading-2024-s1-questions.pdf": {
+        "trustedCount": 25,
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-reading-2024-s2-questions.pdf": {
+        "trustedCount": 25,
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-reading-2024-s3-questions.pdf": {
+        "trustedCount": 25,
+        "signals": [
+          {
+            "count": 25,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "25 questions"
+          },
+          {
+            "count": 25,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "25 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2024 Sample Tests/Mathematical Reasoning Sample Test - Questions.pdf": {
+        "trustedCount": 35,
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2021 Practice Tests/2021 Mathematical Reasoning Practice Test - Questions.pdf": {
+        "trustedCount": 35,
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2022 Practice Tests/2022 Mathematical Reasoning Practice Test - Questions.pdf": {
+        "trustedCount": 35,
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2023 Practice Tests/2023 Mathematical Reasoning Practice Test - Questions.pdf": {
+        "trustedCount": 35,
+        "signals": [
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          },
+          {
+            "count": 35,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "35 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2024 Sample Tests/Thinking Skills Sample Test - Questions.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2021 Practice Tests/2021 Thinking Skills Practice Test - Questions.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2022 Practice Tests/2022 Thinking Skills Practice Test - Questions.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/2023 Practice Tests/2023 Thinking Skills Practice Test - Questions.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-thinking-skills-2024-s1-questions.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-thinking-skills-2024-s2-questions.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "instructionContext": true
+      },
+      "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-thinking-skills-2024-s3-questions.pdf": {
+        "trustedCount": 30,
+        "signals": [
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "exact-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          },
+          {
+            "count": 30,
+            "kind": "ocr-spaced-total",
+            "page": 1,
+            "match": "30 questions"
+          }
+        ],
+        "instructionContext": true
+      }
+    }
+  }
+}
