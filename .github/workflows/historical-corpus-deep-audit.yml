@@ -1,6 +1,12 @@
 name: AWenture historical corpus deep audit
 on:
   workflow_dispatch:
+    inputs:
+      allow_lfs_bandwidth:
+        description: 'I understand this audit downloads the full ~1.57 GiB Git LFS corpus'
+        required: true
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -8,6 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   immutable-corpus:
+    if: ${{ inputs.allow_lfs_bandwidth == true }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
