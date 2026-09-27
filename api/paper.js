@@ -1,6 +1,7 @@
 const crypto=require('node:crypto');
 const {PDFDocument}=require('pdf-lib');
 const manifest=require('./paper-manifest.json');
+const historicalBaseline=require('../baseline/historical-corpus-v1.json');
 
 const OWNER='Sol4evr';
 const REPO='awenture';
@@ -10,6 +11,7 @@ const safePdfCache=new Map();
 
 function token(){return process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||''}
 function cleanRef(value){const ref=String(value||'');return /^[a-f0-9]{40}$/.test(ref)?ref:null}
+function sourceRef(){return cleanRef(process.env.AW_GITHUB_SOURCE_REF)||cleanRef(historicalBaseline.sourceCommit)}
 function cleanId(value){const id=String(Array.isArray(value)?value[0]:value||'');return /^[a-f0-9]{16}$/.test(id)?id:null}
 function entryFor(id){
   const p=manifest?.papers?.[id];
@@ -79,7 +81,7 @@ module.exports=async function handler(req,res){
   if(!entry){res.setHeader('Cache-Control','no-store');return res.status(404).end('Paper not found')}
   const {sourcePath}=entry;
   const auth=token();
-  const ref=cleanRef(process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA);
+  const ref=sourceRef();
   if(!ref){res.setHeader('Cache-Control','no-store');console.error('AW_PAPER_PROXY_CONFIG_ERROR','missing immutable source ref');return res.status(503).end('Historical paper source is not configured')}
   try{
     const safe=await resolveSafePaper(id,entry,ref,auth);
@@ -110,4 +112,4 @@ module.exports=async function handler(req,res){
   }
 };
 
-module.exports._test={byteRange,learnerPdf,entryFor,cleanRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};
+module.exports._test={byteRange,learnerPdf,entryFor,cleanRef,sourceRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};

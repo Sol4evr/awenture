@@ -47,7 +47,7 @@ function walk(dir){if(!fs.existsSync(dir))return;for(const e of fs.readdirSync(d
 walk(stageDir);
 if(deployedPdfs.length)throw new Error(`stage PDFs must not be deployed: ${deployedPdfs.slice(0,5).join(', ')}`);
 const api=fs.readFileSync(apiPath,'utf8');
-for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','media.githubusercontent.com/media','cleanRef','sourceUrl','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
+for(const needle of ['AW_GITHUB_SOURCE_TOKEN','historicalBaseline.sourceCommit','media.githubusercontent.com/media','cleanRef','sourceRef','sourceUrl','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
 if(api.includes('req.query?.path'))throw new Error('paper proxy must not accept arbitrary repository source paths');
 const upstreamStart=api.indexOf('const upstream=await fetch(sourceUrl(entry,ref)');
 const upstreamEnd=api.indexOf('const sourceBytes=',upstreamStart);
@@ -90,7 +90,7 @@ helpers.safePdfCache.clear();
 
 let githubSmoke='LOCAL_SKIP';
 if(process.env.VERCEL==='1'){
-  const ref=helpers.cleanRef(process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA);
+  const ref=helpers.sourceRef();
   if(!ref)throw new Error('Vercel paper delivery smoke check requires an immutable source SHA');
   const sample=papers.find(p=>p.sourcePath.includes('Digital AB 2006.pdf'))||papers[0];
   const url=helpers.sourceUrl(manifest.papers[sample.id],ref);
@@ -100,4 +100,4 @@ if(process.env.VERCEL==='1'){
   if(head!=='%PDF-')throw new Error(`Public GitHub paper source smoke check returned non-PDF bytes: ${JSON.stringify(head)}`);
   githubSmoke='PASS';
 }
-console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',safePdfCache:'LRU_2_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_VERCEL_GIT_COMMIT_SHA',githubSourceSmoke:githubSmoke}));
+console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',safePdfCache:'LRU_2_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_IMMUTABLE_CORPUS_SHA',githubSourceSmoke:githubSmoke}));

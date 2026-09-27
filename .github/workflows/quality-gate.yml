@@ -15,108 +15,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: true
-      - name: Verify Git LFS source assets
-        run: |
-          git lfs ls-files
-          if grep -RIl '^version https://git-lfs.github.com/spec/v1$' source --include='*.pdf' | grep -q .; then
-            echo 'One or more source PDFs are still Git LFS pointer files after checkout.' >&2
-            exit 1
-          fi
+          lfs: false
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: Render private v6.18.2 visual review evidence
-        env:
-          AW_REVIEW_ARTIFACT: '1'
-        run: node scripts/render-v6.18.2-companion-answer-review.mjs
-      - name: Upload private v6.18.2 visual review evidence
-        uses: actions/upload-artifact@v4
+      - name: Restore governed historical runtime cache
+        uses: actions/cache@v4
         with:
-          name: v6182-companion-answer-review
-          path: |
-            dist/stage-papers/companion-answer-review/*.jpg
-            dist/stage-papers/companion-answer-review/manifest.json
-          if-no-files-found: error
-          retention-days: 1
-      - name: Render remaining v6.18.3 answer candidates before gates
-        run: |
-          npm run build:stage-papers
-          node scripts/diagnose-v6.18.2-answer-resource-candidates.mjs
-          node scripts/render-v6.18.3-remaining-answer-review.mjs
-      - name: Upload remaining v6.18.3 answer review evidence
-        uses: actions/upload-artifact@v4
-        with:
-          name: v6183-remaining-answer-review
-          path: |
-            dist/stage-papers/answer-candidate-review-batch-08/*.jpg
-            dist/stage-papers/answer-candidate-review-batch-08/manifest.json
-            dist/stage-papers/answer-candidate-review-batch-20/*.jpg
-            dist/stage-papers/answer-candidate-review-batch-20/manifest.json
-          if-no-files-found: error
-          retention-days: 3
+          path: node_modules/.cache/awenture-historical-corpus-v1
+          key: awenture-historical-runtime-v1-${{ runner.os }}-node22
+      - name: Gate LFS-free ordinary release architecture
+        run: node tests/release-gate-lfs-budget.mjs
       - name: Run release gates
         run: npm run test:release
-      - name: Build formal-paper maturity matrix
-        run: node scripts/audit-v6.18.2-paper-maturity.mjs
-      - name: Gate formal-paper maturity accounting
-        run: node tests/release-gate-v6182-paper-maturity.mjs
-      - name: Export maturity work queues
-        run: node scripts/export-v6.18.2-maturity-work-queues.mjs
-      - name: Diagnose paper-specific timing evidence
-        run: node scripts/diagnose-v6.18.2-paper-timing-evidence.mjs
-      - name: Render paper-specific timing evidence
-        run: node scripts/render-v6.18.2-timing-candidate-review.mjs
-      - name: Discover exact companion answer candidates
-        run: node scripts/diagnose-v6.18.2-answer-resource-candidates.mjs
-      - name: Render companion answer candidate review batch
-        env:
-          AW_ANSWER_REVIEW_BATCH_SIZE: '8'
-          AW_ANSWER_REVIEW_BATCH_OFFSET: '0'
-        run: node scripts/render-v6.18.2-answer-candidate-review-batch.mjs
-      - name: Render orientation/readability review batch
-        env:
-          AW_ORIENTATION_BATCH_SIZE: '12'
-          AW_ORIENTATION_BATCH_OFFSET: '0'
-        run: node scripts/render-v6.18.2-orientation-review-batch.mjs
-      - name: Render targeted terminal-page answer-leak review
-        run: node scripts/render-v6.18.2-answer-leak-review.mjs
-      - name: Upload formal-paper maturity artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: v6182-paper-maturity
-          path: |
-            dist/stage-papers/paper-maturity-v1.json
-            dist/stage-papers/maturity-work-queues/*.json
-            dist/stage-papers/timing-evidence-candidates-v1.json
-            dist/stage-papers/timing-candidate-review/*.jpg
-            dist/stage-papers/timing-candidate-review/manifest.json
-            dist/stage-papers/answer-resource-candidates-v1.json
-            dist/stage-papers/answer-candidate-review-batch/*.jpg
-            dist/stage-papers/answer-candidate-review-batch/manifest.json
-            dist/stage-papers/orientation-review-batch/*.jpg
-            dist/stage-papers/orientation-review-batch/manifest.json
-            dist/stage-papers/answer-leak-review/*.jpg
-            dist/stage-papers/answer-leak-review/manifest.json
-          if-no-files-found: error
-          retention-days: 7
-      - name: Render private unresolved question-count review batch
-        env:
-          AW_REVIEW_BATCH_SIZE: '8'
-          AW_REVIEW_BATCH_OFFSET: '0'
-        run: node scripts/render-v6.18.2-unresolved-review-batch.mjs
-      - name: Upload private unresolved question-count review batch
-        uses: actions/upload-artifact@v4
-        with:
-          name: v6182-unresolved-review-batch-0
-          path: |
-            dist/stage-papers/unresolved-review-batch/*.jpg
-            dist/stage-papers/unresolved-review-batch/manifest.json
-          if-no-files-found: error
-          retention-days: 1
-      - name: Remove uploaded review evidence from tested runtime artifact
+      - name: Confirm release evidence is absent from runtime artifact
         run: node scripts/prune-release-evidence.mjs
       - name: Bind tested artifact to workflow SHA
         run: printf '%s\n' "$GITHUB_SHA" > dist/.aw-tested-sha

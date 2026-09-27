@@ -8,7 +8,9 @@ import { createCanvas } from '@napi-rs/canvas';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const runtime=JSON.parse(fs.readFileSync(path.join(root,'bank/v6.13.1-original-paper-runtime.json'),'utf8'));
 const folderFor={English:'english',Mathematics:'mathematics',Science:'science',Spelling:'spelling'};
-const sourceRoot=path.join(root,'source','original-icas','year2');
+const sourceRoot=process.env.AW_HISTORICAL_SOURCE_ROOT
+  ?path.resolve(process.env.AW_HISTORICAL_SOURCE_ROOT)
+  :path.join(root,'source','original-icas','year2');
 const outputRoot=path.join(root,'dist','original-icas','year2');
 const wasmUrl=pathToFileURL(path.join(root,'node_modules','pdfjs-dist','wasm')+path.sep).href;
 const forceRasterPapers=new Set(['English|2017']);
