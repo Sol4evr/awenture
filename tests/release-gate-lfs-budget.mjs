@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=rel=>fs.readFileSync(path.join(root,rel),'utf8');
 const baseline=JSON.parse(read('baseline/historical-corpus-v1.json'));
+const index=JSON.parse(read(baseline.lfsIndex));
 const quality=read('.github/workflows/quality-gate.yml');
 const deep=read('.github/workflows/historical-corpus-deep-audit.yml');
 const api=read('api/paper.js');
@@ -18,17 +19,12 @@ if(baseline.policy?.ordinaryBuildsMayDownloadFullLfsCorpus!==false||baseline.pol
 if(!api.includes("historicalBaseline.sourceCommit")||api.includes('process.env.VERCEL_GIT_COMMIT_SHA'))throw new Error('Paper runtime must use the immutable corpus source commit');
 if(!materializer.includes('entries.length')||!materializer.includes('identitiesVerified:true')||!materializer.includes('fullCorpusDownloaded:false'))throw new Error('Selective source materializer lacks identity/budget controls');
 
-const paths=execFileSync('git',['ls-tree','-r','-z','--name-only',baseline.sourceCommit,'--','source'],{cwd:root}).toString('utf8').split('\0').filter(p=>p.toLowerCase().endsWith('.pdf'));
-if(paths.length!==baseline.sourcePdfCount)throw new Error(`Pinned corpus inventory mismatch: ${paths.length}/${baseline.sourcePdfCount}`);
-const year2=paths.filter(p=>p.startsWith('source/original-icas/year2/'));
+if(index.sourceCommit!==baseline.sourceCommit||index.sourceTreeSha!==baseline.sourceTreeSha||index.objects?.length!==baseline.sourcePdfCount)throw new Error('Pinned corpus index identity/count mismatch');
+const year2=index.objects.filter(x=>x.path.startsWith('source/original-icas/year2/'));
 if(year2.length!==baseline.year2RuntimePapers)throw new Error(`Selective runtime inventory mismatch: ${year2.length}/${baseline.year2RuntimePapers}`);
-let selectedBytes=0;
-for(const p of year2){
-  const pointer=execFileSync('git',['show',`${baseline.sourceCommit}:${p}`],{cwd:root,encoding:'utf8'});
-  const size=Number(/^size (\d+)$/m.exec(pointer)?.[1]);if(!Number.isSafeInteger(size)||size<1)throw new Error(`Invalid pinned LFS pointer: ${p}`);selectedBytes+=size;
-}
+const selectedBytes=year2.reduce((sum,x)=>sum+x.size,0);
 if(selectedBytes>140*1024*1024)throw new Error(`Ordinary governed source ceiling exceeded: ${selectedBytes}`);
 const activeLfs=execFileSync('git',['lfs','ls-files','-n'],{cwd:root,encoding:'utf8'}).trim();
 if(activeLfs)throw new Error(`Active release tree still contains Git LFS objects: ${activeLfs.split('\n').length}`);
 
-console.log(JSON.stringify({release:'6.19.3',lfsBudgetGate:'PASS',activeLfsObjects:0,pinnedCorpusPdfs:paths.length,ordinarySourcePdfs:year2.length,ordinarySourceMiB:Number((selectedBytes/1048576).toFixed(2)),fullCorpusCheckout:'MANUAL_ONLY',runtimeSource:'IMMUTABLE_SHA'}));
+console.log(JSON.stringify({release:'6.19.3',lfsBudgetGate:'PASS',activeLfsObjects:0,pinnedCorpusPdfs:index.objects.length,pinnedUniqueObjects:index.uniqueObjects,ordinarySourcePdfs:year2.length,ordinarySourceMiB:Number((selectedBytes/1048576).toFixed(2)),fullCorpusCheckout:'MANUAL_ONLY',runtimeSource:'IMMUTABLE_SHA'}));

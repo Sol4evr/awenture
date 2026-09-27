@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const sourceRoot=path.join(root,'source');
 const baseline=JSON.parse(fs.readFileSync(path.join(root,'baseline','historical-corpus-v1.json'),'utf8'));
+const lfsIndex=JSON.parse(fs.readFileSync(path.join(root,baseline.lfsIndex),'utf8'));
 const deep=process.env.AW_REBUILD_HISTORICAL_BASELINE==='1';
 const outRoot=path.join(root,'dist','stage-papers');
 const proxyManifestPath=path.join(root,'api','paper-manifest.json');
@@ -38,10 +38,6 @@ function walk(dir,out=[]){
   return out;
 }
 function rel(p){return path.relative(root,p).split(path.sep).join('/')}
-function pinnedSourcePaths(){
-  const output=execFileSync('git',['ls-tree','-r','-z','--name-only',baseline.sourceCommit,'--','source'],{cwd:root});
-  return output.toString('utf8').split('\0').filter(p=>p.toLowerCase().endsWith('.pdf'));
-}
 function norm(s){return String(s||'').toLowerCase().replace(/[–—]/g,'-')}
 function yearOf(s){const m=String(s).match(/(?:19|20)\d{2}/);return m?Number(m[0]):null}
 function stageOf(r){
@@ -106,7 +102,7 @@ function titleFor(r,subject){
 function paperId(r){return crypto.createHash('sha1').update(r).digest('hex').slice(0,16)}
 function paperUrl(id){return `/api/paper?id=${encodeURIComponent(id)}`}
 
-const files=deep?walk(sourceRoot).map(rel):pinnedSourcePaths();
+const files=deep?walk(sourceRoot).map(rel):lfsIndex.objects.map(x=>x.path);
 if(files.length!==baseline.sourcePdfCount)throw new Error(`Pinned historical source inventory changed: ${files.length}/${baseline.sourcePdfCount}`);
 const catalog={release:'6.18.2',mode:'stage-formal-lite-v2',delivery,generatedAtBuild:true,requiredSubjects,stages:{},summary:{sourcePdfs:files.length,activated:0,pending:0,ignoredFuture:0,deployedPdfCopies:0}};
 for(const id of activeStages)catalog.stages[id]={id,label:stageLabels[id],papers:[],pending:0,subjects:requiredSubjects[id]};

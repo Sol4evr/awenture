@@ -1,27 +1,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const baseline=JSON.parse(fs.readFileSync(path.join(root,'baseline','historical-corpus-v1.json'),'utf8'));
+const lfsIndex=JSON.parse(fs.readFileSync(path.join(root,baseline.lfsIndex),'utf8'));
 const cacheRoot=path.join(root,'node_modules','.cache',baseline.id,'governed-source','original-icas','year2');
 const marker=path.join(cacheRoot,'.complete.json');
 
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function encodePath(value){return value.split('/').map(encodeURIComponent).join('/')}
 function inventory(){
-  const output=execFileSync('git',['ls-tree','-r','-z','--name-only',baseline.sourceCommit,'--','source/original-icas/year2'],{cwd:root});
-  const paths=output.toString('utf8').split('\0').filter(p=>p.toLowerCase().endsWith('.pdf'));
-  if(paths.length!==baseline.year2RuntimePapers)throw new Error(`Governed Year 2 source inventory changed: ${paths.length}/${baseline.year2RuntimePapers}`);
-  return paths;
-}
-function pointerFor(sourcePath){
-  const text=execFileSync('git',['show',`${baseline.sourceCommit}:${sourcePath}`],{cwd:root,encoding:'utf8',maxBuffer:1024*1024});
-  const oid=/^oid sha256:([a-f0-9]{64})$/m.exec(text)?.[1],size=Number(/^size (\d+)$/m.exec(text)?.[1]);
-  if(!oid||!Number.isSafeInteger(size)||size<1)throw new Error(`Invalid pinned LFS identity: ${sourcePath}`);
-  return {oid,size};
+  const entries=lfsIndex.objects.filter(x=>x.path.startsWith('source/original-icas/year2/')).map(x=>({sourcePath:x.path,oid:x.oid,size:x.size}));
+  if(entries.length!==baseline.year2RuntimePapers)throw new Error(`Governed Year 2 source inventory changed: ${entries.length}/${baseline.year2RuntimePapers}`);
+  return entries;
 }
 function targetFor(sourcePath){return path.join(cacheRoot,path.relative('source/original-icas/year2',sourcePath))}
 function validFile(file,identity){
@@ -47,7 +40,7 @@ async function download(entry){
 }
 
 export async function materializeGovernedYear2Source(){
-  const entries=inventory().map(sourcePath=>({sourcePath,...pointerFor(sourcePath)}));
+  const entries=inventory();
   if(!validCache(entries)){
     fs.rmSync(cacheRoot,{recursive:true,force:true});fs.mkdirSync(cacheRoot,{recursive:true});
     for(const entry of entries)await download(entry);
