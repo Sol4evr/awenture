@@ -15,6 +15,7 @@ const materializer=read('scripts/materialize-governed-year2-source.mjs');
 if(quality.includes('lfs: true')||/git lfs (pull|fetch)/.test(quality))throw new Error('Ordinary quality gate must never download the full LFS corpus');
 if(!quality.includes('release-gate-lfs-budget.mjs')||!quality.includes('node_modules/.cache/awenture-historical-corpus-v1'))throw new Error('Ordinary quality gate lacks LFS architecture/cache protection');
 if(!/workflow_dispatch:/.test(deep)||/pull_request:|push:/.test(deep)||!deep.includes('lfs: true')||!deep.includes(baseline.sourceCommit))throw new Error('Deep corpus audit must be manual and SHA-pinned');
+if(!deep.includes('allow_lfs_bandwidth')||!deep.includes("inputs.allow_lfs_bandwidth == true"))throw new Error('Deep corpus audit must require explicit LFS bandwidth approval');
 if(baseline.policy?.ordinaryBuildsMayDownloadFullLfsCorpus!==false||baseline.policy?.runtimeSourceMustUsePinnedCommit!==true)throw new Error('Historical LFS policy is not fail-closed');
 if(!api.includes("historicalBaseline.sourceCommit")||api.includes('process.env.VERCEL_GIT_COMMIT_SHA'))throw new Error('Paper runtime must use the immutable corpus source commit');
 if(!materializer.includes('entries.length')||!materializer.includes('identitiesVerified:true')||!materializer.includes('fullCorpusDownloaded:false'))throw new Error('Selective source materializer lacks identity/budget controls');
