@@ -7,8 +7,10 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=rel=>fs.readFileSync(path.join(root,rel),'utf8');
 const baseline=JSON.parse(read('baseline/historical-corpus-v1.json'));
 const index=JSON.parse(read(baseline.lfsIndex));
-const quality=read('.github/workflows/quality-gate.yml');
-const deep=read('.github/workflows/historical-corpus-deep-audit.yml');
+const qualityPath=path.join(root,'.github/workflows/quality-gate.yml');
+const deepPath=path.join(root,'.github/workflows/historical-corpus-deep-audit.yml');
+const quality=fs.existsSync(qualityPath)?fs.readFileSync(qualityPath,'utf8'):null;
+const deep=fs.existsSync(deepPath)?fs.readFileSync(deepPath,'utf8'):null;
 const api=read('api/paper.js');
 const materializer=read('scripts/materialize-governed-year2-source.mjs');
 const packageJson=read('package.json');
@@ -26,10 +28,13 @@ function activeLfsPointers(dir,out=[]){
   return out;
 }
 
-if(quality.includes('lfs: true')||/git lfs (pull|fetch)/.test(quality))throw new Error('Ordinary quality gate must never download the full LFS corpus');
-if(!quality.includes('release-gate-lfs-budget.mjs')||!quality.includes('node_modules/.cache/awenture-historical-corpus-v1'))throw new Error('Ordinary quality gate lacks LFS architecture/cache protection');
-if(!/workflow_dispatch:/.test(deep)||/pull_request:|push:/.test(deep)||!deep.includes('lfs: true')||!deep.includes(baseline.sourceCommit))throw new Error('Deep corpus audit must be manual and SHA-pinned');
-if(!deep.includes('allow_lfs_bandwidth')||!deep.includes("inputs.allow_lfs_bandwidth == true"))throw new Error('Deep corpus audit must require explicit LFS bandwidth approval');
+if((quality===null)!==(deep===null))throw new Error('CI workflow policy files must be present or source-package-omitted together');
+if(quality!==null){
+  if(quality.includes('lfs: true')||/git lfs (pull|fetch)/.test(quality))throw new Error('Ordinary quality gate must never download the full LFS corpus');
+  if(!quality.includes('release-gate-lfs-budget.mjs')||!quality.includes('node_modules/.cache/awenture-historical-corpus-v1'))throw new Error('Ordinary quality gate lacks LFS architecture/cache protection');
+  if(!/workflow_dispatch:/.test(deep)||/pull_request:|push:/.test(deep)||!deep.includes('lfs: true')||!deep.includes(baseline.sourceCommit))throw new Error('Deep corpus audit must be manual and SHA-pinned');
+  if(!deep.includes('allow_lfs_bandwidth')||!deep.includes("inputs.allow_lfs_bandwidth == true"))throw new Error('Deep corpus audit must require explicit LFS bandwidth approval');
+}
 if(baseline.policy?.ordinaryBuildsMayDownloadFullLfsCorpus!==false||baseline.policy?.runtimeSourceMustUsePinnedCommit!==true)throw new Error('Historical LFS policy is not fail-closed');
 if(baseline.policy?.ordinaryBuildsUseShaPinnedReviewedGovernance!==true)throw new Error('Ordinary release must use SHA-pinned reviewed governance');
 for(const spec of Object.values(baseline.reviewedGovernance||{})){
@@ -52,4 +57,4 @@ if(/filter\s*=\s*lfs|filter=lfs/.test(read('.gitattributes')))throw new Error('A
 const activeLfs=activeLfsPointers(root);
 if(activeLfs.length)throw new Error(`Active release tree still contains Git LFS pointer files: ${activeLfs.length}`);
 
-console.log(JSON.stringify({release:'6.19.3',lfsBudgetGate:'PASS',activeLfsObjects:0,pinnedCorpusPdfs:index.objects.length,pinnedUniqueObjects:index.uniqueObjects,largestSourceMiB:Number((Math.max(...index.objects.map(x=>x.size))/1048576).toFixed(2)),ordinarySourcePdfs:year2.length,ordinarySourceMiB:Number((selectedBytes/1048576).toFixed(2)),ordinaryGovernance:'SHA_PINNED_BINARY_FREE',fullCorpusCheckout:'MANUAL_ONLY',runtimeSource:'IMMUTABLE_SHA'}));
+console.log(JSON.stringify({release:'6.19.3',lfsBudgetGate:'PASS',activeLfsObjects:0,pinnedCorpusPdfs:index.objects.length,pinnedUniqueObjects:index.uniqueObjects,largestSourceMiB:Number((Math.max(...index.objects.map(x=>x.size))/1048576).toFixed(2)),ordinarySourcePdfs:year2.length,ordinarySourceMiB:Number((selectedBytes/1048576).toFixed(2)),ordinaryGovernance:'SHA_PINNED_BINARY_FREE',workflowPolicy:quality===null?'SOURCE_PACKAGE_OMITTED':'VALIDATED',fullCorpusCheckout:'MANUAL_ONLY',runtimeSource:'IMMUTABLE_SHA'}));
