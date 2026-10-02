@@ -1,0 +1,1618 @@
+{
+  "version": "aw-stage-auto-boundary-1",
+  "generatedAt": "2026-09-22T09:58:06.928Z",
+  "policy": {
+    "strict": true,
+    "manualOverridesWin": true,
+    "neverInfersAnswers": true,
+    "sourceClassifierRequired": true,
+    "tailScanRequired": true
+  },
+  "papers": {
+    "source/original-icas/year3/Digital A/Digital AB 2004.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:06.928Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-14"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2004.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.020Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-14"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2006.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.028Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-12"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2006.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.109Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-12"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.893Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 15,
+        "terminalQuestion": 30,
+        "reviewNote": "Exact-source terminal review shows learner questions 29 and 30 on pages 13-14, with question 30 ending on page 14. Page 15 is the 2010 ICAS Computer Skills answer key. The prior full-document boundary leaked answers, so learner navigation must end at page 14."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.898Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "186aa4ed88ca7ef9aed01f8ee4678d13808a431f3970de67d285a45cb6615bb8",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 15,
+        "terminalQuestion": 30,
+        "reviewNote": "Duplicate catalogue path for the same SHA-pinned binary. Exact-source terminal review shows question 30 ending on page 14 and the answer key beginning on page 15. Learner navigation must end at page 14."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.906Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 15,
+        "terminalQuestion": 30,
+        "reviewNote": "Exact-source terminal review shows questions 29 and 30 on page 14. Pages 15-16 are the 2011 ICAS Computer Skills answer keys. The prior full-document boundary leaked answers, so learner navigation must end at page 14."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.915Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "d84cd62773be0427d05b93facfd5d0b85fea5aeaa3945e0be0e4a5fd2952377e",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 15,
+        "terminalQuestion": 30,
+        "reviewNote": "Duplicate catalogue path for the same SHA-pinned binary. Exact-source terminal review shows question 30 ending on page 14 and the answer key beginning on page 15. Learner navigation must end at page 14."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.933Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 14,
+        "terminalQuestion": 30,
+        "reviewNote": "Exact-source terminal review shows question 30 on page 13. Pages 14-15 are the 2012 ICAS Computer Skills answer keys. The prior full-document boundary leaked answers, so learner navigation must end at page 13."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.949Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "255e038c2b5b8e41c34b3cf109cf69f132aecd80790f7dc61ad0db4fec26e1f1",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 14,
+        "terminalQuestion": 30,
+        "reviewNote": "Duplicate catalogue path for the same SHA-pinned binary. Exact-source terminal review shows question 30 ending on page 13 and the answer key beginning on page 14. Learner navigation must end at page 13."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.953Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "7b68fca6f777713d01ca79dfe566e87a077ddbc37f285d7c9c4d935a0a4a11d6",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 17,
+        "terminalQuestion": 30,
+        "reviewNote": "Exact-source terminal review shows question 30 ending on page 15. Page 16 is acknowledgement/back-cover material rather than a learner question, and pages 17-18 are the 2013 ICAS Computer Skills answer keys. Learner navigation therefore ends at page 15, excluding both non-question material and all answer keys."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.958Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "7b68fca6f777713d01ca79dfe566e87a077ddbc37f285d7c9c4d935a0a4a11d6",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 17,
+        "terminalQuestion": 30,
+        "reviewNote": "Duplicate catalogue path for the same SHA-pinned binary. Exact-source terminal review shows question 30 ending on page 15; page 16 is acknowledgement/back-cover material and the answer key begins on page 17. Learner navigation must end at page 15."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.297Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.314Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.337Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 16; learner range 1-15"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.409Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 16; learner range 1-15"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.458Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.466Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.473Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.479Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year3/Digital A/Digital AB 2018.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 33,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.487Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-33"
+    },
+    "source/original-icas/year3/Digital/Digital AB 2018.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 33,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.541Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-33"
+    },
+    "source/original-icas/year3/English A/English A 2007.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.600Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year3/English A/English A 2008.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.606Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/English A/English A 2009.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.636Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/English A/English A 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.647Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year3/English A/English A 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.663Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year3/English A/English A 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.689Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year3/English A/English A 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 19,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.703Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-19"
+    },
+    "source/original-icas/year3/English A/English A 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.888Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "9a0fb6606fafd55a3ac1aab4cffff681c71e8b860139ed1c22519f4d17aba177",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 15,
+        "terminalQuestion": 45,
+        "reviewNote": "Automatic boundary was truncated around the first half of the paper. The exact source cover states 45 QUESTIONS and 45 MULTIPLE-CHOICE QUESTIONS (1-45). Subsequent learner sections continue through questions 22-27, 28-34, 35-41 and 42-45 on pages 8-14. Page 15 begins the ICAS English answer-key table. Learner navigation therefore ends at page 14."
+      },
+      "method": "reviewed-sha-pinned-auto-boundary-correction"
+    },
+    "source/original-icas/year3/English A/English A 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.859Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year3/English A/English A 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.870Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/English A/English A 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.890Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year3/English A/English A 2018.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.910Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year3/English A/English A 2019 REACH.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.918Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-12"
+    },
+    "source/original-icas/year3/English A/PP-2020-ICAS-EN-ENG-D-B[1]-pages[1][1] (1) (8).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 38,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.935Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-38"
+    },
+    "source/original-icas/year3/English A/2021 English ICAS Paper/ICAS_English 2021.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 47,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.950Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-47"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2005.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 9,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.966Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-9"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2007.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 11,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.984Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-11"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2008.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.990Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-13"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2009.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:07.998Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-13"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 10,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.006Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 11; learner range 1-10"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.038Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-13"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.060Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 14; learner range 1-13"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.099Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.130Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-14"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.137Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.149Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 15; learner range 1-14"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.201Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-13"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2018.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.211Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-14"
+    },
+    "source/original-icas/year3/Maths A/Maths A 2019.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 11,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.221Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-11"
+    },
+    "source/original-icas/year3/Maths A/Maths ICAS 2021/2021 Maths A.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.224Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-17"
+    },
+    "source/original-icas/year3/Maths A/Maths ICAS 2021/Maths A 2021.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.232Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 2; learner range 1-1"
+    },
+    "source/original-icas/year3/Science A/Science A 2009.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.254Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year3/Science A/Science A 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.262Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year3/Science A/Science A 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.269Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/Science A/Science A 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.282Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year3/Science A/Science A 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.298Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year3/Science A/Science A 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.309Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/Science A/Science A 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.320Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year3/Science A/Science A 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.341Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year3/Science A/Science A 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.353Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year3/Science A/Science A 2018.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.361Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year3/Science A/Science A 2019.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.372Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year3/Science A/2021 SCIENCE ICAS/ICAS_Science_2021.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.376Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-15"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 6,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.383Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-6"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 6,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.394Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-6"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 9,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.410Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-9"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2016 (Q1-12, Q26-40).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.462Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-1"
+    },
+    "source/original-icas/year3/Spelling A/Spelling A 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.465Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 5; learner range 1-4"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2003.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.476Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-1"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2004.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 2,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.478Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-2"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2006.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 3,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.479Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-3"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2008.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.481Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-4"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2009.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.483Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-4"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 2,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.485Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-2"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.486Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-1"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.488Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-4"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 8,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.498Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-8"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 3,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.504Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-3"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.507Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-1"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.517Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-4"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 2,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.521Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-2"
+    },
+    "source/original-icas/year3/Writing A/Writing A 2018.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.533Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-4"
+    },
+    "source/naplan/2008/Year 3/NAPLAN 2008, final test – language conventions, Year 3 (PDF 696 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.537Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2009/Year 3/NAPLAN 2009, final test – language conventions, Year 3 (PDF 531 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.609Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2010/Year 3/NAPLAN 2010, final test – language conventions, Year 3 (PDF 914 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.656Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2011/Year 3/NAPLAN 2011, final test – language conventions, Year 3 (PDF 700 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.701Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, language conventions, Year 3 (PDF 412 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.732Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, language conventions, Year 3 (PDF 247 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.765Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, language conventions, Year 3 (PDF 645 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.805Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, language conventions, Year 3 (PDF 321 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.869Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Numeracy.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.869Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "72c84d1b0bf8f625ac5d31a72929bc64d0c8ba95c594a41266156d97ec226083",
+        "provider": "ACARA",
+        "evidenceType": "same-paper-explicit-stop-end-of-test",
+        "evidencePage": 14,
+        "terminalQuestion": 35,
+        "reviewNote": "Page 14 contains question 35 followed by STOP – END OF TEST. Page 15 says Do not write on this page and page 16 contains PRACTICE QUESTIONS P1/P2, so learner navigation must stop at page 14."
+      },
+      "method": "reviewed-same-paper-terminal-stop"
+    },
+    "source/naplan/2008/Year 3/NAPLAN 2008, final test – numeracy, Year 3 (PDF 3.2 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:08.957Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/naplan/2009/Year 3/NAPLAN 2009, final test – numeracy, Year 3 (PDF 2.5 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.129Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/naplan/2010/Year 3/NAPLAN 2010, final test – numeracy, Year 3 (PDF 5 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.215Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/naplan/2011/Year 3/NAPLAN 2011, final test – numeracy, Year 3 (PDF 4.5 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 10,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.308Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 11; learner range 1-10"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, numeracy, Year 3 (with redacted image) (PDF 1.3 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.368Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, numeracy, Year 3 (PDF 4.6 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.376Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, numeracy, Year 3 (PDF 3 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.686Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, numeracy, Year 3 (PDF 2.5 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.806Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Reading_Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.949Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-12"
+    },
+    "source/naplan/2008/Year 3/NAPLAN 2008, final test – reading, Year 3 (PDF 774 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:09.989Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2009/Year 3/NAPLAN 2009, final test – reading, Year 3 (PDF 746 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.072Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2010/Year 3/NAPLAN 2010, final test – reading, Year 3 (PDF 1 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.138Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2011/Year 3/NAPLAN 2011, final test – reading, Year 3 (PDF 1.2 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.176Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, reading, Year 3 (PDF 1 MB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.212Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, reading, Year 3 (PDF 290 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.251Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, reading, Year 3 (PDF 310 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.297Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, reading, Year 3 (PDF 500 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.343Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Writing_Prompt_Narrative.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.387Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-1"
+    },
+    "source/naplan/2017/Year 3/Example_Yr_3_Writing_Prompt_Persuasive.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.394Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-1"
+    },
+    "source/naplan/2013/Shared/NAPLAN 2013 final test, writing, Year 3 (PDF 204 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.416Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-4"
+    },
+    "source/naplan/2014/Shared/NAPLAN 2014 final test, writing, Year 3 (PDF 120 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.426Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-4"
+    },
+    "source/naplan/2015/Shared/NAPLAN 2015 final test, writing, Year 3 (PDF 121 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.438Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-4"
+    },
+    "source/naplan/2016/Shared/NAPLAN 2016 final test, writing, Year 3 (PDF 105 KB).pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.451Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-4"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital B 2009 (A) questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.464Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-16"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.472Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB  2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.480Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.487Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.507Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.523Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.536Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 16; learner range 1-15"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.594Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.600Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-15"
+    },
+    "source/original-icas/year4/Digital yr 4/Digital AB - 2018.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 33,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.608Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-33"
+    },
+    "source/original-icas/year4/English yr 4/English B 2007 questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.663Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-14"
+    },
+    "source/original-icas/year4/English yr 4/2008 ICAS English Paper B.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.668Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/original-icas/year4/English yr 4/2009 ICAS English Paper B.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.673Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-16"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.677Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-16"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.689Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.698Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.724Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.733Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 16; learner range 1-15"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 15,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture reviewed source QA",
+      "reviewedAt": "2026-09-22T09:58:13.879Z",
+      "reviewEvidence": {
+        "manifest": "quality/stage-paper-reviewed-boundaries-v1.json",
+        "sha256": "7636d8eed9d040b602d3098f7795c6ec2897ca1543433c070992bb8bdfadbb2c",
+        "provider": "Educational Assessment Australia",
+        "evidenceType": "same-paper-reviewed-auto-boundary-false-positive",
+        "evidencePage": 16,
+        "terminalQuestion": 45,
+        "reviewNote": "Automatic boundary page 11 was a false positive. Same binary cover states 45 QUESTIONS and 45 MULTIPLE-CHOICE QUESTIONS (1-45). Pages 12-14 continue learner material, including questions 36-45; page 15 is the final branded blank learner-side page; page 16 begins the complete 1-45 answer key. Learner navigation therefore ends at page 15 and must not truncate questions 36-45."
+      },
+      "method": "reviewed-sha-pinned-auto-boundary-correction"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.883Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year4/English yr 4/Icas Yr 4 English 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.900Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year4/English yr 4/2018 ICAS English Paper B.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.906Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-17"
+    },
+    "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 40,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.912Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-40"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2007 questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 9,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.993Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-9"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2008 questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 9,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:10.996Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-9"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2017 questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.001Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-12"
+    },
+    "source/original-icas/year4/Maths yr4/Maths B 2018 questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.005Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-12"
+    },
+    "source/original-icas/year4/Science Year 4/2009 ICAS Science Paper B.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.011Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-20"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2010.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 14,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.019Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 15; learner range 1-14"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2011.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.033Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2012.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.040Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-20"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 19,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.048Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-19"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 19,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.054Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-19"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 16,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.065Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 17; learner range 1-16"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.084Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-18"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.095Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-17"
+    },
+    "source/original-icas/year4/Science Year 4/2018 ICAS Science Paper B 1.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 33,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.100Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-33"
+    },
+    "source/original-icas/year4/Science Year 4/Icas Yr 4 Science 2020.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 32,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.126Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-32"
+    },
+    "source/original-icas/year4/Spellings/Spellings/Practice B Spelling.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 8,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.160Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 9; learner range 1-8"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2008 Spelling Paper B.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.381Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-4"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2013 Spelling B.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 5,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.384Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-5"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2014 Spelling Paper BC.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 5,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.432Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-5"
+    },
+    "source/original-icas/year4/Spellings/Spellings/2018 ICAS Spelling Paper BC.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 9,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.480Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-9"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing B 2004.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 2,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.523Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-2"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing B 2006.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 3,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.524Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-3"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2013.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 8,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.527Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-8"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2014.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 3,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.534Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-3"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2015.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 1,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.537Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-1"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing AB 2016.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 4,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.542Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-4"
+    },
+    "source/original-icas/year4/Writing/Writing/Writing B 2017.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 2,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.545Z",
+      "reviewEvidence": "automatic strict QA: catalog source classifier accepted this as a learner question PDF and excluded support/answer resources; no answer/support page detected in the final 65% of the document; learner range 1-2"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-mathematical-reasoning-2024-s1-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 10,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.564Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 11; learner range 1-10"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-mathematical-reasoning-2024-s2-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.658Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 18; learner range 1-17"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-mathematical-reasoning-2024-s3-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.782Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 19; learner range 1-18"
+    },
+    "source/oc/2024 Sample Tests/Reading Sample Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:11.909Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-12"
+    },
+    "source/oc/2021 Practice Tests/2021 Reading Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 9,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:12.020Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-9"
+    },
+    "source/oc/2022 Practice Tests/2022 Reading Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 9,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:12.045Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-9"
+    },
+    "source/oc/2023 Practice Tests/2023 Reading Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 8,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:12.088Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-8"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-reading-2024-s1-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 12,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:12.146Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-12"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-reading-2024-s2-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 13,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:12.213Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-13"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-reading-2024-s3-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 6,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:12.664Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 7; learner range 1-6"
+    },
+    "source/oc/2024 Sample Tests/Mathematical Reasoning Sample Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 10,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.051Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 11; learner range 1-10"
+    },
+    "source/oc/2021 Practice Tests/2021 Mathematical Reasoning Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 17,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.099Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 18; learner range 1-17"
+    },
+    "source/oc/2022 Practice Tests/2022 Mathematical Reasoning Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 28,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.156Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-28"
+    },
+    "source/oc/2023 Practice Tests/2023 Mathematical Reasoning Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 18,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.297Z",
+      "reviewEvidence": "automatic strict QA: non-learner answer/administration/support section begins on PDF page 19; learner range 1-18"
+    },
+    "source/oc/2024 Sample Tests/Thinking Skills Sample Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.347Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-20"
+    },
+    "source/oc/2021 Practice Tests/2021 Thinking Skills Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 24,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.412Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-24"
+    },
+    "source/oc/2022 Practice Tests/2022 Thinking Skills Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 24,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.480Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-24"
+    },
+    "source/oc/2023 Practice Tests/2023 Thinking Skills Practice Test - Questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 24,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.521Z",
+      "reviewEvidence": "automatic strict QA: dedicated question/test PDF; no answer/support page detected in scanned tail; learner range 1-24"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 1/oc-thinking-skills-2024-s1-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 20,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.557Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-20"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 2/oc-thinking-skills-2024-s2-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 24,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.608Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-24"
+    },
+    "source/oc/Braintree 2024 Practice Tests/Sitting 3/oc-thinking-skills-2024-s3-questions.pdf": {
+      "questionStartPage": 1,
+      "questionEndPage": 24,
+      "pageBoundaryVerified": true,
+      "reviewedBy": "AWenture automatic document QA",
+      "reviewedAt": "2026-09-22T09:58:13.680Z",
+      "reviewEvidence": "automatic strict QA: separate same-year answer/support PDF found; no answer/support page detected in question PDF tail; learner range 1-24"
+    }
+  },
+  "summary": {
+    "total": 187,
+    "verified": 187,
+    "pending": 0,
+    "internalAnswerBoundary": 22,
+    "dedicatedQuestionFile": 45,
+    "siblingAnswerEvidence": 20,
+    "sourceClassifiedWholePdf": 100
+  },
+  "unresolved": []
+}

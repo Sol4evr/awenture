@@ -1,15 +1,16 @@
 const crypto=require('node:crypto');
 const {PDFDocument}=require('pdf-lib');
 const manifest=require('./paper-manifest.json');
+const {sourceLocation}=require('../lib/historical-source.js');
 
-const OWNER='Sol4evr';
-const REPO='awenture';
 const DELIVERY='github-source-proxy-v2-allowlist';
 const MAX_SAFE_PDF_CACHE=2;
 const safePdfCache=new Map();
 
 function token(){return process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||''}
 function cleanRef(value){const ref=String(value||'');return /^[a-f0-9]{40}$/.test(ref)?ref:null}
+function deliveryLocation(entry){const source=sourceLocation(entry.sourcePath);return source.readable||source}
+function sourceRef(entry){return entry?deliveryLocation(entry).commit:null}
 function cleanId(value){const id=String(Array.isArray(value)?value[0]:value||'');return /^[a-f0-9]{16}$/.test(id)?id:null}
 function entryFor(id){
   const p=manifest?.papers?.[id];
@@ -17,10 +18,16 @@ function entryFor(id){
   if(typeof p.sourcePath!=='string'||!p.sourcePath.startsWith('source/')||!p.sourcePath.toLowerCase().endsWith('.pdf'))return null;
   if(p.pageBoundaryVerified!==true||p.deliveryStartPage!==1||!Number.isInteger(p.deliveryEndPage)||p.deliveryEndPage<1)return null;
   if(p.sourceSha256!==null&&p.sourceSha256!==undefined&&!/^[a-f0-9]{64}$/.test(String(p.sourceSha256)))return null;
+  try{const source=sourceLocation(p.sourcePath);if(p.sourceSha256&&p.sourceSha256!==source.sha256)return null}catch(_){return null}
   return p;
 }
-function encodePath(p){return p.split('/').map(encodeURIComponent).join('/')}
-function sourceUrl(entry,ref){return `https://media.githubusercontent.com/media/${OWNER}/${REPO}/${ref}/${encodePath(entry.sourcePath)}`}
+function sourceUrl(entry,ref){const source=deliveryLocation(entry);if(ref!==source.commit)throw new Error('Historical corpus ref mismatch');return source.url}
+function contentDisposition(sourcePath){
+  const filename=sourcePath.split('/').pop().replace(/[\"\r\n]/g,'');
+  const ascii=filename.replace(/[^\x20-\x7E]/g,'_');
+  const encoded=encodeURIComponent(filename).replace(/['()*]/g,c=>'%'+c.charCodeAt(0).toString(16).toUpperCase());
+  return `inline; filename="${ascii}"; filename*=UTF-8''${encoded}`;
+}
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function byteRange(value,total){
   if(!value)return null;
@@ -65,8 +72,10 @@ async function resolveSafePaper(id,entry,ref,auth){
   const upstream=await fetch(sourceUrl(entry,ref),{headers,redirect:'follow'});
   if(!upstream.ok){const e=new Error('Unable to fetch historical paper');e.status=upstream.status===404?404:502;throw e}
   const sourceBytes=Buffer.from(await upstream.arrayBuffer());
-  if(entry.sourceSha256&&sha256(sourceBytes)!==entry.sourceSha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
+  const identity=deliveryLocation(entry);
+  if(sourceBytes.length!==identity.size||sha256(sourceBytes)!==identity.sha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
   const safe=await learnerPdf(sourceBytes,entry.deliveryEndPage);
+  if(identity.pageCount&&safe.sourcePages!==identity.pageCount)throw new Error('Readable source page count mismatch');
   const resolved={...safe,etag:`"${sha256(safe.bytes)}"`};
   if(cacheable)cacheSet(key,resolved);
   return {...resolved,cache:'MISS'};
@@ -79,7 +88,7 @@ module.exports=async function handler(req,res){
   if(!entry){res.setHeader('Cache-Control','no-store');return res.status(404).end('Paper not found')}
   const {sourcePath}=entry;
   const auth=token();
-  const ref=cleanRef(process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA);
+  const ref=sourceRef(entry);
   if(!ref){res.setHeader('Cache-Control','no-store');console.error('AW_PAPER_PROXY_CONFIG_ERROR','missing immutable source ref');return res.status(503).end('Historical paper source is not configured')}
   try{
     const safe=await resolveSafePaper(id,entry,ref,auth);
@@ -89,7 +98,7 @@ module.exports=async function handler(req,res){
     const body=range?safe.bytes.subarray(range.start,range.end+1):safe.bytes;
     res.statusCode=range?206:200;
     res.setHeader('Content-Type','application/pdf');
-    res.setHeader('Content-Disposition',`inline; filename="${sourcePath.split('/').pop().replace(/["\r\n]/g,'')}"`);
+    res.setHeader('Content-Disposition',contentDisposition(sourcePath));
     res.setHeader('Cache-Control',ref==='main'?'public, max-age=300, s-maxage=3600':'public, max-age=86400, s-maxage=31536000, immutable');
     res.setHeader('Accept-Ranges','bytes');
     res.setHeader('Content-Length',String(body.length));
@@ -110,4 +119,4 @@ module.exports=async function handler(req,res){
   }
 };
 
-module.exports._test={byteRange,learnerPdf,entryFor,cleanRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};
+module.exports._test={contentDisposition,byteRange,learnerPdf,entryFor,cleanRef,sourceRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};

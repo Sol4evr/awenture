@@ -1,0 +1,33 @@
+name: AWenture historical corpus deep audit
+on:
+  workflow_dispatch:
+    inputs:
+      allow_full_corpus_download:
+        description: 'Download and SHA-verify the pinned normal-Git corpus (no Git LFS)'
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: awenture-historical-corpus-deep-audit
+  cancel-in-progress: false
+jobs:
+  immutable-corpus:
+    if: ${{ inputs.allow_full_corpus_download == true }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Verify and materialize the exact normal-Git corpus SHAs
+        run: node scripts/verify-normal-git-corpora.mjs --materialize
+      - name: Run deep governed source validation
+        run: npm run rebuild:historical-baseline

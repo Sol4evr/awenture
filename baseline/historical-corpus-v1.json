@@ -1,9 +1,25 @@
 {
   "id": "aw-historical-corpus-v1",
   "locked": true,
+  "sourceCommit": "eea48e7df6064b216d26366f2ee5719a573c392e",
   "sourceTreeSha": "c8d01bac7f0d3e8c141e3d409878037424c4b62d",
+  "lfsIndex": "baseline/historical-corpus-v1-lfs-index.json",
   "sourcePdfCount": 602,
   "year2RuntimePapers": 22,
+  "reviewedGovernance": {
+    "catalog": {
+      "path": "baseline/stage-paper-catalog-v6183.json",
+      "sha256": "9453843631cb30b7d1b3b1703ca6f5222dcb8ee14a50f01cb1b973f6d1b51bc8"
+    },
+    "boundaries": {
+      "path": "baseline/stage-paper-auto-boundary-v6183.json",
+      "sha256": "ea91f2efb6b417a715518059557f6f70a5aa07ed48bec70de12fa55460e44f88"
+    },
+    "questionCounts": {
+      "path": "baseline/stage-paper-question-count-v6183.json",
+      "sha256": "c71d458709a2b293e1ee714881d33bc72bd2a6efb19225957102cd15e212ef5e"
+    }
+  },
   "stageLibrary": {
     "activated": 58,
     "pending": 210,
@@ -12,8 +28,11 @@
   },
   "policy": {
     "ordinaryBuildsMayRebuildHistoricalAssets": false,
+    "ordinaryBuildsMayDownloadFullLfsCorpus": false,
+    "runtimeSourceMustUsePinnedCommit": true,
     "sourceMutationRequiresNewBaselineId": true,
     "deepBinaryValidationOnlyOnBaselineRebuild": true,
+    "ordinaryBuildsUseShaPinnedReviewedGovernance": true,
     "historicalPapersRemainIsolatedFromGeneratedDailyPractice": true
   },
   "notes": "Immutable source baseline captured after the full ICAS Y3-Y5, NAPLAN and OC corpus upload. Create aw-historical-corpus-v2 rather than mutating this baseline when historical source content changes."

@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const qaPath=path.join(root,'dist/stage-papers/auto-question-count-verification.json');
@@ -8,10 +7,11 @@ const manifestPath=path.join(root,'quality/stage-paper-question-count-intentiona
 if(!fs.existsSync(qaPath)||!fs.existsSync(manifestPath))throw new Error('question-count residual gate inputs missing');
 const qa=JSON.parse(fs.readFileSync(qaPath,'utf8'));
 const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
+const baseline=JSON.parse(fs.readFileSync(path.join(root,'baseline/historical-corpus-v1.json'),'utf8'));
+const sourceIndex=new Map(JSON.parse(fs.readFileSync(path.join(root,baseline.lfsIndex),'utf8')).objects.map(x=>[x.path,x.oid]));
 if(manifest.version!=='aw-stage-paper-question-count-intentional-residuals-v1')throw new Error('question-count residual manifest version mismatch');
 const residuals=manifest.residuals||[];
 if(residuals.length!==3)throw new Error(`expected exactly 3 governed residual catalog entries, got ${residuals.length}`);
-const sha256=abs=>crypto.createHash('sha256').update(fs.readFileSync(abs)).digest('hex');
 const expectedUnresolved=Object.entries(qa.papers||{}).filter(([,e])=>!e.questionCountVerified).map(([p])=>p).sort();
 const manifestPaths=residuals.map(r=>r.sourcePath).sort();
 if(JSON.stringify(expectedUnresolved)!==JSON.stringify(manifestPaths))throw new Error(`unresolved set must exactly match governed residual manifest: qa=${JSON.stringify(expectedUnresolved)} manifest=${JSON.stringify(manifestPaths)}`);
@@ -21,8 +21,7 @@ for(const r of residuals){
   const e=qa.papers?.[r.sourcePath];if(!e)throw new Error(`residual missing from QA: ${r.sourcePath}`);
   if(e.questionCountVerified)throw new Error(`residual unexpectedly verified: ${r.sourcePath}`);
   if(r.autoScoring!==false||r.progressionCredit!==false)throw new Error(`residual must forbid scoring and progression: ${r.sourcePath}`);
-  const abs=path.join(root,r.sourcePath);if(!fs.existsSync(abs))throw new Error(`residual source missing: ${r.sourcePath}`);
-  if(sha256(abs)!==r.sha256)throw new Error(`residual SHA mismatch: ${r.sourcePath}`);
+  if(sourceIndex.get(r.sourcePath)!==r.sha256)throw new Error(`residual immutable-index SHA mismatch: ${r.sourcePath}`);
   if(r.classification==='intentional-discontinuous-partial'){
     if(JSON.stringify(r.presentRanges)!==JSON.stringify([[1,12],[26,40]])||JSON.stringify(r.missingRanges)!==JSON.stringify([[13,25]]))throw new Error('partial spelling ranges must remain Q1-12 and Q26-40 with Q13-25 absent');
     if(!r.sourcePath.includes('(Q1-12, Q26-40)'))throw new Error('partial spelling residual must bind the explicitly partial source file');

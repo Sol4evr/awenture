@@ -1,0 +1,44 @@
+{
+  "version": "aw-normal-git-corpus-delivery-v2",
+  "sourceCommit": "eea48e7df6064b216d26366f2ee5719a573c392e",
+  "sourceIndexSha256": "40ea06678e44a71e07ec29a16ea30012fd4ed468167f3dd4a8060fce84e8e709",
+  "corpora": {
+    "icas": {
+      "prefix": "source/original-icas/",
+      "repository": "Sol4evr/awenture-corpus-icas",
+      "commit": "61e72519769b594e730936b741f24799c7f31bac",
+      "paths": 261,
+      "verifiedRemoteGitObjects": true
+    },
+    "naplan": {
+      "prefix": "source/naplan/",
+      "repository": "Sol4evr/awenture-corpus-naplan",
+      "commit": "d0325ec7c8eb6160eb813e24acfcd542aacffcd3",
+      "paths": 290,
+      "verifiedRemoteGitObjects": true
+    },
+    "oc": {
+      "prefix": "source/oc/",
+      "repository": "Sol4evr/awenture-corpus-oc",
+      "commit": "f978f15c5a707559acf0ec98fa2bbf432cd61a58",
+      "paths": 51,
+      "verifiedRemoteGitObjects": true
+    }
+  },
+  "readableSources": {
+    "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf": {
+      "sourcePath": "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf",
+      "sourceSha256": "109af09fb98f7f36678e98907519f07f27aa399a3ce8791839c01cd3dfa1ae93",
+      "derivedPath": "derived/readable-sources/76c70ca554c7a811.bin",
+      "sha256": "da41c354835ea972c64852b514b6e2f19c3f68512c13e736cb02fcce2072ce7e",
+      "size": 5875435,
+      "pageCount": 40,
+      "emptyPasswordOnly": true,
+      "pageContentStreamsUnchanged": true,
+      "generator": "pypdf 6.10.0",
+      "repository": "Sol4evr/awenture-corpus-icas",
+      "commit": "c415e369582db217bd2762361af406eb5b04a0b5",
+      "pixelIdenticalPages": 40
+    }
+  }
+}

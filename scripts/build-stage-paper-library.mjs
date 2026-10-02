@@ -5,6 +5,9 @@ import { fileURLToPath } from 'node:url';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const sourceRoot=path.join(root,'source');
+const baseline=JSON.parse(fs.readFileSync(path.join(root,'baseline','historical-corpus-v1.json'),'utf8'));
+const lfsIndex=JSON.parse(fs.readFileSync(path.join(root,baseline.lfsIndex),'utf8'));
+const deep=process.env.AW_REBUILD_HISTORICAL_BASELINE==='1';
 const outRoot=path.join(root,'dist','stage-papers');
 const proxyManifestPath=path.join(root,'api','paper-manifest.json');
 fs.rmSync(outRoot,{recursive:true,force:true});
@@ -91,31 +94,32 @@ function safeQuestionFile(p,stage){
   }
   return false;
 }
-function titleFor(p,subject){
-  const y=yearOf(path.basename(p));
-  const base=path.basename(p,'.pdf').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim();
+function titleFor(r,subject){
+  const y=yearOf(path.basename(r));
+  const base=path.basename(r,'.pdf').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim();
   return y?`${y} ${subject}`:`${subject} · ${base}`;
 }
 function paperId(r){return crypto.createHash('sha1').update(r).digest('hex').slice(0,16)}
 function paperUrl(id){return `/api/paper?id=${encodeURIComponent(id)}`}
 
-const files=walk(sourceRoot);
+const files=deep?walk(sourceRoot).map(rel):lfsIndex.objects.map(x=>x.path);
+if(files.length!==baseline.sourcePdfCount)throw new Error(`Pinned historical source inventory changed: ${files.length}/${baseline.sourcePdfCount}`);
 const catalog={release:'6.18.2',mode:'stage-formal-lite-v2',delivery,generatedAtBuild:true,requiredSubjects,stages:{},summary:{sourcePdfs:files.length,activated:0,pending:0,ignoredFuture:0,deployedPdfCopies:0}};
 for(const id of activeStages)catalog.stages[id]={id,label:stageLabels[id],papers:[],pending:0,subjects:requiredSubjects[id]};
 
-for(const p of files){
-  const r=rel(p),stage=stageOf(r);
+for(const r of files){
+  const p=path.join(root,r),stage=stageOf(r);
   if(!stage||!activeStages.has(stage)){catalog.summary.ignoredFuture++;continue}
-  if(isLfsPointer(p))throw new Error(`Git LFS object was not materialized before stage-paper build: ${r}`);
+  if(deep&&isLfsPointer(p))throw new Error(`Git LFS object was not materialized before deep stage-paper build: ${r}`);
   if(!safeQuestionFile(p,stage)){
     catalog.stages[stage].pending++;catalog.summary.pending++;continue;
   }
-  if(!isPdf(p)){
+  if(deep&&!isPdf(p)){
     catalog.stages[stage].pending++;catalog.summary.pending++;continue;
   }
   const subject=subjectOf(r),id=paperId(r);
   catalog.stages[stage].papers.push({
-    id,stage,subject,year:yearOf(path.basename(p)),title:titleFor(p,subject),
+    id,stage,subject,year:yearOf(path.basename(r)),title:titleFor(r,subject),
     sourcePath:r,assetPath:paperUrl(id),pageCount:null,
     delivery,scoring:'source-review',answerReference:false,provenance:provenanceOf(r),viewer:'lite-url-pdfjs'
   });

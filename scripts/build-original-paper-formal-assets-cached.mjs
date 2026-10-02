@@ -19,6 +19,10 @@ if(!force&&validCache()){
   fs.rmSync(path.join(outRoot,'.complete.json'),{force:true});
   console.log(JSON.stringify({historicalFormalAssets:'CACHE_HIT',baseline:'aw-historical-corpus-v1',questionAssets:22,answerAssets:21}));
 }else{
+  if(!force){
+    const {materializeGovernedYear2Source}=await import('./materialize-governed-year2-source.mjs');
+    process.env.AW_HISTORICAL_SOURCE_ROOT=await materializeGovernedYear2Source();
+  }
   await import('./build-original-paper-formal-assets.mjs');
   copyDir(outRoot,cacheRoot);
   fs.writeFileSync(marker,JSON.stringify({baseline:'aw-historical-corpus-v1',questionAssets:22,answerAssets:21,cached:true})+'\n');

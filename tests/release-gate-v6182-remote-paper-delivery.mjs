@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {validateHeaderValue} from 'node:http';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
@@ -47,7 +48,7 @@ function walk(dir){if(!fs.existsSync(dir))return;for(const e of fs.readdirSync(d
 walk(stageDir);
 if(deployedPdfs.length)throw new Error(`stage PDFs must not be deployed: ${deployedPdfs.slice(0,5).join(', ')}`);
 const api=fs.readFileSync(apiPath,'utf8');
-for(const needle of ['AW_GITHUB_SOURCE_TOKEN','VERCEL_GIT_COMMIT_SHA','media.githubusercontent.com/media','cleanRef','sourceUrl','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
+for(const needle of ['AW_GITHUB_SOURCE_TOKEN','sourceLocation','identity.sha256','cleanRef','sourceRef','sourceUrl','PDFDocument','deliveryEndPage','sourceSha256','Content-Range','X-AW-Paper-Learner-Pages','X-AW-Paper-Safe-Cache','MAX_SAFE_PDF_CACHE=2','paper-manifest.json'])if(!api.includes(needle))throw new Error(`paper proxy contract missing: ${needle}`);
 if(api.includes('req.query?.path'))throw new Error('paper proxy must not accept arbitrary repository source paths');
 const upstreamStart=api.indexOf('const upstream=await fetch(sourceUrl(entry,ref)');
 const upstreamEnd=api.indexOf('const sourceBytes=',upstreamStart);
@@ -65,8 +66,10 @@ const pinnedRef='0123456789abcdef0123456789abcdef01234567';
 if(helpers.cleanRef(pinnedRef)!==pinnedRef||helpers.cleanRef('main')!==null||helpers.cleanRef('release/v6.19.1')!==null)throw new Error('paper source ref must be an immutable 40-character SHA');
 for(const paper of papers){
   const entry=manifest.papers[paper.id];
-  const url=helpers.sourceUrl(entry,pinnedRef);
-  if(!url.startsWith(`https://media.githubusercontent.com/media/Sol4evr/awenture/${pinnedRef}/source/`)||!url.toLowerCase().endsWith('.pdf'))throw new Error(`invalid pinned source URL: ${paper.id}`);
+  const ref=helpers.sourceRef(entry);
+  const url=helpers.sourceUrl(entry,ref);
+  let mismatchDenied=false;try{helpers.sourceUrl(entry,pinnedRef)}catch(_){mismatchDenied=true}if(!mismatchDenied)throw new Error('Mismatched source ref must fail closed');
+  if(!/^https:\/\/raw\.githubusercontent\.com\/Sol4evr\/awenture-corpus-(icas|naplan|oc)\/[a-f0-9]{40}\/(source\/.+\.pdf|derived\/readable-sources\/76c70ca554c7a811\.bin)$/.test(url))throw new Error(`invalid pinned source URL: ${paper.id}`);
   if(url.includes(' ')||url.includes('?ref='))throw new Error(`unpinned or unencoded source URL: ${paper.id}`);
 }
 const synthetic=await PDFDocument.create();for(let i=0;i<5;i++)synthetic.addPage([200,200]);
@@ -90,9 +93,9 @@ helpers.safePdfCache.clear();
 
 let githubSmoke='LOCAL_SKIP';
 if(process.env.VERCEL==='1'){
-  const ref=helpers.cleanRef(process.env.AW_GITHUB_SOURCE_REF||process.env.VERCEL_GIT_COMMIT_SHA);
-  if(!ref)throw new Error('Vercel paper delivery smoke check requires an immutable source SHA');
   const sample=papers.find(p=>p.sourcePath.includes('Digital AB 2006.pdf'))||papers[0];
+  const ref=helpers.sourceRef(manifest.papers[sample.id]);
+  if(!ref)throw new Error('Vercel paper delivery smoke check requires an immutable source SHA');
   const url=helpers.sourceUrl(manifest.papers[sample.id],ref);
   const bytes=await fetch(url,{headers:{Accept:'application/octet-stream',Range:'bytes=0-4','User-Agent':'AWenture-release-gate'},redirect:'follow'});
   if(!(bytes.ok||bytes.status===206))throw new Error(`Public GitHub paper source smoke check failed: HTTP ${bytes.status}`);
@@ -100,4 +103,13 @@ if(process.env.VERCEL==='1'){
   if(head!=='%PDF-')throw new Error(`Public GitHub paper source smoke check returned non-PDF bytes: ${JSON.stringify(head)}`);
   githubSmoke='PASS';
 }
-console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',safePdfCache:'LRU_2_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_VERCEL_GIT_COMMIT_SHA',githubSourceSmoke:githubSmoke}));
+console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',safePdfCache:'LRU_2_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_IMMUTABLE_CORPUS_SHA',githubSourceSmoke:githubSmoke}));
+
+// Exercise Node header validation, including every corpus filename and Unicode/control input.
+for(const p of Object.values(manifest.papers)){
+  const header=helpers.contentDisposition(p.sourcePath);
+  validateHeaderValue('Content-Disposition',header);
+  const encoded=header.split("filename*=UTF-8''")[1];
+  if(decodeURIComponent(encoded)!==p.sourcePath.split('/').pop())throw new Error('PDF download filename identity regression');
+}
+validateHeaderValue('Content-Disposition',helpers.contentDisposition('source/Unicode — “paper” \"\r\n.pdf'));
