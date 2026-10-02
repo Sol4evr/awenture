@@ -15,7 +15,7 @@ export default defineConfig({
     screenshot: 'only-on-failure'
   },
   webServer: {
-    command: 'python3 -m http.server 4173 --bind 127.0.0.1 --directory dist',
+    command: 'python3 tests/preview-server.py',
     port: 4173,
     reuseExistingServer: false,
     timeout: 10000
