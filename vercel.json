@@ -30,7 +30,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -38,15 +38,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -67,7 +63,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -75,15 +71,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -104,7 +96,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -112,15 +104,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -141,7 +129,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -149,15 +137,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -178,7 +162,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -186,15 +170,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -215,7 +195,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -223,15 +203,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -252,7 +228,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -260,15 +236,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -289,7 +261,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -297,15 +269,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -326,7 +294,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -334,15 +302,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -363,7 +327,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -371,15 +335,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -400,7 +360,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -408,15 +368,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -437,7 +393,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -445,15 +401,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -474,7 +426,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -482,15 +434,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -511,7 +459,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -519,15 +467,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -548,7 +492,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -556,15 +500,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -585,7 +525,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -593,15 +533,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -622,7 +558,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -630,15 +566,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -659,7 +591,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -667,15 +599,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -696,7 +624,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -704,15 +632,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -733,7 +657,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -741,15 +665,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -770,7 +690,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -778,15 +698,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     },
@@ -807,7 +723,7 @@
         },
         {
           "key": "Vercel-CDN-Cache-Control",
-          "value": "public, max-age=31536000"
+          "value": "no-store"
         },
         {
           "key": "X-AW-Year2-Corpus-Ref",
@@ -815,15 +731,11 @@
         },
         {
           "key": "x-vercel-enable-rewrite-caching",
-          "value": "1"
+          "value": "0"
         },
         {
           "key": "CDN-Cache-Control",
-          "value": "public, max-age=31536000"
-        },
-        {
-          "key": "Vercel-Cache-Tag",
-          "value": "awenture-year2-c871190b11368e0f3932642496e11a654dde6cbf"
+          "value": "no-store"
         }
       ]
     }
