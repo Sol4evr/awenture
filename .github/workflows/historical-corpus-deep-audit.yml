@@ -2,8 +2,8 @@ name: AWenture historical corpus deep audit
 on:
   workflow_dispatch:
     inputs:
-      allow_lfs_bandwidth:
-        description: 'I understand this audit downloads the full ~1.57 GiB Git LFS corpus'
+      allow_full_corpus_download:
+        description: 'Download and SHA-verify the pinned normal-Git corpus (no Git LFS)'
         required: true
         type: boolean
         default: false
@@ -14,26 +14,20 @@ concurrency:
   cancel-in-progress: false
 jobs:
   immutable-corpus:
-    if: ${{ inputs.allow_lfs_bandwidth == true }}
+    if: ${{ inputs.allow_full_corpus_download == true }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
-      - name: Checkout immutable corpus release
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          ref: eea48e7df6064b216d26366f2ee5719a573c392e
-          lfs: true
+          lfs: false
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci --no-audit --no-fund
-      - name: Verify full LFS corpus is materialized
-        run: |
-          test "$(git lfs ls-files -n | wc -l | tr -d ' ')" = "602"
-          if grep -RIl '^version https://git-lfs.github.com/spec/v1$' source --include='*.pdf' | grep -q .; then
-            echo 'One or more immutable source PDFs remain as LFS pointers.' >&2
-            exit 1
-          fi
+      - name: Verify and materialize the exact normal-Git corpus SHAs
+        run: node scripts/verify-normal-git-corpora.mjs --materialize
       - name: Run deep governed source validation
         run: npm run rebuild:historical-baseline

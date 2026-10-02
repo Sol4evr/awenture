@@ -1,17 +1,15 @@
 const crypto=require('node:crypto');
 const {PDFDocument}=require('pdf-lib');
 const manifest=require('./paper-manifest.json');
-const historicalBaseline=require('../baseline/historical-corpus-v1.json');
+const {sourceLocation}=require('../lib/historical-source.js');
 
-const OWNER='Sol4evr';
-const REPO='awenture';
 const DELIVERY='github-source-proxy-v2-allowlist';
 const MAX_SAFE_PDF_CACHE=2;
 const safePdfCache=new Map();
 
 function token(){return process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||''}
 function cleanRef(value){const ref=String(value||'');return /^[a-f0-9]{40}$/.test(ref)?ref:null}
-function sourceRef(){return cleanRef(process.env.AW_GITHUB_SOURCE_REF)||cleanRef(historicalBaseline.sourceCommit)}
+function sourceRef(entry){return entry?sourceLocation(entry.sourcePath).commit:null}
 function cleanId(value){const id=String(Array.isArray(value)?value[0]:value||'');return /^[a-f0-9]{16}$/.test(id)?id:null}
 function entryFor(id){
   const p=manifest?.papers?.[id];
@@ -19,10 +17,10 @@ function entryFor(id){
   if(typeof p.sourcePath!=='string'||!p.sourcePath.startsWith('source/')||!p.sourcePath.toLowerCase().endsWith('.pdf'))return null;
   if(p.pageBoundaryVerified!==true||p.deliveryStartPage!==1||!Number.isInteger(p.deliveryEndPage)||p.deliveryEndPage<1)return null;
   if(p.sourceSha256!==null&&p.sourceSha256!==undefined&&!/^[a-f0-9]{64}$/.test(String(p.sourceSha256)))return null;
+  try{const source=sourceLocation(p.sourcePath);if(p.sourceSha256&&p.sourceSha256!==source.sha256)return null}catch(_){return null}
   return p;
 }
-function encodePath(p){return p.split('/').map(encodeURIComponent).join('/')}
-function sourceUrl(entry,ref){return `https://media.githubusercontent.com/media/${OWNER}/${REPO}/${ref}/${encodePath(entry.sourcePath)}`}
+function sourceUrl(entry,ref){const source=sourceLocation(entry.sourcePath);if(ref!==source.commit)throw new Error('Historical corpus ref mismatch');return source.url}
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function byteRange(value,total){
   if(!value)return null;
@@ -67,7 +65,8 @@ async function resolveSafePaper(id,entry,ref,auth){
   const upstream=await fetch(sourceUrl(entry,ref),{headers,redirect:'follow'});
   if(!upstream.ok){const e=new Error('Unable to fetch historical paper');e.status=upstream.status===404?404:502;throw e}
   const sourceBytes=Buffer.from(await upstream.arrayBuffer());
-  if(entry.sourceSha256&&sha256(sourceBytes)!==entry.sourceSha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
+  const identity=sourceLocation(entry.sourcePath);
+  if(sourceBytes.length!==identity.size||sha256(sourceBytes)!==identity.sha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
   const safe=await learnerPdf(sourceBytes,entry.deliveryEndPage);
   const resolved={...safe,etag:`"${sha256(safe.bytes)}"`};
   if(cacheable)cacheSet(key,resolved);
@@ -81,7 +80,7 @@ module.exports=async function handler(req,res){
   if(!entry){res.setHeader('Cache-Control','no-store');return res.status(404).end('Paper not found')}
   const {sourcePath}=entry;
   const auth=token();
-  const ref=sourceRef();
+  const ref=sourceRef(entry);
   if(!ref){res.setHeader('Cache-Control','no-store');console.error('AW_PAPER_PROXY_CONFIG_ERROR','missing immutable source ref');return res.status(503).end('Historical paper source is not configured')}
   try{
     const safe=await resolveSafePaper(id,entry,ref,auth);

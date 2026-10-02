@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import historicalSource from '../lib/historical-source.js';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const baseline=JSON.parse(fs.readFileSync(path.join(root,'baseline','historical-corpus-v1.json'),'utf8'));
@@ -29,7 +30,7 @@ function validCache(entries){
   }catch(_){return false}
 }
 async function download(entry){
-  const url=`https://media.githubusercontent.com/media/Sol4evr/awenture/${baseline.sourceCommit}/${encodePath(entry.sourcePath)}`;
+  const {url}=historicalSource.sourceLocation(entry.sourcePath);
   const response=await fetch(url,{headers:{Accept:'application/octet-stream','User-Agent':'AWenture-governed-source-materializer'},redirect:'follow',signal:AbortSignal.timeout(60000)});
   if(!response.ok)throw new Error(`Unable to materialize ${entry.sourcePath}: HTTP ${response.status}`);
   const announced=Number(response.headers.get('content-length')||0);
