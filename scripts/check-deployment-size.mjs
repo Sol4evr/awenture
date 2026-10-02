@@ -24,6 +24,11 @@ function walk(dir) {
 walk(out);
 files.sort((a, b) => b.bytes - a.bytes);
 const total = files.reduce((n, f) => n + f.bytes, 0);
+// This tranche must stay lean even if a build path accidentally omits externalisation.
+if(fs.existsSync(path.join(root,'baseline','year2-question-delivery-v1.json'))){
+  if(files.some(f=>/^original-icas[\\/]year2[\\/].*-questions\.pdf$/.test(f.path)))throw new Error('External question PDFs leaked back into deployment output');
+  if(total>25*1024*1024)throw new Error('Year 2 external delivery tranche exceeds 25 MiB');
+}
 const mib = n => (n / 1024 / 1024).toFixed(2);
 const totalMiB=total/1024/1024;
 const growthMiB=totalMiB-baselineMiB;
