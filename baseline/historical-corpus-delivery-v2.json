@@ -24,5 +24,21 @@
       "paths": 51,
       "verifiedRemoteGitObjects": true
     }
+  },
+  "readableSources": {
+    "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf": {
+      "sourcePath": "source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf",
+      "sourceSha256": "109af09fb98f7f36678e98907519f07f27aa399a3ce8791839c01cd3dfa1ae93",
+      "derivedPath": "derived/readable-sources/76c70ca554c7a811.bin",
+      "sha256": "da41c354835ea972c64852b514b6e2f19c3f68512c13e736cb02fcce2072ce7e",
+      "size": 5875435,
+      "pageCount": 40,
+      "emptyPasswordOnly": true,
+      "pageContentStreamsUnchanged": true,
+      "generator": "pypdf 6.10.0",
+      "repository": "Sol4evr/awenture-corpus-icas",
+      "commit": "c415e369582db217bd2762361af406eb5b04a0b5",
+      "pixelIdenticalPages": 40
+    }
   }
 }

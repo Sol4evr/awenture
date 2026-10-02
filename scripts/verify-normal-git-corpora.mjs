@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import historicalSource from '../lib/historical-source.js';
 import {fileURLToPath} from 'node:url';
+import {PDFDocument} from 'pdf-lib';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const index=JSON.parse(fs.readFileSync(path.join(root,'baseline/historical-corpus-v1-lfs-index.json'),'utf8'));
 const materialize=process.argv.includes('--materialize');
@@ -24,4 +25,8 @@ async function worker(){
 }
 await Promise.all(Array.from({length:4},worker));
 if(verified.size!==565||index.objects.some(x=>!verified.has(x.oid)))throw new Error('Incomplete historical corpus verification');
-console.log(JSON.stringify({normalGitCorpusVerification:'PASS',paths:602,uniqueObjects:565,gitLfsDownloads:0,materialized:materialize}));
+let readableVerified=0;
+for(const original of Object.keys(historicalSource.delivery.readableSources||{})){
+ const readable=historicalSource.sourceLocation(original).readable;const response=await fetch(readable.url,{signal:AbortSignal.timeout(90000)});if(!response.ok)throw new Error('Readable corpus fetch failed');const bytes=Buffer.from(await response.arrayBuffer());if(bytes.length!==readable.size||crypto.createHash('sha256').update(bytes).digest('hex')!==readable.sha256||(await PDFDocument.load(bytes)).getPageCount()!==readable.pageCount)throw new Error('Readable corpus identity/page-count mismatch');readableVerified++;
+}
+console.log(JSON.stringify({readableSourcesVerified:readableVerified,normalGitCorpusVerification:'PASS',paths:602,uniqueObjects:565,gitLfsDownloads:0,materialized:materialize}));

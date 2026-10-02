@@ -9,7 +9,8 @@ const safePdfCache=new Map();
 
 function token(){return process.env.AW_GITHUB_SOURCE_TOKEN||process.env.GITHUB_TOKEN||process.env.GH_TOKEN||''}
 function cleanRef(value){const ref=String(value||'');return /^[a-f0-9]{40}$/.test(ref)?ref:null}
-function sourceRef(entry){return entry?sourceLocation(entry.sourcePath).commit:null}
+function deliveryLocation(entry){const source=sourceLocation(entry.sourcePath);return source.readable||source}
+function sourceRef(entry){return entry?deliveryLocation(entry).commit:null}
 function cleanId(value){const id=String(Array.isArray(value)?value[0]:value||'');return /^[a-f0-9]{16}$/.test(id)?id:null}
 function entryFor(id){
   const p=manifest?.papers?.[id];
@@ -20,7 +21,7 @@ function entryFor(id){
   try{const source=sourceLocation(p.sourcePath);if(p.sourceSha256&&p.sourceSha256!==source.sha256)return null}catch(_){return null}
   return p;
 }
-function sourceUrl(entry,ref){const source=sourceLocation(entry.sourcePath);if(ref!==source.commit)throw new Error('Historical corpus ref mismatch');return source.url}
+function sourceUrl(entry,ref){const source=deliveryLocation(entry);if(ref!==source.commit)throw new Error('Historical corpus ref mismatch');return source.url}
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function byteRange(value,total){
   if(!value)return null;
@@ -65,9 +66,10 @@ async function resolveSafePaper(id,entry,ref,auth){
   const upstream=await fetch(sourceUrl(entry,ref),{headers,redirect:'follow'});
   if(!upstream.ok){const e=new Error('Unable to fetch historical paper');e.status=upstream.status===404?404:502;throw e}
   const sourceBytes=Buffer.from(await upstream.arrayBuffer());
-  const identity=sourceLocation(entry.sourcePath);
+  const identity=deliveryLocation(entry);
   if(sourceBytes.length!==identity.size||sha256(sourceBytes)!==identity.sha256){const e=new Error('Historical paper source identity mismatch');e.status=502;throw e}
   const safe=await learnerPdf(sourceBytes,entry.deliveryEndPage);
+  if(identity.pageCount&&safe.sourcePages!==identity.pageCount)throw new Error('Readable source page count mismatch');
   const resolved={...safe,etag:`"${sha256(safe.bytes)}"`};
   if(cacheable)cacheSet(key,resolved);
   return {...resolved,cache:'MISS'};

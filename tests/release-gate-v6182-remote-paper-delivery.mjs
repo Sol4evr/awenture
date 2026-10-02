@@ -68,7 +68,7 @@ for(const paper of papers){
   const ref=helpers.sourceRef(entry);
   const url=helpers.sourceUrl(entry,ref);
   let mismatchDenied=false;try{helpers.sourceUrl(entry,pinnedRef)}catch(_){mismatchDenied=true}if(!mismatchDenied)throw new Error('Mismatched source ref must fail closed');
-  if(!/^https:\/\/raw\.githubusercontent\.com\/Sol4evr\/awenture-corpus-(icas|naplan|oc)\/[a-f0-9]{40}\/source\//.test(url)||!url.toLowerCase().endsWith('.pdf'))throw new Error(`invalid pinned source URL: ${paper.id}`);
+  if(!/^https:\/\/raw\.githubusercontent\.com\/Sol4evr\/awenture-corpus-(icas|naplan|oc)\/[a-f0-9]{40}\/(source\/.+\.pdf|derived\/readable-sources\/76c70ca554c7a811\.bin)$/.test(url))throw new Error(`invalid pinned source URL: ${paper.id}`);
   if(url.includes(' ')||url.includes('?ref='))throw new Error(`unpinned or unencoded source URL: ${paper.id}`);
 }
 const synthetic=await PDFDocument.create();for(let i=0;i<5;i++)synthetic.addPage([200,200]);

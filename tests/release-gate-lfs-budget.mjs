@@ -14,6 +14,8 @@ const deep=fs.existsSync(deepPath)?fs.readFileSync(deepPath,'utf8'):null;
 const api=read('api/paper.js');
 const {sourceLocation,delivery}=await import('../lib/historical-source.js').then(x=>x.default);
 for(const entry of index.objects){const location=sourceLocation(entry.path);if(location.sha256!==entry.oid||location.size!==entry.size||!location.url.startsWith('https://raw.githubusercontent.com/Sol4evr/awenture-corpus-')||!/^[a-f0-9]{40}$/.test(location.commit))throw new Error('Unpinned normal-Git source identity');}
+const readable=sourceLocation('source/original-icas/year4/English yr 4/2019 ICAS English Paper B.pdf').readable;
+if(!readable||readable.emptyPasswordOnly!==true||readable.pixelIdenticalPages!==40||readable.sourceSha256!=='109af09fb98f7f36678e98907519f07f27aa399a3ce8791839c01cd3dfa1ae93')throw new Error('Governed encrypted-source readability contract missing');
 for(const unsafe of ['source/../private.pdf','source/unknown.pdf','https://example.org/file.pdf']){let denied=false;try{sourceLocation(unsafe)}catch(_){denied=true}if(!denied)throw new Error('Unknown source must fail closed');}
 const materializer=read('scripts/materialize-governed-year2-source.mjs');
 const packageJson=read('package.json');
