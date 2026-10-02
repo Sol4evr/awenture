@@ -22,6 +22,12 @@ function entryFor(id){
   return p;
 }
 function sourceUrl(entry,ref){const source=deliveryLocation(entry);if(ref!==source.commit)throw new Error('Historical corpus ref mismatch');return source.url}
+function contentDisposition(sourcePath){
+  const filename=sourcePath.split('/').pop().replace(/[\"\r\n]/g,'');
+  const ascii=filename.replace(/[^\x20-\x7E]/g,'_');
+  const encoded=encodeURIComponent(filename).replace(/['()*]/g,c=>'%'+c.charCodeAt(0).toString(16).toUpperCase());
+  return `inline; filename="${ascii}"; filename*=UTF-8''${encoded}`;
+}
 function sha256(bytes){return crypto.createHash('sha256').update(bytes).digest('hex')}
 function byteRange(value,total){
   if(!value)return null;
@@ -92,7 +98,7 @@ module.exports=async function handler(req,res){
     const body=range?safe.bytes.subarray(range.start,range.end+1):safe.bytes;
     res.statusCode=range?206:200;
     res.setHeader('Content-Type','application/pdf');
-    res.setHeader('Content-Disposition',`inline; filename="${sourcePath.split('/').pop().replace(/["\r\n]/g,'')}"`);
+    res.setHeader('Content-Disposition',contentDisposition(sourcePath));
     res.setHeader('Cache-Control',ref==='main'?'public, max-age=300, s-maxage=3600':'public, max-age=86400, s-maxage=31536000, immutable');
     res.setHeader('Accept-Ranges','bytes');
     res.setHeader('Content-Length',String(body.length));
@@ -113,4 +119,4 @@ module.exports=async function handler(req,res){
   }
 };
 
-module.exports._test={byteRange,learnerPdf,entryFor,cleanRef,sourceRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};
+module.exports._test={contentDisposition,byteRange,learnerPdf,entryFor,cleanRef,sourceRef,sourceUrl,resolveSafePaper,cacheKey,cacheGet,cacheSet,safePdfCache,MAX_SAFE_PDF_CACHE};

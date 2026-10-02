@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {validateHeaderValue} from 'node:http';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
@@ -103,3 +104,12 @@ if(process.env.VERCEL==='1'){
   githubSmoke='PASS';
 }
 console.log(JSON.stringify({release:'6.18.2',remotePaperDelivery:'PASS',delivery,papers:papers.length,proxyAllowlist:papers.length,learnerOnly:true,syntheticCrop:'5_TO_3_PASS',safePdfCache:'LRU_2_PASS',answerLeakProtectedEntries,deployedStagePdfs:0,supportResourcesReachable:false,githubCredentials:'SERVER_SIDE_ONLY',deploymentRef:'PINNED_TO_IMMUTABLE_CORPUS_SHA',githubSourceSmoke:githubSmoke}));
+
+// Exercise Node header validation, including every corpus filename and Unicode/control input.
+for(const p of Object.values(manifest.papers)){
+  const header=helpers.contentDisposition(p.sourcePath);
+  validateHeaderValue('Content-Disposition',header);
+  const encoded=header.split("filename*=UTF-8''")[1];
+  if(decodeURIComponent(encoded)!==p.sourcePath.split('/').pop())throw new Error('PDF download filename identity regression');
+}
+validateHeaderValue('Content-Disposition',helpers.contentDisposition('source/Unicode — “paper” \"\r\n.pdf'));
