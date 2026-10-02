@@ -29,6 +29,11 @@ jobs:
           key: awenture-historical-runtime-v1-${{ runner.os }}-node22
       - name: Gate LFS-free ordinary release architecture
         run: node tests/release-gate-lfs-budget.mjs
+      - name: Restore immutable Year 2 CDN fixtures
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/awenture-year2-question-delivery
+          key: awenture-year2-cdn-${{ runner.os }}-${{ hashFiles('baseline/year2-question-delivery-v1.json') }}
       - name: Run release gates
         run: npm run test:release
       - name: Confirm release evidence is absent from runtime artifact
@@ -59,6 +64,13 @@ jobs:
         with:
           name: v6182-tested-dist
           path: dist
+      - name: Restore immutable Year 2 CDN fixtures
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/awenture-year2-question-delivery
+          key: awenture-year2-cdn-${{ runner.os }}-${{ hashFiles('baseline/year2-question-delivery-v1.json') }}
+      - name: Verify immutable external question fixtures
+        run: node scripts/materialize-year2-question-delivery.mjs
       - name: Verify tested artifact SHA
         run: test "$(cat dist/.aw-tested-sha)" = "$GITHUB_SHA"
       - run: npx playwright install --with-deps webkit chromium
@@ -90,6 +102,13 @@ jobs:
         with:
           name: v6182-tested-dist
           path: dist
+      - name: Restore immutable Year 2 CDN fixtures
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/awenture-year2-question-delivery
+          key: awenture-year2-cdn-${{ runner.os }}-${{ hashFiles('baseline/year2-question-delivery-v1.json') }}
+      - name: Verify immutable external question fixtures
+        run: node scripts/materialize-year2-question-delivery.mjs
       - name: Verify tested artifact SHA
         run: test "$(cat dist/.aw-tested-sha)" = "$GITHUB_SHA"
       - run: npx playwright install --with-deps webkit chromium

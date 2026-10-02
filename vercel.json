@@ -12,6 +12,556 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/original-icas/year2/english/2013-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/english/2014-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/english/2015-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/english/2016-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/english/2017-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/english/2018-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/english/2019-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/english/2020-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2013-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2014-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2015-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2016-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2017-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2018-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2019-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2020-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/science/2014-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/science/2015-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/science/2016-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/science/2017-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/science/2018-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
+    },
+    {
+      "source": "/original-icas/year2/spelling/2016-questions.pdf",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "public, max-age=31536000"
+        },
+        {
+          "key": "X-AW-Year2-Corpus-Ref",
+          "value": "c871190b11368e0f3932642496e11a654dde6cbf"
+        }
+      ]
     }
   ],
   "git": {
@@ -23,5 +573,95 @@
   "github": {
     "autoAlias": true,
     "autoJobCancelation": true
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/original-icas/year2/english/2013-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2013-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/english/2014-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2014-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/english/2015-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2015-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/english/2016-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2016-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/english/2017-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2017-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/english/2018-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2018-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/english/2019-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2019-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/english/2020-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/english/2020-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2013-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2013-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2014-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2014-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2015-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2015-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2016-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2016-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2017-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2017-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2018-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2018-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2019-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2019-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/mathematics/2020-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/mathematics/2020-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/science/2014-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/science/2014-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/science/2015-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/science/2015-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/science/2016-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/science/2016-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/science/2017-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/science/2017-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/science/2018-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/science/2018-questions.pdf"
+    },
+    {
+      "source": "/original-icas/year2/spelling/2016-questions.pdf",
+      "destination": "https://raw.githubusercontent.com/Sol4evr/awenture-corpus-icas/c871190b11368e0f3932642496e11a654dde6cbf/derived/learner-safe-year2/spelling/2016-questions.pdf"
+    }
+  ]
 }
