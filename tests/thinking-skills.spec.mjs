@@ -8,6 +8,7 @@ test('home entry, seven skills, readable visuals and save/resume',async({page})=
  await page.getByRole('button',{name:'Visual reasoning',exact:false}).click();
  await expect(page.locator('.ts-visual')).toBeVisible();
  await expect(page.locator('.ts-visual text')).toHaveText(['A','B','C','D']);
+ await expect(page.locator('.ts-choices button span')).toHaveCount(0);
  await page.locator('.ts-choices button').first().click();
  await page.getByRole('button',{name:'Check answer',exact:true}).click();
  await expect(page.locator('.ts-feedback')).toBeVisible();
