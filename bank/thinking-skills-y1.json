@@ -1,0 +1,951 @@
+{
+  "schemaVersion": 1,
+  "title": "Year 1-2 Thinking Skills",
+  "provenance": "AWenture original practice; adapted from Alistair Thinking Skills Group 1 pack, 11 November 2026. Multiple-choice practice, not official competition questions.",
+  "topics": [
+    "Patterns",
+    "Number logic",
+    "Deduction",
+    "Visual reasoning",
+    "Spatial thinking",
+    "Lateral thinking",
+    "Problem solving"
+  ],
+  "questions": [
+    {
+      "id": "TS1-01",
+      "sourceNumber": 1,
+      "topic": "Patterns",
+      "level": "core",
+      "pool": "skills",
+      "question": "What comes next? 2, 4, 6, 8, ___",
+      "options": [
+        "9",
+        "11",
+        "12",
+        "10"
+      ],
+      "answer": "10",
+      "explanation": "10. Add 2 each time.",
+      "visual": null
+    },
+    {
+      "id": "TS1-02",
+      "sourceNumber": 2,
+      "topic": "Patterns",
+      "level": "core",
+      "pool": "skills",
+      "question": "What shape comes next in the picture?",
+      "options": [
+        "Triangle",
+        "Rectangle",
+        "Circle",
+        "Square"
+      ],
+      "answer": "Circle",
+      "explanation": "Circle. The repeating unit is circle, square, triangle.",
+      "visual": "pattern"
+    },
+    {
+      "id": "TS1-03",
+      "sourceNumber": 3,
+      "topic": "Patterns",
+      "level": "core",
+      "pool": "skills",
+      "question": "What comes next? 1, 2, 4, 5, 7, 8, ___",
+      "options": [
+        "12",
+        "10",
+        "9",
+        "11"
+      ],
+      "answer": "10",
+      "explanation": "10. The steps repeat: add 1, then add 2.",
+      "visual": null
+    },
+    {
+      "id": "TS1-04",
+      "sourceNumber": 4,
+      "topic": "Patterns",
+      "level": "core",
+      "pool": "skills",
+      "question": "What comes next? 20, 17, 14, 11, ___",
+      "options": [
+        "8",
+        "7",
+        "9",
+        "10"
+      ],
+      "answer": "8",
+      "explanation": "8. Subtract 3 each time.",
+      "visual": null
+    },
+    {
+      "id": "TS1-05",
+      "sourceNumber": 5,
+      "topic": "Patterns",
+      "level": "core",
+      "pool": "skills",
+      "question": "What letter comes next? A, C, E, G, ___",
+      "options": [
+        "I",
+        "J",
+        "K",
+        "H"
+      ],
+      "answer": "I",
+      "explanation": "I. Skip one alphabet letter each time.",
+      "visual": null
+    },
+    {
+      "id": "TS1-06",
+      "sourceNumber": 6,
+      "topic": "Patterns",
+      "level": "stretch",
+      "pool": "skills",
+      "question": "What comes next? 1, 3, 6, 10, ___",
+      "options": [
+        "16",
+        "17",
+        "15",
+        "14"
+      ],
+      "answer": "15",
+      "explanation": "15. Add 2, then 3, then 4, then 5.",
+      "visual": null
+    },
+    {
+      "id": "TS1-07",
+      "sourceNumber": 7,
+      "topic": "Number logic",
+      "level": "core",
+      "pool": "skills",
+      "question": "A star means 4. What is star + star + 2?",
+      "options": [
+        "12",
+        "10",
+        "9",
+        "11"
+      ],
+      "answer": "10",
+      "explanation": "10. Replace each star with 4: 4 + 4 + 2.",
+      "visual": null
+    },
+    {
+      "id": "TS1-08",
+      "sourceNumber": 8,
+      "topic": "Number logic",
+      "level": "core",
+      "pool": "skills",
+      "question": "Find the missing number: ___ + 6 = 14",
+      "options": [
+        "8",
+        "7",
+        "9",
+        "10"
+      ],
+      "answer": "8",
+      "explanation": "8. 14 minus 6 is 8.",
+      "visual": null
+    },
+    {
+      "id": "TS1-09",
+      "sourceNumber": 9,
+      "topic": "Number logic",
+      "level": "core",
+      "pool": "skills",
+      "question": "Two bags hold equal numbers of marbles. They hold 12 marbles altogether. How many are in each bag?",
+      "options": [
+        "5",
+        "7",
+        "8",
+        "6"
+      ],
+      "answer": "6",
+      "explanation": "6. Split 12 into two equal groups.",
+      "visual": null
+    },
+    {
+      "id": "TS1-10",
+      "sourceNumber": 10,
+      "topic": "Number logic",
+      "level": "core",
+      "pool": "skills",
+      "question": "A machine adds 3. You put in 8. What comes out?",
+      "options": [
+        "12",
+        "13",
+        "11",
+        "10"
+      ],
+      "answer": "11",
+      "explanation": "11. 8 + 3 = 11.",
+      "visual": null
+    },
+    {
+      "id": "TS1-11",
+      "sourceNumber": 11,
+      "topic": "Number logic",
+      "level": "core",
+      "pool": "skills",
+      "question": "A machine turns 2 into 5 and 4 into 9. Its rule is: double the number, then add 1. What does 6 become?",
+      "options": [
+        "15",
+        "13",
+        "12",
+        "14"
+      ],
+      "answer": "13",
+      "explanation": "13. Double 6 is 12; add 1.",
+      "visual": null
+    },
+    {
+      "id": "TS1-12",
+      "sourceNumber": 12,
+      "topic": "Number logic",
+      "level": "stretch",
+      "pool": "skills",
+      "question": "Two stars and one moon total 13. One star is 5. What is one moon?",
+      "options": [
+        "3",
+        "2",
+        "4",
+        "5"
+      ],
+      "answer": "3",
+      "explanation": "3. Two stars total 10, leaving 3.",
+      "visual": null
+    },
+    {
+      "id": "TS1-13",
+      "sourceNumber": 13,
+      "topic": "Deduction",
+      "level": "core",
+      "pool": "skills",
+      "question": "Mia is taller than Leo. Leo is taller than Sam. Who is shortest?",
+      "options": [
+        "Leo",
+        "Sam",
+        "Mia"
+      ],
+      "answer": "Sam",
+      "explanation": "Sam. The order from tallest is Mia, Leo, Sam.",
+      "visual": null
+    },
+    {
+      "id": "TS1-14",
+      "sourceNumber": 14,
+      "topic": "Deduction",
+      "level": "core",
+      "pool": "skills",
+      "question": "A red, blue and green box each hold one toy. The car is in the blue box. The bear is not in the red box. Which box holds the bear?",
+      "options": [
+        "Green",
+        "Red",
+        "Blue"
+      ],
+      "answer": "Green",
+      "explanation": "Green. Blue holds the car; red is ruled out.",
+      "visual": null
+    },
+    {
+      "id": "TS1-15",
+      "sourceNumber": 15,
+      "topic": "Deduction",
+      "level": "core",
+      "pool": "skills",
+      "question": "Every zorb has a tail. Pip is a zorb. Must Pip have a tail?",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "answer": "Yes",
+      "explanation": "Yes. The rule applies to every zorb, including Pip.",
+      "visual": null
+    },
+    {
+      "id": "TS1-16",
+      "sourceNumber": 16,
+      "topic": "Deduction",
+      "level": "core",
+      "pool": "skills",
+      "question": "Some birds are white. Coco is a bird. Must Coco be white? ",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": "No",
+      "explanation": "No. Some does not mean all; Coco could be another colour.",
+      "visual": null
+    },
+    {
+      "id": "TS1-17",
+      "sourceNumber": 17,
+      "topic": "Deduction",
+      "level": "core",
+      "pool": "skills",
+      "question": "Ava, Ben and Cy each have one different pet: cat, dog or fish. Ava has the fish. Ben does not have the dog. What pet does Cy have?",
+      "options": [
+        "Fish",
+        "Cat",
+        "Dog"
+      ],
+      "answer": "Dog",
+      "explanation": "Dog. Ben must have the cat, so Cy has the dog.",
+      "visual": null
+    },
+    {
+      "id": "TS1-18",
+      "sourceNumber": 18,
+      "topic": "Deduction",
+      "level": "stretch",
+      "pool": "skills",
+      "question": "A red box says \"The coin is in this box.\" A blue box says \"The coin is in the red box.\" Exactly one box holds a coin. Could exactly one of these two statements be true?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": "No",
+      "explanation": "No. Both statements say the coin is in red, so both are true or both are false.",
+      "visual": null
+    },
+    {
+      "id": "TS1-19",
+      "sourceNumber": 19,
+      "topic": "Visual reasoning",
+      "level": "core",
+      "pool": "skills",
+      "question": "Which shape has no straight sides? Choose its letter.",
+      "options": [
+        "D",
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "C",
+      "explanation": "C. The circle has no straight sides.",
+      "visual": "odd"
+    },
+    {
+      "id": "TS1-20",
+      "sourceNumber": 20,
+      "topic": "Visual reasoning",
+      "level": "core",
+      "pool": "skills",
+      "question": "How many small squares are shaded in the picture?",
+      "options": [
+        "5",
+        "4",
+        "6",
+        "7"
+      ],
+      "answer": "5",
+      "explanation": "5. Count once across each row: 2 + 1 + 2.",
+      "visual": "shaded"
+    },
+    {
+      "id": "TS1-21",
+      "sourceNumber": 21,
+      "topic": "Visual reasoning",
+      "level": "core",
+      "pool": "skills",
+      "question": "How many squares of ALL sizes are in the picture?",
+      "options": [
+        "4",
+        "6",
+        "7",
+        "5"
+      ],
+      "answer": "5",
+      "explanation": "5. Four small squares and one large square.",
+      "visual": "squares"
+    },
+    {
+      "id": "TS1-22",
+      "sourceNumber": 22,
+      "topic": "Visual reasoning",
+      "level": "core",
+      "pool": "skills",
+      "question": "Finish the bottom row. Choose the missing shape.",
+      "options": [
+        "Triangle",
+        "Rectangle",
+        "Circle",
+        "Square"
+      ],
+      "answer": "Triangle",
+      "explanation": "Triangle. Each row has circle, square, triangle in that order.",
+      "visual": "matrix"
+    },
+    {
+      "id": "TS1-23",
+      "sourceNumber": 23,
+      "topic": "Visual reasoning",
+      "level": "core",
+      "pool": "skills",
+      "question": "A large square has one diagonal drawn from its top-left corner to its bottom-right corner. How many triangles does that make inside the square?",
+      "options": [
+        "4",
+        "2",
+        "1",
+        "3"
+      ],
+      "answer": "2",
+      "explanation": "2. The diagonal splits the square into two triangles.",
+      "visual": "diagonal"
+    },
+    {
+      "id": "TS1-24",
+      "sourceNumber": 24,
+      "topic": "Visual reasoning",
+      "level": "stretch",
+      "pool": "skills",
+      "question": "How many triangles of ALL sizes can you see?",
+      "options": [
+        "8",
+        "7",
+        "9",
+        "10"
+      ],
+      "answer": "8",
+      "explanation": "8. Four small triangles and four larger triangles, each made of two small ones.",
+      "visual": "cross"
+    },
+    {
+      "id": "TS1-25",
+      "sourceNumber": 25,
+      "topic": "Spatial thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "You face north. Turn right once. Which direction do you face?",
+      "options": [
+        "East",
+        "South",
+        "West",
+        "North"
+      ],
+      "answer": "East",
+      "explanation": "East. A right turn from north points east.",
+      "visual": null
+    },
+    {
+      "id": "TS1-26",
+      "sourceNumber": 26,
+      "topic": "Spatial thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "You face east. Turn left once. Which direction do you face?",
+      "options": [
+        "South",
+        "West",
+        "North",
+        "East"
+      ],
+      "answer": "North",
+      "explanation": "North. A left turn from east points north.",
+      "visual": null
+    },
+    {
+      "id": "TS1-27",
+      "sourceNumber": 27,
+      "topic": "Spatial thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "Start at the dot. Move 2 squares right and 1 square up. Choose the letter of your finishing square.",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "B",
+      "explanation": "B. The dot is in the bottom-left cell; two right and one up reaches B.",
+      "visual": "grid"
+    },
+    {
+      "id": "TS1-28",
+      "sourceNumber": 28,
+      "topic": "Spatial thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "An arrow points up. Turn it a half-turn. Which way does it point now?",
+      "options": [
+        "Up",
+        "Right",
+        "Down",
+        "Left"
+      ],
+      "answer": "Down",
+      "explanation": "Down. A half-turn is 180 degrees.",
+      "visual": null
+    },
+    {
+      "id": "TS1-29",
+      "sourceNumber": 29,
+      "topic": "Spatial thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "Fold a square paper exactly in half so the left edge meets the right edge. What shape is the folded paper?",
+      "options": [
+        "Circle",
+        "Triangle",
+        "Rectangle"
+      ],
+      "answer": "Rectangle",
+      "explanation": "Rectangle. Its width is half its original width.",
+      "visual": null
+    },
+    {
+      "id": "TS1-30",
+      "sourceNumber": 30,
+      "topic": "Spatial thinking",
+      "level": "stretch",
+      "pool": "skills",
+      "question": "Stack 3 cubes in one tower and 2 cubes in another tower beside it. The towers share no cubes. How many cubes altogether, including hidden ones?",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "4"
+      ],
+      "answer": "5",
+      "explanation": "5. Count 3 + 2; cubes still count when hidden.",
+      "visual": null
+    },
+    {
+      "id": "TS1-31",
+      "sourceNumber": 31,
+      "topic": "Lateral thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "You have 3 apples. You take away 2 and hold them. How many apples are you holding?",
+      "options": [
+        "4",
+        "2",
+        "1",
+        "3"
+      ],
+      "answer": "2",
+      "explanation": "2. The question asks about the apples you took.",
+      "visual": null
+    },
+    {
+      "id": "TS1-32",
+      "sourceNumber": 32,
+      "topic": "Lateral thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "You pass the runner in second place. What place are you in now?",
+      "options": [
+        "First",
+        "Second",
+        "Third",
+        "Fourth"
+      ],
+      "answer": "Second",
+      "explanation": "Second. You take that runner's position.",
+      "visual": null
+    },
+    {
+      "id": "TS1-33",
+      "sourceNumber": 33,
+      "topic": "Lateral thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "Two fathers and two sons go fishing. There are only 3 people: a grandfather, his son and his grandson. How can there be two fathers?",
+      "options": [
+        "The grandfather and his son are both fathers.",
+        "Each person has two fathers in the boat.",
+        "There are four people."
+      ],
+      "answer": "The grandfather and his son are both fathers.",
+      "explanation": "The grandfather is a father, and his son is also a father.",
+      "visual": null
+    },
+    {
+      "id": "TS1-34",
+      "sourceNumber": 34,
+      "topic": "Lateral thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "A toy train has no engine battery and no motor. Can it move if Alistair pushes it?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": "Yes",
+      "explanation": "Yes. A push can move it; a motor is not needed.",
+      "visual": null
+    },
+    {
+      "id": "TS1-35",
+      "sourceNumber": 35,
+      "topic": "Lateral thinking",
+      "level": "core",
+      "pool": "skills",
+      "question": "A box holds 5 red socks and 5 blue socks. Without looking, what is the fewest socks you must take to be certain of two socks of the same colour?",
+      "options": [
+        "5",
+        "3",
+        "2",
+        "4"
+      ],
+      "answer": "3",
+      "explanation": "3. The first two could be different; the third must match one of them.",
+      "visual": null
+    },
+    {
+      "id": "TS1-36",
+      "sourceNumber": 36,
+      "topic": "Lateral thinking",
+      "level": "stretch",
+      "pool": "skills",
+      "question": "There are 4 corners on a square table. You cut off ONE corner with one straight cut, joining two adjacent sides. How many corners does the remaining tabletop have?",
+      "options": [
+        "5",
+        "4",
+        "6",
+        "7"
+      ],
+      "answer": "5",
+      "explanation": "5. One old corner goes, but the cut creates two new corners.",
+      "visual": null
+    },
+    {
+      "id": "TS1-37",
+      "sourceNumber": 37,
+      "topic": "Problem solving",
+      "level": "core",
+      "pool": "skills",
+      "question": "A pencil costs 3 tokens. How many tokens do 3 pencils cost?",
+      "options": [
+        "8",
+        "10",
+        "11",
+        "9"
+      ],
+      "answer": "9",
+      "explanation": "9. 3 + 3 + 3 = 9.",
+      "visual": null
+    },
+    {
+      "id": "TS1-38",
+      "sourceNumber": 38,
+      "topic": "Problem solving",
+      "level": "core",
+      "pool": "skills",
+      "question": "You have 10 beads. Give 2 to Mia and 3 to Leo. How many are left?",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "4"
+      ],
+      "answer": "5",
+      "explanation": "5. 10 - 2 - 3 = 5.",
+      "visual": null
+    },
+    {
+      "id": "TS1-39",
+      "sourceNumber": 39,
+      "topic": "Problem solving",
+      "level": "core",
+      "pool": "skills",
+      "question": "Four children each shake hands once with every other child. How many handshakes are there?",
+      "options": [
+        "8",
+        "6",
+        "5",
+        "7"
+      ],
+      "answer": "6",
+      "explanation": "6. Count pairs: AB, AC, AD, BC, BD, CD.",
+      "visual": null
+    },
+    {
+      "id": "TS1-40",
+      "sourceNumber": 40,
+      "topic": "Problem solving",
+      "level": "core",
+      "pool": "skills",
+      "question": "A snail climbs 3 steps each day, then slips down 1 step each night. It starts at step 0. On which day does it first reach step 7?",
+      "options": [
+        "Day 2",
+        "Day 3",
+        "Day 4",
+        "Day 7"
+      ],
+      "answer": "Day 3",
+      "explanation": "Day 3. Daytime heights are 3, 5, 7. It reaches 7 before slipping.",
+      "visual": null
+    },
+    {
+      "id": "TS1-41",
+      "sourceNumber": 41,
+      "topic": "Problem solving",
+      "level": "core",
+      "pool": "skills",
+      "question": "A toy costs 8 tokens. You can pay using only 2-token and 5-token coins. What is the fewest coins you can use to pay exactly 8?",
+      "options": [
+        "3 coins",
+        "4 coins",
+        "5 coins",
+        "2 coins"
+      ],
+      "answer": "4 coins",
+      "explanation": "4 coins. Four 2-token coins make 8. A 5-token coin leaves 3, which cannot be made.",
+      "visual": null
+    },
+    {
+      "id": "TS1-42",
+      "sourceNumber": 42,
+      "topic": "Problem solving",
+      "level": "stretch",
+      "pool": "skills",
+      "question": "Alistair can choose a red or blue shirt and black, white or green shorts. How many different shirt-and-shorts outfits can he make?",
+      "options": [
+        "7",
+        "8",
+        "6",
+        "5"
+      ],
+      "answer": "6",
+      "explanation": "6. Each of 2 shirts pairs with 3 shorts: 2 x 3.",
+      "visual": null
+    },
+    {
+      "id": "TS1-43",
+      "sourceNumber": 43,
+      "topic": "Patterns",
+      "level": "core",
+      "pool": "mixed",
+      "question": "What comes next? 3, 6, 9, 12, ___",
+      "options": [
+        "17",
+        "15",
+        "14",
+        "16"
+      ],
+      "answer": "15",
+      "explanation": "15. Add 3 each time.",
+      "visual": null
+    },
+    {
+      "id": "TS1-44",
+      "sourceNumber": 44,
+      "topic": "Patterns",
+      "level": "core",
+      "pool": "mixed",
+      "question": "What comes next? 2, 3, 5, 6, 8, 9, ___",
+      "options": [
+        "11",
+        "10",
+        "12",
+        "13"
+      ],
+      "answer": "11",
+      "explanation": "11. Alternate adding 1 and adding 2.",
+      "visual": null
+    },
+    {
+      "id": "TS1-45",
+      "sourceNumber": 45,
+      "topic": "Number logic",
+      "level": "core",
+      "pool": "mixed",
+      "question": "A triangle means 3. A square means 4. What is triangle + square + square?",
+      "options": [
+        "10",
+        "12",
+        "13",
+        "11"
+      ],
+      "answer": "11",
+      "explanation": "11. 3 + 4 + 4 = 11.",
+      "visual": null
+    },
+    {
+      "id": "TS1-46",
+      "sourceNumber": 46,
+      "topic": "Number logic",
+      "level": "core",
+      "pool": "mixed",
+      "question": "Three equal baskets hold 15 balls altogether. How many balls are in each?",
+      "options": [
+        "6",
+        "7",
+        "5",
+        "4"
+      ],
+      "answer": "5",
+      "explanation": "5. 15 split equally into 3 groups is 5.",
+      "visual": null
+    },
+    {
+      "id": "TS1-47",
+      "sourceNumber": 47,
+      "topic": "Deduction",
+      "level": "core",
+      "pool": "mixed",
+      "question": "Jo finished before Kim. Kim finished before Lou. Who finished last?",
+      "options": [
+        "Lou",
+        "Jo",
+        "Kim"
+      ],
+      "answer": "Lou",
+      "explanation": "Lou. The order is Jo, Kim, Lou.",
+      "visual": null
+    },
+    {
+      "id": "TS1-48",
+      "sourceNumber": 48,
+      "topic": "Deduction",
+      "level": "core",
+      "pool": "mixed",
+      "question": "All wugs are green. Max is green. Must Max be a wug?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": "No",
+      "explanation": "No. Other things may also be green.",
+      "visual": null
+    },
+    {
+      "id": "TS1-49",
+      "sourceNumber": 49,
+      "topic": "Visual reasoning",
+      "level": "core",
+      "pool": "mixed",
+      "question": "How many squares of ALL sizes are in this picture?",
+      "options": [
+        "13",
+        "15",
+        "16",
+        "14"
+      ],
+      "answer": "14",
+      "explanation": "14. Nine small squares, four 2-by-2 squares and one 3-by-3 square.",
+      "visual": "nine"
+    },
+    {
+      "id": "TS1-50",
+      "sourceNumber": 50,
+      "topic": "Visual reasoning",
+      "level": "core",
+      "pool": "mixed",
+      "question": "A square has 4 sides. A triangle has 3. How many sides altogether on 2 separate squares and 1 separate triangle?",
+      "options": [
+        "12",
+        "13",
+        "11",
+        "10"
+      ],
+      "answer": "11",
+      "explanation": "11. 4 + 4 + 3 = 11.",
+      "visual": null
+    },
+    {
+      "id": "TS1-51",
+      "sourceNumber": 51,
+      "topic": "Spatial thinking",
+      "level": "core",
+      "pool": "mixed",
+      "question": "You face south. Turn left once. Which direction do you face?",
+      "options": [
+        "West",
+        "North",
+        "East",
+        "South"
+      ],
+      "answer": "East",
+      "explanation": "East. Imagine facing down a map; your left is east.",
+      "visual": null
+    },
+    {
+      "id": "TS1-52",
+      "sourceNumber": 52,
+      "topic": "Spatial thinking",
+      "level": "core",
+      "pool": "mixed",
+      "question": "An arrow points right. Turn it one quarter-turn clockwise. Which way does it point?",
+      "options": [
+        "Up",
+        "Right",
+        "Down",
+        "Left"
+      ],
+      "answer": "Down",
+      "explanation": "Down. Clockwise means the same turning direction as clock hands.",
+      "visual": null
+    },
+    {
+      "id": "TS1-53",
+      "sourceNumber": 53,
+      "topic": "Lateral thinking",
+      "level": "core",
+      "pool": "mixed",
+      "question": "You take 4 shells from a pile of 9 and put them in your pocket. How many shells are in your pocket?",
+      "options": [
+        "3",
+        "5",
+        "6",
+        "4"
+      ],
+      "answer": "4",
+      "explanation": "4. Count the shells taken, not those remaining.",
+      "visual": null
+    },
+    {
+      "id": "TS1-54",
+      "sourceNumber": 54,
+      "topic": "Lateral thinking",
+      "level": "core",
+      "pool": "mixed",
+      "question": "A bag holds only red, blue and yellow counters, at least 4 of each. How many must you take without looking to be certain of two of the same colour?",
+      "options": [
+        "5",
+        "6",
+        "4",
+        "3"
+      ],
+      "answer": "4",
+      "explanation": "4. Three could all be different; a fourth must repeat a colour.",
+      "visual": null
+    },
+    {
+      "id": "TS1-55",
+      "sourceNumber": 55,
+      "topic": "Problem solving",
+      "level": "core",
+      "pool": "mixed",
+      "question": "Five children each get 2 stickers. There are 13 stickers at the start. How many remain?",
+      "options": [
+        "5",
+        "3",
+        "2",
+        "4"
+      ],
+      "answer": "3",
+      "explanation": "3. Give out 5 x 2 = 10; 13 - 10 = 3.",
+      "visual": null
+    },
+    {
+      "id": "TS1-56",
+      "sourceNumber": 56,
+      "topic": "Problem solving",
+      "level": "core",
+      "pool": "mixed",
+      "question": "A frog jumps 4 stones forward, then 1 stone back, each round. It starts at stone 0. What stone is it on after 3 complete rounds?",
+      "options": [
+        "9",
+        "8",
+        "10",
+        "11"
+      ],
+      "answer": "9",
+      "explanation": "9. Each complete round gains 3 stones; 3 x 3 = 9.",
+      "visual": null
+    }
+  ]
+}
