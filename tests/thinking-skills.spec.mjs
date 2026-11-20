@@ -42,10 +42,15 @@ test('mixed paper permits review and flags, hides solutions until submitted, mar
   await page.getByRole('button',{name:i===13?'Review before submitting':'Next →',exact:true}).click();
  }
  await expect(page.getByRole('heading',{name:'Check your paper'})).toBeVisible();await page.getByRole('button',{name:'Submit paper',exact:true}).click();await expect(page.locator('.ts-score')).toHaveText('14 of 14 correct');
+ await expect(page.locator('.ts-topic-review button')).toHaveCount(7);
+ await expect(page.locator('.ts-topic-review')).toContainText('Every skill was correct');
+ await page.locator('.ts-topic-review button').first().click();
+ await expect(page.locator('.ts-nav button')).toHaveCount(6);
 });
 test('timed paper auto-submits when time expires after resuming',async({page})=>{
  await page.getByRole('button',{name:'Explore all 7 skills'}).click();await page.getByRole('button',{name:'Start with a 60-minute limit'}).click();
  await page.evaluate(()=>{const key='awenture-thinking-active-v1',s=JSON.parse(localStorage.getItem(key));s.deadline=Date.now()-100;localStorage.setItem(key,JSON.stringify(s))});
  await page.reload();await page.getByRole('button',{name:'Explore all 7 skills'}).click();await page.getByRole('button',{name:'Resume saved session'}).click();
  await expect(page.getByText('The time limit ended.',{exact:false})).toBeVisible();await expect(page.locator('.ts-score')).toHaveText('0 of 14 correct');
+ await expect(page.locator('.ts-topic-review')).toContainText('Start with Patterns');
 });
